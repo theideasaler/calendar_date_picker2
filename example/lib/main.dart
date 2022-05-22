@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'CalendarDatePicker2 Demo Home Page'),
     );
   }
 }
@@ -32,29 +32,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<DateTime?> _customSingleDatePickerValue = [];
-  List<DateTime?> _defaultSingleDatePickerValue = [];
-  List<DateTime?> _defaultMultiDatePickerValue = [];
-  List<DateTime?> _defaultRangeDatePickerValue = [];
-
-  List<DateTime?> _defaultSingleDatePickerValueWithDefaultValue = [
+  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
     DateTime(2022, 3, 9)
   ];
-  List<DateTime?> _defaultMultiDatePickerValueWithDefaultValue = [
+  List<DateTime?> _multiDatePickerValueWithDefaultValue = [
     DateTime(today.year, today.month, 1),
     DateTime(today.year, today.month, 5),
     DateTime(today.year, today.month, 14),
     DateTime(today.year, today.month, 17),
     DateTime(today.year, today.month, 25),
   ];
-  List<DateTime?> _defaultRangeDatePickerValueWithDefaultValue = [
+  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
     DateTime(1999, 5, 6),
-    today
+    DateTime(1999, 5, 21),
   ];
-  List<DateTime?> _defaultRangeDatePickerValueWithDefaultValue2 = [
-    DateTime(2019, 8, 12),
+
+  List<DateTime?> _rangeDatePickerWithActionButtonsWithValue = [
+    DateTime(2022, 5, 20),
+    DateTime(2022, 5, 25)
   ];
-  List<DateTime?> _defaultRangeDatePickerValueWithDefaultValue3 = [null, today];
+  List<DateTime?> _dialogCalendarPickerValue = [
+    DateTime(2021, 8, 10),
+    DateTime(2021, 8, 13),
+  ];
+  List<DateTime?> _overlayCalendarPickerValue = [
+    DateTime(2022, 10, 13),
+    DateTime(2022, 10, 22)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +67,18 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(
-          children: <Widget>[
-            _buildCustomDatePicker(),
-            _buildDefaultSingleDatePickerWithValue(),
-            _buildDefaultMultiDatePickerWithValue(),
-            _buildDefaultRangeDatePickerWithValue(),
-            // _buildDefaultRangeDatePickerWithValue2(),
-            // _buildDefaultRangeDatePickerWithValue3(),
-            // _buildDefaultSingleDatePicker(),
-            // _buildDefaultMultiDatePicker(),
-            // _buildDefaultRangeDatePicker(),
-          ],
+        child: SizedBox(
+          width: 400,
+          child: ListView(
+            children: <Widget>[
+              _buildCalendarDialogButton(),
+              _buildCalendarOverlayButton(),
+              _buildDefaultSingleDatePickerWithValue(),
+              _buildDefaultMultiDatePickerWithValue(),
+              _buildDefaultRangeDatePickerWithValue(),
+              _buildCalendarWithActionButtons(),
+            ],
+          ),
         ),
       ),
     );
@@ -92,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
       valueText = values.isNotEmpty
           ? values
               .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-              .join(' , ')
+              .join(', ')
           : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
@@ -109,170 +113,138 @@ class _MyHomePageState extends State<MyHomePage> {
     return valueText;
   }
 
-  Widget _buildCustomDatePicker() {
-    var config = CalendarDatePicker2Config(
-      controlsHeight: 48,
-      controlsTextStyle: const TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w700,
-        fontSize: 16,
-      ),
-      weekdayLabelTextStyle: const TextStyle(
-        color: Colors.black87,
-        fontWeight: FontWeight.w600,
-        fontSize: 14,
-      ),
-      dayTextStyle: const TextStyle(
-        color: Color.fromRGBO(0, 0, 0, 0.8),
-        fontWeight: FontWeight.w400,
-        fontSize: 13,
-      ),
-      selectedDayTextStyle: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w700,
-        fontSize: 13,
-      ),
-      selectedDayHighlightColor: Colors.indigo,
-    );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        const Text('Custom Single Date Picker'),
-        CalendarDatePicker2(
-          config: config,
-          initialValue: _customSingleDatePickerValue,
-          onValueChanged: (values) =>
-              setState(() => _customSingleDatePickerValue = values),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Selection(s):  '),
-            const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _customSingleDatePickerValue,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
-
-  Widget _buildDefaultSingleDatePicker() {
-    var config = CalendarDatePicker2Config();
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        const Text('Default Single Date Picker'),
-        CalendarDatePicker2(
-          config: config,
-          initialValue: _defaultSingleDatePickerValue,
-          onValueChanged: (values) =>
-              setState(() => _defaultSingleDatePickerValue = values),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Selection(s):  '),
-            const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _defaultSingleDatePickerValue,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
-
-  Widget _buildDefaultMultiDatePicker() {
-    var config = CalendarDatePicker2Config(
-      calendarType: CalendarDatePicker2Type.multi,
-    );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        const Text('Default Multi Date Picker'),
-        CalendarDatePicker2(
-          config: config,
-          initialValue: _defaultMultiDatePickerValue,
-          onValueChanged: (values) =>
-              setState(() => _defaultMultiDatePickerValue = values),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Selection(s):  '),
-            const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _defaultMultiDatePickerValue,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
-
-  Widget _buildDefaultRangeDatePicker() {
-    var config = CalendarDatePicker2Config(
+  _buildCalendarDialogButton() {
+    var config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
+      selectedDayHighlightColor: Colors.purple[800],
     );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        const Text('Default Range Date Picker'),
-        CalendarDatePicker2(
-          config: config,
-          initialValue: _defaultRangeDatePickerValue,
-          onValueChanged: (values) =>
-              setState(() => _defaultRangeDatePickerValue = values),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Selection(s):  '),
-            const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _defaultRangeDatePickerValue,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () async {
+              var values = await showCalendarDatePicker2Dialog(
+                context: context,
+                config: config,
+                dialogSize: const Size(350, 410),
+                borderRadius: 15,
+                initialValue: _dialogCalendarPickerValue,
+              );
+              if (values != null) {
+                // ignore: avoid_print
+                print(_getValueText(
+                  config.calendarType,
+                  values,
+                ));
+                setState(() {
+                  _dialogCalendarPickerValue = values;
+                });
+              }
+            },
+            child: const Text('Open Calendar Dialog'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCalendarOverlayButton() {
+    var config = CalendarDatePicker2WithActionButtonsConfig(
+      calendarType: CalendarDatePicker2Type.range,
+      selectedDayHighlightColor: Colors.purple[800],
+    );
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              OverlayState? overlayState = Overlay.of(context);
+              OverlayEntry? overlayEntry;
+              overlayEntry = OverlayEntry(
+                builder: (context) {
+                  return Positioned(
+                    left: 0,
+                    top: 0,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                        ),
+                        Positioned(
+                          left: MediaQuery.of(context).size.width / 2 - 175,
+                          top: 170,
+                          child: Material(
+                            child: Container(
+                              width: 350,
+                              height: 410,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[300]!,
+                                      blurRadius: 10,
+                                    ),
+                                  ],
+                                  color: Colors.white),
+                              child: CalendarDatePicker2WithActionButtons(
+                                config: config,
+                                initialValue: _overlayCalendarPickerValue,
+                                onValueChanged: (values) {
+                                  setState(() =>
+                                      _overlayCalendarPickerValue = values);
+                                },
+                                onCancelTapped: () => overlayEntry?.remove(),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+
+              overlayState?.insert(overlayEntry);
+            },
+            child: const Text('Open Calendar Overlay'),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildDefaultSingleDatePickerWithValue() {
-    var config = CalendarDatePicker2Config();
+    var config = CalendarDatePicker2Config(
+      selectedDayHighlightColor: Colors.amber[900],
+      weekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      weekdayLabelTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      controlsHeight: 50,
+      controlsTextStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
+    );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 10),
-        const Text('Default Single Date Picker (With default value)'),
+        const Text('Single Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _defaultSingleDatePickerValueWithDefaultValue,
-          onValueChanged: (values) => setState(
-              () => _defaultSingleDatePickerValueWithDefaultValue = values),
+          initialValue: _singleDatePickerValueWithDefaultValue,
+          onValueChanged: (values) =>
+              setState(() => _singleDatePickerValueWithDefaultValue = values),
         ),
+        const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -281,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               _getValueText(
                 config.calendarType,
-                _defaultSingleDatePickerValueWithDefaultValue,
+                _singleDatePickerValueWithDefaultValue,
               ),
             ),
           ],
@@ -294,18 +266,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildDefaultMultiDatePickerWithValue() {
     var config = CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.multi,
+      selectedDayHighlightColor: Colors.indigo,
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 10),
-        const Text('Default Multi Date Picker (With default value)'),
+        const Text('Multi Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _defaultMultiDatePickerValueWithDefaultValue,
-          onValueChanged: (values) => setState(
-              () => _defaultMultiDatePickerValueWithDefaultValue = values),
+          initialValue: _multiDatePickerValueWithDefaultValue,
+          onValueChanged: (values) =>
+              setState(() => _multiDatePickerValueWithDefaultValue = values),
         ),
+        const SizedBox(height: 10),
         Wrap(
           children: [
             const Text('Selection(s):  '),
@@ -313,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               _getValueText(
                 config.calendarType,
-                _defaultMultiDatePickerValueWithDefaultValue,
+                _multiDatePickerValueWithDefaultValue,
               ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
@@ -329,18 +303,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildDefaultRangeDatePickerWithValue() {
     var config = CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.range,
+      selectedDayHighlightColor: Colors.teal[800],
+      weekdayLabelTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      controlsTextStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 10),
-        const Text('Default Range Date Picker (With default value)'),
+        const Text('Range Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _defaultRangeDatePickerValueWithDefaultValue,
-          onValueChanged: (values) => setState(
-              () => _defaultRangeDatePickerValueWithDefaultValue = values),
+          initialValue: _rangeDatePickerValueWithDefaultValue,
+          onValueChanged: (values) =>
+              setState(() => _rangeDatePickerValueWithDefaultValue = values),
         ),
+        const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -349,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               _getValueText(
                 config.calendarType,
-                _defaultRangeDatePickerValueWithDefaultValue,
+                _rangeDatePickerValueWithDefaultValue,
               ),
             ),
           ],
@@ -359,21 +344,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildDefaultRangeDatePickerWithValue2() {
-    var config = CalendarDatePicker2Config(
+  Widget _buildCalendarWithActionButtons() {
+    var config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 10),
-        const Text('Default Range Date Picker (With default value)'),
-        CalendarDatePicker2(
+        const Text('Date Picker With Action Buttons'),
+        CalendarDatePicker2WithActionButtons(
           config: config,
-          initialValue: _defaultRangeDatePickerValueWithDefaultValue2,
+          initialValue: _rangeDatePickerWithActionButtonsWithValue,
           onValueChanged: (values) => setState(
-              () => _defaultRangeDatePickerValueWithDefaultValue2 = values),
+              () => _rangeDatePickerWithActionButtonsWithValue = values),
         ),
+        const SizedBox(height: 10),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -382,40 +368,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               _getValueText(
                 config.calendarType,
-                _defaultRangeDatePickerValueWithDefaultValue2,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
-
-  Widget _buildDefaultRangeDatePickerWithValue3() {
-    var config = CalendarDatePicker2Config(
-      calendarType: CalendarDatePicker2Type.range,
-    );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: 10),
-        const Text('Default Range Date Picker (With default value)'),
-        CalendarDatePicker2(
-          config: config,
-          initialValue: _defaultRangeDatePickerValueWithDefaultValue3,
-          onValueChanged: (values) => setState(
-              () => _defaultRangeDatePickerValueWithDefaultValue3 = values),
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Selection(s):  '),
-            const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _defaultRangeDatePickerValueWithDefaultValue3,
+                _rangeDatePickerWithActionButtonsWithValue,
               ),
             ),
           ],

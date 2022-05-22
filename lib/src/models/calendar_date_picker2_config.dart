@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum CalendarDatePicker2Type {
-  /// single date
-  single,
-
-  /// multiple single dates
-  multi,
-
-  /// period consisting start and end dates
-  range,
-}
+enum CalendarDatePicker2Type { single, multi, range }
 
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
@@ -21,6 +12,8 @@ class CalendarDatePicker2Config {
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.controlsHeight,
+    this.lastMonthIcon,
+    this.nextMonthIcon,
     this.controlsTextStyle,
     this.dayTextStyle,
     this.selectedDayTextStyle,
@@ -55,6 +48,12 @@ class CalendarDatePicker2Config {
   /// The custom height for calendar control toggle's height
   final double? controlsHeight;
 
+  /// Custom icon for last month button control
+  final Widget? lastMonthIcon;
+
+  /// Custom icon for next month button control
+  final Widget? nextMonthIcon;
+
   /// The custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
@@ -76,6 +75,8 @@ class CalendarDatePicker2Config {
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
     double? controlsHeight,
+    Widget? lastMonthIcon,
+    Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
@@ -91,11 +92,123 @@ class CalendarDatePicker2Config {
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
       controlsHeight: controlsHeight ?? this.controlsHeight,
+      lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
+      nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+    );
+  }
+}
+
+class CalendarDatePicker2WithActionButtonsConfig
+    extends CalendarDatePicker2Config {
+  CalendarDatePicker2WithActionButtonsConfig({
+    CalendarDatePicker2Type? calendarType,
+    DateTime? firstDate,
+    DateTime? lastDate,
+    DateTime? currentDate,
+    DatePickerMode? calendarViewMode,
+    List<String>? weekdayLabels,
+    TextStyle? weekdayLabelTextStyle,
+    double? controlsHeight,
+    Widget? lastMonthIcon,
+    Widget? nextMonthIcon,
+    TextStyle? controlsTextStyle,
+    TextStyle? dayTextStyle,
+    TextStyle? selectedDayTextStyle,
+    Color? selectedDayHighlightColor,
+    this.gapBetweenCalendarAndButtons,
+    this.cancelButtonTextStyle,
+    this.cancelButton,
+    this.okButtonTextStyle,
+    this.okButton,
+    this.openedFromDialog,
+  }) : super(
+          calendarType: calendarType,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          currentDate: currentDate,
+          calendarViewMode: calendarViewMode,
+          weekdayLabels: weekdayLabels,
+          weekdayLabelTextStyle: weekdayLabelTextStyle,
+          controlsHeight: controlsHeight,
+          lastMonthIcon: lastMonthIcon,
+          nextMonthIcon: nextMonthIcon,
+          controlsTextStyle: controlsTextStyle,
+          dayTextStyle: dayTextStyle,
+          selectedDayTextStyle: selectedDayTextStyle,
+          selectedDayHighlightColor: selectedDayHighlightColor,
+        );
+
+  /// The gap between calendar and action buttons
+  final double? gapBetweenCalendarAndButtons;
+
+  /// Text style for cancel button
+  final TextStyle? cancelButtonTextStyle;
+
+  /// Custom cancel button
+  final Widget? cancelButton;
+
+  /// Text style for ok button
+  final TextStyle? okButtonTextStyle;
+
+  /// Custom ok button
+  final Widget? okButton;
+
+  /// Is the calendar opened from dialog
+  final bool? openedFromDialog;
+
+  @override
+  CalendarDatePicker2WithActionButtonsConfig copyWith({
+    CalendarDatePicker2Type? calendarType,
+    DateTime? firstDate,
+    DateTime? lastDate,
+    DateTime? currentDate,
+    DatePickerMode? calendarViewMode,
+    List<String>? weekdayLabels,
+    TextStyle? weekdayLabelTextStyle,
+    double? controlsHeight,
+    Widget? lastMonthIcon,
+    Widget? nextMonthIcon,
+    TextStyle? controlsTextStyle,
+    TextStyle? dayTextStyle,
+    TextStyle? selectedDayTextStyle,
+    Color? selectedDayHighlightColor,
+    double? gapBetweenCalendarAndButtons,
+    TextStyle? cancelButtonTextStyle,
+    Widget? cancelButton,
+    TextStyle? okButtonTextStyle,
+    Widget? okButton,
+    bool? openedFromDialog,
+  }) {
+    return CalendarDatePicker2WithActionButtonsConfig(
+      calendarType: calendarType ?? this.calendarType,
+      firstDate: firstDate ?? this.firstDate,
+      lastDate: lastDate ?? this.lastDate,
+      currentDate: currentDate ?? this.currentDate,
+      calendarViewMode: calendarViewMode ?? this.calendarViewMode,
+      weekdayLabels: weekdayLabels ?? this.weekdayLabels,
+      weekdayLabelTextStyle:
+          weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      controlsHeight: controlsHeight ?? this.controlsHeight,
+      lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
+      nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
+      controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
+      dayTextStyle: dayTextStyle ?? this.dayTextStyle,
+      selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
+      selectedDayHighlightColor:
+          selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      gapBetweenCalendarAndButtons:
+          gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
+      cancelButtonTextStyle:
+          cancelButtonTextStyle ?? this.cancelButtonTextStyle,
+      cancelButton: cancelButton ?? this.cancelButton,
+      okButtonTextStyle: okButtonTextStyle ?? this.okButtonTextStyle,
+      okButton: okButton ?? this.okButton,
+      openedFromDialog: openedFromDialog ?? this.openedFromDialog,
     );
   }
 }

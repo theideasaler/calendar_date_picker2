@@ -28,14 +28,30 @@ const double _subHeaderHeight = 52.0;
 const double _monthNavButtonsWidth = 108.0;
 
 class CalendarDatePicker2 extends StatefulWidget {
-  const CalendarDatePicker2({
+  CalendarDatePicker2({
     required this.initialValue,
     required this.config,
     this.onValueChanged,
     this.onDisplayedMonthChanged,
     this.selectableDayPredicate,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    var ok = true;
+    var notOk = false;
+    var isInitialValueValid = initialValue.length > 1
+        ? (config.calendarType == CalendarDatePicker2Type.range
+            ? (initialValue[0] == null
+                ? (initialValue[1] != null ? notOk : ok)
+                : (initialValue[1] != null
+                    ? (initialValue[1]!.isBefore(initialValue[0]!) ? notOk : ok)
+                    : ok))
+            : ok)
+        : ok;
+    assert(
+      isInitialValueValid,
+      'Range picker must has start date set before setting end date, and start date must before end date.',
+    );
+  }
 
   /// The initially selected [DateTime]s that the picker should display.
   final List<DateTime?> initialValue;
@@ -183,38 +199,48 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   void _handleDayChanged(DateTime value) {
     _vibrate();
     setState(() {
-      _selectedDates.removeWhere((d) => d == null);
+      var selectedDates = [..._selectedDates];
+      selectedDates.removeWhere((d) => d == null);
 
       if (widget.config.calendarType == CalendarDatePicker2Type.single) {
-        _selectedDates = [value];
+        selectedDates = [value];
       } else if (widget.config.calendarType == CalendarDatePicker2Type.multi) {
         var index =
-            _selectedDates.indexWhere((d) => DateUtils.isSameDay(d, value));
+            selectedDates.indexWhere((d) => DateUtils.isSameDay(d, value));
         if (index != -1) {
-          _selectedDates.removeAt(index);
+          selectedDates.removeAt(index);
         } else {
-          _selectedDates.add(value);
+          selectedDates.add(value);
         }
       } else if (widget.config.calendarType == CalendarDatePicker2Type.range) {
-        if (_selectedDates.isEmpty) {
-          _selectedDates.add(value);
+        if (selectedDates.isEmpty) {
+          selectedDates.add(value);
         } else {
-          var isRangeSet =
-              _selectedDates.length > 1 && _selectedDates[1] != null;
-          var isSelectedDayBeforeStartDate = value.isBefore(_selectedDates[0]!);
+          var isRangeSet = selectedDates.length > 1 && selectedDates[1] != null;
+          var isSelectedDayBeforeStartDate = value.isBefore(selectedDates[0]!);
 
           if (isRangeSet || isSelectedDayBeforeStartDate) {
-            _selectedDates = [value, null];
+            selectedDates = [value, null];
           } else {
-            _selectedDates = [_selectedDates[0], value];
+            selectedDates = [selectedDates[0], value];
           }
         }
       }
 
-      _selectedDates
+      selectedDates
         ..removeWhere((d) => d == null)
         ..sort((d1, d2) => d1!.compareTo(d2!));
-      widget.onValueChanged?.call(_selectedDates);
+
+      var isValueDifferent =
+          widget.config.calendarType != CalendarDatePicker2Type.single ||
+              !DateUtils.isSameDay(selectedDates[0],
+                  _selectedDates.isNotEmpty ? _selectedDates[0] : null);
+      if (isValueDifferent) {
+        _selectedDates = _selectedDates
+          ..clear()
+          ..addAll(selectedDates);
+        widget.onValueChanged?.call(_selectedDates);
+      }
     });
   }
 
@@ -716,7 +742,8 @@ class _MonthPickerState extends State<_MonthPicker> {
               children: <Widget>[
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.chevron_left),
+                  icon: widget.config.lastMonthIcon ??
+                      const Icon(Icons.chevron_left),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth
                       ? null
@@ -725,7 +752,8 @@ class _MonthPickerState extends State<_MonthPicker> {
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
                 IconButton(
-                  icon: const Icon(Icons.chevron_right),
+                  icon: widget.config.nextMonthIcon ??
+                      const Icon(Icons.chevron_right),
                   color: controlColor,
                   tooltip: _isDisplayingLastMonth
                       ? null
@@ -935,9 +963,10 @@ class _DayPickerState extends State<_DayPicker> {
         } else if (isToday) {
           // The current day gets a different text color and a circle stroke
           // border.
-          dayColor = todayColor;
+          dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
           decoration = BoxDecoration(
-            border: Border.all(color: widget.config.selectedDayHighlightColor ?? todayColor),
+            border: Border.all(
+                color: widget.config.selectedDayHighlightColor ?? todayColor),
             shape: BoxShape.circle,
           );
         }
@@ -965,8 +994,11 @@ class _DayPickerState extends State<_DayPicker> {
                 DateUtils.isSameDay(startDate, endDate);
 
             if (isDateInRange && !isStartDateSameToEndDate) {
-              var rangePickerIncludedDayDecoration =
-                  BoxDecoration(color: selectedDayBackground.withOpacity(0.15));
+              var rangePickerIncludedDayDecoration = BoxDecoration(
+                color: (widget.config.selectedDayHighlightColor ??
+                        selectedDayBackground)
+                    .withOpacity(0.15),
+              );
 
               if (DateUtils.isSameDay(startDate, dayToBuild)) {
                 dayWidget = Stack(
