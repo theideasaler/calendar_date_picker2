@@ -1213,7 +1213,8 @@ class _YearPickerState extends State<YearPicker> {
     } else if (isDisabled) {
       textColor = colorScheme.onSurface.withOpacity(0.38);
     } else if (isCurrentYear) {
-      textColor = colorScheme.primary;
+      textColor =
+          widget.config.selectedDayHighlightColor ?? colorScheme.primary;
     } else {
       textColor = colorScheme.onSurface.withOpacity(0.87);
     }
@@ -1222,13 +1223,13 @@ class _YearPickerState extends State<YearPicker> {
     BoxDecoration? decoration;
     if (isSelected) {
       decoration = BoxDecoration(
-        color: colorScheme.primary,
+        color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         borderRadius: BorderRadius.circular(decorationHeight / 2),
       );
     } else if (isCurrentYear && !isDisabled) {
       decoration = BoxDecoration(
         border: Border.all(
-          color: colorScheme.primary,
+          color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         ),
         borderRadius: BorderRadius.circular(decorationHeight / 2),
       );

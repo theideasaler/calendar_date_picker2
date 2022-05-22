@@ -39,13 +39,13 @@ class CalendarDatePicker2Config {
   /// The initially displayed view of the calendar picker.
   final DatePickerMode calendarViewMode;
 
-  /// The custom weekday label sunday's value is 0, by default S M T W T F S
+  /// Custom weekday label sunday's value is 0, by default S M T W T F S
   final List<String>? weekdayLabels;
 
-  /// The custom text style for weekday labels
+  /// Custom text style for weekday labels
   final TextStyle? weekdayLabelTextStyle;
 
-  /// The custom height for calendar control toggle's height
+  /// Custom height for calendar control toggle's height
   final double? controlsHeight;
 
   /// Custom icon for last month button control
@@ -54,13 +54,13 @@ class CalendarDatePicker2Config {
   /// Custom icon for next month button control
   final Widget? nextMonthIcon;
 
-  /// The custom text style for calendar mode toggle control
+  /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
-  /// The custom text style for calendar day text
+  /// Custom text style for calendar day text
   final TextStyle? dayTextStyle;
 
-  /// The custom text style for selected calendar day text
+  /// Custom text style for selected calendar day text
   final TextStyle? selectedDayTextStyle;
 
   /// The highlight color selected day

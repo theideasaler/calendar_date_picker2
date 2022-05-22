@@ -82,12 +82,15 @@ class _CalendarDatePicker2WithActionButtonsState
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CalendarDatePicker2(
-          initialValue: [..._editCache],
-          config: widget.config,
-          onValueChanged: (values) => _editCache = values,
-          onDisplayedMonthChanged: widget.onDisplayedMonthChanged,
-          selectableDayPredicate: widget.selectableDayPredicate,
+        MediaQuery.removePadding(
+          context: context,
+          child: CalendarDatePicker2(
+            initialValue: [..._editCache],
+            config: widget.config,
+            onValueChanged: (values) => _editCache = values,
+            onDisplayedMonthChanged: widget.onDisplayedMonthChanged,
+            selectableDayPredicate: widget.selectableDayPredicate,
+          ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),
         Row(

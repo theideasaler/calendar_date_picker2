@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'CalendarDatePicker2 Demo Home Page'),
+      home: const MyHomePage(title: 'CalendarDatePicker2 Demo'),
     );
   }
 }
@@ -55,10 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime(2021, 8, 10),
     DateTime(2021, 8, 13),
   ];
-  List<DateTime?> _overlayCalendarPickerValue = [
-    DateTime(2022, 10, 13),
-    DateTime(2022, 10, 22)
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: SizedBox(
-          width: 400,
+          width: 375,
           child: ListView(
             children: <Widget>[
               _buildCalendarDialogButton(),
-              _buildCalendarOverlayButton(),
               _buildDefaultSingleDatePickerWithValue(),
               _buildDefaultMultiDatePickerWithValue(),
               _buildDefaultRangeDatePickerWithValue(),
@@ -128,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
               var values = await showCalendarDatePicker2Dialog(
                 context: context,
                 config: config,
-                dialogSize: const Size(350, 410),
+                dialogSize: const Size(325, 400),
                 borderRadius: 15,
                 initialValue: _dialogCalendarPickerValue,
               );
@@ -149,75 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  Widget _buildCalendarOverlayButton() {
-    var config = CalendarDatePicker2WithActionButtonsConfig(
-      calendarType: CalendarDatePicker2Type.range,
-      selectedDayHighlightColor: Colors.purple[800],
-    );
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              OverlayState? overlayState = Overlay.of(context);
-              OverlayEntry? overlayEntry;
-              overlayEntry = OverlayEntry(
-                builder: (context) {
-                  return Positioned(
-                    left: 0,
-                    top: 0,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                        ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width / 2 - 175,
-                          top: 170,
-                          child: Material(
-                            child: Container(
-                              width: 350,
-                              height: 410,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[300]!,
-                                      blurRadius: 10,
-                                    ),
-                                  ],
-                                  color: Colors.white),
-                              child: CalendarDatePicker2WithActionButtons(
-                                config: config,
-                                initialValue: _overlayCalendarPickerValue,
-                                onValueChanged: (values) {
-                                  setState(() =>
-                                      _overlayCalendarPickerValue = values);
-                                },
-                                onCancelTapped: () => overlayEntry?.remove(),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-
-              overlayState?.insert(overlayEntry);
-            },
-            child: const Text('Open Calendar Overlay'),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildDefaultSingleDatePickerWithValue() {
     var config = CalendarDatePicker2Config(
       selectedDayHighlightColor: Colors.amber[900],
