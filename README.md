@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.0.1-blue)]()
+[![Pub Package](https://img.shields.io/badge/pub-v0.0.1-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 Highly customizable calendar picker based on Flutter's CalendarDatePicker, with extra support for multi and range mode.
