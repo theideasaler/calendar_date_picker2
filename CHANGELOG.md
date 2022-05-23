@@ -1,3 +1,10 @@
+## [0.0.9] - Fix binding lint warning
+
+* Fix binding lint warning
+## [0.0.8] - Fix binding warning
+
+* Fix binding lint warning
+
 ## [0.0.7] - Update readme
 
 * Update readme
