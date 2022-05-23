@@ -1,3 +1,6 @@
+## [0.1.2] - Update readme
+
+* Update readme
 ## [0.1.1] - Fix Flutter 3.0.0 compiler warning
 
 * Fix Flutter 3.0.0 compiler warning regarding null-aware operation

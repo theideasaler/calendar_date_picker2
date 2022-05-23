@@ -1,9 +1,9 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.0.1-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.1.2-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
-Highly customizable calendar picker based on Flutter's CalendarDatePicker, with extra support for multi and range mode.
+Lightweight and highly customizable calendar picker based on Flutter's original CalendarDatePicker, with extra support for multi and range mode.
 
 | ![single-mode-picker](https://user-images.githubusercontent.com/17869748/169690600-de51bee2-6f59-4f6a-95bf-c55e00dc54ae.gif) | ![multi-mode-picker](https://user-images.githubusercontent.com/17869748/169690730-e9cb5b29-8994-4e46-905e-83a14cc19809.gif) | ![range-picker-mode](https://user-images.githubusercontent.com/17869748/169690843-a7dc3fc2-0598-4050-aee0-e676d3a98c6c.gif) | ![dialog-function](https://user-images.githubusercontent.com/17869748/169691322-04404a63-53ff-4f90-a183-8d658806dedc.gif) |
 | :------------: | :------------: | :------------: | :------------: |
@@ -31,7 +31,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.1.1
+  calendar_date_picker2: ^0.1.2
 ```
 
 ### Basic setup
@@ -112,7 +112,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
 | selectedDayHighlightColor | Color? | The highlight color selected day |
 
-### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 6 extra configs
+### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 6 extra options
 | Option | Type | Description |
 |---|---|---|
 | gapBetweenCalendarAndButtons | double? | The gap between calendar and action buttons |
