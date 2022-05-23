@@ -1,6 +1,6 @@
 name: calendar_date_picker2
-description: Highly customisable calendar picker built on Flutter's original CalendarDatePicker
-version: 0.0.4
+description: Highly customizable calendar picker built on Flutter's original CalendarDatePicker
+version: 0.0.6
 homepage: https://github.com/theideasaler/calendar_date_picker2
 
 environment:

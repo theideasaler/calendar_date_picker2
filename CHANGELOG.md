@@ -1,3 +1,11 @@
+## [0.0.6] - Fix static analysis
+
+* Fix static analysis
+
+## [0.0.5] - Update license
+
+* Update readme pub dev link
+
 ## [0.0.4] - Update license
 
 * Update readme

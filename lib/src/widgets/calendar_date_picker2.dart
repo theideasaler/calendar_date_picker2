@@ -510,7 +510,7 @@ class _MonthPickerState extends State<_MonthPicker> {
     if (widget.initialMonth != oldWidget.initialMonth &&
         widget.initialMonth != _currentMonth) {
       // We can't interrupt this widget build with a scroll, so do it next frame
-      WidgetsBinding.instance?.addPostFrameCallback(
+      WidgetsBinding.instance!.addPostFrameCallback(
         (Duration timeStamp) => _showMonth(widget.initialMonth, jump: true),
       );
     }
