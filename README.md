@@ -31,7 +31,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.0.1
+  calendar_date_picker2: ^0.0.7
 ```
 
 ### Basic setup
