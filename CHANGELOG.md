@@ -1,3 +1,7 @@
+## [0.1.7] - Add config options
+
+* Add `shouldCloseDialogAfterCancelTapped` into `CalendarDatePicker2WithActionButtonsConfig`
+* Add `dialogBackgroundColor` into `showCalendarDatePicker2Dialog`
 ## [0.1.6] - Fix change log
 
 * Fix change log

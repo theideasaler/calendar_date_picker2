@@ -13,6 +13,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
   bool barrierDismissible = true,
   Color? barrierColor = Colors.black54,
   bool useSafeArea = true,
+  Color? dialogBackgroundColor,
   RouteSettings? routeSettings,
   String? barrierLabel,
   TransitionBuilder? builder,
@@ -22,7 +23,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
     backgroundColor: Colors.transparent,
     clipBehavior: Clip.antiAlias,
     child: Material(
-      color: Colors.white,
+      color: dialogBackgroundColor ?? Theme.of(context).canvasColor,
       borderRadius: BorderRadius.circular(borderRadius),
       child: SizedBox(
         width: dialogSize.width,

@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.1.6-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.1.7-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -31,7 +31,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.1.6
+  calendar_date_picker2: ^0.1.7
 ```
 
 ### Basic setup
@@ -112,7 +112,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
 | selectedDayHighlightColor | Color? | The highlight color selected day |
 
-### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 6 extra options
+### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 | Option | Type | Description |
 |---|---|---|
 | gapBetweenCalendarAndButtons | double? | The gap between calendar and action buttons |
@@ -121,6 +121,7 @@ var results = await showCalendarDatePicker2Dialog(
 | okButtonTextStyle | TextStyle? | Text style for ok button |
 | okButton | Widget? | Custom ok button |
 | openedFromDialog | bool? | Is the calendar opened from dialog |
+| shouldCloseDialogAfterCancelTapped | bool? | If the dialog should be closed when user taps the cancel button |
 
 ### Custom UI
 By using the configs above, you could make your own custom calendar picker as your need.

@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.purple[800],
+      shouldCloseDialogAfterCancelTapped: true,
     );
     return Padding(
       padding: const EdgeInsets.all(15),
@@ -126,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 dialogSize: const Size(325, 400),
                 borderRadius: 15,
                 initialValue: _dialogCalendarPickerValue,
+                dialogBackgroundColor: Colors.white,
               );
               if (values != null) {
                 // ignore: avoid_print

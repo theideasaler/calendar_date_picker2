@@ -126,6 +126,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.okButtonTextStyle,
     this.okButton,
     this.openedFromDialog,
+    this.shouldCloseDialogAfterCancelTapped,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -161,6 +162,9 @@ class CalendarDatePicker2WithActionButtonsConfig
   /// Is the calendar opened from dialog
   final bool? openedFromDialog;
 
+  /// If the dialog should be closed when user taps the cancel button
+  final bool? shouldCloseDialogAfterCancelTapped;
+
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -183,6 +187,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? okButtonTextStyle,
     Widget? okButton,
     bool? openedFromDialog,
+    bool? shouldCloseDialogAfterCancelTapped,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -209,6 +214,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       okButtonTextStyle: okButtonTextStyle ?? this.okButtonTextStyle,
       okButton: okButton ?? this.okButton,
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
+      shouldCloseDialogAfterCancelTapped: shouldCloseDialogAfterCancelTapped ??
+          this.shouldCloseDialogAfterCancelTapped,
     );
   }
 }

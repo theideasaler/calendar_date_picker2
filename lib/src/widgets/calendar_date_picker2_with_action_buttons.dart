@@ -112,6 +112,10 @@ class _CalendarDatePicker2WithActionButtonsState
       onTap: () => setState(() {
         _editCache = _values;
         widget.onCancelTapped?.call();
+        if ((widget.config.openedFromDialog ?? false) &&
+            (widget.config.shouldCloseDialogAfterCancelTapped ?? false)) {
+          Navigator.pop(context);
+        }
       }),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
