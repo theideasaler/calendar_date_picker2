@@ -1,3 +1,6 @@
+## [0.1.4] - Update package description
+
+* Update package description
 ## [0.1.4] - Update package intro
 
 * Update package intro
