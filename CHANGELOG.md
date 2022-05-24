@@ -1,4 +1,8 @@
-## [0.1.2] - Update readme
+## [0.1.4] - Update package intro
+
+* Update package intro
+
+## [0.1.3] - Update readme
 
 * Fix wording issue
 
