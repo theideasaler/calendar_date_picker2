@@ -1,4 +1,7 @@
-## [0.1.4] - Update package description
+## [0.1.6] - Fix change log
+
+* Fix change log
+## [0.1.5] - Update package description
 
 * Update package description
 ## [0.1.4] - Update package intro
