@@ -160,24 +160,36 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     });
   }
 
-  void _handleMonthChanged(DateTime date) {
+  void _handleMonthChanged(DateTime date, {bool fromYearPicker = false}) {
     setState(() {
+      final currentDisplayedMonthDate = DateTime(
+        _currentDisplayedMonthDate.year,
+        _currentDisplayedMonthDate.month,
+      );
+      var newDisplayedMonthDate = currentDisplayedMonthDate;
+
       if (_currentDisplayedMonthDate.year != date.year ||
           _currentDisplayedMonthDate.month != date.month) {
-        _currentDisplayedMonthDate = DateTime(date.year, date.month);
+        newDisplayedMonthDate = DateTime(date.year, date.month);
+      }
 
-        if (widget.config.calendarType == CalendarDatePicker2Type.multi ||
-            widget.config.calendarType == CalendarDatePicker2Type.range) {
-          var selectedDatesInThisYear = widget.initialValue
-              .where((d) => d?.year == date.year)
-              .toList()
-            ..sort((d1, d2) => d1!.compareTo(d2!));
-          if (selectedDatesInThisYear.isNotEmpty) {
-            _currentDisplayedMonthDate =
-                DateTime(date.year, selectedDatesInThisYear[0]!.month);
-          }
+      if (fromYearPicker) {
+        var selectedDatesInThisYear = widget.initialValue
+            .where((d) => d?.year == date.year)
+            .toList()
+          ..sort((d1, d2) => d1!.compareTo(d2!));
+        if (selectedDatesInThisYear.isNotEmpty) {
+          newDisplayedMonthDate =
+              DateTime(date.year, selectedDatesInThisYear[0]!.month);
         }
+      }
 
+      if (currentDisplayedMonthDate.year != newDisplayedMonthDate.year ||
+          currentDisplayedMonthDate.month != newDisplayedMonthDate.month) {
+        _currentDisplayedMonthDate = DateTime(
+          newDisplayedMonthDate.year,
+          newDisplayedMonthDate.month,
+        );
         widget.onDisplayedMonthChanged?.call(_currentDisplayedMonthDate);
       }
     });
@@ -194,7 +206,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
     setState(() {
       _mode = DatePickerMode.day;
-      _handleMonthChanged(value);
+      _handleMonthChanged(value, fromYearPicker: true);
     });
   }
 
@@ -265,6 +277,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           child: YearPicker(
             config: widget.config,
             key: _yearPickerKey,
+            initialMonth: _currentDisplayedMonthDate,
             selectedDates: _selectedDates,
             onChanged: _handleYearChanged,
           ),
@@ -1140,6 +1153,7 @@ class YearPicker extends StatefulWidget {
     required this.config,
     required this.selectedDates,
     required this.onChanged,
+    required this.initialMonth,
     this.dragStartBehavior = DragStartBehavior.start,
     Key? key,
   }) : super(key: key);
@@ -1154,6 +1168,9 @@ class YearPicker extends StatefulWidget {
 
   /// Called when the user picks a year.
   final ValueChanged<DateTime> onChanged;
+
+  /// The initial month to display.
+  final DateTime initialMonth;
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
@@ -1262,12 +1279,12 @@ class _YearPickerState extends State<YearPicker> {
     } else {
       yearItem = InkWell(
         key: ValueKey<int>(year),
-        onTap: () => widget.onChanged(DateTime(
+        onTap: () => widget.onChanged(
+          DateTime(
             year,
-            (widget.selectedDates.isNotEmpty
-                    ? widget.selectedDates[0]!.month
-                    : null) ??
-                1)),
+            widget.initialMonth.month,
+          ),
+        ),
         child: yearItem,
       );
     }

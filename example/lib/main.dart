@@ -146,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
   Widget _buildDefaultSingleDatePickerWithValue() {
     var config = CalendarDatePicker2Config(
       selectedDayHighlightColor: Colors.amber[900],
