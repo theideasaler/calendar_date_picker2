@@ -111,6 +111,7 @@ var results = await showCalendarDatePicker2Dialog(
 | dayTextStyle | TextStyle? | Custom text style for calendar day text |
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
 | selectedDayHighlightColor | Color? | The highlight color selected day |
+| keepMonthYearChanged | bool? | Keep "month-year" display or not when month changed |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 | Option | Type | Description |

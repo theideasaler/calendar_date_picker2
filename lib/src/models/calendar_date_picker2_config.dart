@@ -18,6 +18,7 @@ class CalendarDatePicker2Config {
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
+    this.keepMonthYearChanged,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -66,6 +67,9 @@ class CalendarDatePicker2Config {
   /// The highlight color selected day
   final Color? selectedDayHighlightColor;
 
+  // Keep "month-year" display or not when month changed
+  final bool? keepMonthYearChanged;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -81,6 +85,7 @@ class CalendarDatePicker2Config {
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
+    bool? keepMonthYearChanged
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -99,6 +104,8 @@ class CalendarDatePicker2Config {
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      keepMonthYearChanged:
+          keepMonthYearChanged ?? this.keepMonthYearChanged
     );
   }
 }
@@ -120,6 +127,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
+    bool? keepMonthYearChanged,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -142,6 +150,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedDayHighlightColor: selectedDayHighlightColor,
+          keepMonthYearChanged: keepMonthYearChanged
         );
 
   /// The gap between calendar and action buttons
@@ -188,6 +197,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? okButton,
     bool? openedFromDialog,
     bool? shouldCloseDialogAfterCancelTapped,
+    bool? keepMonthYearChanged
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -216,6 +226,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
       shouldCloseDialogAfterCancelTapped: shouldCloseDialogAfterCancelTapped ??
           this.shouldCloseDialogAfterCancelTapped,
+      keepMonthYearChanged:
+            keepMonthYearChanged ?? this.keepMonthYearChanged    
     );
   }
 }

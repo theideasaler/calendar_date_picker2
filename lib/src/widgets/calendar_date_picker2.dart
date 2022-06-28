@@ -166,8 +166,9 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           _currentDisplayedMonthDate.month != date.month) {
         _currentDisplayedMonthDate = DateTime(date.year, date.month);
 
-        if (widget.config.calendarType == CalendarDatePicker2Type.multi ||
-            widget.config.calendarType == CalendarDatePicker2Type.range) {
+        if (widget.config.keepMonthYearChanged != true && 
+        (widget.config.calendarType == CalendarDatePicker2Type.multi ||
+            widget.config.calendarType == CalendarDatePicker2Type.range)) {
           var selectedDatesInThisYear = widget.initialValue
               .where((d) => d?.year == date.year)
               .toList()
