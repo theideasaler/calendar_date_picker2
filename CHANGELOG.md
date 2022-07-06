@@ -1,3 +1,7 @@
+## [0.1.9] - Update readme
+
+- Update readme
+
 ## [0.1.8] - Fix month label display issue
 
 - Fix month label not change issue

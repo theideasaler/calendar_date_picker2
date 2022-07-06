@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.1.8-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.1.9-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -31,14 +31,14 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.1.8
+  calendar_date_picker2: ^0.1.9
 ```
 
 ### Basic setup
 
 *The complete example is available [here](https://github.com/theideasaler/calendar_date_picker2/blob/main/example/lib/main.dart).*
 
-**TableCalendar** requires you to provide `config` and `initialValue`:
+**CalendarDatePicker2** requires you to provide `config` and `initialValue`:
 * `config` contains the configurations for your calendar setup and UI.
 * `initialValue` is initial values passed into your calendar picker, initial value must be a `List`.
 
