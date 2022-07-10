@@ -1096,6 +1096,7 @@ class _DayPickerState extends State<_DayPicker> {
         horizontal: _monthPickerHorizontalPadding,
       ),
       child: GridView.custom(
+        padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
         gridDelegate: _dayPickerGridDelegate,
         childrenDelegate: SliverChildListDelegate(
