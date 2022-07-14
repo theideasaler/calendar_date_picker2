@@ -677,15 +677,17 @@ class _MonthPickerState extends State<_MonthPicker> {
   /// on the current [TextDirection]). For vertical directions it will move up and
   /// down a week at a time.
   void _handleDirectionFocus(DirectionalFocusIntent intent) {
-    assert(_focusedDay != null);
     setState(() {
-      final DateTime? nextDate =
-          _nextDateInDirection(_focusedDay!, intent.direction);
-      if (nextDate != null) {
-        _focusedDay = nextDate;
-        if (!DateUtils.isSameMonth(_focusedDay, _currentMonth)) {
-          _showMonth(_focusedDay!);
+      if (_focusedDay != null) {
+        final nextDate = _nextDateInDirection(_focusedDay!, intent.direction);
+        if (nextDate != null) {
+          _focusedDay = nextDate;
+          if (!DateUtils.isSameMonth(_focusedDay, _currentMonth)) {
+            _showMonth(_focusedDay!);
+          }
         }
+      } else {
+        _focusedDay ??= widget.initialMonth;
       }
     });
   }
@@ -1004,8 +1006,8 @@ class _DayPickerState extends State<_DayPicker> {
 
         if (widget.config.calendarType == CalendarDatePicker2Type.range) {
           if (widget.selectedDates.length == 2) {
-            var startDate = widget.selectedDates[0];
-            var endDate = widget.selectedDates[1];
+            var startDate = DateUtils.dateOnly(widget.selectedDates[0]);
+            var endDate = DateUtils.dateOnly(widget.selectedDates[1]);
             var isDateInRange = !(dayToBuild.isBefore(startDate) ||
                 dayToBuild.isAfter(endDate));
             var isStartDateSameToEndDate =
