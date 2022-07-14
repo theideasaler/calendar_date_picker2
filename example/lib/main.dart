@@ -41,6 +41,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<DateTime?> _dialogCalendarPickerValue = [
+    DateTime(2021, 8, 10),
+    DateTime(2021, 8, 13),
+  ];
   List<DateTime?> _singleDatePickerValueWithDefaultValue = [
     DateTime(2022, 3, 9)
   ];
@@ -57,12 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   List<DateTime?> _rangeDatePickerWithActionButtonsWithValue = [
-    DateTime(2022, 5, 20),
-    DateTime(2022, 5, 25)
-  ];
-  List<DateTime?> _dialogCalendarPickerValue = [
-    DateTime(2021, 8, 10),
-    DateTime(2021, 8, 13),
+    DateTime.now(),
+    DateTime.now().add(const Duration(days: 5)),
   ];
 
   @override
@@ -303,10 +303,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             const Text('Selection(s):  '),
             const SizedBox(width: 10),
-            Text(
-              _getValueText(
-                config.calendarType,
-                _rangeDatePickerWithActionButtonsWithValue,
+            Flexible(
+              child: Text(
+                _getValueText(
+                  config.calendarType,
+                  _rangeDatePickerWithActionButtonsWithValue,
+                ),
               ),
             ),
           ],
