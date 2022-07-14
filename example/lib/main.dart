@@ -137,6 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: 15,
                 initialValue: _dialogCalendarPickerValue,
                 dialogBackgroundColor: Colors.white,
+                selectableDayPredicate: (day) => !day
+                    .difference(_dialogCalendarPickerValue[0]!
+                        .subtract(const Duration(days: 5)))
+                    .isNegative,
               );
               if (values != null) {
                 // ignore: avoid_print
