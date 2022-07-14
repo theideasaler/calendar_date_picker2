@@ -29,5 +29,5 @@ If applicable, add screenshots to help explain your problem.
 **Platforms (please complete the following information):**
  - Platforms: [e.g. iOS, Android, Web]
 
-**Minimum Reproduceable Repo**
+**Minimum Reproduceable Example**
 Add a minimum reproduceable sample
