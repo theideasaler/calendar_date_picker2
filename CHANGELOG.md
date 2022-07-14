@@ -1,4 +1,4 @@
-## [0.2.0]
+## [0.2.1]
 
 - Fix keyboard assertion when no focused day is set
 - Fix time part not respected in range picker mode
