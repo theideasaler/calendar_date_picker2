@@ -1,3 +1,8 @@
+## [0.2.2]
+
+- Add new config option `disabledDayTextStyle` for disabled calendar days
+- Add `selectableDayPredicate` into built-in dialog function
+
 ## [0.2.1]
 
 - Fix keyboard assertion when no focused day is set
