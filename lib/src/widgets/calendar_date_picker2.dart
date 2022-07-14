@@ -959,8 +959,7 @@ class _DayPickerState extends State<_DayPicker> {
         final DateTime dayToBuild = DateTime(year, month, day);
         final bool isDisabled = dayToBuild.isAfter(widget.config.lastDate) ||
             dayToBuild.isBefore(widget.config.firstDate) ||
-            (widget.selectableDayPredicate != null &&
-                !widget.selectableDayPredicate!(dayToBuild));
+            !(widget.selectableDayPredicate?.call(dayToBuild) ?? true);
         final bool isSelectedDay =
             widget.selectedDates.any((d) => DateUtils.isSameDay(d, dayToBuild));
 
@@ -991,15 +990,28 @@ class _DayPickerState extends State<_DayPicker> {
           );
         }
 
+        var customDayTextStyle = widget.config.dayTextStyle;
+
+        if (isDisabled) {
+          customDayTextStyle = customDayTextStyle?.copyWith(
+            color: disabledDayColor,
+            fontWeight: FontWeight.normal,
+          );
+          if (widget.config.disabledDayTextStyle != null) {
+            customDayTextStyle = widget.config.disabledDayTextStyle;
+          }
+        }
+
+        if (isSelectedDay) {
+          customDayTextStyle = widget.config.selectedDayTextStyle;
+        }
+
         Widget dayWidget = Container(
           decoration: decoration,
           child: Center(
             child: Text(
               localizations.formatDecimal(day),
-              style: (isSelectedDay
-                      ? widget.config.selectedDayTextStyle
-                      : widget.config.dayTextStyle) ??
-                  dayStyle.apply(color: dayColor),
+              style: customDayTextStyle ?? dayStyle.apply(color: dayColor),
             ),
           ),
         );

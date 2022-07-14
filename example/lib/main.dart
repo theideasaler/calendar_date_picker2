@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime(2021, 8, 13),
   ];
   List<DateTime?> _singleDatePickerValueWithDefaultValue = [
-    DateTime(2022, 3, 9)
+    DateTime.now(),
   ];
   List<DateTime?> _multiDatePickerValueWithDefaultValue = [
     DateTime(today.year, today.month, 1),
@@ -170,6 +170,13 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
+      dayTextStyle: const TextStyle(
+        color: Colors.amber,
+        fontWeight: FontWeight.bold,
+      ),
+      disabledDayTextStyle: const TextStyle(
+        color: Colors.grey,
+      ),
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -181,6 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
           initialValue: _singleDatePickerValueWithDefaultValue,
           onValueChanged: (values) =>
               setState(() => _singleDatePickerValueWithDefaultValue = values),
+          selectableDayPredicate: (day) => !day
+              .difference(DateTime.now().subtract(const Duration(days: 3)))
+              .isNegative,
         ),
         const SizedBox(height: 10),
         Row(

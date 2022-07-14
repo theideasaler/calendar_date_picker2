@@ -18,6 +18,7 @@ class CalendarDatePicker2Config {
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
+    this.disabledDayTextStyle,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -60,11 +61,14 @@ class CalendarDatePicker2Config {
   /// Custom text style for calendar day text
   final TextStyle? dayTextStyle;
 
-  /// Custom text style for selected calendar day text
+  /// Custom text style for selected calendar day(s)
   final TextStyle? selectedDayTextStyle;
 
   /// The highlight color selected day
   final Color? selectedDayHighlightColor;
+
+  /// Custom text style for disabled calendar day(s)
+  final TextStyle? disabledDayTextStyle;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -81,6 +85,7 @@ class CalendarDatePicker2Config {
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
+    TextStyle? disabledDayTextStyle,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -99,6 +104,7 @@ class CalendarDatePicker2Config {
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
     );
   }
 }
@@ -120,6 +126,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
+    TextStyle? disabledDayTextStyle,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -142,6 +149,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedDayHighlightColor: selectedDayHighlightColor,
+          disabledDayTextStyle: disabledDayTextStyle,
         );
 
   /// The gap between calendar and action buttons
@@ -181,6 +189,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
+    TextStyle? disabledDayTextStyle,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -206,6 +215,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:

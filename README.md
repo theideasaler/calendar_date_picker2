@@ -16,9 +16,9 @@ CalendarDatePicker2 consists of two main widgets:
 
 ## Features
 
-* Extended CalendarDatePicker allows null initialDate
+* Extended CalendarDatePicker allows `null` initialDate
 * Customizable UI
-* Supports three modes: single, multi and range 
+* Supports three modes: single, multi and range
 * Built-in `showCalendarDatePicker2Dialog`
 
 ## How to use
@@ -111,6 +111,7 @@ var results = await showCalendarDatePicker2Dialog(
 | dayTextStyle | TextStyle? | Custom text style for calendar day text |
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
 | selectedDayHighlightColor | Color? | The highlight color selected day |
+| disabledDayTextStyle | TextStyle? | Custom text style for disabled calendar day(s) |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 | Option | Type | Description |
