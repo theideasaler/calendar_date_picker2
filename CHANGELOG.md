@@ -1,5 +1,10 @@
 ## [0.2.0]
 
+- Fix keyboard assertion when no focused day is set
+- Fix time part not respected in range picker mode
+
+## [0.2.0]
+
 - Fix Calendar body's GridView default extra padding
 
 ## [0.1.9]
