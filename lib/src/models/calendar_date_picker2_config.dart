@@ -19,6 +19,7 @@ class CalendarDatePicker2Config {
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
     this.disabledDayTextStyle,
+    this.todayTextStyle,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -69,6 +70,9 @@ class CalendarDatePicker2Config {
 
   /// Custom text style for disabled calendar day(s)
   final TextStyle? disabledDayTextStyle;
+
+  /// The color of the current day
+  final TextStyle? todayTextStyle;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
