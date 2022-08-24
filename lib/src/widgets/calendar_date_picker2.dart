@@ -979,6 +979,7 @@ class _DayPickerState extends State<_DayPicker> {
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
+        } else if (isToday) {
           // The current day gets a different text color and a circle stroke
           // border.
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
