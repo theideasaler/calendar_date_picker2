@@ -992,6 +992,10 @@ class _DayPickerState extends State<_DayPicker> {
 
         var customDayTextStyle = widget.config.dayTextStyle;
 
+        if (isToday) {
+          customDayTextStyle = widget.config.todayTextStyle;
+        }
+
         if (isDisabled) {
           customDayTextStyle = customDayTextStyle?.copyWith(
             color: disabledDayColor,
