@@ -402,7 +402,7 @@ class _DatePickerModeToggleButtonState
                             widget.title,
                             overflow: TextOverflow.ellipsis,
                             style: widget.config.controlsTextStyle ??
-                                textTheme.subtitle2?.copyWith(
+                                textTheme.titleSmall?.copyWith(
                                   color: controlColor,
                                 ),
                           ),
@@ -905,6 +905,24 @@ class _DayPickerState extends State<_DayPicker> {
     super.dispose();
   }
 
+  /// Builds widgets showing abbreviated days of week. The first widget in the
+  /// returned list corresponds to the first day of week for the current locale.
+  ///
+  /// Examples:
+  ///
+  /// ```
+  /// ┌ Sunday is the first day of week in the US (en_US)
+  /// |
+  /// S M T W T F S  <-- the returned list contains these widgets
+  /// _ _ _ _ _ 1 2
+  /// 3 4 5 6 7 8 9
+  ///
+  /// ┌ But it's Monday in the UK (en_GB)
+  /// |
+  /// M T W T F S S  <-- the returned list contains these widgets
+  /// _ _ _ _ 1 2 3
+  /// 4 5 6 7 8 9 10
+  /// ```
   List<Widget> _dayHeaders(
       TextStyle? headerStyle, MaterialLocalizations localizations) {
     final List<Widget> result = <Widget>[];
@@ -931,10 +949,10 @@ class _DayPickerState extends State<_DayPicker> {
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final TextStyle? headerStyle = textTheme.caption?.apply(
+    final TextStyle? headerStyle = textTheme.bodySmall?.apply(
       color: colorScheme.onSurface.withOpacity(0.60),
     );
-    final TextStyle dayStyle = textTheme.caption!;
+    final TextStyle dayStyle = textTheme.bodySmall!;
     final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
     final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
     final Color selectedDayColor = colorScheme.onPrimary;
@@ -984,15 +1002,14 @@ class _DayPickerState extends State<_DayPicker> {
           // border.
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
           decoration = BoxDecoration(
-            border: Border.all(
-                color: widget.config.selectedDayHighlightColor ?? todayColor),
+            border: Border.all(color: dayColor),
             shape: BoxShape.circle,
           );
         }
 
         var customDayTextStyle = widget.config.dayTextStyle;
 
-        if (isToday) {
+        if (isToday && widget.config.todayTextStyle != null) {
           customDayTextStyle = widget.config.todayTextStyle;
         }
 

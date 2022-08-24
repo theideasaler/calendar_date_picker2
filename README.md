@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.2.2-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.2.3-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -31,7 +31,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.2.2
+  calendar_date_picker2: ^0.2.3
 ```
 
 ### Basic setup
@@ -62,6 +62,7 @@ CalendarDatePicker2(
   config: CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.multi,
   ),
+  onValueChanged: (dates) => _yourHandler(dates),
   initialValue: [],
 );
 ```
@@ -74,6 +75,7 @@ CalendarDatePicker2(
   config: CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.range,
   ),
+  onValueChanged: (dates) => _yourHandler(dates),
   initialValue: [],
 );
 ```
@@ -112,6 +114,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
 | selectedDayHighlightColor | Color? | The highlight color selected day |
 | disabledDayTextStyle | TextStyle? | Custom text style for disabled calendar day(s) |
+| todayTextStyle | TextStyle? | Custom text style for current calendar day |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 | Option | Type | Description |
@@ -135,6 +138,6 @@ CalendarDatePicker2WithActionButtons(
     selectedDayHighlightColor: Colors.purple[800],
   ),
   initialValue: [],
-  onValueChanged: (values) => setState(() => _yourVariable = values),
+  onValueChanged: (dates) => setState(() => _yourVariable = dates),
 );
 ```

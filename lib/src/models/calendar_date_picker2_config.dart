@@ -41,7 +41,7 @@ class CalendarDatePicker2Config {
   /// The initially displayed view of the calendar picker.
   final DatePickerMode calendarViewMode;
 
-  /// Custom weekday label sunday's value is 0, by default S M T W T F S
+  /// Custom weekday labels for the current locale
   final List<String>? weekdayLabels;
 
   /// Custom text style for weekday labels
@@ -65,7 +65,7 @@ class CalendarDatePicker2Config {
   /// Custom text style for selected calendar day(s)
   final TextStyle? selectedDayTextStyle;
 
-  /// The highlight color selected day
+  /// The highlight color for selected day
   final Color? selectedDayHighlightColor;
 
   /// Custom text style for disabled calendar day(s)
