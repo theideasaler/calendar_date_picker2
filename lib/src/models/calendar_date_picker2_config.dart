@@ -71,7 +71,7 @@ class CalendarDatePicker2Config {
   /// Custom text style for disabled calendar day(s)
   final TextStyle? disabledDayTextStyle;
 
-  /// The color of the current day
+  /// Custom text style for the current day
   final TextStyle? todayTextStyle;
 
   CalendarDatePicker2Config copyWith({
@@ -90,6 +90,7 @@ class CalendarDatePicker2Config {
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
+    TextStyle? todayTextStyle,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -109,6 +110,7 @@ class CalendarDatePicker2Config {
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
+      todayTextStyle: todayTextStyle ?? this.todayTextStyle,
     );
   }
 }
@@ -131,6 +133,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
+    TextStyle? todayTextStyle,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -154,6 +157,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedDayTextStyle: selectedDayTextStyle,
           selectedDayHighlightColor: selectedDayHighlightColor,
           disabledDayTextStyle: disabledDayTextStyle,
+          todayTextStyle: todayTextStyle,
         );
 
   /// The gap between calendar and action buttons
@@ -194,6 +198,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
+    TextStyle? todayTextStyle,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -220,6 +225,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
+      todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
