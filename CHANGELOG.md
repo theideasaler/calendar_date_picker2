@@ -1,3 +1,9 @@
+## [0.2.3]
+
+- feat: add `todayTextStyle` into config
+- docs: fix documentation grammar issue
+- refactor: clean up codebase and rebase flutter's source code
+
 ## [0.2.2]
 
 - Add new config option `disabledDayTextStyle` for disabled calendar days
