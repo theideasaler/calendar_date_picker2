@@ -87,7 +87,7 @@ This package includes built-in support to display calendar as a dialog. To use i
 ...
 var results = await showCalendarDatePicker2Dialog(
   context: context,
-  config: CalendarDatePicker2Config(),
+  config: CalendarDatePicker2WithActionButtonsConfig(),
   dialogSize: const Size(325, 400),
   initialValue: _dialogCalendarPickerValue,
   borderRadius: 15,
@@ -112,7 +112,7 @@ var results = await showCalendarDatePicker2Dialog(
 | controlsTextStyle | TextStyle? | Custom text style for calendar mode toggle control |
 | dayTextStyle | TextStyle? | Custom text style for calendar day text |
 | selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
-| selectedDayHighlightColor | Color? | The highlight color selected day |
+| selectedDayHighlightColor | Color? | The highlight color for selected day |
 | disabledDayTextStyle | TextStyle? | Custom text style for disabled calendar day(s) |
 | todayTextStyle | TextStyle? | Custom text style for current calendar day |
 
