@@ -104,7 +104,7 @@ var results = await showCalendarDatePicker2Dialog(
 | lastDate | DateTime? | The latest allowable DateTime user can select |
 | currentDate | DateTime? | The DateTime representing today which will be outlined in calendar |
 | calendarViewMode | DatePickerMode? | The initially displayed view of the calendar picker |
-| weekdayLabels | List\<String\>? | Custom weekday labels, should starts with Sunday |
+| weekdayLabels | List\<String\>? | Custom weekday labels for the current locale |
 | weekdayLabelTextStyle | TextStyle? | Custom text style for weekday labels |
 | controlsHeight | double? | Custom height for calendar control toggle's height |
 | lastMonthIcon | Widget? | Custom icon for last month button control |
