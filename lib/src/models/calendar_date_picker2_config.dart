@@ -76,11 +76,11 @@ class CalendarDatePicker2Config {
   /// Custom text style for the current day
   final TextStyle? todayTextStyle;
 
-  /// Custom border radius day indicator
-  final double? dayBorderRadius;
+  /// Custom border radius for day indicator
+  final BorderRadius? dayBorderRadius;
 
-  /// Custom border radius year indicator
-  final double? yearBorderRadius;
+  /// Custom border radius for year indicator
+  final BorderRadius? yearBorderRadius;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -99,8 +99,8 @@ class CalendarDatePicker2Config {
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
-    double? dayBorderRadius,
-    double? yearBorderRadius,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -146,8 +146,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
-    double? dayBorderRadius,
-    double? yearBorderRadius,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -222,8 +222,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? okButton,
     bool? openedFromDialog,
     bool? shouldCloseDialogAfterCancelTapped,
-    double? dayBorderRadius,
-    double? yearBorderRadius,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,

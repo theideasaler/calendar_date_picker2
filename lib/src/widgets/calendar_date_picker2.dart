@@ -992,7 +992,7 @@ class _DayPickerState extends State<_DayPicker> {
           dayColor = selectedDayColor;
           decoration = BoxDecoration(
             borderRadius: widget.config.dayBorderRadius != null
-                ? BorderRadius.circular(widget.config.dayBorderRadius!)
+                ? widget.config.dayBorderRadius!
                 : null,
             color: widget.config.selectedDayHighlightColor ??
                 selectedDayBackground,
@@ -1008,7 +1008,7 @@ class _DayPickerState extends State<_DayPicker> {
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
           decoration = BoxDecoration(
             borderRadius: widget.config.dayBorderRadius != null
-                ? BorderRadius.circular(widget.config.dayBorderRadius!)
+                ? widget.config.dayBorderRadius!
                 : null,
             border: Border.all(color: dayColor),
             shape: widget.config.dayBorderRadius != null
@@ -1302,16 +1302,16 @@ class _YearPickerState extends State<YearPicker> {
     if (isSelected) {
       decoration = BoxDecoration(
         color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        borderRadius: BorderRadius.circular(
-            widget.config.yearBorderRadius ?? decorationHeight / 2),
+        borderRadius: widget.config.yearBorderRadius ??
+            BorderRadius.circular(decorationHeight / 2),
       );
     } else if (isCurrentYear && !isDisabled) {
       decoration = BoxDecoration(
         border: Border.all(
           color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         ),
-        borderRadius: BorderRadius.circular(
-            widget.config.yearBorderRadius ?? decorationHeight / 2),
+        borderRadius: widget.config.yearBorderRadius ??
+            BorderRadius.circular(decorationHeight / 2),
       );
     }
 
