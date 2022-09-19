@@ -94,7 +94,7 @@ This package includes built-in support to display calendar as a dialog. To use i
 ...
 var results = await showCalendarDatePicker2Dialog(
   context: context,
-  config: CalendarDatePicker2Config(),
+  config: CalendarDatePicker2WithActionButtonsConfig(),
   dialogSize: const Size(325, 400),
   initialValue: _dialogCalendarPickerValue,
   borderRadius: 15,
@@ -105,7 +105,6 @@ var results = await showCalendarDatePicker2Dialog(
 ### Config options
 
 ### For CalendarDatePicker2Config:
-
 | Option                    | Type                     | Description                                                        |
 | ------------------------- | ------------------------ | ------------------------------------------------------------------ |
 | calendarType              | CalendarDatePicker2Type? | Calendar picker type, has 3 values: single, multi, range           |
