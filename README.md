@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.2.3-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.2.4-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -10,16 +10,18 @@ A lightweight and customizable calendar picker based on Flutter CalendarDatePick
 | **single mode** | **multi mode** | **range mode** | **dialog function** |
 
 ## Intro
-CalendarDatePicker2 consists of two main widgets: 
+
+CalendarDatePicker2 consists of two main widgets:
+
 - `CalendarDatePicker2`, this widget only includes the calendar UI and will emit event whenever user taps a different date.
 - `CalendarDatePicker2WithActionButtons`, this widget includes calendar UI and the action buttons (CANCEL & OK). This widget will only emit the updated value when user taps 'OK' button.
 
 ## Features
 
-* Extended CalendarDatePicker allows `null` initialDate
-* Customizable UI
-* Supports three modes: single, multi and range
-* Built-in `showCalendarDatePicker2Dialog`
+- Extended CalendarDatePicker allows `null` initialDate
+- Customizable UI
+- Supports three modes: single, multi and range
+- Built-in `showCalendarDatePicker2Dialog`
 
 ## How to use
 
@@ -31,18 +33,20 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.2.3
+  calendar_date_picker2: ^0.2.4
 ```
 
 ### Basic setup
 
-*The complete example is available [here](https://github.com/theideasaler/calendar_date_picker2/blob/main/example/lib/main.dart).*
+_The complete example is available [here](https://github.com/theideasaler/calendar_date_picker2/blob/main/example/lib/main.dart)._
 
 **CalendarDatePicker2** requires you to provide `config` and `initialValue`:
-* `config` contains the configurations for your calendar setup and UI.
-* `initialValue` is initial values passed into your calendar picker, initial value must be a `List`.
+
+- `config` contains the configurations for your calendar setup and UI.
+- `initialValue` is initial values passed into your calendar picker, initial value must be a `List`.
 
 ### The minimum working sample
+
 ```dart
 CalendarDatePicker2(
   config: CalendarDatePicker2Config(),
@@ -55,6 +59,7 @@ CalendarDatePicker2(
 During the initialization of `CalendarDatePicker2Config` the `calendarType` of the config instance will by default set to `CalendarDatePicker2Type.single`, so you don't have to set the calendar type specifically.
 
 ### Multi Date Picker Configuration
+
 In order to use multi mode date picker, you will need to set the calendarType of config to `CalendarDatePicker2Type.multi`:
 
 ```dart
@@ -68,6 +73,7 @@ CalendarDatePicker2(
 ```
 
 ### Range Date Picker Configuration
+
 In order to use range mode date picker, you will need to set the calendarType of config to `CalendarDatePicker2Type.range`:
 
 ```dart
@@ -81,6 +87,7 @@ CalendarDatePicker2(
 ```
 
 ### Use built-in dialog display method
+
 This package includes built-in support to display calendar as a dialog. To use it, you will need to call `showCalendarDatePicker2Dialog`, which takes three required arguments: `context`, `config`, `dialogSize`:
 
 ```dart
@@ -96,38 +103,43 @@ var results = await showCalendarDatePicker2Dialog(
 ```
 
 ### Config options
+
 ### For CalendarDatePicker2Config:
-| Option | Type | Description |
-|---|---|---|
-| calendarType | CalendarDatePicker2Type? | Calendar picker type, has 3 values: single, multi, range |
-| firstDate | DateTime? | The earliest allowable DateTime user can select |
-| lastDate | DateTime? | The latest allowable DateTime user can select |
-| currentDate | DateTime? | The DateTime representing today which will be outlined in calendar |
-| calendarViewMode | DatePickerMode? | The initially displayed view of the calendar picker |
-| weekdayLabels | List\<String\>? | Custom weekday labels for the current locale |
-| weekdayLabelTextStyle | TextStyle? | Custom text style for weekday labels |
-| controlsHeight | double? | Custom height for calendar control toggle's height |
-| lastMonthIcon | Widget? | Custom icon for last month button control |
-| nextMonthIcon | Widget? | Custom icon for next month button control |
-| controlsTextStyle | TextStyle? | Custom text style for calendar mode toggle control |
-| dayTextStyle | TextStyle? | Custom text style for calendar day text |
-| selectedDayTextStyle | TextStyle? | Custom text style for selected calendar day text |
-| selectedDayHighlightColor | Color? | The highlight color for selected day |
-| disabledDayTextStyle | TextStyle? | Custom text style for disabled calendar day(s) |
-| todayTextStyle | TextStyle? | Custom text style for current calendar day |
+| Option                    | Type                     | Description                                                        |
+| ------------------------- | ------------------------ | ------------------------------------------------------------------ |
+| calendarType              | CalendarDatePicker2Type? | Calendar picker type, has 3 values: single, multi, range           |
+| firstDate                 | DateTime?                | The earliest allowable DateTime user can select                    |
+| lastDate                  | DateTime?                | The latest allowable DateTime user can select                      |
+| currentDate               | DateTime?                | The DateTime representing today which will be outlined in calendar |
+| calendarViewMode          | DatePickerMode?          | The initially displayed view of the calendar picker                |
+| weekdayLabels             | List\<String\>?          | Custom weekday labels, should starts with Sunday                   |
+| weekdayLabelTextStyle     | TextStyle?               | Custom text style for weekday labels                               |
+| controlsHeight            | double?                  | Custom height for calendar control toggle's height                 |
+| lastMonthIcon             | Widget?                  | Custom icon for last month button control                          |
+| nextMonthIcon             | Widget?                  | Custom icon for next month button control                          |
+| controlsTextStyle         | TextStyle?               | Custom text style for calendar mode toggle control                 |
+| dayTextStyle              | TextStyle?               | Custom text style for calendar day text                            |
+| selectedDayTextStyle      | TextStyle?               | Custom text style for selected calendar day text                   |
+| selectedDayHighlightColor | Color?                   | The highlight color selected day                                   |
+| disabledDayTextStyle      | TextStyle?               | Custom text style for disabled calendar day(s)                     |
+| todayTextStyle            | TextStyle?               | Custom text style for current calendar day                         |
+| dayBorderRadius                    | BorderRadius? | Custom border radius for day indicator                          |
+| yearBorderRadius                   | BorderRadius? | Custom border radius for year indicator                         |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
-| Option | Type | Description |
-|---|---|---|
-| gapBetweenCalendarAndButtons | double? | The gap between calendar and action buttons |
-| cancelButtonTextStyle | TextStyle? | Text style for cancel button |
-| cancelButton | Widget? | Custom cancel button |
-| okButtonTextStyle | TextStyle? | Text style for ok button |
-| okButton | Widget? | Custom ok button |
-| openedFromDialog | bool? | Is the calendar opened from dialog |
-| shouldCloseDialogAfterCancelTapped | bool? | If the dialog should be closed when user taps the cancel button |
+
+| Option                             | Type          | Description                                                     |
+| ---------------------------------- | ------------- | --------------------------------------------------------------- |
+| gapBetweenCalendarAndButtons       | double?       | The gap between calendar and action buttons                     |
+| cancelButtonTextStyle              | TextStyle?    | Text style for cancel button                                    |
+| cancelButton                       | Widget?       | Custom cancel button                                            |
+| okButtonTextStyle                  | TextStyle?    | Text style for ok button                                        |
+| okButton                           | Widget?       | Custom ok button                                                |
+| openedFromDialog                   | bool?         | Is the calendar opened from dialog                              |
+| shouldCloseDialogAfterCancelTapped | bool?         | If the dialog should be closed when user taps the cancel button |
 
 ### Custom UI
+
 By using the configs above, you could make your own custom calendar picker as your need.
 ![image](https://user-images.githubusercontent.com/17869748/169694388-6e1bf1be-71ac-4bde-b99c-9f091f15a78f.png)
 
