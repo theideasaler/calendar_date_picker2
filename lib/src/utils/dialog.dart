@@ -8,7 +8,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
   required CalendarDatePicker2WithActionButtonsConfig config,
   required Size dialogSize,
   List<DateTime?> initialValue = const [],
-  double borderRadius = 10,
+  BorderRadius? borderRadius,
   bool useRootNavigator = true,
   bool barrierDismissible = true,
   Color? barrierColor = Colors.black54,
@@ -25,7 +25,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
     clipBehavior: Clip.antiAlias,
     child: Material(
       color: dialogBackgroundColor ?? Theme.of(context).canvasColor,
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: borderRadius ?? BorderRadius.circular(10),
       child: SizedBox(
         width: dialogSize.width,
         height: max(dialogSize.height, 410),

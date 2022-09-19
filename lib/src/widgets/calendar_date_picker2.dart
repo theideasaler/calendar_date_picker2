@@ -991,6 +991,7 @@ class _DayPickerState extends State<_DayPicker> {
           // contrasting text color.
           dayColor = selectedDayColor;
           decoration = BoxDecoration(
+            borderRadius: widget.config.dayBorderRadius,
             color: widget.config.selectedDayHighlightColor ??
                 selectedDayBackground,
             shape: BoxShape.circle,
@@ -1002,6 +1003,7 @@ class _DayPickerState extends State<_DayPicker> {
           // border.
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
           decoration = BoxDecoration(
+            borderRadius: widget.config.dayBorderRadius,
             border: Border.all(color: dayColor),
             shape: BoxShape.circle,
           );

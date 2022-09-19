@@ -2,7 +2,7 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-var today = DateUtils.dateOnly(DateTime.now());
+final today = DateUtils.dateOnly(DateTime.now());
 
 void main() {
   runApp(const MyApp());
@@ -104,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
           : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
-        var startDate = values[0].toString().replaceAll('00:00:00.000', '');
-        var endDate = values.length > 1
+        final startDate = values[0].toString().replaceAll('00:00:00.000', '');
+        final endDate = values.length > 1
             ? values[1].toString().replaceAll('00:00:00.000', '')
             : 'null';
         valueText = '$startDate to $endDate';
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _buildCalendarDialogButton() {
-    var config = CalendarDatePicker2WithActionButtonsConfig(
+    final config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.purple[800],
       shouldCloseDialogAfterCancelTapped: true,
@@ -130,11 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           ElevatedButton(
             onPressed: () async {
-              var values = await showCalendarDatePicker2Dialog(
+              final values = await showCalendarDatePicker2Dialog(
                 context: context,
                 config: config,
                 dialogSize: const Size(325, 400),
-                borderRadius: 15,
+                borderRadius: BorderRadius.circular(15),
                 initialValue: _dialogCalendarPickerValue,
                 dialogBackgroundColor: Colors.white,
                 selectableDayPredicate: (day) => !day
@@ -161,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildDefaultSingleDatePickerWithValue() {
-    var config = CalendarDatePicker2Config(
+    final config = CalendarDatePicker2Config(
       selectedDayHighlightColor: Colors.amber[900],
       weekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       weekdayLabelTextStyle: const TextStyle(
@@ -216,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildDefaultMultiDatePickerWithValue() {
-    var config = CalendarDatePicker2Config(
+    final config = CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.multi,
       selectedDayHighlightColor: Colors.indigo,
     );
@@ -253,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildDefaultRangeDatePickerWithValue() {
-    var config = CalendarDatePicker2Config(
+    final config = CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.teal[800],
       weekdayLabelTextStyle: const TextStyle(
@@ -297,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildCalendarWithActionButtons() {
-    var config = CalendarDatePicker2WithActionButtonsConfig(
+    final config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
     );
     return Column(

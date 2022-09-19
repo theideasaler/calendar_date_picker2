@@ -1,3 +1,10 @@
+## [0.2.4]
+
+- feat: add `dayBorderRadius` into config
+- feat: add `yearBorderRadius` into config
+- refactor: change param `borderRadius`'type of function `showCalendarDatePicker2Dialog` to `BorderRadius`
+- refactor: code clean-up
+
 ## [0.2.3]
 
 - feat: add `todayTextStyle` into config
@@ -50,6 +57,7 @@
 ## [0.1.2]
 
 - Update readme
+
 ## [0.1.1]
 
 - Fix Flutter 3.0.0 compiler warning regarding null-aware operation
