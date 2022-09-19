@@ -991,9 +991,14 @@ class _DayPickerState extends State<_DayPicker> {
           // contrasting text color.
           dayColor = selectedDayColor;
           decoration = BoxDecoration(
+            borderRadius: widget.config.dayBorderRadius != null
+                ? widget.config.dayBorderRadius!
+                : null,
             color: widget.config.selectedDayHighlightColor ??
                 selectedDayBackground,
-            shape: BoxShape.circle,
+            shape: widget.config.dayBorderRadius != null
+                ? BoxShape.rectangle
+                : BoxShape.circle,
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
@@ -1002,8 +1007,13 @@ class _DayPickerState extends State<_DayPicker> {
           // border.
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
           decoration = BoxDecoration(
+            borderRadius: widget.config.dayBorderRadius != null
+                ? widget.config.dayBorderRadius!
+                : null,
             border: Border.all(color: dayColor),
-            shape: BoxShape.circle,
+            shape: widget.config.dayBorderRadius != null
+                ? BoxShape.rectangle
+                : BoxShape.circle,
           );
         }
 
@@ -1027,14 +1037,24 @@ class _DayPickerState extends State<_DayPicker> {
           customDayTextStyle = widget.config.selectedDayTextStyle;
         }
 
-        Widget dayWidget = Container(
-          decoration: decoration,
-          child: Center(
-            child: Text(
-              localizations.formatDecimal(day),
-              style: customDayTextStyle ?? dayStyle.apply(color: dayColor),
+        Widget dayWidget = Row(
+          children: [
+            const Spacer(),
+            AspectRatio(
+              aspectRatio: 1,
+              child: Container(
+                decoration: decoration,
+                child: Center(
+                  child: Text(
+                    localizations.formatDecimal(day),
+                    style:
+                        customDayTextStyle ?? dayStyle.apply(color: dayColor),
+                  ),
+                ),
+              ),
             ),
-          ),
+            const Spacer(),
+          ],
         );
 
         if (widget.config.calendarType == CalendarDatePicker2Type.range) {
@@ -1282,14 +1302,16 @@ class _YearPickerState extends State<YearPicker> {
     if (isSelected) {
       decoration = BoxDecoration(
         color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        borderRadius: BorderRadius.circular(decorationHeight / 2),
+        borderRadius: widget.config.yearBorderRadius ??
+            BorderRadius.circular(decorationHeight / 2),
       );
     } else if (isCurrentYear && !isDisabled) {
       decoration = BoxDecoration(
         border: Border.all(
           color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         ),
-        borderRadius: BorderRadius.circular(decorationHeight / 2),
+        borderRadius: widget.config.yearBorderRadius ??
+            BorderRadius.circular(decorationHeight / 2),
       );
     }
 

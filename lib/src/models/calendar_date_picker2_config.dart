@@ -20,6 +20,8 @@ class CalendarDatePicker2Config {
     this.selectedDayHighlightColor,
     this.disabledDayTextStyle,
     this.todayTextStyle,
+    this.dayBorderRadius,
+    this.yearBorderRadius,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -74,6 +76,12 @@ class CalendarDatePicker2Config {
   /// Custom text style for the current day
   final TextStyle? todayTextStyle;
 
+  /// Custom border radius for day indicator
+  final BorderRadius? dayBorderRadius;
+
+  /// Custom border radius for year indicator
+  final BorderRadius? yearBorderRadius;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -91,6 +99,8 @@ class CalendarDatePicker2Config {
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -111,6 +121,8 @@ class CalendarDatePicker2Config {
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
+      dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
+      yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
   }
 }
@@ -134,6 +146,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -158,6 +172,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedDayHighlightColor: selectedDayHighlightColor,
           disabledDayTextStyle: disabledDayTextStyle,
           todayTextStyle: todayTextStyle,
+          dayBorderRadius: dayBorderRadius,
+          yearBorderRadius: yearBorderRadius,
         );
 
   /// The gap between calendar and action buttons
@@ -206,6 +222,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? okButton,
     bool? openedFromDialog,
     bool? shouldCloseDialogAfterCancelTapped,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -236,6 +254,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
       shouldCloseDialogAfterCancelTapped: shouldCloseDialogAfterCancelTapped ??
           this.shouldCloseDialogAfterCancelTapped,
+      dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
+      yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
   }
 }
