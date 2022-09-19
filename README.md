@@ -97,7 +97,7 @@ var results = await showCalendarDatePicker2Dialog(
   config: CalendarDatePicker2WithActionButtonsConfig(),
   dialogSize: const Size(325, 400),
   initialValue: _dialogCalendarPickerValue,
-  borderRadius: 15,
+  borderRadius: BorderRadius.circular(15),
 );
 ...
 ```
