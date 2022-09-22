@@ -763,9 +763,9 @@ class _MonthPickerState extends State<_MonthPicker> {
                 const Spacer(),
                 IconButton(
                   icon: widget.config.lastMonthIcon ??
-                      Icon(
+                      const Icon(
                         Icons.chevron_left,
-                        color: widget.config.controlsIconsColor ?? Colors.white,
+                        color: Colors.white,
                       ),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth
@@ -776,9 +776,9 @@ class _MonthPickerState extends State<_MonthPicker> {
                 ),
                 IconButton(
                   icon: widget.config.nextMonthIcon ??
-                      Icon(
+                      const Icon(
                         Icons.chevron_right,
-                        color: widget.config.controlsIconsColor ?? Colors.white,
+                        color: Colors.white,
                       ),
                   color: controlColor,
                   tooltip: _isDisplayingLastMonth
@@ -1298,7 +1298,9 @@ class _YearPickerState extends State<YearPicker> {
     } else {
       textColor = colorScheme.onSurface.withOpacity(0.87);
     }
-    final TextStyle? itemStyle = textTheme.bodyText1?.apply(color: textColor);
+    final TextStyle? itemStyle = textTheme.bodyText1?.apply(
+      color: textColor,
+    );
 
     BoxDecoration? decoration;
     if (isSelected) {
@@ -1326,7 +1328,10 @@ class _YearPickerState extends State<YearPicker> {
           child: Semantics(
             selected: isSelected,
             button: true,
-            child: Text(year.toString(), style: itemStyle),
+            child: Text(
+              year.toString(),
+              style: widget.config.yearTextStyle ?? itemStyle,
+            ),
           ),
         ),
       ),

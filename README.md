@@ -134,27 +134,26 @@ borderRadius: BorderRadius.circular(15),
 
 ### For CalendarDatePicker2Config:
 
-| Option                     | Type                     | Description                                                        |
-|----------------------------|--------------------------|--------------------------------------------------------------------|
-| calendarType               | CalendarDatePicker2Type? | Calendar picker type, has 3 values: single, multi, range           |
-| firstDate                  | DateTime?                | The earliest allowable DateTime user can select                    |
-| lastDate                   | DateTime?                | The latest allowable DateTime user can select                      |
-| currentDate                | DateTime?                | The DateTime representing today which will be outlined in calendar |
-| calendarViewMode           | DatePickerMode?          | The initially displayed view of the calendar picker                |
-| weekdayLabels              | List\<String\>?          | Custom weekday labels, should starts with Sunday                   |
-| weekdayLabelTextStyle      | TextStyle?               | Custom text style for weekday labels                               |
-| controlsHeight             | double?                  | Custom height for calendar control toggle's height                 |
-| lastMonthIcon              | Widget?                  | Custom icon for last month button control                          |
-| nextMonthIcon              | Widget?                  | Custom icon for next month button control                          |
-| controlsTextStyle          | TextStyle?               | Custom text style for calendar mode toggle control                 |
-| controlsIconsColor         | Color?                   | Custom color icons for calendar mode toggle control                |
-| dayTextStyle               | TextStyle?               | Custom text style for calendar day text                            |
-| selectedDayTextStyle       | TextStyle?               | Custom text style for selected calendar day text                   |
-| selectedDayHighlightColor  | Color?                   | The highlight color selected day                                   |
-| disabledDayTextStyle       | TextStyle?               | Custom text style for disabled calendar day(s)                     |
-| todayTextStyle             | TextStyle?               | Custom text style for current calendar day                         |
-| dayBorderRadius            | BorderRadius?            | Custom border radius for day indicator                             |
-| yearBorderRadius           | BorderRadius?            | Custom border radius for year indicator                            |
+| Option                    | Type                     | Description                                                        |
+| ------------------------- | ------------------------ | ------------------------------------------------------------------ |
+| calendarType              | CalendarDatePicker2Type? | Calendar picker type, has 3 values: single, multi, range           |
+| firstDate                 | DateTime?                | The earliest allowable DateTime user can select                    |
+| lastDate                  | DateTime?                | The latest allowable DateTime user can select                      |
+| currentDate               | DateTime?                | The DateTime representing today which will be outlined in calendar |
+| calendarViewMode          | DatePickerMode?          | The initially displayed view of the calendar picker                |
+| weekdayLabels             | List\<String\>?          | Custom weekday labels, should starts with Sunday                   |
+| weekdayLabelTextStyle     | TextStyle?               | Custom text style for weekday labels                               |
+| controlsHeight            | double?                  | Custom height for calendar control toggle's height                 |
+| lastMonthIcon             | Widget?                  | Custom icon for last month button control                          |
+| nextMonthIcon             | Widget?                  | Custom icon for next month button control                          |
+| controlsTextStyle         | TextStyle?               | Custom text style for calendar mode toggle control                 |
+| dayTextStyle              | TextStyle?               | Custom text style for calendar day text                            |
+| selectedDayTextStyle      | TextStyle?               | Custom text style for selected calendar day text                   |
+| selectedDayHighlightColor | Color?                   | The highlight color selected day                                   |
+| disabledDayTextStyle      | TextStyle?               | Custom text style for disabled calendar day(s)                     |
+| todayTextStyle            | TextStyle?               | Custom text style for current calendar day                         |
+| dayBorderRadius                    | BorderRadius? | Custom border radius for day indicator                          |
+| yearBorderRadius                   | BorderRadius? | Custom border radius for year indicator                         |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 

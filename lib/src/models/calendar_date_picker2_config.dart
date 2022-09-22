@@ -15,7 +15,6 @@ class CalendarDatePicker2Config {
     this.lastMonthIcon,
     this.nextMonthIcon,
     this.controlsTextStyle,
-    this.controlsIconsColor,
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
@@ -23,6 +22,7 @@ class CalendarDatePicker2Config {
     this.todayTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
+    this.yearTextStyle,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -62,9 +62,6 @@ class CalendarDatePicker2Config {
   /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
-  /// Custom color icons for calendar mode toggle control
-  final Color? controlsIconsColor;
-
   /// Custom text style for calendar day text
   final TextStyle? dayTextStyle;
 
@@ -86,6 +83,9 @@ class CalendarDatePicker2Config {
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
 
+  // Custom text style for years list
+  final TextStyle? yearTextStyle;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -98,7 +98,6 @@ class CalendarDatePicker2Config {
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
-    Color? controlsIconsColor,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -106,6 +105,7 @@ class CalendarDatePicker2Config {
     TextStyle? todayTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    TextStyle? yearTextStyle,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -120,7 +120,6 @@ class CalendarDatePicker2Config {
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
-      controlsIconsColor: controlsIconsColor ?? this.controlsIconsColor,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
@@ -129,6 +128,7 @@ class CalendarDatePicker2Config {
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
     );
   }
 }
@@ -147,7 +147,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
-    Color? controlsIconsColor,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -155,6 +154,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    TextStyle? yearTextStyle,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -174,7 +174,6 @@ class CalendarDatePicker2WithActionButtonsConfig
           lastMonthIcon: lastMonthIcon,
           nextMonthIcon: nextMonthIcon,
           controlsTextStyle: controlsTextStyle,
-          controlsIconsColor: controlsIconsColor,
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedDayHighlightColor: selectedDayHighlightColor,
@@ -182,6 +181,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           todayTextStyle: todayTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
+          yearTextStyle: yearTextStyle,
         );
 
   /// The gap between calendar and action buttons
@@ -218,7 +218,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
-    Color? controlsIconsColor,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -233,6 +232,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? shouldCloseDialogAfterCancelTapped,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    TextStyle? yearTextStyle,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -247,7 +247,6 @@ class CalendarDatePicker2WithActionButtonsConfig
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
-      controlsIconsColor: controlsIconsColor ?? this.controlsIconsColor,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
@@ -266,6 +265,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           this.shouldCloseDialogAfterCancelTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
     );
   }
 }
