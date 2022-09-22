@@ -174,7 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
-      controlsIconsColor: Colors.white,
       dayTextStyle: const TextStyle(
         color: Colors.amber,
         fontWeight: FontWeight.bold,
@@ -266,7 +265,6 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
-      controlsIconsColor: Colors.white,
     );
     return Column(
       mainAxisSize: MainAxisSize.min,

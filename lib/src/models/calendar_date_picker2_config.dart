@@ -23,6 +23,7 @@ class CalendarDatePicker2Config {
     this.todayTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
+    this.yearColor,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -86,6 +87,9 @@ class CalendarDatePicker2Config {
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
 
+  // Custom years color
+  final Color? yearColor;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -106,6 +110,7 @@ class CalendarDatePicker2Config {
     TextStyle? todayTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    Color? yearColor,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -129,6 +134,7 @@ class CalendarDatePicker2Config {
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      yearColor: yearColor ?? this.yearColor,
     );
   }
 }
@@ -155,6 +161,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    Color? yearColor,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -182,6 +189,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           todayTextStyle: todayTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
+          yearColor: yearColor,
         );
 
   /// The gap between calendar and action buttons
@@ -233,6 +241,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? shouldCloseDialogAfterCancelTapped,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    Color? yearColor,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -266,6 +275,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           this.shouldCloseDialogAfterCancelTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      yearColor: yearColor ?? this.yearColor,
     );
   }
 }
