@@ -763,7 +763,10 @@ class _MonthPickerState extends State<_MonthPicker> {
                 const Spacer(),
                 IconButton(
                   icon: widget.config.lastMonthIcon ??
-                      const Icon(Icons.chevron_left),
+                      Icon(
+                        Icons.chevron_left,
+                        color: widget.config.controlsIconsColor ?? Colors.white,
+                      ),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth
                       ? null
@@ -773,7 +776,10 @@ class _MonthPickerState extends State<_MonthPicker> {
                 ),
                 IconButton(
                   icon: widget.config.nextMonthIcon ??
-                      const Icon(Icons.chevron_right),
+                      Icon(
+                        Icons.chevron_right,
+                        color: widget.config.controlsIconsColor ?? Colors.white,
+                      ),
                   color: controlColor,
                   tooltip: _isDisplayingLastMonth
                       ? null
