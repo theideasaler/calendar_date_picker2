@@ -765,7 +765,6 @@ class _MonthPickerState extends State<_MonthPicker> {
                   icon: widget.config.lastMonthIcon ??
                       const Icon(
                         Icons.chevron_left,
-                        color: Colors.white,
                       ),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth
@@ -778,7 +777,6 @@ class _MonthPickerState extends State<_MonthPicker> {
                   icon: widget.config.nextMonthIcon ??
                       const Icon(
                         Icons.chevron_right,
-                        color: Colors.white,
                       ),
                   color: controlColor,
                   tooltip: _isDisplayingLastMonth
@@ -1328,10 +1326,8 @@ class _YearPickerState extends State<YearPicker> {
           child: Semantics(
             selected: isSelected,
             button: true,
-            child: Text(
-              year.toString(),
-              style: widget.config.yearTextStyle ?? itemStyle,
-            ),
+            child: Text(year.toString(),
+                style: widget.config.yearTextStyle ?? itemStyle),
           ),
         ),
       ),
