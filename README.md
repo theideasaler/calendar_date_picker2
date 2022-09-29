@@ -153,3 +153,10 @@ CalendarDatePicker2WithActionButtons(
   onValueChanged: (dates) => setState(() => _yourVariable = dates),
 );
 ```
+## Contributions
+Feel free to contribute to this project. 🍺 Pull requests are welcome!
+However, there are some rules that need to be followed before creating a PR:
+- Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter
+- Please do not introduce changes that are not realated to your code
+
+
