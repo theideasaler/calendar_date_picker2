@@ -161,3 +161,4 @@ There are some tips before creating a PR:
 
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter
 - Please avoid introducing new changes that are not related to your code
+- Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
