@@ -160,4 +160,4 @@ Feel free to contribute to this project. 🍺 Pull requests are welcome!
 There are some tips before creating a PR:
 
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter
-- Please do not introduce changes that are not related to your code
+- Please acoid introducing new changes that are not related to your code
