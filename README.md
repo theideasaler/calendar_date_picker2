@@ -125,6 +125,7 @@ var results = await showCalendarDatePicker2Dialog(
 | todayTextStyle            | TextStyle?               | Custom text style for current calendar day                         |
 | dayBorderRadius                    | BorderRadius? | Custom border radius for day indicator                          |
 | yearBorderRadius                   | BorderRadius? | Custom border radius for year indicator                         |
+| yearTextStyle                      | TextStyle?    | Custom text style for years list                                |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 7 extra options
 
