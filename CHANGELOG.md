@@ -1,3 +1,7 @@
+## [0.2.5]
+
+- feat: add `yearTextStyle` into config
+- fix: fix `onCancelTapped` get called on Ok button tapped
 ## [0.2.4]
 
 - feat: add `dayBorderRadius` into config
