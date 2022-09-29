@@ -140,7 +140,7 @@ class _CalendarDatePicker2WithActionButtonsState
       onTap: () => setState(() {
         _values = _editCache;
         widget.onValueChanged?.call(_values);
-        widget.onCancelTapped?.call();
+        widget.onOkTapped?.call();
         if (widget.config.openedFromDialog ?? false) {
           Navigator.pop(context, _values);
         }

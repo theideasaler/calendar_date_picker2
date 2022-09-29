@@ -20,9 +20,9 @@ class CalendarDatePicker2Config {
     this.selectedDayHighlightColor,
     this.disabledDayTextStyle,
     this.todayTextStyle,
+    this.yearTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
-    this.yearTextStyle,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -77,14 +77,14 @@ class CalendarDatePicker2Config {
   /// Custom text style for the current day
   final TextStyle? todayTextStyle;
 
+  // Custom text style for years list
+  final TextStyle? yearTextStyle;
+
   /// Custom border radius for day indicator
   final BorderRadius? dayBorderRadius;
 
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
-
-  // Custom text style for years list
-  final TextStyle? yearTextStyle;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -103,9 +103,9 @@ class CalendarDatePicker2Config {
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
+    TextStyle? yearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    TextStyle? yearTextStyle,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -126,9 +126,9 @@ class CalendarDatePicker2Config {
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
+      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
-      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
     );
   }
 }
@@ -152,9 +152,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
+    TextStyle? yearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    TextStyle? yearTextStyle,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -179,9 +179,9 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedDayHighlightColor: selectedDayHighlightColor,
           disabledDayTextStyle: disabledDayTextStyle,
           todayTextStyle: todayTextStyle,
+          yearTextStyle: yearTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
-          yearTextStyle: yearTextStyle,
         );
 
   /// The gap between calendar and action buttons
@@ -223,6 +223,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Color? selectedDayHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
+    TextStyle? yearTextStyle,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -232,7 +233,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? shouldCloseDialogAfterCancelTapped,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    TextStyle? yearTextStyle,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -253,6 +253,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
+      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
@@ -265,7 +266,6 @@ class CalendarDatePicker2WithActionButtonsConfig
           this.shouldCloseDialogAfterCancelTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
-      yearTextStyle: yearTextStyle ?? this.yearTextStyle,
     );
   }
 }
