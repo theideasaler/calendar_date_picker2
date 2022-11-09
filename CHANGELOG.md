@@ -1,7 +1,15 @@
+## [0.2.6]
+
+- feat: add `firstDayOfWeek` into config
+- feat: add `closeDialogOnOkTapped` into config
+- update: rename `shouldCloseDialogAfterCancelTapped` to `closeDialogOnCancelTapped`
+- update: set default value as `true` for both `closeDialogOnOkTapped` & `closeDialogOnCancelTapped`
+
 ## [0.2.5]
 
 - feat: add `yearTextStyle` into config
 - fix: fix `onCancelTapped` get called on Ok button tapped
+
 ## [0.2.4]
 
 - feat: add `dayBorderRadius` into config
