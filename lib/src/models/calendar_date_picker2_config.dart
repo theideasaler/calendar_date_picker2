@@ -11,6 +11,7 @@ class CalendarDatePicker2Config {
     DatePickerMode? calendarViewMode,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
+    this.firstDayOfWeek,
     this.controlsHeight,
     this.lastMonthIcon,
     this.nextMonthIcon,
@@ -44,11 +45,19 @@ class CalendarDatePicker2Config {
   /// The initially displayed view of the calendar picker.
   final DatePickerMode calendarViewMode;
 
-  /// Custom weekday labels for the current locale
+  /// Custom weekday labels for the current locale, MUST starts from Sunday
+  /// Examples:
+  ///
+  /// - US English: S, M, T, W, T, F, S
+  /// - Russian: вс, пн, вт, ср, чт, пт, сб - notice that the list begins with
+  ///   вс (Sunday) even though the first day of week for Russian is Monday.
   final List<String>? weekdayLabels;
 
   /// Custom text style for weekday labels
   final TextStyle? weekdayLabelTextStyle;
+
+  /// Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.
+  final int? firstDayOfWeek;
 
   /// Custom height for calendar control toggle's height
   final double? controlsHeight;
@@ -94,6 +103,7 @@ class CalendarDatePicker2Config {
     DatePickerMode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
@@ -116,6 +126,7 @@ class CalendarDatePicker2Config {
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
@@ -161,7 +172,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.okButtonTextStyle,
     this.okButton,
     this.openedFromDialog,
-    this.shouldCloseDialogAfterCancelTapped,
+    this.closeDialogOnCancelTapped,
+    this.closeDialogOnOkTapped,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -202,8 +214,11 @@ class CalendarDatePicker2WithActionButtonsConfig
   /// Is the calendar opened from dialog
   final bool? openedFromDialog;
 
-  /// If the dialog should be closed when user taps the cancel button
-  final bool? shouldCloseDialogAfterCancelTapped;
+  /// If the dialog should be closed when user taps the CANCEL button
+  final bool? closeDialogOnCancelTapped;
+
+  /// If the dialog should be closed when user taps the OK button
+  final bool? closeDialogOnOkTapped;
 
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
@@ -214,6 +229,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     DatePickerMode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
@@ -230,7 +246,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? okButtonTextStyle,
     Widget? okButton,
     bool? openedFromDialog,
-    bool? shouldCloseDialogAfterCancelTapped,
+    bool? closeDialogOnCancelTapped,
+    bool? closeDialogOnOkTapped,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
   }) {
@@ -262,8 +279,10 @@ class CalendarDatePicker2WithActionButtonsConfig
       okButtonTextStyle: okButtonTextStyle ?? this.okButtonTextStyle,
       okButton: okButton ?? this.okButton,
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
-      shouldCloseDialogAfterCancelTapped: shouldCloseDialogAfterCancelTapped ??
-          this.shouldCloseDialogAfterCancelTapped,
+      closeDialogOnCancelTapped:
+          closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
+      closeDialogOnOkTapped:
+          closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
