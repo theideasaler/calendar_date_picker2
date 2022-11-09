@@ -827,7 +827,7 @@ class _FocusedDate extends InheritedWidget {
     return !DateUtils.isSameDay(date, oldWidget.date);
   }
 
-  static DateTime? of(BuildContext context) {
+  static DateTime? maybeOf(BuildContext context) {
     final _FocusedDate? focusedDate =
         context.dependOnInheritedWidgetOfExactType<_FocusedDate>();
     return focusedDate?.date;
@@ -890,7 +890,7 @@ class _DayPickerState extends State<_DayPicker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Check to see if the focused date is in this month, if so focus it.
-    final DateTime? focusedDate = _FocusedDate.of(context);
+    final DateTime? focusedDate = _FocusedDate.maybeOf(context);
     if (focusedDate != null &&
         DateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
       _dayFocusNodes[focusedDate.day - 1].requestFocus();
@@ -928,7 +928,11 @@ class _DayPickerState extends State<_DayPicker> {
     final List<Widget> result = <Widget>[];
     final weekdays =
         widget.config.weekdayLabels ?? localizations.narrowWeekdays;
-    for (int i = localizations.firstDayOfWeekIndex; true; i = (i + 1) % 7) {
+    final firstDayOfWeek =
+        widget.config.firstDayOfWeek ?? localizations.firstDayOfWeekIndex;
+    assert(firstDayOfWeek >= 0 && firstDayOfWeek <= 6,
+        'firstDayOfWeek must between 0 and 6');
+    for (int i = firstDayOfWeek; true; i = (i + 1) % 7) {
       final String weekday = weekdays[i];
       result.add(ExcludeSemantics(
         child: Center(
@@ -938,7 +942,7 @@ class _DayPickerState extends State<_DayPicker> {
           ),
         ),
       ));
-      if (i == (localizations.firstDayOfWeekIndex - 1) % 7) break;
+      if (i == (firstDayOfWeek - 1) % 7) break;
     }
     return result;
   }
@@ -963,7 +967,8 @@ class _DayPickerState extends State<_DayPicker> {
     final int month = widget.displayedMonth.month;
 
     final int daysInMonth = DateUtils.getDaysInMonth(year, month);
-    final int dayOffset = DateUtils.firstDayOffset(year, month, localizations);
+    final int dayOffset = getMonthFirstDayOffset(year, month,
+        widget.config.firstDayOfWeek ?? localizations.firstDayOfWeekIndex);
 
     final List<Widget> dayItems = _dayHeaders(headerStyle, localizations);
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
