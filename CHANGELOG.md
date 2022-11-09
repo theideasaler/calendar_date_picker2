@@ -1,3 +1,7 @@
+## [0.2.8]
+
+- fix: Missing `firstDayOfWeek` in `CalendarDatePicker2WithActionButtonsConfig`
+
 ## [0.2.7]
 
 - fix: Dialog OK button not returning selected dates
@@ -54,6 +58,6 @@
 - Add `shouldCloseDialogAfterCancelTapped` into `CalendarDatePicker2WithActionButtonsConfig`
 - Add `dialogBackgroundColor` into `showCalendarDatePicker2Dialog`
 
-## [0.0.1 - 0.1.6]
+## [0.1.6]
 
 - Initial implementation

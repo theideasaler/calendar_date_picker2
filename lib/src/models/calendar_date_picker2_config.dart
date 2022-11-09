@@ -154,6 +154,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     DatePickerMode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
@@ -182,6 +183,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           calendarViewMode: calendarViewMode,
           weekdayLabels: weekdayLabels,
           weekdayLabelTextStyle: weekdayLabelTextStyle,
+          firstDayOfWeek: firstDayOfWeek,
           controlsHeight: controlsHeight,
           lastMonthIcon: lastMonthIcon,
           nextMonthIcon: nextMonthIcon,
@@ -260,6 +262,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
