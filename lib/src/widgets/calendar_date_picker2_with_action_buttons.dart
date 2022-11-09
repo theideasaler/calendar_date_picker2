@@ -143,7 +143,7 @@ class _CalendarDatePicker2WithActionButtonsState
         widget.onOkTapped?.call();
         if ((widget.config.openedFromDialog ?? false) &&
             (widget.config.closeDialogOnOkTapped ?? true)) {
-          Navigator.pop(context);
+          Navigator.pop(context, _values);
         }
       }),
       child: Container(

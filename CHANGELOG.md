@@ -1,3 +1,7 @@
+## [0.2.7]
+
+- fix: Dialog OK button not returning selected dates
+
 ## [0.2.6]
 
 - feat: add `firstDayOfWeek` into config
@@ -50,67 +54,6 @@
 - Add `shouldCloseDialogAfterCancelTapped` into `CalendarDatePicker2WithActionButtonsConfig`
 - Add `dialogBackgroundColor` into `showCalendarDatePicker2Dialog`
 
-## [0.1.6]
+## [0.0.1 - 0.1.6]
 
-- Fix change log
-
-## [0.1.5]
-
-- Update package description
-
-## [0.1.4]
-
-- Update package intro
-
-## [0.1.3]
-
-- Fix wording issue
-
-## [0.1.2]
-
-- Update readme
-
-## [0.1.1]
-
-- Fix Flutter 3.0.0 compiler warning regarding null-aware operation
-
-## [0.1.0]
-
-- Fix binding lint warning
-
-## [0.0.9]
-
-- Fix binding lint warning
-
-## [0.0.8]
-
-- Fix binding lint warning
-
-## [0.0.7]
-
-- Update readme
-
-## [0.0.6]
-
-- Fix static analysis
-
-## [0.0.5]
-
-- Update readme pub dev link
-
-## [0.0.4]
-
-- Update readme
-
-## [0.0.3]
-
-- Update license
-
-## [0.0.2]
-
-- Add implementation for dialog function
-- Fixed styling issues for current year item in year mode
-
-## [0.0.1]
-
-- Fully working CalendarDatePicker2; example included
+- Initial implementation
