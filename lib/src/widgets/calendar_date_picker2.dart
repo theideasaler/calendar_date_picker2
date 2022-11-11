@@ -1297,15 +1297,10 @@ class _YearPickerState extends State<YearPicker> {
     } else {
       textColor = colorScheme.onSurface.withOpacity(0.87);
     }
-    TextStyle? itemStyle = textTheme.bodyText1;
-
-    if (isSelected && widget.config.selectedYearTextStyle != null){
-      itemStyle =  widget.config.selectedYearTextStyle;
-    } else {
-      itemStyle = widget.config.yearTextStyle ?? textTheme.bodyText1;
+    TextStyle? itemStyle = (widget.config.yearTextStyle ?? textTheme.bodyText1)?.apply(color: textColor);
+    if (isSelected){
+      itemStyle = widget.config.selectedYearTextStyle ?? itemStyle;
     }
-
-    itemStyle = itemStyle?.apply(color: textColor);
 
     BoxDecoration? decoration;
     if (isSelected) {
