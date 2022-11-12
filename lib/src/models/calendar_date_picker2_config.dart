@@ -129,7 +129,8 @@ class CalendarDatePicker2Config {
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
-      weekdayLabelTextStyle: weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelTextStyle:
+          weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -137,18 +138,21 @@ class CalendarDatePicker2Config {
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
-      selectedDayHighlightColor: selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      selectedDayHighlightColor:
+          selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
-      selectedYearTextStyle: selectedYearTextStyle ?? this.selectedYearTextStyle,
+      selectedYearTextStyle:
+          selectedYearTextStyle ?? this.selectedYearTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
   }
 }
 
-class CalendarDatePicker2WithActionButtonsConfig extends CalendarDatePicker2Config {
+class CalendarDatePicker2WithActionButtonsConfig
+    extends CalendarDatePicker2Config {
   CalendarDatePicker2WithActionButtonsConfig({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -266,7 +270,8 @@ class CalendarDatePicker2WithActionButtonsConfig extends CalendarDatePicker2Conf
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
-      weekdayLabelTextStyle: weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelTextStyle:
+          weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -274,20 +279,25 @@ class CalendarDatePicker2WithActionButtonsConfig extends CalendarDatePicker2Conf
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
-      selectedDayHighlightColor: selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      selectedDayHighlightColor:
+          selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
-      selectedYearTextStyle: selectedYearTextStyle ?? this.selectedYearTextStyle,
+      selectedYearTextStyle:
+          selectedYearTextStyle ?? this.selectedYearTextStyle,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
-      cancelButtonTextStyle: cancelButtonTextStyle ?? this.cancelButtonTextStyle,
+      cancelButtonTextStyle:
+          cancelButtonTextStyle ?? this.cancelButtonTextStyle,
       cancelButton: cancelButton ?? this.cancelButton,
       okButtonTextStyle: okButtonTextStyle ?? this.okButtonTextStyle,
       okButton: okButton ?? this.okButton,
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
-      closeDialogOnCancelTapped: closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
-      closeDialogOnOkTapped: closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
+      closeDialogOnCancelTapped:
+          closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
+      closeDialogOnOkTapped:
+          closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
