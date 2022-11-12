@@ -1,3 +1,7 @@
+## [0.3.0]
+
+- fix: fix dart formatting issue
+
 ## [0.2.9]
 
 - feat: add new config `selectedYearTextStyle`
