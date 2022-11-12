@@ -1,3 +1,7 @@
+## [0.2.9]
+
+- feat: add new config `selectedYearTextStyle`
+
 ## [0.2.8]
 
 - fix: Missing `firstDayOfWeek` in `CalendarDatePicker2WithActionButtonsConfig`
