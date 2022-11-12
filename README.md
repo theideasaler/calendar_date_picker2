@@ -126,6 +126,7 @@ var results = await showCalendarDatePicker2Dialog(
 | disabledDayTextStyle      | TextStyle?               | Custom text style for disabled calendar day(s)                                      |
 | todayTextStyle            | TextStyle?               | Custom text style for current calendar day                                          |
 | yearTextStyle             | TextStyle?               | Custom text style for years list                                                    |
+| selectedYearTextStyle     | TextStyle?               | Custom text style for selected year                                                 |
 | dayBorderRadius           | BorderRadius?            | Custom border radius for day indicator                                              |
 | yearBorderRadius          | BorderRadius?            | Custom border radius for year indicator                                             |
 

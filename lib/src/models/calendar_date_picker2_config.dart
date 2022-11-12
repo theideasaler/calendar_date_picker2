@@ -22,6 +22,7 @@ class CalendarDatePicker2Config {
     this.disabledDayTextStyle,
     this.todayTextStyle,
     this.yearTextStyle,
+    this.selectedYearTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
@@ -89,6 +90,9 @@ class CalendarDatePicker2Config {
   // Custom text style for years list
   final TextStyle? yearTextStyle;
 
+  // Custom text style for selected year
+  final TextStyle? selectedYearTextStyle;
+
   /// Custom border radius for day indicator
   final BorderRadius? dayBorderRadius;
 
@@ -114,6 +118,7 @@ class CalendarDatePicker2Config {
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
+    TextStyle? selectedYearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
   }) {
@@ -124,8 +129,7 @@ class CalendarDatePicker2Config {
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
-      weekdayLabelTextStyle:
-          weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelTextStyle: weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -133,19 +137,18 @@ class CalendarDatePicker2Config {
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
-      selectedDayHighlightColor:
-          selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      selectedDayHighlightColor: selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
+      selectedYearTextStyle: selectedYearTextStyle ?? this.selectedYearTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
   }
 }
 
-class CalendarDatePicker2WithActionButtonsConfig
-    extends CalendarDatePicker2Config {
+class CalendarDatePicker2WithActionButtonsConfig extends CalendarDatePicker2Config {
   CalendarDatePicker2WithActionButtonsConfig({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -165,6 +168,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
+    TextStyle? selectedYearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     this.gapBetweenCalendarAndButtons,
@@ -194,6 +198,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           disabledDayTextStyle: disabledDayTextStyle,
           todayTextStyle: todayTextStyle,
           yearTextStyle: yearTextStyle,
+          selectedYearTextStyle: selectedYearTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
         );
@@ -242,6 +247,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
+    TextStyle? selectedYearTextStyle,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -260,8 +266,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
-      weekdayLabelTextStyle:
-          weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelTextStyle: weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -269,23 +274,20 @@ class CalendarDatePicker2WithActionButtonsConfig
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
-      selectedDayHighlightColor:
-          selectedDayHighlightColor ?? this.selectedDayHighlightColor,
+      selectedDayHighlightColor: selectedDayHighlightColor ?? this.selectedDayHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
+      selectedYearTextStyle: selectedYearTextStyle ?? this.selectedYearTextStyle,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
-      cancelButtonTextStyle:
-          cancelButtonTextStyle ?? this.cancelButtonTextStyle,
+      cancelButtonTextStyle: cancelButtonTextStyle ?? this.cancelButtonTextStyle,
       cancelButton: cancelButton ?? this.cancelButton,
       okButtonTextStyle: okButtonTextStyle ?? this.okButtonTextStyle,
       okButton: okButton ?? this.okButton,
       openedFromDialog: openedFromDialog ?? this.openedFromDialog,
-      closeDialogOnCancelTapped:
-          closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
-      closeDialogOnOkTapped:
-          closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
+      closeDialogOnCancelTapped: closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
+      closeDialogOnOkTapped: closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
     );
