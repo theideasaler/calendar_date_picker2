@@ -1,3 +1,7 @@
+## [0.3.3]
+
+- update: readme.md
+
 ## [0.3.2]
 
 - feat: add `dayTextStylePredicate` into config
