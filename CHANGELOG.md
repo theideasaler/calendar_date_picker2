@@ -1,3 +1,10 @@
+## [0.3.2]
+
+- feat: add `dayTextStylePredicate` into config
+- feat: add `dayBuilder` into config
+- refactor: move `selectableDayPredicate` into config
+- refine: code clean-up
+
 ## [0.3.1]
 
 - fix: fix dart formatting issue

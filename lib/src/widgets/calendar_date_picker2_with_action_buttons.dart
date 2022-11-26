@@ -7,7 +7,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     required this.config,
     this.onValueChanged,
     this.onDisplayedMonthChanged,
-    this.selectableDayPredicate,
     this.onCancelTapped,
     this.onOkTapped,
     Key? key,
@@ -20,9 +19,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
   /// Called when the user navigates to a new month/year in the picker.
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
-
-  /// Function to provide full control over which dates in the calendar can be selected.
-  final SelectableDayPredicate? selectableDayPredicate;
 
   /// The calendar configurations including action buttons
   final CalendarDatePicker2WithActionButtonsConfig config;
@@ -89,7 +85,6 @@ class _CalendarDatePicker2WithActionButtonsState
             config: widget.config,
             onValueChanged: (values) => _editCache = values,
             onDisplayedMonthChanged: widget.onDisplayedMonthChanged,
-            selectableDayPredicate: widget.selectableDayPredicate,
           ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),

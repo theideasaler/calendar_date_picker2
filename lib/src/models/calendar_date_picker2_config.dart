@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 
 enum CalendarDatePicker2Type { single, multi, range }
 
+typedef CalendarDayTextStylePredicate = TextStyle? Function({
+  required DateTime date,
+});
+
+typedef CalendarDayBuilder = Widget? Function({
+  required DateTime date,
+  TextStyle? textStyle,
+  BoxDecoration? decoration,
+  bool? isSelected,
+  bool? isDisabled,
+  bool? isToday,
+});
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -25,6 +38,9 @@ class CalendarDatePicker2Config {
     this.selectedYearTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
+    this.selectableDayPredicate,
+    this.dayTextStylePredicate,
+    this.dayBuilder,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -72,25 +88,25 @@ class CalendarDatePicker2Config {
   /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
-  /// Custom text style for calendar day text
+  /// Custom text style for all calendar days
   final TextStyle? dayTextStyle;
 
   /// Custom text style for selected calendar day(s)
   final TextStyle? selectedDayTextStyle;
 
-  /// The highlight color for selected day
+  /// The highlight color for selected day(s)
   final Color? selectedDayHighlightColor;
 
   /// Custom text style for disabled calendar day(s)
   final TextStyle? disabledDayTextStyle;
 
-  /// Custom text style for the current day
+  /// Custom text style for today
   final TextStyle? todayTextStyle;
 
   // Custom text style for years list
   final TextStyle? yearTextStyle;
 
-  // Custom text style for selected year
+  // Custom text style for selected year(s)
   final TextStyle? selectedYearTextStyle;
 
   /// Custom border radius for day indicator
@@ -98,6 +114,15 @@ class CalendarDatePicker2Config {
 
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
+
+  /// Function to provide full control over which dates in the calendar can be selected.
+  final SelectableDayPredicate? selectableDayPredicate;
+
+  /// Function to provide full control over calendar days text style
+  final CalendarDayTextStylePredicate? dayTextStylePredicate;
+
+  /// Function to build customizable day widget
+  final CalendarDayBuilder? dayBuilder;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -121,6 +146,9 @@ class CalendarDatePicker2Config {
     TextStyle? selectedYearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    SelectableDayPredicate? selectableDayPredicate,
+    CalendarDayTextStylePredicate? dayTextStylePredicate,
+    CalendarDayBuilder? dayBuilder,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -147,6 +175,11 @@ class CalendarDatePicker2Config {
           selectedYearTextStyle ?? this.selectedYearTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      selectableDayPredicate:
+          selectableDayPredicate ?? this.selectableDayPredicate,
+      dayTextStylePredicate:
+          dayTextStylePredicate ?? this.dayTextStylePredicate,
+      dayBuilder: dayBuilder ?? this.dayBuilder,
     );
   }
 }
@@ -175,6 +208,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? selectedYearTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    SelectableDayPredicate? selectableDayPredicate,
+    CalendarDayTextStylePredicate? dayTextStylePredicate,
+    CalendarDayBuilder? dayBuilder,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -205,6 +241,9 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedYearTextStyle: selectedYearTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
+          selectableDayPredicate: selectableDayPredicate,
+          dayTextStylePredicate: dayTextStylePredicate,
+          dayBuilder: dayBuilder,
         );
 
   /// The gap between calendar and action buttons
@@ -262,6 +301,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? closeDialogOnOkTapped,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    SelectableDayPredicate? selectableDayPredicate,
+    CalendarDayTextStylePredicate? dayTextStylePredicate,
+    CalendarDayBuilder? dayBuilder,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -300,6 +342,11 @@ class CalendarDatePicker2WithActionButtonsConfig
           closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      selectableDayPredicate:
+          selectableDayPredicate ?? this.selectableDayPredicate,
+      dayTextStylePredicate:
+          dayTextStylePredicate ?? this.dayTextStylePredicate,
+      dayBuilder: dayBuilder ?? this.dayBuilder,
     );
   }
 }
