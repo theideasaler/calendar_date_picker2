@@ -150,7 +150,7 @@ var results = await showCalendarDatePicker2Dialog(
 
 By using the configs above, you could make your own custom calendar picker as your need.
 
-![image](https://user-images.githubusercontent.com/17869748/204086302-839a4516-0b2c-4ad2-a626-8f6583bbc51d.png)
+![image](https://user-images.githubusercontent.com/17869748/204086478-78722804-2cab-4b35-a92a-be6f08f3d919.png)
 
 
 ```dart
