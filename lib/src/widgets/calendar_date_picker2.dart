@@ -37,21 +37,27 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onDisplayedMonthChanged,
     Key? key,
   }) : super(key: key) {
-    const ok = true;
-    const notOk = false;
-    final isInitialValueValid = initialValue.length > 1
-        ? (config.calendarType == CalendarDatePicker2Type.range
-            ? (initialValue[0] == null
-                ? (initialValue[1] != null ? notOk : ok)
-                : (initialValue[1] != null
-                    ? (initialValue[1]!.isBefore(initialValue[0]!) ? notOk : ok)
-                    : ok))
-            : ok)
-        : ok;
-    assert(
-      isInitialValueValid,
-      'Range picker must has start date set before setting end date, and start date must before end date.',
-    );
+    const valid = true;
+    const invalid = false;
+
+    if (config.calendarType == CalendarDatePicker2Type.single) {
+      assert(initialValue.length < 2,
+          'Error: single date picker only allows maximum one initial date');
+    }
+
+    if (initialValue.length > 1 &&
+        config.calendarType == CalendarDatePicker2Type.range) {
+      final isRangePickerValueValid = initialValue[0] == null
+          ? (initialValue[1] != null ? invalid : valid)
+          : (initialValue[1] != null
+              ? (initialValue[1]!.isBefore(initialValue[0]!) ? invalid : valid)
+              : valid);
+
+      assert(
+        isRangePickerValueValid,
+        'Error: range date picker must has start date set before setting end date, and start date must before end date.',
+      );
+    }
   }
 
   /// The initially selected [DateTime]s that the picker should display.
