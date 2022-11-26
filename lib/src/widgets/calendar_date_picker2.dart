@@ -45,8 +45,8 @@ class CalendarDatePicker2 extends StatefulWidget {
           'Error: single date picker only allows maximum one initial date');
     }
 
-    if (initialValue.length > 1 &&
-        config.calendarType == CalendarDatePicker2Type.range) {
+    if (config.calendarType == CalendarDatePicker2Type.range &&
+        initialValue.length > 1) {
       final isRangePickerValueValid = initialValue[0] == null
           ? (initialValue[1] != null ? invalid : valid)
           : (initialValue[1] != null
