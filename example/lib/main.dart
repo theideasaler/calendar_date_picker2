@@ -118,14 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _buildCalendarDialogButton() {
-    const dayTextStyle = TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.w700,
-    );
-    final weekendTextStyle = TextStyle(
-      color: Colors.grey[500],
-      fontWeight: FontWeight.w600,
-    );
+    const dayTextStyle =
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+    final weekendTextStyle =
+        TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
       color: Colors.red[400],
       fontWeight: FontWeight.w700,
@@ -146,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
+        selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
         dayTextStylePredicate: ({required date}) {
           TextStyle? textStyle;
           if (date.weekday == DateTime.saturday ||

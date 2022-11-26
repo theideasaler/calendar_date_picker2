@@ -150,7 +150,7 @@ var results = await showCalendarDatePicker2Dialog(
 
 By using the configs above, you could make your own custom calendar picker as your need.
 
-![image](https://user-images.githubusercontent.com/17869748/204076157-027bf21e-976b-47a2-8630-271a31fc8ca6.png)
+![image](https://user-images.githubusercontent.com/17869748/204086302-839a4516-0b2c-4ad2-a626-8f6583bbc51d.png)
 
 
 ```dart
@@ -158,6 +158,7 @@ CalendarDatePicker2WithActionButtons(
   config: CalendarDatePicker2WithActionButtonsConfig(
     firstDayOfWeek: 1,
     calendarType: CalendarDatePicker2Type.range,
+    selectedDayTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
     selectedDayHighlightColor: Colors.purple[800],
     dayTextStylePredicate: _setWeekendAndAnniversaryTextStyle,
     dayBuilder: _yourDayBuilder,
