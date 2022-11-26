@@ -156,6 +156,7 @@ By using the configs above, you could make your own custom calendar picker as yo
 ```dart
 CalendarDatePicker2WithActionButtons(
   config: CalendarDatePicker2WithActionButtonsConfig(
+    firstDayOfWeek: 1,
     calendarType: CalendarDatePicker2Type.range,
     selectedDayHighlightColor: Colors.purple[800],
     dayTextStylePredicate: _setWeekendAndAnniversaryTextStyle,
