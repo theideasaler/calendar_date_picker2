@@ -36,7 +36,6 @@ class CalendarDatePicker2 extends StatefulWidget {
     required this.config,
     this.onValueChanged,
     this.onDisplayedMonthChanged,
-    this.disableYearPickerToggle = false,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -73,9 +72,6 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// The calendar UI related configurations
   final CalendarDatePicker2Config config;
-
-  /// Flag to disable showing the year picker.
-  final bool disableYearPickerToggle;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
@@ -310,7 +306,6 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           config: widget.config,
           mode: _mode,
           title: _localizations.formatMonthYear(_currentDisplayedMonthDate),
-          disableYearPickerToggle: widget.disableYearPickerToggle,
           onTitlePressed: () {
             // Toggle the day/year mode.
             _handleModeChanged(_mode == DatePickerMode.day
@@ -333,7 +328,6 @@ class _DatePickerModeToggleButton extends StatefulWidget {
     required this.title,
     required this.onTitlePressed,
     required this.config,
-    required this.disableYearPickerToggle,
   });
 
   /// The current display of the calendar picker.
@@ -348,9 +342,6 @@ class _DatePickerModeToggleButton extends StatefulWidget {
   /// The calendar configurations
   final CalendarDatePicker2Config config;
 
-  /// Flag to disable toggle
-  final bool disableYearPickerToggle;
-
   @override
   _DatePickerModeToggleButtonState createState() =>
       _DatePickerModeToggleButtonState();
@@ -360,10 +351,6 @@ class _DatePickerModeToggleButtonState
     extends State<_DatePickerModeToggleButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
-  bool get canTogglePicker {
-    return !widget.disableYearPickerToggle;
-  }
 
   @override
   void initState() {
@@ -409,7 +396,9 @@ class _DatePickerModeToggleButtonState
               child: SizedBox(
                 height: (widget.config.controlsHeight ?? _subHeaderHeight),
                 child: InkWell(
-                  onTap: canTogglePicker ? widget.onTitlePressed : null,
+                  onTap: widget.config.disableYearPicker
+                      ? null
+                      : widget.onTitlePressed,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
@@ -424,19 +413,17 @@ class _DatePickerModeToggleButtonState
                                 ),
                           ),
                         ),
-                        Builder(builder: (context) {
-                          if (canTogglePicker) {
-                            return RotationTransition(
-                              turns: _controller,
-                              child: Icon(
-                                Icons.arrow_drop_down,
-                                color: widget.config.controlsTextStyle?.color ??
-                                    controlColor,
+                        widget.config.disableYearPicker
+                            ? Container()
+                            : RotationTransition(
+                                turns: _controller,
+                                child: Icon(
+                                  Icons.arrow_drop_down,
+                                  color:
+                                      widget.config.controlsTextStyle?.color ??
+                                          controlColor,
+                                ),
                               ),
-                            );
-                          }
-                          return Container();
-                        }),
                       ],
                     ),
                   ),

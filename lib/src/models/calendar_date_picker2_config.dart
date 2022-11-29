@@ -41,6 +41,7 @@ class CalendarDatePicker2Config {
     this.selectableDayPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
+    this.disableYearPicker = false,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
@@ -123,6 +124,9 @@ class CalendarDatePicker2Config {
 
   /// Function to build customizable day widget
   final CalendarDayBuilder? dayBuilder;
+
+  /// Flag to disable year picker and hide the toggle icon.
+  final bool disableYearPicker;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
