@@ -414,7 +414,7 @@ class _DatePickerModeToggleButtonState
                           ),
                         ),
                         widget.config.disableYearPicker
-                            ? Container()
+                            ? const SizedBox()
                             : RotationTransition(
                                 turns: _controller,
                                 child: Icon(
