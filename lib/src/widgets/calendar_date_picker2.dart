@@ -396,7 +396,7 @@ class _DatePickerModeToggleButtonState
               child: SizedBox(
                 height: (widget.config.controlsHeight ?? _subHeaderHeight),
                 child: InkWell(
-                  onTap: widget.config.disableYearPicker
+                  onTap: widget.config.disableYearPicker == true
                       ? null
                       : widget.onTitlePressed,
                   child: Padding(
@@ -413,7 +413,7 @@ class _DatePickerModeToggleButtonState
                                 ),
                           ),
                         ),
-                        widget.config.disableYearPicker
+                        widget.config.disableYearPicker == true
                             ? const SizedBox()
                             : RotationTransition(
                                 turns: _controller,
