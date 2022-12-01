@@ -1,3 +1,7 @@
+## [0.3.5]
+
+- fix: fix copyWith method
+
 ## [0.3.4]
 
 - feat: add `disableYearPicker` into config
