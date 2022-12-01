@@ -185,7 +185,7 @@ class CalendarDatePicker2Config {
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableYearPicker: this.disableYearPicker,
+      disableYearPicker: disableYearPicker ?? this.disableYearPicker,
     );
   }
 }
@@ -356,7 +356,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableYearPicker: this.disableYearPicker,
+      disableYearPicker: disableYearPicker ?? this.disableYearPicker,
     );
   }
 }
