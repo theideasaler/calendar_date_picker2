@@ -367,6 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildCalendarWithActionButtons() {
     final config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
+      disableYearPicker: true,
     );
     return Column(
       mainAxisSize: MainAxisSize.min,

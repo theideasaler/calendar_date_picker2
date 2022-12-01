@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.3.3-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.3.4-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A super lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -33,7 +33,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.3.3
+  calendar_date_picker2: ^0.3.4
 ```
 
 ### Basic setup
@@ -132,6 +132,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectableDayPredicate    | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
 | dayTextStylePredicate     | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
 | dayBuilder                | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
+| disableYearPicker         | bool?                          | Flag to disable year picker and hide the toggle icon                                |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 8 extra options
 
@@ -151,7 +152,6 @@ var results = await showCalendarDatePicker2Dialog(
 By using the configs above, you could make your own custom calendar picker as your need.
 
 ![image](https://user-images.githubusercontent.com/17869748/204086478-78722804-2cab-4b35-a92a-be6f08f3d919.png)
-
 
 ```dart
 CalendarDatePicker2WithActionButtons(
