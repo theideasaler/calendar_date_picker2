@@ -4,11 +4,12 @@
 
 import 'dart:math' as math;
 
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
@@ -395,7 +396,9 @@ class _DatePickerModeToggleButtonState
               child: SizedBox(
                 height: (widget.config.controlsHeight ?? _subHeaderHeight),
                 child: InkWell(
-                  onTap: widget.onTitlePressed,
+                  onTap: widget.config.disableYearPicker == true
+                      ? null
+                      : widget.onTitlePressed,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
@@ -410,14 +413,17 @@ class _DatePickerModeToggleButtonState
                                 ),
                           ),
                         ),
-                        RotationTransition(
-                          turns: _controller,
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: widget.config.controlsTextStyle?.color ??
-                                controlColor,
-                          ),
-                        ),
+                        widget.config.disableYearPicker == true
+                            ? const SizedBox()
+                            : RotationTransition(
+                                turns: _controller,
+                                child: Icon(
+                                  Icons.arrow_drop_down,
+                                  color:
+                                      widget.config.controlsTextStyle?.color ??
+                                          controlColor,
+                                ),
+                              ),
                       ],
                     ),
                   ),
