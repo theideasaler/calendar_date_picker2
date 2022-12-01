@@ -125,7 +125,7 @@ class CalendarDatePicker2Config {
   /// Function to build customizable day widget
   final CalendarDayBuilder? dayBuilder;
 
-  /// Flag to disable year picker and hide the toggle icon.
+  /// Flag to disable year picker and hide the toggle icon
   final bool? disableYearPicker;
 
   CalendarDatePicker2Config copyWith({

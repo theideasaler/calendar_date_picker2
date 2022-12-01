@@ -1,3 +1,9 @@
+## [0.3.4]
+
+- feat: add `disableYearPicker` into config
+- refine: refine assertion
+- update: update example
+
 ## [0.3.3]
 
 - update: readme.md
