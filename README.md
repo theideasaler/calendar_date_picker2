@@ -168,6 +168,12 @@ CalendarDatePicker2WithActionButtons(
 );
 ```
 
+## Roadmap/Plans
+
+- 150 :star:: Include `time setter` which allows user to set time part for each selected dates
+- 300 :star:: Include `month picker` which allows user to select specific month
+
+
 ## Contributions
 
 Feel free to contribute to this project. 🍺 Pull requests are welcome!
