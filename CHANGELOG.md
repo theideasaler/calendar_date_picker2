@@ -1,3 +1,7 @@
+## [0.3.6]
+
+- fix: fix textStyle for okButton
+
 ## [0.3.5]
 
 - fix: fix copyWith method
