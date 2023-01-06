@@ -146,7 +146,7 @@ class _CalendarDatePicker2WithActionButtonsState
         child: widget.config.okButton ??
             Text(
               'OK',
-              style: widget.config.cancelButtonTextStyle ??
+              style: widget.config.okButtonTextStyle ??
                   TextStyle(
                     color: widget.config.selectedDayHighlightColor ??
                         colorScheme.primary,
