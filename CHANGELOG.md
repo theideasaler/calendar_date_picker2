@@ -1,3 +1,7 @@
+## [0.3.7]
+
+- fix: remove deprecated styles
+
 ## [0.3.6]
 
 - fix: fix textStyle for okButton
