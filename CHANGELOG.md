@@ -1,3 +1,7 @@
+## [0.3.8]
+
+- feat: add custom wrapping padding `buttonPadding` for `CalendarDatePickerWithActionButtons` buttons
+
 ## [0.3.7]
 
 - fix: remove deprecated styles
