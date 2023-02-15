@@ -113,7 +113,8 @@ class _CalendarDatePicker2WithActionButtonsState
         }
       }),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: widget.config.buttonPadding ??
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.cancelButton ??
             Text(
               'CANCEL',
@@ -142,7 +143,8 @@ class _CalendarDatePicker2WithActionButtonsState
         }
       }),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: widget.config.buttonPadding ??
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.okButton ??
             Text(
               'OK',
