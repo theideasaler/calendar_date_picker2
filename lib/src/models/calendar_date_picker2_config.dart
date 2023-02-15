@@ -226,6 +226,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.openedFromDialog,
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
+    this.buttonPadding,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -278,6 +279,9 @@ class CalendarDatePicker2WithActionButtonsConfig
   /// If the dialog should be closed when user taps the OK button
   final bool? closeDialogOnOkTapped;
 
+  /// Custom wrapping padding for Ok & Cancel buttons
+  final EdgeInsets? buttonPadding;
+
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -313,6 +317,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     bool? disableYearPicker,
+    EdgeInsets? buttonPadding,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -357,6 +362,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
       disableYearPicker: disableYearPicker ?? this.disableYearPicker,
+      buttonPadding: buttonPadding ?? this.buttonPadding,
     );
   }
 }

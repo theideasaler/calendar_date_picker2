@@ -134,18 +134,19 @@ var results = await showCalendarDatePicker2Dialog(
 | dayBuilder                | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
 | disableYearPicker         | bool?                          | Flag to disable year picker and hide the toggle icon                                |
 
-### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 8 extra options
+### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
-| Option                       | Type       | Description                                    |
-| ---------------------------- | ---------- | ---------------------------------------------- |
-| gapBetweenCalendarAndButtons | double?    | The gap between calendar and action buttons    |
-| cancelButtonTextStyle        | TextStyle? | Text style for cancel button                   |
-| cancelButton                 | Widget?    | Custom cancel button                           |
-| okButtonTextStyle            | TextStyle? | Text style for ok button                       |
-| okButton                     | Widget?    | Custom ok button                               |
-| openedFromDialog             | bool?      | Is the calendar opened from dialog             |
-| closeDialogOnCancelTapped    | bool?      | Close dialog after user taps the CANCEL button |
-| closeDialogOnOkTapped        | bool?      | Close dialog after user taps the OK button     |
+| Option                       | Type        | Description                                     |
+| ---------------------------- | ----------- | ----------------------------------------------- |
+| gapBetweenCalendarAndButtons | double?     | The gap between calendar and action buttons     |
+| cancelButtonTextStyle        | TextStyle?  | Text style for cancel button                    |
+| cancelButton                 | Widget?     | Custom cancel button                            |
+| okButtonTextStyle            | TextStyle?  | Text style for ok button                        |
+| okButton                     | Widget?     | Custom ok button                                |
+| openedFromDialog             | bool?       | Is the calendar opened from dialog              |
+| closeDialogOnCancelTapped    | bool?       | Close dialog after user taps the CANCEL button  |
+| closeDialogOnOkTapped        | bool?       | Close dialog after user taps the OK button      |
+| buttonPadding                | EdgeInsets? | Custom wrapping padding for Ok & Cancel buttons |
 
 ### Custom UI
 
@@ -167,7 +168,6 @@ CalendarDatePicker2WithActionButtons(
   onValueChanged: (dates) => setState(() => _yourVariable = dates),
 );
 ```
-
 
 ## Contributions
 
