@@ -1,6 +1,12 @@
+## [0.3.9]
+
+- feat: add `centerAlignModePickerButton` into config
+- feat: add `customModePickerButtonIcon` into config
+- update: add package screenshot
+
 ## [0.3.8]
 
-- feat: add custom wrapping padding `buttonPadding` for `CalendarDatePickerWithActionButtons` buttons
+- feat: add custom wrapping padding `buttonPadding` into config
 
 ## [0.3.7]
 
