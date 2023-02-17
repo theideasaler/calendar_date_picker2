@@ -381,12 +381,22 @@ class _DatePickerModeToggleButtonState
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
+    var datePickerOffsetPadding = _monthNavButtonsWidth;
+    if (widget.config.centerAlignModePickerButton == true) {
+      datePickerOffsetPadding /= 2;
+    }
 
     return Container(
-      padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
+      padding: widget.config.centerAlignModePickerButton == true
+          ? EdgeInsets.zero
+          : const EdgeInsetsDirectional.only(start: 16, end: 4),
       height: (widget.config.controlsHeight ?? _subHeaderHeight),
       child: Row(
         children: <Widget>[
+          if (widget.mode == DatePickerMode.day &&
+              widget.config.centerAlignModePickerButton == true)
+            // Give space for the prev/next month buttons that are underneath this row
+            SizedBox(width: datePickerOffsetPadding),
           Flexible(
             child: Semantics(
               label: MaterialLocalizations.of(context).selectYearSemanticsLabel,
@@ -399,8 +409,16 @@ class _DatePickerModeToggleButtonState
                       ? null
                       : widget.onTitlePressed,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: EdgeInsets.symmetric(
+                        horizontal:
+                            widget.config.centerAlignModePickerButton == true
+                                ? 0
+                                : 8),
                     child: Row(
+                      mainAxisAlignment:
+                          widget.config.centerAlignModePickerButton == true
+                              ? MainAxisAlignment.center
+                              : MainAxisAlignment.start,
                       children: <Widget>[
                         Flexible(
                           child: Text(
@@ -416,12 +434,14 @@ class _DatePickerModeToggleButtonState
                             ? const SizedBox()
                             : RotationTransition(
                                 turns: _controller,
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  color:
-                                      widget.config.controlsTextStyle?.color ??
-                                          controlColor,
-                                ),
+                                child:
+                                    widget.config.customModePickerButtonIcon ??
+                                        Icon(
+                                          Icons.arrow_drop_down,
+                                          color: widget.config.controlsTextStyle
+                                                  ?.color ??
+                                              controlColor,
+                                        ),
                               ),
                       ],
                     ),
@@ -432,7 +452,7 @@ class _DatePickerModeToggleButtonState
           ),
           if (widget.mode == DatePickerMode.day)
             // Give space for the prev/next month buttons that are underneath this row
-            const SizedBox(width: _monthNavButtonsWidth),
+            SizedBox(width: datePickerOffsetPadding),
         ],
       ),
     );
@@ -762,7 +782,8 @@ class _MonthPickerState extends State<_MonthPicker> {
             height: (widget.config.controlsHeight ?? _subHeaderHeight),
             child: Row(
               children: <Widget>[
-                const Spacer(),
+                if (widget.config.centerAlignModePickerButton != true)
+                  const Spacer(),
                 IconButton(
                   icon: widget.config.lastMonthIcon ??
                       const Icon(Icons.chevron_left),
@@ -773,6 +794,8 @@ class _MonthPickerState extends State<_MonthPicker> {
                   onPressed:
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
+                if (widget.config.centerAlignModePickerButton == true)
+                  const Spacer(),
                 IconButton(
                   icon: widget.config.nextMonthIcon ??
                       const Icon(Icons.chevron_right),
