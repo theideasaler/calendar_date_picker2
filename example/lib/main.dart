@@ -142,6 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
+        centerAlignModePickerButton: true,
+        customModePickerButtonIcon: const SizedBox(),
         selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
         dayTextStylePredicate: ({required date}) {
           TextStyle? textStyle;
