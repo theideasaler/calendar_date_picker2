@@ -32,7 +32,7 @@ class CalendarDatePicker2Config {
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
-    this.selectedRangeIncludedDayColor,
+    this.selectedRangeHighlightColor,
     this.disabledDayTextStyle,
     this.todayTextStyle,
     this.yearTextStyle,
@@ -103,7 +103,7 @@ class CalendarDatePicker2Config {
 
   /// The highlight color for day(s) included in the selected range
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range]
-  final Color? selectedRangeIncludedDayColor;
+  final Color? selectedRangeHighlightColor;
 
   /// Custom text style for disabled calendar day(s)
   final TextStyle? disabledDayTextStyle;
