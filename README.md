@@ -122,8 +122,8 @@ var results = await showCalendarDatePicker2Dialog(
 | controlsTextStyle           | TextStyle?                     | Custom text style for calendar mode toggle control                                  |
 | dayTextStyle                | TextStyle?                     | Custom text style for calendar day text                                             |
 | selectedDayTextStyle        | TextStyle?                     | Custom text style for selected calendar day text                                    |
-| selectedDayHighlightColor   | Color?                         | The highlight color for the selected day                                                    |
-| selectedRangeHighlightColor | Color?                         | The highlight color for days included in the selected range  |
+| selectedDayHighlightColor   | Color?                         | The highlight color for selected day(s)                                                    |
+| selectedRangeHighlightColor | Color?                         | The highlight color for day(s) included in the selected range  |
 | disabledDayTextStyle        | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
 | todayTextStyle              | TextStyle?                     | Custom text style for current calendar day                                          |
 | yearTextStyle               | TextStyle?                     | Custom text style for years list                                                    |
