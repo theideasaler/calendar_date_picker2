@@ -778,7 +778,9 @@ class _MonthPickerState extends State<_MonthPicker> {
       child: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
+            padding: widget.config.centerAlignModePickerButton != true
+                ? const EdgeInsetsDirectional.only(start: 16, end: 4)
+                : const EdgeInsetsDirectional.only(start: 8, end: 8),
             height: (widget.config.controlsHeight ?? _subHeaderHeight),
             child: Row(
               children: <Widget>[
