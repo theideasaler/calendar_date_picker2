@@ -1,3 +1,7 @@
+## [0.4.0]
+
+- fix: incorrect header padding in `centerAlignModePickerButton` mode
+
 ## [0.3.9]
 
 - feat: add `centerAlignModePickerButton` into config
