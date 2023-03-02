@@ -9,6 +9,8 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onDisplayedMonthChanged,
     this.onCancelTapped,
     this.onOkTapped,
+    this.confirmText,
+    this.cancelText,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +24,12 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
   /// The calendar configurations including action buttons
   final CalendarDatePicker2WithActionButtonsConfig config;
+
+  /// The text that is displayed on the cancel button.
+  final String? cancelText;
+
+  /// The text that is displayed on the confirm button.
+  final String? confirmText;
 
   /// The callback when cancel button is tapped
   final Function? onCancelTapped;
@@ -75,6 +83,8 @@ class _CalendarDatePicker2WithActionButtonsState
 
   @override
   Widget build(BuildContext context) {
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -91,17 +101,18 @@ class _CalendarDatePicker2WithActionButtonsState
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            _buildCancelButton(Theme.of(context).colorScheme),
+            _buildCancelButton(Theme.of(context).colorScheme, localizations),
             if ((widget.config.gapBetweenCalendarAndButtons ?? 0) > 0)
               SizedBox(width: widget.config.gapBetweenCalendarAndButtons),
-            _buildOkButton(Theme.of(context).colorScheme),
+            _buildOkButton(Theme.of(context).colorScheme, localizations),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildCancelButton(ColorScheme colorScheme) {
+  Widget _buildCancelButton(
+      ColorScheme colorScheme, MaterialLocalizations localizations) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
       onTap: () => setState(() {
@@ -117,7 +128,9 @@ class _CalendarDatePicker2WithActionButtonsState
             const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.cancelButton ??
             Text(
-              'CANCEL',
+              Theme.of(context).useMaterial3
+                  ? localizations.cancelButtonLabel
+                  : localizations.cancelButtonLabel.toUpperCase(),
               style: widget.config.cancelButtonTextStyle ??
                   TextStyle(
                     color: widget.config.selectedDayHighlightColor ??
@@ -130,7 +143,8 @@ class _CalendarDatePicker2WithActionButtonsState
     );
   }
 
-  Widget _buildOkButton(ColorScheme colorScheme) {
+  Widget _buildOkButton(
+      ColorScheme colorScheme, MaterialLocalizations localizations) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
       onTap: () => setState(() {
@@ -147,7 +161,7 @@ class _CalendarDatePicker2WithActionButtonsState
             const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.okButton ??
             Text(
-              'OK',
+              localizations.okButtonLabel,
               style: widget.config.okButtonTextStyle ??
                   TextStyle(
                     color: widget.config.selectedDayHighlightColor ??
