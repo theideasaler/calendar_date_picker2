@@ -86,7 +86,7 @@ class _CalendarDatePicker2WithActionButtonsState
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MediaQuery.removePadding(
