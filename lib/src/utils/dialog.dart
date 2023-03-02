@@ -20,23 +20,22 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
 }) {
   var dialog = Dialog(
     insetPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-    backgroundColor: Colors.transparent,
-    clipBehavior: Clip.antiAlias,
-    child: Material(
-      color: dialogBackgroundColor ?? Theme.of(context).canvasColor,
+    backgroundColor: dialogBackgroundColor ?? Theme.of(context).canvasColor,
+    shape: RoundedRectangleBorder(
       borderRadius: borderRadius ?? BorderRadius.circular(10),
-      child: SizedBox(
-        width: dialogSize.width,
-        height: max(dialogSize.height, 410),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CalendarDatePicker2WithActionButtons(
-              initialValue: initialValue,
-              config: config.copyWith(openedFromDialog: true),
-            ),
-          ],
-        ),
+    ),
+    clipBehavior: Clip.antiAlias,
+    child: SizedBox(
+      width: dialogSize.width,
+      height: max(dialogSize.height, 410),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CalendarDatePicker2WithActionButtons(
+            initialValue: initialValue,
+            config: config.copyWith(openedFromDialog: true),
+          ),
+        ],
       ),
     ),
   );
