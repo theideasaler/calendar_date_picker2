@@ -9,8 +9,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onDisplayedMonthChanged,
     this.onCancelTapped,
     this.onOkTapped,
-    this.confirmText,
-    this.cancelText,
     Key? key,
   }) : super(key: key);
 
@@ -24,12 +22,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
   /// The calendar configurations including action buttons
   final CalendarDatePicker2WithActionButtonsConfig config;
-
-  /// The text that is displayed on the cancel button.
-  final String? cancelText;
-
-  /// The text that is displayed on the confirm button.
-  final String? confirmText;
 
   /// The callback when cancel button is tapped
   final Function? onCancelTapped;
@@ -86,7 +78,7 @@ class _CalendarDatePicker2WithActionButtonsState
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MediaQuery.removePadding(
@@ -129,9 +121,7 @@ class _CalendarDatePicker2WithActionButtonsState
             const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.cancelButton ??
             Text(
-              Theme.of(context).useMaterial3
-                  ? localizations.cancelButtonLabel
-                  : localizations.cancelButtonLabel.toUpperCase(),
+              localizations.cancelButtonLabel.toUpperCase(),
               style: widget.config.cancelButtonTextStyle ??
                   TextStyle(
                     color: widget.config.selectedDayHighlightColor ??
@@ -162,7 +152,7 @@ class _CalendarDatePicker2WithActionButtonsState
             const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: widget.config.okButton ??
             Text(
-              localizations.okButtonLabel,
+              localizations.okButtonLabel.toUpperCase(),
               style: widget.config.okButtonTextStyle ??
                   TextStyle(
                     color: widget.config.selectedDayHighlightColor ??
