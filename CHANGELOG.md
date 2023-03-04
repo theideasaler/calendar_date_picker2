@@ -1,3 +1,8 @@
+## [0.4.1]
+
+- fix: dialog border radius issue when theme uses `useMaterial3:true`
+- feat: add action button localizations
+
 ## [0.4.0]
 
 - fix: incorrect header padding in `centerAlignModePickerButton` mode
