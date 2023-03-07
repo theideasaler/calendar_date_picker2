@@ -45,8 +45,9 @@ class CalendarDatePicker2Config {
     this.centerAlignModePickerButton,
     this.customModePickerButtonIcon,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
-        firstDate = firstDate ?? DateTime(1970),
-        lastDate = lastDate ?? DateTime(DateTime.now().year + 50),
+        firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
+        lastDate =
+            DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
         calendarViewMode = calendarViewMode ?? DatePickerMode.day;
 
@@ -167,8 +168,8 @@ class CalendarDatePicker2Config {
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
-      firstDate: firstDate ?? this.firstDate,
-      lastDate: lastDate ?? this.lastDate,
+      firstDate: DateUtils.dateOnly(firstDate ?? this.firstDate),
+      lastDate: DateUtils.dateOnly(lastDate ?? this.lastDate),
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
@@ -341,8 +342,8 @@ class CalendarDatePicker2WithActionButtonsConfig
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
-      firstDate: firstDate ?? this.firstDate,
-      lastDate: lastDate ?? this.lastDate,
+      firstDate: DateUtils.dateOnly(firstDate ?? this.firstDate),
+      lastDate: DateUtils.dateOnly(lastDate ?? this.lastDate),
       currentDate: currentDate ?? this.currentDate,
       calendarViewMode: calendarViewMode ?? this.calendarViewMode,
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
