@@ -4,12 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Calendar date picker2 unit test', () {});
-  testWidgets('Empty initial list wont throw unmodified list',
+  testWidgets('Constant initial list wont throw unmodified list',
       (widgetTester) async {
+    const emp = <DateTime>[];
     await widgetTester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: CalendarDatePicker2(
-            initialValue: const [], config: CalendarDatePicker2Config()),
+            initialValue: emp, config: CalendarDatePicker2Config()),
       ),
     ));
   });
