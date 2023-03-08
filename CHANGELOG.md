@@ -1,3 +1,7 @@
+## [0.4.2]
+
+- fix: post-process `firstDate` &  `lastDate` to date-only
+
 ## [0.4.1]
 
 - fix: dialog border radius issue when theme uses `useMaterial3:true`
