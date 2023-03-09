@@ -1,3 +1,8 @@
+## [0.4.3]
+
+- fix: minimum working sample unmodifiable list exception
+- update: README.md
+
 ## [0.4.2]
 
 - fix: post-process `firstDate` &  `lastDate` to date-only
