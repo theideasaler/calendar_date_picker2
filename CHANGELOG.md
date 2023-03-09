@@ -1,3 +1,7 @@
+## [0.4.4]
+
+- fix: wrong month display on selected year tapped
+
 ## [0.4.3]
 
 - fix: minimum working sample unmodifiable list exception

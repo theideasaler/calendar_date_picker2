@@ -92,6 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
     CalendarDatePicker2Type datePickerType,
     List<DateTime?> values,
   ) {
+    values =
+        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
     var valueText = (values.isNotEmpty ? values[0] : null)
         .toString()
         .replaceAll('00:00:00.000', '');

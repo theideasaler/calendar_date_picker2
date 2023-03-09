@@ -176,7 +176,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       }
 
       if (fromYearPicker) {
-        final selectedDatesInThisYear = widget.initialValue
+        final selectedDatesInThisYear = _selectedDates
             .where((d) => d?.year == date.year)
             .toList()
           ..sort((d1, d2) => d1!.compareTo(d2!));
