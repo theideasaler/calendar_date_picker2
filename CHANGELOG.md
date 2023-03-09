@@ -1,3 +1,7 @@
+## [0.4.5]
+
+- feat: add `yearBuilder` into config
+
 ## [0.4.4]
 
 - fix: wrong month display on selected year tapped

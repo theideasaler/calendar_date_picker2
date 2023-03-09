@@ -15,6 +15,15 @@ typedef CalendarDayBuilder = Widget? Function({
   bool? isToday,
 });
 
+typedef CalendarYearBuilder = Widget? Function({
+  required int year,
+  TextStyle? textStyle,
+  BoxDecoration? decoration,
+  bool? isSelected,
+  bool? isDisabled,
+  bool? isCurrentYear,
+});
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -44,6 +53,7 @@ class CalendarDatePicker2Config {
     this.disableYearPicker,
     this.centerAlignModePickerButton,
     this.customModePickerButtonIcon,
+    this.yearBuilder,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -125,7 +135,7 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over calendar days text style
   final CalendarDayTextStylePredicate? dayTextStylePredicate;
 
-  /// Function to build customizable day widget
+  /// Function to provide full control over day widget UI
   final CalendarDayBuilder? dayBuilder;
 
   /// Flag to disable year picker and hide the mode toggle button icon
@@ -136,6 +146,9 @@ class CalendarDatePicker2Config {
 
   /// Custom icon for the mode picker button icon
   final Widget? customModePickerButtonIcon;
+
+  /// Function to provide full control over year widget UI
+  final CalendarYearBuilder? yearBuilder;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -165,6 +178,7 @@ class CalendarDatePicker2Config {
     bool? disableYearPicker,
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
+    CalendarYearBuilder? yearBuilder,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -201,6 +215,7 @@ class CalendarDatePicker2Config {
           centerAlignModePickerButton ?? this.centerAlignModePickerButton,
       customModePickerButtonIcon:
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
+      yearBuilder: yearBuilder ?? this.yearBuilder,
     );
   }
 }
@@ -235,6 +250,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? disableYearPicker,
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
+    CalendarYearBuilder? yearBuilder,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -272,6 +288,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           disableYearPicker: disableYearPicker,
           centerAlignModePickerButton: centerAlignModePickerButton,
           customModePickerButtonIcon: customModePickerButtonIcon,
+          yearBuilder: yearBuilder,
         );
 
   /// The gap between calendar and action buttons
@@ -339,6 +356,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     EdgeInsets? buttonPadding,
+    CalendarYearBuilder? yearBuilder,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -388,6 +406,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       customModePickerButtonIcon:
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      yearBuilder: yearBuilder ?? this.yearBuilder,
     );
   }
 }
