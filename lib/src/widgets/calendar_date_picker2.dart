@@ -1369,23 +1369,31 @@ class _YearPickerState extends State<YearPicker> {
       );
     }
 
-    Widget yearItem = Center(
-      child: Container(
-        decoration: decoration,
-        height: decorationHeight,
-        width: decorationWidth,
-        child: Center(
-          child: Semantics(
-            selected: isSelected,
-            button: true,
-            child: Text(
-              year.toString(),
-              style: itemStyle,
+    Widget yearItem = widget.config.yearBuilder?.call(
+          year: year,
+          textStyle: itemStyle,
+          decoration: decoration,
+          isSelected: isSelected,
+          isDisabled: isDisabled,
+          isCurrentYear: isCurrentYear,
+        ) ??
+        Center(
+          child: Container(
+            decoration: decoration,
+            height: decorationHeight,
+            width: decorationWidth,
+            child: Center(
+              child: Semantics(
+                selected: isSelected,
+                button: true,
+                child: Text(
+                  year.toString(),
+                  style: itemStyle,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
 
     if (isDisabled) {
       yearItem = ExcludeSemantics(

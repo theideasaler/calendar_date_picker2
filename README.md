@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.4.4-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.4.5-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
@@ -33,7 +33,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.4.4
+  calendar_date_picker2: ^0.4.5
 ```
 
 ### Basic setup
@@ -135,6 +135,7 @@ var results = await showCalendarDatePicker2Dialog(
 | disableYearPicker           | bool?                          | Flag to disable year picker and hide the toggle icon                                |
 | centerAlignModePickerButton | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerButtonIcon  | Widget?                        | Custom icon for the mode picker button icon                                         |
+| yearBuilder                 | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
@@ -154,7 +155,7 @@ var results = await showCalendarDatePicker2Dialog(
 
 By using the configs above, you could make your own custom calendar picker as your need.
 
-![image](https://user-images.githubusercontent.com/17869748/220879930-be9d981b-d7a6-44e9-b533-cb56e5733d90.png)
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/17869748/223992571-f153515d-170d-48f6-afce-84f59f58940b.png"> <img width="300" alt="image" src="https://user-images.githubusercontent.com/17869748/223992976-5539a3af-6409-4983-958b-ca927a9d714f.png">
 
 ```dart
 CalendarDatePicker2WithActionButtons(
@@ -166,6 +167,7 @@ CalendarDatePicker2WithActionButtons(
     centerAlignModePickerButton: true,
     customModePickerButtonIcon: SizedBox(),
     dayBuilder: _yourDayBuilder,
+    yearBuilder: _yourYearBuilder,
   ),
   initialValue: _yourDatesVariable,
   onValueChanged: (dates) => setState(() => _yourDatesVariable = dates),
