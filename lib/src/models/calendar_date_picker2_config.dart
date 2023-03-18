@@ -155,7 +155,7 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over year widget UI
   final CalendarYearBuilder? yearBuilder;
 
-  /// Custom mode picker button
+  /// Custom mode picker text
   final CalendarModePickerButtonTextHandler? modePickerButtonTextHandler;
 
   CalendarDatePicker2Config copyWith({
