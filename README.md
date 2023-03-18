@@ -136,6 +136,7 @@ var results = await showCalendarDatePicker2Dialog(
 | centerAlignModePickerButton | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerButtonIcon  | Widget?                        | Custom icon for the mode picker button icon                                         |
 | yearBuilder                 | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
+| modePickerButtonTextHandler | CalendarModePickerButtonTextHandler?           | Function to provide full control over year widget UI                |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
