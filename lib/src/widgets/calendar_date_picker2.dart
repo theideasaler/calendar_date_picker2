@@ -262,6 +262,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     });
   }
 
+  String getTitle(DateTime dateTime) {
+    return widget.config.modePickerButtonTextHandler?.call(monthDate: dateTime) ?? _localizations.formatMonthYear(dateTime);
+  }
+
   Widget _buildPicker() {
     switch (_mode) {
       case DatePickerMode.day:
@@ -304,7 +308,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
         _DatePickerModeToggleButton(
           config: widget.config,
           mode: _mode,
-          title: _localizations.formatMonthYear(_currentDisplayedMonthDate),
+          title: getTitle(_currentDisplayedMonthDate),
           onTitlePressed: () {
             // Toggle the day/year mode.
             _handleModeChanged(_mode == DatePickerMode.day
