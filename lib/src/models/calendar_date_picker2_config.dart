@@ -24,6 +24,10 @@ typedef CalendarYearBuilder = Widget? Function({
   bool? isCurrentYear,
 });
 
+typedef CalendarModePickerButtonTextHandler = String? Function({
+  required DateTime monthDate,
+});
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -54,6 +58,7 @@ class CalendarDatePicker2Config {
     this.centerAlignModePickerButton,
     this.customModePickerButtonIcon,
     this.yearBuilder,
+    this.modePickerButtonTextHandler,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -150,6 +155,9 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over year widget UI
   final CalendarYearBuilder? yearBuilder;
 
+  /// Function to control mode picker displayed text
+  final CalendarModePickerButtonTextHandler? modePickerButtonTextHandler;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -179,6 +187,7 @@ class CalendarDatePicker2Config {
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
+    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -216,6 +225,7 @@ class CalendarDatePicker2Config {
       customModePickerButtonIcon:
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      modePickerButtonTextHandler: modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
     );
   }
 }
@@ -251,6 +261,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
+    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -289,6 +300,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           centerAlignModePickerButton: centerAlignModePickerButton,
           customModePickerButtonIcon: customModePickerButtonIcon,
           yearBuilder: yearBuilder,
+          modePickerButtonTextHandler: modePickerButtonTextHandler,
         );
 
   /// The gap between calendar and action buttons
@@ -357,6 +369,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? customModePickerButtonIcon,
     EdgeInsets? buttonPadding,
     CalendarYearBuilder? yearBuilder,
+    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -407,6 +420,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       buttonPadding: buttonPadding ?? this.buttonPadding,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      modePickerButtonTextHandler: modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
     );
   }
 }
