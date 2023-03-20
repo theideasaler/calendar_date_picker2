@@ -306,8 +306,8 @@ class _MyHomePageState extends State<MyHomePage> {
         CalendarDatePicker2(
           config: config,
           initialValue: _singleDatePickerValueWithDefaultValue,
-          onValueChanged: (values) =>
-              setState(() => _singleDatePickerValueWithDefaultValue = values),
+          onValueChanged: (dates) =>
+              _singleDatePickerValueWithDefaultValue = dates,
         ),
         const SizedBox(height: 10),
         Row(
@@ -341,8 +341,8 @@ class _MyHomePageState extends State<MyHomePage> {
         CalendarDatePicker2(
           config: config,
           initialValue: _multiDatePickerValueWithDefaultValue,
-          onValueChanged: (values) =>
-              setState(() => _multiDatePickerValueWithDefaultValue = values),
+          onValueChanged: (dates) =>
+              setState(() => _multiDatePickerValueWithDefaultValue = dates),
         ),
         const SizedBox(height: 10),
         Wrap(
@@ -387,8 +387,8 @@ class _MyHomePageState extends State<MyHomePage> {
         CalendarDatePicker2(
           config: config,
           initialValue: _rangeDatePickerValueWithDefaultValue,
-          onValueChanged: (values) =>
-              setState(() => _rangeDatePickerValueWithDefaultValue = values),
+          onValueChanged: (dates) =>
+              setState(() => _rangeDatePickerValueWithDefaultValue = dates),
         ),
         const SizedBox(height: 10),
         Row(
@@ -422,8 +422,8 @@ class _MyHomePageState extends State<MyHomePage> {
         CalendarDatePicker2WithActionButtons(
           config: config,
           initialValue: _rangeDatePickerWithActionButtonsWithValue,
-          onValueChanged: (values) => setState(
-              () => _rangeDatePickerWithActionButtonsWithValue = values),
+          onValueChanged: (dates) => setState(
+              () => _rangeDatePickerWithActionButtonsWithValue = dates),
         ),
         const SizedBox(height: 10),
         Row(

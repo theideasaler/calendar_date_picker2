@@ -50,7 +50,8 @@ _The complete example is available [here](https://github.com/theideasaler/calend
 ```dart
 CalendarDatePicker2(
   config: CalendarDatePicker2Config(),
-  initialValue: [],
+  initialValue: _dates,
+  onValueChanged: (dates) => _dates = dates,
 );
 ```
 
@@ -67,8 +68,8 @@ CalendarDatePicker2(
   config: CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.multi,
   ),
-  onValueChanged: (dates) => _yourHandler(dates),
-  initialValue: [],
+  initialValue: _dates,
+  onValueChanged: (dates) => _dates = dates,
 );
 ```
 
@@ -81,8 +82,8 @@ CalendarDatePicker2(
   config: CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.range,
   ),
-  onValueChanged: (dates) => _yourHandler(dates),
-  initialValue: [],
+  initialValue: _dates,
+  onValueChanged: (dates) => _dates = dates,
 );
 ```
 
@@ -96,7 +97,7 @@ var results = await showCalendarDatePicker2Dialog(
   context: context,
   config: CalendarDatePicker2WithActionButtonsConfig(),
   dialogSize: const Size(325, 400),
-  initialValue: _dialogCalendarPickerValue,
+  initialValue: _dates,
   borderRadius: BorderRadius.circular(15),
 );
 ...
@@ -170,8 +171,8 @@ CalendarDatePicker2WithActionButtons(
     dayBuilder: _yourDayBuilder,
     yearBuilder: _yourYearBuilder,
   ),
-  initialValue: _yourDatesVariable,
-  onValueChanged: (dates) => setState(() => _yourDatesVariable = dates),
+  initialValue: _dates,
+  onValueChanged: (dates) => _dates = dates,
 );
 ```
 
@@ -181,6 +182,7 @@ Feel free to contribute to this project. 🍺 Pull requests are welcome!
 
 There are some tips before creating a PR:
 
+- Please create an issue/feature before raising a PR
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `flutter format .` if you are not using VS Code
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
 - Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
