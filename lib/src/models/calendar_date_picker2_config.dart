@@ -54,7 +54,7 @@ class CalendarDatePicker2Config {
     this.selectableDayPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
-    this.disableYearPicker,
+    this.disableModePicker,
     this.centerAlignModePickerButton,
     this.customModePickerButtonIcon,
     this.yearBuilder,
@@ -143,8 +143,8 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over day widget UI
   final CalendarDayBuilder? dayBuilder;
 
-  /// Flag to disable year picker and hide the mode toggle button icon
-  final bool? disableYearPicker;
+  /// Flag to disable mode picker and hide the mode toggle button icon
+  final bool? disableModePicker;
 
   /// Flag to centralize year and month text label in controls
   final bool? centerAlignModePickerButton;
@@ -183,7 +183,7 @@ class CalendarDatePicker2Config {
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
-    bool? disableYearPicker,
+    bool? disableModePicker,
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
@@ -219,13 +219,14 @@ class CalendarDatePicker2Config {
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableYearPicker: disableYearPicker ?? this.disableYearPicker,
+      disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePickerButton:
           centerAlignModePickerButton ?? this.centerAlignModePickerButton,
       customModePickerButtonIcon:
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       yearBuilder: yearBuilder ?? this.yearBuilder,
-      modePickerButtonTextHandler: modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
+      modePickerButtonTextHandler:
+          modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
     );
   }
 }
@@ -257,7 +258,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
-    bool? disableYearPicker,
+    bool? disableModePicker,
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
@@ -296,7 +297,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectableDayPredicate: selectableDayPredicate,
           dayTextStylePredicate: dayTextStylePredicate,
           dayBuilder: dayBuilder,
-          disableYearPicker: disableYearPicker,
+          disableModePicker: disableModePicker,
           centerAlignModePickerButton: centerAlignModePickerButton,
           customModePickerButtonIcon: customModePickerButtonIcon,
           yearBuilder: yearBuilder,
@@ -364,7 +365,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
-    bool? disableYearPicker,
+    bool? disableModePicker,
     bool? centerAlignModePickerButton,
     Widget? customModePickerButtonIcon,
     EdgeInsets? buttonPadding,
@@ -413,14 +414,15 @@ class CalendarDatePicker2WithActionButtonsConfig
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableYearPicker: disableYearPicker ?? this.disableYearPicker,
+      disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePickerButton:
           centerAlignModePickerButton ?? this.centerAlignModePickerButton,
       customModePickerButtonIcon:
           customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       buttonPadding: buttonPadding ?? this.buttonPadding,
       yearBuilder: yearBuilder ?? this.yearBuilder,
-      modePickerButtonTextHandler: modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
+      modePickerButtonTextHandler:
+          modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
     );
   }
 }

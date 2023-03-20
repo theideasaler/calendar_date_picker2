@@ -1,3 +1,8 @@
+## [0.4.6]
+
+- feat: add `modePickerButtonTextHandler` into config
+- update: rename `disableYearPicker` to `disableModePicker`
+
 ## [0.4.5]
 
 - feat: add `yearBuilder` into config

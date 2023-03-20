@@ -304,7 +304,9 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
         _DatePickerModeToggleButton(
           config: widget.config,
           mode: _mode,
-          title: widget.config.modePickerButtonTextHandler?.call(monthDate: _currentDisplayedMonthDate) ?? _localizations.formatMonthYear(_currentDisplayedMonthDate),
+          title: widget.config.modePickerButtonTextHandler
+                  ?.call(monthDate: _currentDisplayedMonthDate) ??
+              _localizations.formatMonthYear(_currentDisplayedMonthDate),
           onTitlePressed: () {
             // Toggle the day/year mode.
             _handleModeChanged(_mode == DatePickerMode.day
@@ -405,7 +407,7 @@ class _DatePickerModeToggleButtonState
               child: SizedBox(
                 height: (widget.config.controlsHeight ?? _subHeaderHeight),
                 child: InkWell(
-                  onTap: widget.config.disableYearPicker == true
+                  onTap: widget.config.disableModePicker == true
                       ? null
                       : widget.onTitlePressed,
                   child: Padding(
@@ -430,7 +432,7 @@ class _DatePickerModeToggleButtonState
                                 ),
                           ),
                         ),
-                        widget.config.disableYearPicker == true
+                        widget.config.disableModePicker == true
                             ? const SizedBox()
                             : RotationTransition(
                                 turns: _controller,
