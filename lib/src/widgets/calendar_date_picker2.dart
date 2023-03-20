@@ -105,7 +105,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     if (widget.config.calendarViewMode != oldWidget.config.calendarViewMode) {
       _mode = widget.config.calendarViewMode;
     }
-    _selectedDates = widget.initialValue.toList();
+   // _selectedDates = widget.initialValue.toList();
   }
 
   @override
