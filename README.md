@@ -182,7 +182,7 @@ Feel free to contribute to this project. 🍺 Pull requests are welcome!
 
 There are some tips before creating a PR:
 
-- Please create an issue/feature before raising a PR
+- Please always create an issue/feature before raising a PR
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `flutter format .` if you are not using VS Code
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
 - Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
