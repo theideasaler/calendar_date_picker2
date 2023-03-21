@@ -133,7 +133,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectableDayPredicate      | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
 | dayTextStylePredicate       | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
 | dayBuilder                  | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
-| disableYearPicker           | bool?                          | Flag to disable year picker and hide the toggle icon                                |
+| disableModePicker           | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
 | centerAlignModePickerButton | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerButtonIcon  | Widget?                        | Custom icon for the mode picker button icon                                         |
 | yearBuilder                 | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
