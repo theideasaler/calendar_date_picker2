@@ -135,10 +135,10 @@ var results = await showCalendarDatePicker2Dialog(
 | selectableDayPredicate    | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
 | dayTextStylePredicate     | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
 | dayBuilder                | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
+| yearBuilder               | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
 | disableModePicker         | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
 | centerAlignModePicker     | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerIcon      | Widget?                        | Custom icon for the mode picker button icon                                         |
-| yearBuilder               | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
 | modePickerTextHandler     | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
@@ -184,7 +184,7 @@ Feel free to contribute to this project. 🍺 Pull requests are welcome!
 
 There are some tips before creating a PR:
 
-- Please create an issue/feature before raising a PR
+- Please always create an issue/feature before raising a PR
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `flutter format .` if you are not using VS Code
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
 - Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
