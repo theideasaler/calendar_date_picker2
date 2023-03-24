@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CalendarDatePicker2WithActionButtons extends StatefulWidget {
   const CalendarDatePicker2WithActionButtons({
-    required this.initialValue,
+    required this.value,
     required this.config,
     this.onValueChanged,
     this.onDisplayedMonthChanged,
@@ -12,7 +12,7 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final List<DateTime?> initialValue;
+  final List<DateTime?> value;
 
   /// Called when the user taps 'OK' button
   final ValueChanged<List<DateTime?>>? onValueChanged;
@@ -41,8 +41,8 @@ class _CalendarDatePicker2WithActionButtonsState
 
   @override
   void initState() {
-    _values = widget.initialValue;
-    _editCache = widget.initialValue;
+    _values = widget.value;
+    _editCache = widget.value;
     super.initState();
   }
 
@@ -50,14 +50,13 @@ class _CalendarDatePicker2WithActionButtonsState
   void didUpdateWidget(
       covariant CalendarDatePicker2WithActionButtons oldWidget) {
     var isValueSame =
-        oldWidget.initialValue.length == widget.initialValue.length;
+        oldWidget.value.length == widget.value.length;
 
     if (isValueSame) {
-      for (var i = 0; i < oldWidget.initialValue.length; i++) {
-        var isSame = (oldWidget.initialValue[i] == null &&
-                widget.initialValue[i] == null) ||
+      for (var i = 0; i < oldWidget.value.length; i++) {
+        var isSame = (oldWidget.value[i] == null && widget.value[i] == null) ||
             DateUtils.isSameDay(
-                oldWidget.initialValue[i], widget.initialValue[i]);
+                oldWidget.value[i], widget.value[i]);
         if (!isSame) {
           isValueSame = false;
           break;
@@ -66,8 +65,8 @@ class _CalendarDatePicker2WithActionButtonsState
     }
 
     if (!isValueSame) {
-      _values = widget.initialValue;
-      _editCache = widget.initialValue;
+      _values = widget.value;
+      _editCache = widget.value;
     }
 
     super.didUpdateWidget(oldWidget);
@@ -83,7 +82,7 @@ class _CalendarDatePicker2WithActionButtonsState
         MediaQuery.removePadding(
           context: context,
           child: CalendarDatePicker2(
-            initialValue: [..._editCache],
+            value: [..._editCache],
             config: widget.config,
             onValueChanged: (values) => _editCache = values,
             onDisplayedMonthChanged: widget.onDisplayedMonthChanged,

@@ -31,7 +31,7 @@ T? _ambiguate<T>(T? value) => value;
 
 class CalendarDatePicker2 extends StatefulWidget {
   CalendarDatePicker2({
-    required this.initialValue,
+    required this.value,
     required this.config,
     this.onValueChanged,
     this.onDisplayedMonthChanged,
@@ -41,16 +41,16 @@ class CalendarDatePicker2 extends StatefulWidget {
     const invalid = false;
 
     if (config.calendarType == CalendarDatePicker2Type.single) {
-      assert(initialValue.length < 2,
+      assert(value.length < 2,
           'Error: single date picker only allows maximum one initial date');
     }
 
     if (config.calendarType == CalendarDatePicker2Type.range &&
-        initialValue.length > 1) {
-      final isRangePickerValueValid = initialValue[0] == null
-          ? (initialValue[1] != null ? invalid : valid)
-          : (initialValue[1] != null
-              ? (initialValue[1]!.isBefore(initialValue[0]!) ? invalid : valid)
+        value.length > 1) {
+      final isRangePickerValueValid = value[0] == null
+          ? (value[1] != null ? invalid : valid)
+          : (value[1] != null
+              ? (value[1]!.isBefore(value[0]!) ? invalid : valid)
               : valid);
 
       assert(
@@ -61,7 +61,7 @@ class CalendarDatePicker2 extends StatefulWidget {
   }
 
   /// The initially selected [DateTime]s that the picker should display.
-  final List<DateTime?> initialValue;
+  final List<DateTime?> value;
 
   /// Called when the user selects a date in the picker.
   final ValueChanged<List<DateTime?>>? onValueChanged;
@@ -90,13 +90,12 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   void initState() {
     super.initState();
     final config = widget.config;
-    final initialDate = widget.initialValue.isNotEmpty &&
-            widget.initialValue[0] != null
-        ? DateTime(widget.initialValue[0]!.year, widget.initialValue[0]!.month)
+    final initialDate = widget.value.isNotEmpty && widget.value[0] != null
+        ? DateTime(widget.value[0]!.year, widget.value[0]!.month)
         : DateUtils.dateOnly(DateTime.now());
     _mode = config.calendarViewMode;
     _currentDisplayedMonthDate = DateTime(initialDate.year, initialDate.month);
-    _selectedDates = widget.initialValue.toList();
+    _selectedDates = widget.value.toList();
   }
 
   @override
@@ -105,7 +104,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     if (widget.config.calendarViewMode != oldWidget.config.calendarViewMode) {
       _mode = widget.config.calendarViewMode;
     }
-    _selectedDates = widget.initialValue.toList();
+    _selectedDates = widget.value.toList();
   }
 
   @override
@@ -304,7 +303,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
         _DatePickerModeToggleButton(
           config: widget.config,
           mode: _mode,
-          title: widget.config.modePickerButtonTextHandler
+          title: widget.config.modePickerTextHandler
                   ?.call(monthDate: _currentDisplayedMonthDate) ??
               _localizations.formatMonthYear(_currentDisplayedMonthDate),
           onTitlePressed: () {
@@ -384,19 +383,19 @@ class _DatePickerModeToggleButtonState
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
     var datePickerOffsetPadding = _monthNavButtonsWidth;
-    if (widget.config.centerAlignModePickerButton == true) {
+    if (widget.config.centerAlignModePicker == true) {
       datePickerOffsetPadding /= 2;
     }
 
     return Container(
-      padding: widget.config.centerAlignModePickerButton == true
+      padding: widget.config.centerAlignModePicker == true
           ? EdgeInsets.zero
           : const EdgeInsetsDirectional.only(start: 16, end: 4),
       height: (widget.config.controlsHeight ?? _subHeaderHeight),
       child: Row(
         children: <Widget>[
           if (widget.mode == DatePickerMode.day &&
-              widget.config.centerAlignModePickerButton == true)
+              widget.config.centerAlignModePicker == true)
             // Give space for the prev/next month buttons that are underneath this row
             SizedBox(width: datePickerOffsetPadding),
           Flexible(
@@ -413,12 +412,12 @@ class _DatePickerModeToggleButtonState
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal:
-                            widget.config.centerAlignModePickerButton == true
+                            widget.config.centerAlignModePicker == true
                                 ? 0
                                 : 8),
                     child: Row(
                       mainAxisAlignment:
-                          widget.config.centerAlignModePickerButton == true
+                          widget.config.centerAlignModePicker == true
                               ? MainAxisAlignment.center
                               : MainAxisAlignment.start,
                       children: <Widget>[
@@ -437,7 +436,7 @@ class _DatePickerModeToggleButtonState
                             : RotationTransition(
                                 turns: _controller,
                                 child:
-                                    widget.config.customModePickerButtonIcon ??
+                                    widget.config.customModePickerIcon ??
                                         Icon(
                                           Icons.arrow_drop_down,
                                           color: widget.config.controlsTextStyle
@@ -780,13 +779,13 @@ class _MonthPickerState extends State<_MonthPicker> {
       child: Column(
         children: <Widget>[
           Container(
-            padding: widget.config.centerAlignModePickerButton != true
+            padding: widget.config.centerAlignModePicker != true
                 ? const EdgeInsetsDirectional.only(start: 16, end: 4)
                 : const EdgeInsetsDirectional.only(start: 8, end: 8),
             height: (widget.config.controlsHeight ?? _subHeaderHeight),
             child: Row(
               children: <Widget>[
-                if (widget.config.centerAlignModePickerButton != true)
+                if (widget.config.centerAlignModePicker != true)
                   const Spacer(),
                 IconButton(
                   icon: widget.config.lastMonthIcon ??
@@ -798,7 +797,7 @@ class _MonthPickerState extends State<_MonthPicker> {
                   onPressed:
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
-                if (widget.config.centerAlignModePickerButton == true)
+                if (widget.config.centerAlignModePicker == true)
                   const Spacer(),
                 IconButton(
                   icon: widget.config.nextMonthIcon ??
