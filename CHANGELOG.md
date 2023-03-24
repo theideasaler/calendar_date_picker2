@@ -1,3 +1,7 @@
+## [0.4.9]
+
+- update: README.md
+
 ## [0.4.8]
 
 - fix: static analyzer formatting issue
