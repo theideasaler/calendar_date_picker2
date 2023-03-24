@@ -49,14 +49,12 @@ class _CalendarDatePicker2WithActionButtonsState
   @override
   void didUpdateWidget(
       covariant CalendarDatePicker2WithActionButtons oldWidget) {
-    var isValueSame =
-        oldWidget.value.length == widget.value.length;
+    var isValueSame = oldWidget.value.length == widget.value.length;
 
     if (isValueSame) {
       for (var i = 0; i < oldWidget.value.length; i++) {
         var isSame = (oldWidget.value[i] == null && widget.value[i] == null) ||
-            DateUtils.isSameDay(
-                oldWidget.value[i], widget.value[i]);
+            DateUtils.isSameDay(oldWidget.value[i], widget.value[i]);
         if (!isSame) {
           isValueSame = false;
           break;
