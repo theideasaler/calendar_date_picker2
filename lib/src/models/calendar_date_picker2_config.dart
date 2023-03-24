@@ -24,7 +24,7 @@ typedef CalendarYearBuilder = Widget? Function({
   bool? isCurrentYear,
 });
 
-typedef CalendarModePickerButtonTextHandler = String? Function({
+typedef CalendarModePickerTextHandler = String? Function({
   required DateTime monthDate,
 });
 
@@ -54,11 +54,11 @@ class CalendarDatePicker2Config {
     this.selectableDayPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
-    this.disableModePicker,
-    this.centerAlignModePickerButton,
-    this.customModePickerButtonIcon,
     this.yearBuilder,
-    this.modePickerButtonTextHandler,
+    this.disableModePicker,
+    this.centerAlignModePicker,
+    this.customModePickerIcon,
+    this.modePickerTextHandler,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -143,20 +143,20 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over day widget UI
   final CalendarDayBuilder? dayBuilder;
 
+  /// Function to provide full control over year widget UI
+  final CalendarYearBuilder? yearBuilder;
+
   /// Flag to disable mode picker and hide the mode toggle button icon
   final bool? disableModePicker;
 
   /// Flag to centralize year and month text label in controls
-  final bool? centerAlignModePickerButton;
+  final bool? centerAlignModePicker;
 
   /// Custom icon for the mode picker button icon
-  final Widget? customModePickerButtonIcon;
-
-  /// Function to provide full control over year widget UI
-  final CalendarYearBuilder? yearBuilder;
+  final Widget? customModePickerIcon;
 
   /// Function to control mode picker displayed text
-  final CalendarModePickerButtonTextHandler? modePickerButtonTextHandler;
+  final CalendarModePickerTextHandler? modePickerTextHandler;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -183,11 +183,11 @@ class CalendarDatePicker2Config {
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
-    bool? disableModePicker,
-    bool? centerAlignModePickerButton,
-    Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
-    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
+    bool? disableModePicker,
+    bool? centerAlignModePicker,
+    Widget? customModePickerIcon,
+    CalendarModePickerTextHandler? modePickerTextHandler,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -219,14 +219,13 @@ class CalendarDatePicker2Config {
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableModePicker: disableModePicker ?? this.disableModePicker,
-      centerAlignModePickerButton:
-          centerAlignModePickerButton ?? this.centerAlignModePickerButton,
-      customModePickerButtonIcon:
-          customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       yearBuilder: yearBuilder ?? this.yearBuilder,
-      modePickerButtonTextHandler:
-          modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
+      disableModePicker: disableModePicker ?? this.disableModePicker,
+      centerAlignModePicker:
+          centerAlignModePicker ?? this.centerAlignModePicker,
+      customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
+      modePickerTextHandler:
+          modePickerTextHandler ?? this.modePickerTextHandler,
     );
   }
 }
@@ -258,11 +257,11 @@ class CalendarDatePicker2WithActionButtonsConfig
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
-    bool? disableModePicker,
-    bool? centerAlignModePickerButton,
-    Widget? customModePickerButtonIcon,
     CalendarYearBuilder? yearBuilder,
-    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
+    bool? disableModePicker,
+    bool? centerAlignModePicker,
+    Widget? customModePickerIcon,
+    CalendarModePickerTextHandler? modePickerTextHandler,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -297,11 +296,11 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectableDayPredicate: selectableDayPredicate,
           dayTextStylePredicate: dayTextStylePredicate,
           dayBuilder: dayBuilder,
-          disableModePicker: disableModePicker,
-          centerAlignModePickerButton: centerAlignModePickerButton,
-          customModePickerButtonIcon: customModePickerButtonIcon,
           yearBuilder: yearBuilder,
-          modePickerButtonTextHandler: modePickerButtonTextHandler,
+          disableModePicker: disableModePicker,
+          centerAlignModePicker: centerAlignModePicker,
+          customModePickerIcon: customModePickerIcon,
+          modePickerTextHandler: modePickerTextHandler,
         );
 
   /// The gap between calendar and action buttons
@@ -352,6 +351,16 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    BorderRadius? dayBorderRadius,
+    BorderRadius? yearBorderRadius,
+    SelectableDayPredicate? selectableDayPredicate,
+    CalendarDayTextStylePredicate? dayTextStylePredicate,
+    CalendarDayBuilder? dayBuilder,
+    CalendarYearBuilder? yearBuilder,
+    bool? disableModePicker,
+    bool? centerAlignModePicker,
+    Widget? customModePickerIcon,
+    CalendarModePickerTextHandler? modePickerTextHandler,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -360,17 +369,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? openedFromDialog,
     bool? closeDialogOnCancelTapped,
     bool? closeDialogOnOkTapped,
-    BorderRadius? dayBorderRadius,
-    BorderRadius? yearBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
-    CalendarDayTextStylePredicate? dayTextStylePredicate,
-    CalendarDayBuilder? dayBuilder,
-    bool? disableModePicker,
-    bool? centerAlignModePickerButton,
-    Widget? customModePickerButtonIcon,
     EdgeInsets? buttonPadding,
-    CalendarYearBuilder? yearBuilder,
-    CalendarModePickerButtonTextHandler? modePickerButtonTextHandler,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -395,6 +394,20 @@ class CalendarDatePicker2WithActionButtonsConfig
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
+      yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      selectableDayPredicate:
+          selectableDayPredicate ?? this.selectableDayPredicate,
+      dayTextStylePredicate:
+          dayTextStylePredicate ?? this.dayTextStylePredicate,
+      dayBuilder: dayBuilder ?? this.dayBuilder,
+      yearBuilder: yearBuilder ?? this.yearBuilder,
+      disableModePicker: disableModePicker ?? this.disableModePicker,
+      centerAlignModePicker:
+          centerAlignModePicker ?? this.centerAlignModePicker,
+      customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
+      modePickerTextHandler:
+          modePickerTextHandler ?? this.modePickerTextHandler,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
@@ -407,22 +420,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           closeDialogOnCancelTapped ?? this.closeDialogOnCancelTapped,
       closeDialogOnOkTapped:
           closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
-      dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
-      yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
-      selectableDayPredicate:
-          selectableDayPredicate ?? this.selectableDayPredicate,
-      dayTextStylePredicate:
-          dayTextStylePredicate ?? this.dayTextStylePredicate,
-      dayBuilder: dayBuilder ?? this.dayBuilder,
-      disableModePicker: disableModePicker ?? this.disableModePicker,
-      centerAlignModePickerButton:
-          centerAlignModePickerButton ?? this.centerAlignModePickerButton,
-      customModePickerButtonIcon:
-          customModePickerButtonIcon ?? this.customModePickerButtonIcon,
       buttonPadding: buttonPadding ?? this.buttonPadding,
-      yearBuilder: yearBuilder ?? this.yearBuilder,
-      modePickerButtonTextHandler:
-          modePickerButtonTextHandler ?? this.modePickerButtonTextHandler,
     );
   }
 }

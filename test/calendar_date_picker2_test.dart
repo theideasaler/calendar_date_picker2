@@ -10,7 +10,7 @@ void main() {
     await widgetTester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: CalendarDatePicker2(
-            initialValue: emp, config: CalendarDatePicker2Config()),
+            value: emp, config: CalendarDatePicker2Config()),
       ),
     ));
   });

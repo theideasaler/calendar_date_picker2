@@ -144,8 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
-      centerAlignModePickerButton: true,
-      customModePickerButtonIcon: const SizedBox(),
+      centerAlignModePicker: true,
+      customModePickerIcon: const SizedBox(),
       selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
       dayTextStylePredicate: ({required date}) {
         TextStyle? textStyle;
@@ -251,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 config: config,
                 dialogSize: const Size(325, 400),
                 borderRadius: BorderRadius.circular(15),
-                initialValue: _dialogCalendarPickerValue,
+                value: _dialogCalendarPickerValue,
                 dialogBackgroundColor: Colors.white,
               );
               if (values != null) {
@@ -305,7 +305,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Text('Single Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _singleDatePickerValueWithDefaultValue,
+          value: _singleDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
               _singleDatePickerValueWithDefaultValue = dates,
         ),
@@ -340,7 +340,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Text('Multi Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _multiDatePickerValueWithDefaultValue,
+          value: _multiDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
               setState(() => _multiDatePickerValueWithDefaultValue = dates),
         ),
@@ -386,7 +386,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Text('Range Date Picker (With default value)'),
         CalendarDatePicker2(
           config: config,
-          initialValue: _rangeDatePickerValueWithDefaultValue,
+          value: _rangeDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
               setState(() => _rangeDatePickerValueWithDefaultValue = dates),
         ),
@@ -421,7 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Text('Date Picker With Action Buttons'),
         CalendarDatePicker2WithActionButtons(
           config: config,
-          initialValue: _rangeDatePickerWithActionButtonsWithValue,
+          value: _rangeDatePickerWithActionButtonsWithValue,
           onValueChanged: (dates) => setState(
               () => _rangeDatePickerWithActionButtonsWithValue = dates),
         ),
