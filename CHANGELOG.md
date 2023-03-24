@@ -1,5 +1,9 @@
 ## [0.4.7]
 
+- fix: static analyzer formatting issue
+
+## [0.4.7]
+
 - update: rename `initialValue` to `value`
 - update: rename `centerAlignModePickerButton` to `centerAlignModePicker`
 - update: rename `customModePickerButtonIcon` to `customModePickerIcon`
