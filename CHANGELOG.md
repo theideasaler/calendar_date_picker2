@@ -1,4 +1,4 @@
-## [0.4.7]
+## [0.4.8]
 
 - fix: static analyzer formatting issue
 
