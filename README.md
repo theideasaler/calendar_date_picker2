@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.4.6-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.4.7-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 ![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)
 
@@ -35,7 +35,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.4.6
+  calendar_date_picker2: ^0.4.7
 ```
 
 ### Basic setup
@@ -177,6 +177,28 @@ CalendarDatePicker2WithActionButtons(
   onValueChanged: (dates) => _dates = dates,
 );
 ```
+
+## Multi-language support
+
+This package has multi-language supports. To enable it, add your `Locale` into the wrapping `MaterialApp`:
+
+```dart
+MaterialApp(
+  localizationsDelegates: GlobalMaterialLocalizations.delegates,
+  supportedLocales: const [
+    Locale('en', ''),
+    Locale('zh', ''),
+    Locale('ru', ''),
+    Locale('es', ''),
+    Locale('hi', ''),
+  ],
+  ...
+);
+```
+### Example of different languages
+| <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227443635-604afb00-9d26-4e2b-ae66-5839ac25347f.png"> | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227442622-1e17ec84-9593-4587-b54a-506aeb020d32.png"> | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227443327-89ce40ba-e661-4006-ba42-dfcc3ae27d43.png"> | <img width="231" alt="image" src="https://user-images.githubusercontent.com/17869748/227444732-bd137b1d-9941-4542-89bc-6f63407e422d.png"> |
+| :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                 **中文**                                                                  |                                                                **русский**                                                                |                                                                **español**                                                                |                                                                 **हिंदी**                                                                 |
 
 ## Contributions
 

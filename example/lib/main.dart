@@ -25,6 +25,8 @@ class MyApp extends StatelessWidget {
         Locale('he', ''),
         Locale('es', ''),
         Locale('ru', ''),
+        Locale('ko', ''),
+        Locale('hi', ''),
       ],
       home: const MyHomePage(title: 'CalendarDatePicker2 Demo'),
     );

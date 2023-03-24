@@ -1,3 +1,11 @@
+## [0.4.7]
+
+- update: rename `initialValue` to `value`
+- update: rename `centerAlignModePickerButton` to `centerAlignModePicker`
+- update: rename `customModePickerButtonIcon` to `customModePickerIcon`
+- update: rename `modePickerButtonTextHandler` to `modePickerTextHandler`
+- update: README.md
+
 ## [0.4.6]
 
 - feat: add `modePickerButtonTextHandler` into config
