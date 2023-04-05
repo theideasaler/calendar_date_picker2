@@ -1091,7 +1091,8 @@ class _DayPickerState extends State<_DayPicker> {
               final rangePickerIncludedDayDecoration = BoxDecoration(
                 color: (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
-                    .withOpacity(0.15),
+                    .withOpacity(
+                        widget.config.selectedDayHighlightOpacity ?? 0.15),
               );
 
               if (DateUtils.isSameDay(startDate, dayToBuild)) {
