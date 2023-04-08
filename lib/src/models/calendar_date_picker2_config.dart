@@ -45,7 +45,7 @@ class CalendarDatePicker2Config {
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
-    this.selectedDayHighlightOpacity,
+    this.selectedRangeHighlightColor,
     this.disabledDayTextStyle,
     this.todayTextStyle,
     this.yearTextStyle,
@@ -117,8 +117,9 @@ class CalendarDatePicker2Config {
   /// The highlight color for selected day(s)
   final Color? selectedDayHighlightColor;
 
-  /// The highlight color Opacity. Default value is 0.15
-  final double? selectedDayHighlightOpacity;
+  /// The highlight color for day(s) included in the selected range
+  /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range]
+  final Color? selectedRangeHighlightColor;
 
   /// Custom text style for disabled calendar day(s)
   final TextStyle? disabledDayTextStyle;
@@ -178,7 +179,7 @@ class CalendarDatePicker2Config {
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
-    double? selectedDayHighlightOpacity,
+    Color? selectedRangeHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
@@ -212,8 +213,8 @@ class CalendarDatePicker2Config {
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
-      selectedDayHighlightOpacity:
-          selectedDayHighlightOpacity ?? this.selectedDayHighlightOpacity,
+      selectedRangeHighlightColor:
+          selectedRangeHighlightColor ?? this.selectedRangeHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
@@ -255,7 +256,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
-    double? selectedDayHighlightOpacity,
+    Color? selectedRangeHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
@@ -295,7 +296,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedDayHighlightColor: selectedDayHighlightColor,
-          selectedDayHighlightOpacity: selectedDayHighlightOpacity,
+          selectedRangeHighlightColor: selectedRangeHighlightColor,
           disabledDayTextStyle: disabledDayTextStyle,
           todayTextStyle: todayTextStyle,
           yearTextStyle: yearTextStyle,
@@ -356,7 +357,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
-    double? selectedDayHighlightOpacity,
+    Color? selectedRangeHighlightColor,
     TextStyle? disabledDayTextStyle,
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
@@ -399,8 +400,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
           selectedDayHighlightColor ?? this.selectedDayHighlightColor,
-      selectedDayHighlightOpacity:
-          selectedDayHighlightOpacity ?? this.selectedDayHighlightOpacity,
+      selectedRangeHighlightColor:
+          selectedRangeHighlightColor ?? this.selectedRangeHighlightColor,
       disabledDayTextStyle: disabledDayTextStyle ?? this.disabledDayTextStyle,
       todayTextStyle: todayTextStyle ?? this.todayTextStyle,
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
