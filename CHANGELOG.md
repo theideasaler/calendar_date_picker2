@@ -1,3 +1,7 @@
+## [0.5.0]
+
+- feat: add `selectedRangeHighlightColor` into config
+
 ## [0.4.9]
 
 - update: README.md
