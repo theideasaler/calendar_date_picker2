@@ -110,7 +110,7 @@ var results = await showCalendarDatePicker2Dialog(
 ### For CalendarDatePicker2Config:
 
 | Option                    | Type                           | Description                                                                         |
-| ------------------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
+| ------------------------- |--------------------------------|-------------------------------------------------------------------------------------|
 | calendarType              | CalendarDatePicker2Type?       | Calendar picker type, has 3 values: single, multi, range                            |
 | firstDate                 | DateTime?                      | The earliest allowable DateTime user can select                                     |
 | lastDate                  | DateTime?                      | The latest allowable DateTime user can select                                       |
@@ -126,6 +126,7 @@ var results = await showCalendarDatePicker2Dialog(
 | dayTextStyle              | TextStyle?                     | Custom text style for calendar day text                                             |
 | selectedDayTextStyle      | TextStyle?                     | Custom text style for selected calendar day text                                    |
 | selectedDayHighlightColor | Color?                         | The highlight color selected day                                                    |
+| selectedRangeHighlightColor | Color?                        | The highlight color for day(s) included in the selected range                       |
 | disabledDayTextStyle      | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
 | todayTextStyle            | TextStyle?                     | Custom text style for current calendar day                                          |
 | yearTextStyle             | TextStyle?                     | Custom text style for years list                                                    |
