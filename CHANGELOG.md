@@ -1,3 +1,7 @@
+## [0.5.1]
+
+- fix: dates value type issue
+
 ## [0.5.0]
 
 - feat: add `selectedRangeHighlightColor` into config
