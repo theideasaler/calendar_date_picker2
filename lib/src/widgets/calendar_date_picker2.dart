@@ -253,9 +253,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
               !DateUtils.isSameDay(selectedDates[0],
                   _selectedDates.isNotEmpty ? _selectedDates[0] : null);
       if (isValueDifferent) {
-        _selectedDates = _selectedDates
-          ..clear()
-          ..addAll(selectedDates);
+        _selectedDates = [...selectedDates];
         widget.onValueChanged?.call(_selectedDates);
       }
     });

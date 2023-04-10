@@ -309,7 +309,7 @@ class _MyHomePageState extends State<MyHomePage> {
           config: config,
           value: _singleDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
-              _singleDatePickerValueWithDefaultValue = dates,
+              setState(() => _singleDatePickerValueWithDefaultValue = dates),
         ),
         const SizedBox(height: 10),
         Row(
