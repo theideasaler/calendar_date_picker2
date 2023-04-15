@@ -1066,6 +1066,28 @@ class _DayPickerState extends State<_DayPicker> {
           }
         }
 
+        DateTime? startDate;
+        DateTime? endDate;
+        var isDateInBetweenRangePickerSelectedDates = false;
+
+        final isFullySelectedRangePicker =
+            widget.config.calendarType == CalendarDatePicker2Type.range &&
+                widget.selectedDates.length == 2;
+
+        if (isFullySelectedRangePicker) {
+          startDate = DateUtils.dateOnly(widget.selectedDates[0]);
+          endDate = DateUtils.dateOnly(widget.selectedDates[1]);
+
+          isDateInBetweenRangePickerSelectedDates =
+              !(dayToBuild.isBefore(startDate) ||
+                      dayToBuild.isAfter(endDate)) &&
+                  !DateUtils.isSameDay(startDate, endDate);
+        }
+
+        if (isDateInBetweenRangePickerSelectedDates) {
+          customDayTextStyle = widget.config.selectedRangeDayTextStyle;
+        }
+
         if (isSelectedDay) {
           customDayTextStyle = widget.config.selectedDayTextStyle;
         }
@@ -1088,58 +1110,51 @@ class _DayPickerState extends State<_DayPicker> {
               dayTextStyle,
             );
 
-        if (widget.config.calendarType == CalendarDatePicker2Type.range) {
-          if (widget.selectedDates.length == 2) {
-            final startDate = DateUtils.dateOnly(widget.selectedDates[0]);
-            final endDate = DateUtils.dateOnly(widget.selectedDates[1]);
-            final isDateInRange = !(dayToBuild.isBefore(startDate) ||
-                dayToBuild.isAfter(endDate));
-            final isStartDateSameToEndDate =
-                DateUtils.isSameDay(startDate, endDate);
+        if (isDateInBetweenRangePickerSelectedDates) {
+          final rangePickerIncludedDayDecoration = BoxDecoration(
+            color: widget.config.selectedRangeHighlightColor ??
+                (widget.config.selectedDayHighlightColor ??
+                        selectedDayBackground)
+                    .withOpacity(0.15),
+          );
 
-            if (isDateInRange && !isStartDateSameToEndDate) {
-              final rangePickerIncludedDayDecoration = BoxDecoration(
-                color: widget.config.selectedRangeHighlightColor ??
-                    (widget.config.selectedDayHighlightColor ??
-                            selectedDayBackground)
-                        .withOpacity(0.15),
-              );
-
-              if (DateUtils.isSameDay(startDate, dayToBuild)) {
-                dayWidget = Stack(
-                  children: [
-                    Row(children: [
-                      const Spacer(),
-                      Expanded(
-                        child: Container(
-                            decoration: rangePickerIncludedDayDecoration),
-                      ),
-                    ]),
-                    dayWidget,
-                  ],
-                );
-              } else if (DateUtils.isSameDay(endDate, dayToBuild)) {
-                dayWidget = Stack(
-                  children: [
-                    Row(children: [
-                      Expanded(
-                        child: Container(
-                            decoration: rangePickerIncludedDayDecoration),
-                      ),
-                      const Spacer(),
-                    ]),
-                    dayWidget,
-                  ],
-                );
-              } else {
-                dayWidget = Stack(
-                  children: [
-                    Container(decoration: rangePickerIncludedDayDecoration),
-                    dayWidget,
-                  ],
-                );
-              }
-            }
+          if (DateUtils.isSameDay(startDate, dayToBuild)) {
+            dayWidget = Stack(
+              children: [
+                Row(children: [
+                  const Spacer(),
+                  Expanded(
+                    child: Container(
+                      decoration: rangePickerIncludedDayDecoration,
+                    ),
+                  ),
+                ]),
+                dayWidget,
+              ],
+            );
+          } else if (DateUtils.isSameDay(endDate, dayToBuild)) {
+            dayWidget = Stack(
+              children: [
+                Row(children: [
+                  Expanded(
+                    child: Container(
+                      decoration: rangePickerIncludedDayDecoration,
+                    ),
+                  ),
+                  const Spacer(),
+                ]),
+                dayWidget,
+              ],
+            );
+          } else {
+            dayWidget = Stack(
+              children: [
+                Container(
+                  decoration: rangePickerIncludedDayDecoration,
+                ),
+                dayWidget,
+              ],
+            );
           }
         }
 
