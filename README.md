@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.5.1-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.5.2-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -35,7 +35,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.5.1
+  calendar_date_picker2: ^0.5.2
 ```
 
 ### Basic setup
@@ -107,6 +107,16 @@ var results = await showCalendarDatePicker2Dialog(
 
 ### Config options
 
+### For CalendarDatePicker2 widget
+
+| Argument                | Type                           | Description                                              |
+| ----------------------- | ------------------------------ | -------------------------------------------------------- |
+| config                  | CalendarDatePicker2Config      | Calendar UI related configurations                       |
+| value                   | List\<DateTime?\>              | The selected [DateTime]s that the picker should display. |
+| onValueChanged          | ValueChanged<List<DateTime?>>? | Called when the selected dates changed                   |
+| displayedMonthDate      | DateTime?                      | Date to control calendar displayed month                 |
+| onDisplayedMonthChanged | ValueChanged\<DateTime\>?      | The initially displayed view of the calendar picker      |
+
 ### For CalendarDatePicker2Config:
 
 | Option                      | Type                           | Description                                                                         |
@@ -125,6 +135,7 @@ var results = await showCalendarDatePicker2Dialog(
 | controlsTextStyle           | TextStyle?                     | Custom text style for calendar mode toggle control                                  |
 | dayTextStyle                | TextStyle?                     | Custom text style for calendar day text                                             |
 | selectedDayTextStyle        | TextStyle?                     | Custom text style for selected calendar day text                                    |
+| selectedRangeDayTextStyle   | TextStyle?                     | Custom text style for selected range calendar day(s)                                |
 | selectedDayHighlightColor   | Color?                         | The highlight color selected day                                                    |
 | selectedRangeHighlightColor | Color?                         | The highlight color for day(s) included in the selected range                       |
 | disabledDayTextStyle        | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
