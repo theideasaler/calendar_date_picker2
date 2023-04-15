@@ -1,3 +1,8 @@
+## [0.5.2]
+
+- feat: add `displayedMonthDate` into calendar widget
+- feat: add `selectedRangeDayTextStyle` into calendar config
+
 ## [0.5.1]
 
 - fix: dates value type issue
