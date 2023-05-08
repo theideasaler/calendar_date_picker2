@@ -31,9 +31,10 @@ T? _ambiguate<T>(T? value) => value;
 
 class CalendarDatePicker2 extends StatefulWidget {
   CalendarDatePicker2({
-    required this.value,
     required this.config,
+    required this.value,
     this.onValueChanged,
+    this.displayedMonthDate,
     this.onDisplayedMonthChanged,
     Key? key,
   }) : super(key: key) {
@@ -60,17 +61,20 @@ class CalendarDatePicker2 extends StatefulWidget {
     }
   }
 
-  /// The initially selected [DateTime]s that the picker should display.
-  final List<DateTime?> value;
-
-  /// Called when the user selects a date in the picker.
-  final ValueChanged<List<DateTime?>>? onValueChanged;
-
-  /// Called when the user navigates to a new month/year in the picker.
-  final ValueChanged<DateTime>? onDisplayedMonthChanged;
-
   /// The calendar UI related configurations
   final CalendarDatePicker2Config config;
+
+  /// The selected [DateTime]s that the picker should display.
+  final List<DateTime?> value;
+
+  /// Called when the selected dates changed
+  final ValueChanged<List<DateTime?>>? onValueChanged;
+
+  /// Date to control calendar displayed month
+  final DateTime? displayedMonthDate;
+
+  /// Called when the displayed month changed
+  final ValueChanged<DateTime>? onDisplayedMonthChanged;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
@@ -90,9 +94,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   void initState() {
     super.initState();
     final config = widget.config;
-    final initialDate = widget.value.isNotEmpty && widget.value[0] != null
-        ? DateTime(widget.value[0]!.year, widget.value[0]!.month)
-        : DateUtils.dateOnly(DateTime.now());
+    final initialDate = widget.displayedMonthDate ??
+        (widget.value.isNotEmpty && widget.value[0] != null
+            ? DateTime(widget.value[0]!.year, widget.value[0]!.month)
+            : DateUtils.dateOnly(DateTime.now()));
     _mode = config.calendarViewMode;
     _currentDisplayedMonthDate = DateTime(initialDate.year, initialDate.month);
     _selectedDates = widget.value.toList();
@@ -104,6 +109,14 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     if (widget.config.calendarViewMode != oldWidget.config.calendarViewMode) {
       _mode = widget.config.calendarViewMode;
     }
+
+    if (widget.displayedMonthDate != null) {
+      _currentDisplayedMonthDate = DateTime(
+        widget.displayedMonthDate!.year,
+        widget.displayedMonthDate!.month,
+      );
+    }
+
     _selectedDates = widget.value.toList();
   }
 
@@ -253,9 +266,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
               !DateUtils.isSameDay(selectedDates[0],
                   _selectedDates.isNotEmpty ? _selectedDates[0] : null);
       if (isValueDifferent) {
-        _selectedDates = _selectedDates
-          ..clear()
-          ..addAll(selectedDates);
+        _selectedDates = [...selectedDates];
         widget.onValueChanged?.call(_selectedDates);
       }
     });
@@ -1056,6 +1067,26 @@ class _DayPickerState extends State<_DayPicker> {
           }
         }
 
+        final isFullySelectedRangePicker =
+            widget.config.calendarType == CalendarDatePicker2Type.range &&
+                widget.selectedDates.length == 2;
+        var isDateInBetweenRangePickerSelectedDates = false;
+
+        if (isFullySelectedRangePicker) {
+          final startDate = DateUtils.dateOnly(widget.selectedDates[0]);
+          final endDate = DateUtils.dateOnly(widget.selectedDates[1]);
+
+          isDateInBetweenRangePickerSelectedDates =
+              !(dayToBuild.isBefore(startDate) ||
+                      dayToBuild.isAfter(endDate)) &&
+                  !DateUtils.isSameDay(startDate, endDate);
+        }
+
+        if (isDateInBetweenRangePickerSelectedDates &&
+            widget.config.selectedRangeDayTextStyle != null) {
+          customDayTextStyle = widget.config.selectedRangeDayTextStyle;
+        }
+
         if (isSelectedDay) {
           customDayTextStyle = widget.config.selectedDayTextStyle;
         }
@@ -1078,57 +1109,57 @@ class _DayPickerState extends State<_DayPicker> {
               dayTextStyle,
             );
 
-        if (widget.config.calendarType == CalendarDatePicker2Type.range) {
-          if (widget.selectedDates.length == 2) {
-            final startDate = DateUtils.dateOnly(widget.selectedDates[0]);
-            final endDate = DateUtils.dateOnly(widget.selectedDates[1]);
-            final isDateInRange = !(dayToBuild.isBefore(startDate) ||
-                dayToBuild.isAfter(endDate));
-            final isStartDateSameToEndDate =
-                DateUtils.isSameDay(startDate, endDate);
-
-            if (isDateInRange && !isStartDateSameToEndDate) {
-              final rangePickerIncludedDayDecoration = BoxDecoration(
-                color: (widget.config.selectedDayHighlightColor ??
+        if (isDateInBetweenRangePickerSelectedDates) {
+          final rangePickerIncludedDayDecoration = BoxDecoration(
+            color: widget.config.selectedRangeHighlightColor ??
+                (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
                     .withOpacity(0.15),
-              );
+          );
 
-              if (DateUtils.isSameDay(startDate, dayToBuild)) {
-                dayWidget = Stack(
-                  children: [
-                    Row(children: [
-                      const Spacer(),
-                      Expanded(
-                        child: Container(
-                            decoration: rangePickerIncludedDayDecoration),
-                      ),
-                    ]),
-                    dayWidget,
-                  ],
-                );
-              } else if (DateUtils.isSameDay(endDate, dayToBuild)) {
-                dayWidget = Stack(
-                  children: [
-                    Row(children: [
-                      Expanded(
-                        child: Container(
-                            decoration: rangePickerIncludedDayDecoration),
-                      ),
-                      const Spacer(),
-                    ]),
-                    dayWidget,
-                  ],
-                );
-              } else {
-                dayWidget = Stack(
-                  children: [
-                    Container(decoration: rangePickerIncludedDayDecoration),
-                    dayWidget,
-                  ],
-                );
-              }
-            }
+          if (DateUtils.isSameDay(
+            DateUtils.dateOnly(widget.selectedDates[0]),
+            dayToBuild,
+          )) {
+            dayWidget = Stack(
+              children: [
+                Row(children: [
+                  const Spacer(),
+                  Expanded(
+                    child: Container(
+                      decoration: rangePickerIncludedDayDecoration,
+                    ),
+                  ),
+                ]),
+                dayWidget,
+              ],
+            );
+          } else if (DateUtils.isSameDay(
+            DateUtils.dateOnly(widget.selectedDates[1]),
+            dayToBuild,
+          )) {
+            dayWidget = Stack(
+              children: [
+                Row(children: [
+                  Expanded(
+                    child: Container(
+                      decoration: rangePickerIncludedDayDecoration,
+                    ),
+                  ),
+                  const Spacer(),
+                ]),
+                dayWidget,
+              ],
+            );
+          } else {
+            dayWidget = Stack(
+              children: [
+                Container(
+                  decoration: rangePickerIncludedDayDecoration,
+                ),
+                dayWidget,
+              ],
+            );
           }
         }
 
