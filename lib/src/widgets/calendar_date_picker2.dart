@@ -1040,13 +1040,14 @@ class _DayPickerState extends State<_DayPicker> {
           // The current day gets a different text color and a circle stroke
           // border.
           dayColor = widget.config.selectedDayHighlightColor ?? todayColor;
-          decoration = BoxDecoration(
-            borderRadius: widget.config.dayBorderRadius,
-            border: Border.all(color: dayColor),
-            shape: widget.config.dayBorderRadius != null
-                ? BoxShape.rectangle
-                : BoxShape.circle,
-          );
+          decoration = widget.config.todayDecoration ??
+              BoxDecoration(
+                borderRadius: widget.config.dayBorderRadius,
+                border: Border.all(color: dayColor),
+                shape: widget.config.dayBorderRadius != null
+                    ? BoxShape.rectangle
+                    : BoxShape.circle,
+              );
         }
 
         var customDayTextStyle =

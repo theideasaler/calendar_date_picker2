@@ -293,6 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.amber,
         fontWeight: FontWeight.bold,
       ),
+      todayDecoration: const BoxDecoration(),
       disabledDayTextStyle: const TextStyle(
         color: Colors.grey,
       ),
