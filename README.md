@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.4.9-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.5.2-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -35,7 +35,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.4.9
+  calendar_date_picker2: ^0.5.2
 ```
 
 ### Basic setup
@@ -107,40 +107,51 @@ var results = await showCalendarDatePicker2Dialog(
 
 ### Config options
 
+### For CalendarDatePicker2 widget
+
+| Argument                | Type                           | Description                                              |
+| ----------------------- | ------------------------------ | -------------------------------------------------------- |
+| config                  | CalendarDatePicker2Config      | Calendar UI related configurations                       |
+| value                   | List\<DateTime?\>              | The selected [DateTime]s that the picker should display. |
+| onValueChanged          | ValueChanged<List<DateTime?>>? | Called when the selected dates changed                   |
+| displayedMonthDate      | DateTime?                      | Date to control calendar displayed month                 |
+| onDisplayedMonthChanged | ValueChanged\<DateTime\>?      | The initially displayed view of the calendar picker      |
+
 ### For CalendarDatePicker2Config:
 
-| Option                    | Type                           | Description                                                                         |
-| ------------------------- |--------------------------------|-------------------------------------------------------------------------------------|
-| calendarType              | CalendarDatePicker2Type?       | Calendar picker type, has 3 values: single, multi, range                            |
-| firstDate                 | DateTime?                      | The earliest allowable DateTime user can select                                     |
-| lastDate                  | DateTime?                      | The latest allowable DateTime user can select                                       |
-| currentDate               | DateTime?                      | The DateTime representing today which will be outlined in calendar                  |
-| calendarViewMode          | DatePickerMode?                | The initially displayed view of the calendar picker                                 |
-| weekdayLabels             | List\<String\>?                | Custom weekday labels, should starts with Sunday                                    |
-| weekdayLabelTextStyle     | TextStyle?                     | Custom text style for weekday labels                                                |
-| firstDayOfWeek            | int?                           | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday. |
-| controlsHeight            | double?                        | Custom height for calendar control toggle's height                                  |
-| lastMonthIcon             | Widget?                        | Custom icon for last month button control                                           |
-| nextMonthIcon             | Widget?                        | Custom icon for next month button control                                           |
-| controlsTextStyle         | TextStyle?                     | Custom text style for calendar mode toggle control                                  |
-| dayTextStyle              | TextStyle?                     | Custom text style for calendar day text                                             |
-| selectedDayTextStyle      | TextStyle?                     | Custom text style for selected calendar day text                                    |
-| selectedDayHighlightColor | Color?                         | The highlight color selected day                                                    |
-| selectedRangeHighlightColor | Color?                        | The highlight color for day(s) included in the selected range                       |
-| disabledDayTextStyle      | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
-| todayTextStyle            | TextStyle?                     | Custom text style for current calendar day                                          |
-| yearTextStyle             | TextStyle?                     | Custom text style for years list                                                    |
-| selectedYearTextStyle     | TextStyle?                     | Custom text style for selected year                                                 |
-| dayBorderRadius           | BorderRadius?                  | Custom border radius for day indicator                                              |
-| yearBorderRadius          | BorderRadius?                  | Custom border radius for year indicator                                             |
-| selectableDayPredicate    | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
-| dayTextStylePredicate     | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
-| dayBuilder                | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
-| yearBuilder               | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
-| disableModePicker         | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
-| centerAlignModePicker     | bool?                          | Flag to centralize year and month text label in controls                            |
-| customModePickerIcon      | Widget?                        | Custom icon for the mode picker button icon                                         |
-| modePickerTextHandler     | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
+| Option                      | Type                           | Description                                                                         |
+| --------------------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
+| calendarType                | CalendarDatePicker2Type?       | Calendar picker type, has 3 values: single, multi, range                            |
+| firstDate                   | DateTime?                      | The earliest allowable DateTime user can select                                     |
+| lastDate                    | DateTime?                      | The latest allowable DateTime user can select                                       |
+| currentDate                 | DateTime?                      | The DateTime representing today which will be outlined in calendar                  |
+| calendarViewMode            | DatePickerMode?                | The initially displayed view of the calendar picker                                 |
+| weekdayLabels               | List\<String\>?                | Custom weekday labels, should starts with Sunday                                    |
+| weekdayLabelTextStyle       | TextStyle?                     | Custom text style for weekday labels                                                |
+| firstDayOfWeek              | int?                           | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday. |
+| controlsHeight              | double?                        | Custom height for calendar control toggle's height                                  |
+| lastMonthIcon               | Widget?                        | Custom icon for last month button control                                           |
+| nextMonthIcon               | Widget?                        | Custom icon for next month button control                                           |
+| controlsTextStyle           | TextStyle?                     | Custom text style for calendar mode toggle control                                  |
+| dayTextStyle                | TextStyle?                     | Custom text style for calendar day text                                             |
+| selectedDayTextStyle        | TextStyle?                     | Custom text style for selected calendar day text                                    |
+| selectedRangeDayTextStyle   | TextStyle?                     | Custom text style for selected range calendar day(s)                                |
+| selectedDayHighlightColor   | Color?                         | The highlight color selected day                                                    |
+| selectedRangeHighlightColor | Color?                         | The highlight color for day(s) included in the selected range                       |
+| disabledDayTextStyle        | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
+| todayTextStyle              | TextStyle?                     | Custom text style for current calendar day                                          |
+| yearTextStyle               | TextStyle?                     | Custom text style for years list                                                    |
+| selectedYearTextStyle       | TextStyle?                     | Custom text style for selected year                                                 |
+| dayBorderRadius             | BorderRadius?                  | Custom border radius for day indicator                                              |
+| yearBorderRadius            | BorderRadius?                  | Custom border radius for year indicator                                             |
+| selectableDayPredicate      | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
+| dayTextStylePredicate       | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
+| dayBuilder                  | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
+| yearBuilder                 | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
+| disableModePicker           | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
+| centerAlignModePicker       | bool?                          | Flag to centralize year and month text label in controls                            |
+| customModePickerIcon        | Widget?                        | Custom icon for the mode picker button icon                                         |
+| modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
@@ -196,6 +207,7 @@ MaterialApp(
   ...
 );
 ```
+
 | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227443635-604afb00-9d26-4e2b-ae66-5839ac25347f.png"> | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227442622-1e17ec84-9593-4587-b54a-506aeb020d32.png"> | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227443327-89ce40ba-e661-4006-ba42-dfcc3ae27d43.png"> | <img width="232" alt="image" src="https://user-images.githubusercontent.com/17869748/227444732-bd137b1d-9941-4542-89bc-6f63407e422d.png"> |
 | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                 **中文**                                                                  |                                                                **русский**                                                                |                                                                **español**                                                                |                                                                 **हिंदी**                                                                 |
@@ -207,6 +219,7 @@ Feel free to contribute to this project. 🍺 Pull requests are welcome!
 There are some tips before creating a PR:
 
 - Please always create an issue/feature before raising a PR
+- Please always create a minimum reproducible example for an issue
 - Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `flutter format .` if you are not using VS Code
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
 - Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
