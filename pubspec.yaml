@@ -4,7 +4,7 @@ version: 0.4.9
 homepage: https://github.com/theideasaler/calendar_date_picker2
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.16.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
