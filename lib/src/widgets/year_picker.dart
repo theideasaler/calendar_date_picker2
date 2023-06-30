@@ -1,10 +1,9 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:calendar_date_picker2/src/constants.dart';
+import 'package:calendar_date_picker2/src/widgets/year_picker_grid_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
-import 'package:flutter/rendering.dart';
 
 /// A scrollable grid of years to allow picking a year.
 ///
@@ -195,15 +194,11 @@ class _C2YearPickerState extends State<C2YearPicker> {
       children: <Widget>[
         const Divider(),
         Expanded(
-          child: GridView.builder(
+          child: C2YearPickerGridView(
             controller: _scrollController,
             dragStartBehavior: widget.dragStartBehavior,
-            gridDelegate: _yearPickerGridDelegate,
             itemBuilder: _buildYearItem,
             itemCount: math.max(_itemCount, minYears),
-            padding: const EdgeInsets.symmetric(
-              horizontal: C2Constants.yearPickerPadding,
-            ),
           ),
         ),
         const Divider(),
@@ -211,29 +206,3 @@ class _C2YearPickerState extends State<C2YearPicker> {
     );
   }
 }
-
-class _YearPickerGridDelegate extends SliverGridDelegate {
-  const _YearPickerGridDelegate();
-
-  @override
-  SliverGridLayout getLayout(SliverConstraints constraints) {
-    final double tileWidth = (constraints.crossAxisExtent -
-            (C2Constants.yearPickerColumnCount - 1) *
-                C2Constants.yearPickerRowSpacing) /
-        C2Constants.yearPickerColumnCount;
-    return SliverGridRegularTileLayout(
-      childCrossAxisExtent: tileWidth,
-      childMainAxisExtent: C2Constants.yearPickerRowHeight,
-      crossAxisCount: C2Constants.yearPickerColumnCount,
-      crossAxisStride: tileWidth + C2Constants.yearPickerRowSpacing,
-      mainAxisStride: C2Constants.yearPickerRowHeight,
-      reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-    );
-  }
-
-  @override
-  bool shouldRelayout(_YearPickerGridDelegate oldDelegate) => false;
-}
-
-const _YearPickerGridDelegate _yearPickerGridDelegate =
-    _YearPickerGridDelegate();
