@@ -22,7 +22,7 @@ class C2YearPickerGridView extends StatelessWidget {
     return GridView.builder(
       controller: controller,
       dragStartBehavior: dragStartBehavior,
-      gridDelegate: _yearPickerGridDelegate,
+      gridDelegate: const _YearPickerGridDelegate(),
       itemBuilder: itemBuilder,
       itemCount: itemCount,
       padding: const EdgeInsets.symmetric(
@@ -54,6 +54,3 @@ class _YearPickerGridDelegate extends SliverGridDelegate {
   @override
   bool shouldRelayout(_YearPickerGridDelegate oldDelegate) => false;
 }
-
-const _YearPickerGridDelegate _yearPickerGridDelegate =
-    _YearPickerGridDelegate();
