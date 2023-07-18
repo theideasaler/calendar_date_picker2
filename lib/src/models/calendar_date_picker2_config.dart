@@ -61,6 +61,7 @@ class CalendarDatePicker2Config {
     this.customModePickerIcon,
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
+    this.isTitleUpperCase,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -167,6 +168,9 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
+  /// Flag to control if the title text should be upper case
+  final bool? isTitleUpperCase;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -199,6 +203,7 @@ class CalendarDatePicker2Config {
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    bool? isTitleUpperCase,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -241,6 +246,7 @@ class CalendarDatePicker2Config {
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      isTitleUpperCase: isTitleUpperCase ?? this.isTitleUpperCase,
     );
   }
 }
@@ -382,6 +388,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    bool? isTitleUpperCase,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,

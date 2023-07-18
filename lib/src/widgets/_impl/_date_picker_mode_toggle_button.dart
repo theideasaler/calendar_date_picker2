@@ -104,7 +104,9 @@ class _DatePickerModeToggleButtonState
                       children: <Widget>[
                         Flexible(
                           child: Text(
-                            widget.title,
+                            widget.config.isTitleUpperCase ?? false
+                                ? widget.title.toUpperCase()
+                                : widget.title,
                             overflow: TextOverflow.ellipsis,
                             style: widget.config.controlsTextStyle ??
                                 textTheme.titleSmall?.copyWith(
