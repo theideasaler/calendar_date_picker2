@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: "[Bug]"
+title: "[Bug] YOUR BUG BRIEF DESCRIPTION HERE"
 labels: ''
 assignees: ''
 
@@ -29,5 +29,5 @@ If applicable, add screenshots to help explain your problem.
 **Platforms (please complete the following information):**
  - Platforms: [e.g. iOS, Android, Web]
 
-**Minimum Reproduceable Example**
-Add a minimum reproduceable sample
+**Minimum Reproducible Example (Required)**
+Add a minimum Reproducible sample
