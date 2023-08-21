@@ -152,6 +152,7 @@ var results = await showCalendarDatePicker2Dialog(
 | centerAlignModePicker       | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerIcon        | Widget?                        | Custom icon for the mode picker button icon                                         |
 | modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
+| rangeBidirectional          | bool                           | Flag to enable selecting dates range also in reverse-chronological order            |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
