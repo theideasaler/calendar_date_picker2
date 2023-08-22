@@ -234,31 +234,44 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       var selectedDates = [..._selectedDates];
       selectedDates.removeWhere((d) => d == null);
 
-      if (widget.config.calendarType == CalendarDatePicker2Type.single) {
-        selectedDates = [value];
-      } else if (widget.config.calendarType == CalendarDatePicker2Type.multi) {
-        final index =
-            selectedDates.indexWhere((d) => DateUtils.isSameDay(d, value));
-        if (index != -1) {
-          selectedDates.removeAt(index);
-        } else {
-          selectedDates.add(value);
-        }
-      } else if (widget.config.calendarType == CalendarDatePicker2Type.range) {
-        if (selectedDates.isEmpty) {
-          selectedDates.add(value);
-        } else {
+      final calendarType = widget.config.calendarType;
+      switch (calendarType) {
+        case CalendarDatePicker2Type.single:
+          selectedDates = [value];
+          break;
+
+        case CalendarDatePicker2Type.multi:
+          final index =
+              selectedDates.indexWhere((d) => DateUtils.isSameDay(d, value));
+          if (index != -1) {
+            selectedDates.removeAt(index);
+          } else {
+            selectedDates.add(value);
+          }
+          break;
+
+        case CalendarDatePicker2Type.range:
+          if (selectedDates.isEmpty) {
+            selectedDates.add(value);
+            break;
+          }
+
+          final bidirectional = widget.config.rangeBidirectional;
+
           final isRangeSet =
               selectedDates.length > 1 && selectedDates[1] != null;
           final isSelectedDayBeforeStartDate =
               value.isBefore(selectedDates[0]!);
 
-          if (isRangeSet || isSelectedDayBeforeStartDate) {
+          if (isRangeSet) {
+            selectedDates = [value, null];
+          } else if (isSelectedDayBeforeStartDate && !bidirectional) {
             selectedDates = [value, null];
           } else {
             selectedDates = [selectedDates[0], value];
           }
-        }
+
+          break;
       }
 
       selectedDates

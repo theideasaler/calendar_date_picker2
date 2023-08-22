@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-enum CalendarDatePicker2Type { single, multi, range }
+enum CalendarDatePicker2Type {
+  single,
+  multi,
+
+  /// Allows selecting a range of two dates.
+  ///
+  /// See also [CalendarDatePicker2Config.rangeBidirectional].
+  range,
+}
 
 typedef CalendarDayTextStylePredicate = TextStyle? Function({
   required DateTime date,
@@ -61,6 +69,7 @@ class CalendarDatePicker2Config {
     this.customModePickerIcon,
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
+    this.rangeBidirectional = false,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -167,6 +176,11 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
+  /// Whether the range selection can be also made in reverse-chronological
+  /// order.
+  /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
+  final bool rangeBidirectional;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -199,6 +213,7 @@ class CalendarDatePicker2Config {
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    bool? rangeBidirectional,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -241,6 +256,7 @@ class CalendarDatePicker2Config {
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
     );
   }
 }
@@ -279,6 +295,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    bool rangeBidirectional = false,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -320,6 +337,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           centerAlignModePicker: centerAlignModePicker,
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
+          rangeBidirectional: rangeBidirectional,
         );
 
   /// The gap between calendar and action buttons
@@ -391,6 +409,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? closeDialogOnCancelTapped,
     bool? closeDialogOnOkTapped,
     EdgeInsets? buttonPadding,
+    bool? rangeBidirectional,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -433,6 +452,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
