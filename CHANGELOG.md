@@ -1,3 +1,7 @@
+## [0.5.3]
+
+- feat: add `rangeBidirectional` into calendar config
+
 ## [0.5.2]
 
 - feat: add `displayedMonthDate` into calendar widget

@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-part '_impl/year_picker.dart';
-part '_impl/_day_picker.dart';
-part '_impl/_focus_date.dart';
 part '_impl/_calendar_view.dart';
 part '_impl/_date_picker_mode_toggle_button.dart';
+part '_impl/_day_picker.dart';
+part '_impl/_focus_date.dart';
+part '_impl/year_picker.dart';
 
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
