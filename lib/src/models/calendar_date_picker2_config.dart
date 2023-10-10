@@ -70,6 +70,7 @@ class CalendarDatePicker2Config {
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional = false,
+    this.scrollPhysics,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -181,6 +182,9 @@ class CalendarDatePicker2Config {
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
   final bool rangeBidirectional;
 
+  // Choose calendar scroll physics
+  final ScrollPhysics? scrollPhysics;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -214,6 +218,7 @@ class CalendarDatePicker2Config {
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool? rangeBidirectional,
+    ScrollPhysics? scrollPhysics,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -257,6 +262,7 @@ class CalendarDatePicker2Config {
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
+      scrollPhysics: scrollPhysics ?? this.scrollPhysics,
     );
   }
 }
@@ -305,6 +311,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
+    ScrollPhysics? scrollPhysics,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -338,6 +345,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
           rangeBidirectional: rangeBidirectional,
+          scrollPhysics: scrollPhysics,
         );
 
   /// The gap between calendar and action buttons
@@ -410,6 +418,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? closeDialogOnOkTapped,
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
+    ScrollPhysics? scrollPhysics,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -466,6 +475,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       closeDialogOnOkTapped:
           closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      scrollPhysics: scrollPhysics ?? this.scrollPhysics,
     );
   }
 }
