@@ -36,6 +36,26 @@ typedef CalendarModePickerTextHandler = String? Function({
   required DateTime monthDate,
 });
 
+typedef AdjustedRangeSelectionCallback = void Function({
+  required DateTimeRange originalRange,
+  required DateTimeRange adjustedRange,
+});
+
+enum RangeSelectableDaysMode {
+  /// Default, allows including non-selectable days.
+  includeNonSelectableDays,
+
+  /// When the selected range is including non-selectable day(s), changes the
+  /// selected end date to the day before the first non-selectable day in the
+  /// range.
+  coerceFromStartDate,
+
+  /// When the selected range is including non-selectable day(s), changes the
+  /// selected start date to the day after the last non-selectable day in the
+  /// range.
+  coerceFromEndDate,
+}
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -43,6 +63,8 @@ class CalendarDatePicker2Config {
     DateTime? lastDate,
     DateTime? currentDate,
     DatePickerMode? calendarViewMode,
+    bool? rangeBidirectional,
+    RangeSelectableDaysMode? selectedRangeBehavior,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.firstDayOfWeek,
@@ -69,13 +91,28 @@ class CalendarDatePicker2Config {
     this.customModePickerIcon,
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
-    this.rangeBidirectional = false,
+    this.onRangeSelectionAdjusted,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
             DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
-        calendarViewMode = calendarViewMode ?? DatePickerMode.day;
+        calendarViewMode = calendarViewMode ?? DatePickerMode.day,
+        rangeBidirectional = rangeBidirectional ?? false,
+        selectedRangeBehavior = selectedRangeBehavior ??
+            RangeSelectableDaysMode.includeNonSelectableDays {
+    assert(calendarType == CalendarDatePicker2Type.range
+        && selectableDayPredicate == null
+        && this.selectedRangeBehavior
+            != RangeSelectableDaysMode.includeNonSelectableDays,
+        "'selectableDayPredicate' cannot be null when 'calendarType' is set to"
+            " range and 'selectedRangeBehavior' to something else than"
+            " includeNonSelectableDays");
+    assert(this.rangeBidirectional
+        && calendarType != CalendarDatePicker2Type.range,
+        "'rangeBidirectional' cannot be set to true when 'calendarType' is not"
+            " set to range");
+  }
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;
@@ -181,6 +218,16 @@ class CalendarDatePicker2Config {
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
   final bool rangeBidirectional;
 
+  /// Whether the range selection can include disabled dates.
+  /// See [RangeSelectableDaysMode] for more details.
+  /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
+  final RangeSelectableDaysMode selectedRangeBehavior;
+
+  /// Callback when the selected range has been adjusted (e.g. the start or end
+  /// date have been modified to not include a non-selectable day, related to
+  /// [selectedRangeBehavior]).
+  final AdjustedRangeSelectionCallback? onRangeSelectionAdjusted;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -214,6 +261,8 @@ class CalendarDatePicker2Config {
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool? rangeBidirectional,
+    RangeSelectableDaysMode? selectedRangeBehavior,
+    AdjustedRangeSelectionCallback? onRangeSelectionAdjusted,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -257,6 +306,8 @@ class CalendarDatePicker2Config {
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
+      selectedRangeBehavior: selectedRangeBehavior ?? this.selectedRangeBehavior,
+      onRangeSelectionAdjusted: onRangeSelectionAdjusted ?? this.onRangeSelectionAdjusted,
     );
   }
 }
@@ -295,7 +346,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
-    bool rangeBidirectional = false,
+    bool? rangeBidirectional,
+    RangeSelectableDaysMode? selectedRangeBehavior,
+    AdjustedRangeSelectionCallback? onRangeSelectionAdjusted,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -338,6 +391,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
           rangeBidirectional: rangeBidirectional,
+          selectedRangeBehavior: selectedRangeBehavior,
+          onRangeSelectionAdjusted: onRangeSelectionAdjusted,
         );
 
   /// The gap between calendar and action buttons
@@ -410,6 +465,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? closeDialogOnOkTapped,
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
+    RangeSelectableDaysMode? selectedRangeBehavior,
+    AdjustedRangeSelectionCallback? onRangeSelectionAdjusted,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -453,6 +510,9 @@ class CalendarDatePicker2WithActionButtonsConfig
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
+      selectedRangeBehavior: selectedRangeBehavior ?? this.selectedRangeBehavior,
+      onRangeSelectionAdjusted:
+          onRangeSelectionAdjusted ?? this.onRangeSelectionAdjusted,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:

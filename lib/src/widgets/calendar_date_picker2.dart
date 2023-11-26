@@ -234,8 +234,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       var selectedDates = [..._selectedDates];
       selectedDates.removeWhere((d) => d == null);
 
-      final calendarType = widget.config.calendarType;
-      switch (calendarType) {
+      switch (widget.config.calendarType) {
         case CalendarDatePicker2Type.single:
           selectedDates = [value];
           break;
@@ -262,13 +261,65 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
               selectedDates.length > 1 && selectedDates[1] != null;
           final isSelectedDayBeforeStartDate =
               value.isBefore(selectedDates[0]!);
+          final selectableDayPredicate = widget.config.selectableDayPredicate;
 
           if (isRangeSet) {
             selectedDates = [value, null];
           } else if (isSelectedDayBeforeStartDate && !bidirectional) {
             selectedDates = [value, null];
           } else {
-            selectedDates = [selectedDates[0], value];
+            var startDate = selectedDates[0]!;
+            var endDate = value;
+            final originalRange =
+                DateTimeRange(start: startDate, end: endDate);
+            switch (widget.config.selectedRangeBehavior) {
+              case RangeSelectableDaysMode.includeNonSelectableDays:
+                // default behavior that is not changing the dates.
+                break;
+              case RangeSelectableDaysMode.coerceFromStartDate: {
+                  // adjust the range to fit before the next non-selectable day
+                  // after startDate.
+                  DateTime date = startDate;
+                  do {
+                    var nextDate = date.add(const Duration(days: 1));
+                    var isDateSelectable = selectableDayPredicate!(nextDate);
+                    if (!isDateSelectable) {
+                      endDate = date;
+                      if (widget.config.onRangeSelectionAdjusted != null) {
+                        widget.config.onRangeSelectionAdjusted!(
+                          originalRange: originalRange,
+                          adjustedRange: DateTimeRange(start: startDate, end: endDate),
+                        );
+                      }
+                      break;
+                    }
+                    date = nextDate;
+                  } while (date.isBefore(endDate));
+                  break;
+                }
+              case RangeSelectableDaysMode.coerceFromEndDate: {
+                  // adjust the range to fit after the last non-selectable day
+                  // before endDate.
+                  DateTime date = endDate;
+                  do {
+                    var previousDay = date.subtract(const Duration(days: 1));
+                    var isDaySelectable = selectableDayPredicate!(previousDay);
+                    if (!isDaySelectable) {
+                      startDate = date;
+                      if (widget.config.onRangeSelectionAdjusted != null) {
+                        widget.config.onRangeSelectionAdjusted!(
+                          originalRange: originalRange,
+                          adjustedRange: DateTimeRange(start: startDate, end: endDate),
+                        );
+                      }
+                      break;
+                    }
+                    date = previousDay;
+                  } while (date.isAfter(startDate));
+                  break;
+                }
+            }
+            selectedDates = [startDate, endDate];
           }
 
           break;
