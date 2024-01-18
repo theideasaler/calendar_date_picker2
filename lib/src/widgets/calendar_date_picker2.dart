@@ -40,6 +40,7 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onValueChanged,
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
+    this.allowSameDateSelection = false,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -79,6 +80,9 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// Called when the displayed month changed
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
+
+  /// Whether allow same date selection
+  final bool allowSameDateSelection;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
@@ -282,7 +286,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           widget.config.calendarType != CalendarDatePicker2Type.single ||
               !DateUtils.isSameDay(selectedDates[0],
                   _selectedDates.isNotEmpty ? _selectedDates[0] : null);
-      if (isValueDifferent) {
+      if (isValueDifferent || widget.allowSameDateSelection) {
         _selectedDates = [...selectedDates];
         widget.onValueChanged?.call(_selectedDates);
       }
