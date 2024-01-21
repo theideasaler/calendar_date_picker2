@@ -155,8 +155,8 @@ class _CalendarViewState extends State<_CalendarView> {
   void _handleNextMonth() {
     if (!_isDisplayingLastMonth) {
       _pageController.nextPage(
-        duration: _monthScrollDuration,
-        curve: Curves.ease,
+        duration: widget.config.pageAnimationDuration,
+        curve: widget.config.pageAnimationCurve,
       );
     }
   }
@@ -165,8 +165,8 @@ class _CalendarViewState extends State<_CalendarView> {
   void _handlePreviousMonth() {
     if (!_isDisplayingFirstMonth) {
       _pageController.previousPage(
-        duration: _monthScrollDuration,
-        curve: Curves.ease,
+        duration: widget.config.pageAnimationDuration,
+        curve: widget.config.pageAnimationCurve,
       );
     }
   }
@@ -179,8 +179,8 @@ class _CalendarViewState extends State<_CalendarView> {
     } else {
       _pageController.animateToPage(
         monthPage,
-        duration: _monthScrollDuration,
-        curve: Curves.ease,
+        duration: widget.config.pageAnimationDuration,
+        curve: widget.config.pageAnimationCurve,
       );
     }
   }

@@ -70,6 +70,8 @@ class CalendarDatePicker2Config {
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional = false,
+    this.pageAnimationCurve = Curves.ease,
+    this.pageAnimationDuration = const Duration(milliseconds: 200),
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -175,6 +177,13 @@ class CalendarDatePicker2Config {
 
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
+
+  /// Month selection transition curve
+  final Curve pageAnimationCurve;
+
+  /// Month selection transition duration
+  /// Default is 300 milliseconds
+  final Duration pageAnimationDuration;
 
   /// Whether the range selection can be also made in reverse-chronological
   /// order.
