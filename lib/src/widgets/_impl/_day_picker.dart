@@ -124,6 +124,8 @@ class _DayPickerState extends State<_DayPicker> {
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
+    final Color splashColor =
+        widget.config.splashColor ?? selectedDayBackground.withOpacity(0.38);
 
     final int year = widget.displayedMonth.year;
     final int month = widget.displayedMonth.month;
@@ -308,7 +310,7 @@ class _DayPickerState extends State<_DayPicker> {
             focusNode: _dayFocusNodes[day - 1],
             onTap: () => widget.onChanged(dayToBuild),
             radius: _dayPickerRowHeight / 2 + 4,
-            splashColor: selectedDayBackground.withOpacity(0.38),
+            splashColor: splashColor,
             child: Semantics(
               // We want the day of month to be spoken first irrespective of the
               // locale-specific preferences or TextDirection. This is because
