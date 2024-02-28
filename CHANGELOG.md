@@ -1,3 +1,7 @@
+## [0.5.5]
+
+- doc: update README.md
+
 ## [0.5.4]
 
 - feat: add `calendarViewScrollPhysics` into calendar config
