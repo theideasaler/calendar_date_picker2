@@ -1,3 +1,7 @@
+## [0.5.4]
+
+- feat: add `calendarViewScrollPhysics` into calendar config
+
 ## [0.5.3]
 
 - feat: add `rangeBidirectional` into calendar config
