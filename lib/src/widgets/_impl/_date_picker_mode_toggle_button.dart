@@ -83,7 +83,6 @@ class _DatePickerModeToggleButtonState
           Flexible(
             child: Semantics(
               label: MaterialLocalizations.of(context).selectYearSemanticsLabel,
-              excludeSemantics: true,
               button: true,
               child: SizedBox(
                 height: (widget.config.controlsHeight ?? _subHeaderHeight),
