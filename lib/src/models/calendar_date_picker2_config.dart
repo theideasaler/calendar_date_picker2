@@ -71,7 +71,6 @@ class CalendarDatePicker2Config {
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional = false,
     this.calendarViewScrollPhysics,
-    this.dayHighlightShape,
     this.daySplashColor,
     this.dayHighlightColor,
     this.dayHoverColor,
@@ -190,9 +189,6 @@ class CalendarDatePicker2Config {
   /// The scroll physics for the calendar month view
   final ScrollPhysics? calendarViewScrollPhysics;
 
-  /// The shape of the day highlight
-  final BoxShape? dayHighlightShape;
-
   /// The splash color of the day
   final Color? daySplashColor;
 
@@ -239,7 +235,6 @@ class CalendarDatePicker2Config {
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
-    BoxShape? dayHighlightShape,
     Color? daySplashColor,
     Color? dayHighlightColor,
     Color? dayHoverColor,
@@ -289,7 +284,6 @@ class CalendarDatePicker2Config {
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
-      dayHighlightShape: dayHighlightShape ?? this.dayHighlightShape,
       daySplashColor: daySplashColor ?? this.daySplashColor,
       dayHighlightColor: dayHighlightColor ?? this.dayHighlightColor,
       dayHoverColor: dayHoverColor ?? this.dayHoverColor,
@@ -334,7 +328,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool rangeBidirectional = false,
     ScrollPhysics? calendarViewScrollPhysics,
-    BoxShape? dayHighlightShape,
     Color? daySplashColor,
     Color? dayHighlightColor,
     Color? dayHoverColor,
@@ -382,7 +375,6 @@ class CalendarDatePicker2WithActionButtonsConfig
           modePickerTextHandler: modePickerTextHandler,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
-          dayHighlightShape: dayHighlightShape,
           daySplashColor: daySplashColor,
           dayHighlightColor: dayHighlightColor,
           dayHoverColor: dayHoverColor,
@@ -460,7 +452,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
-    BoxShape? dayHighlightShape,
     Color? daySplashColor,
     Color? dayHighlightColor,
     Color? dayHoverColor,
@@ -523,7 +514,6 @@ class CalendarDatePicker2WithActionButtonsConfig
       buttonPadding: buttonPadding ?? this.buttonPadding,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
-      dayHighlightShape: dayHighlightShape ?? this.dayHighlightShape,
       daySplashColor: daySplashColor ?? this.daySplashColor,
       dayHighlightColor: dayHighlightColor ?? this.dayHighlightColor,
       dayHoverColor: dayHoverColor ?? this.dayHoverColor,

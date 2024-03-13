@@ -308,7 +308,9 @@ class _DayPickerState extends State<_DayPicker> {
             focusNode: _dayFocusNodes[day - 1],
             onTap: () => widget.onChanged(dayToBuild),
             borderRadius: widget.config.dayBorderRadius,
-            highlightShape: widget.config.dayHighlightShape ?? BoxShape.circle,
+            highlightShape: widget.config.dayBorderRadius != null
+                ? BoxShape.rectangle
+                : BoxShape.circle,
             radius: _dayPickerRowHeight / 2 + 4,
             splashColor: widget.config.daySplashColor ??
                 selectedDayBackground.withOpacity(0.38),
@@ -357,23 +359,14 @@ class _DayPickerState extends State<_DayPicker> {
     int day,
     TextStyle dayTextStyle,
   ) {
-    return Row(
-      children: [
-        const Spacer(),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            decoration: decoration,
-            child: Center(
-              child: Text(
-                localizations.formatDecimal(day),
-                style: dayTextStyle,
-              ),
-            ),
-          ),
+    return Container(
+      decoration: decoration,
+      child: Center(
+        child: Text(
+          localizations.formatDecimal(day),
+          style: dayTextStyle,
         ),
-        const Spacer(),
-      ],
+      ),
     );
   }
 }
