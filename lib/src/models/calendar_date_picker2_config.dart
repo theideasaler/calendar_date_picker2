@@ -71,6 +71,10 @@ class CalendarDatePicker2Config {
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional = false,
     this.calendarViewScrollPhysics,
+    this.daySplashColor,
+    this.dayHighlightColor,
+    this.dayHoverColor,
+    this.dayFocusColor,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -185,6 +189,18 @@ class CalendarDatePicker2Config {
   /// The scroll physics for the calendar month view
   final ScrollPhysics? calendarViewScrollPhysics;
 
+  /// The splash color of the day
+  final Color? daySplashColor;
+
+  /// The highlight color of the day
+  final Color? dayHighlightColor;
+
+  /// The hover color of the day
+  final Color? dayHoverColor;
+
+  /// The focus color of the day
+  final Color? dayFocusColor;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -219,6 +235,10 @@ class CalendarDatePicker2Config {
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    Color? dayHighlightColor,
+    Color? dayHoverColor,
+    Color? dayFocusColor,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -264,6 +284,10 @@ class CalendarDatePicker2Config {
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      dayHighlightColor: dayHighlightColor ?? this.dayHighlightColor,
+      dayHoverColor: dayHoverColor ?? this.dayHoverColor,
+      dayFocusColor: dayFocusColor ?? this.dayFocusColor,
     );
   }
 }
@@ -304,6 +328,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool rangeBidirectional = false,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    Color? dayHighlightColor,
+    Color? dayHoverColor,
+    Color? dayFocusColor,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -347,6 +375,10 @@ class CalendarDatePicker2WithActionButtonsConfig
           modePickerTextHandler: modePickerTextHandler,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
+          daySplashColor: daySplashColor,
+          dayHighlightColor: dayHighlightColor,
+          dayHoverColor: dayHoverColor,
+          dayFocusColor: dayFocusColor,
         );
 
   /// The gap between calendar and action buttons
@@ -420,6 +452,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    Color? dayHighlightColor,
+    Color? dayHoverColor,
+    Color? dayFocusColor,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -478,6 +514,10 @@ class CalendarDatePicker2WithActionButtonsConfig
       buttonPadding: buttonPadding ?? this.buttonPadding,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      dayHighlightColor: dayHighlightColor ?? this.dayHighlightColor,
+      dayHoverColor: dayHoverColor ?? this.dayHoverColor,
+      dayFocusColor: dayFocusColor ?? this.dayFocusColor,
     );
   }
 }

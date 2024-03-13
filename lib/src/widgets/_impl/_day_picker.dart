@@ -307,8 +307,16 @@ class _DayPickerState extends State<_DayPicker> {
           dayWidget = InkResponse(
             focusNode: _dayFocusNodes[day - 1],
             onTap: () => widget.onChanged(dayToBuild),
+            borderRadius: widget.config.dayBorderRadius,
+            highlightShape: widget.config.dayBorderRadius != null
+                ? BoxShape.rectangle
+                : BoxShape.circle,
             radius: _dayPickerRowHeight / 2 + 4,
-            splashColor: selectedDayBackground.withOpacity(0.38),
+            splashColor: widget.config.daySplashColor ??
+                selectedDayBackground.withOpacity(0.38),
+            highlightColor: widget.config.dayHighlightColor,
+            hoverColor: widget.config.dayHoverColor,
+            focusColor: widget.config.dayFocusColor,
             child: Semantics(
               // We want the day of month to be spoken first irrespective of the
               // locale-specific preferences or TextDirection. This is because
@@ -351,23 +359,14 @@ class _DayPickerState extends State<_DayPicker> {
     int day,
     TextStyle dayTextStyle,
   ) {
-    return Row(
-      children: [
-        const Spacer(),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            decoration: decoration,
-            child: Center(
-              child: Text(
-                localizations.formatDecimal(day),
-                style: dayTextStyle,
-              ),
-            ),
-          ),
+    return Container(
+      decoration: decoration,
+      child: Center(
+        child: Text(
+          localizations.formatDecimal(day),
+          style: dayTextStyle,
         ),
-        const Spacer(),
-      ],
+      ),
     );
   }
 }
