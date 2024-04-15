@@ -311,6 +311,12 @@ class _MyHomePageState extends State<MyHomePage> {
           value: _singleDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
               setState(() => _singleDatePickerValueWithDefaultValue = dates),
+          onDateTapped: (DateTime dateTime){
+            print('onDateTapped: $dateTime');
+          },
+          onDateLongPressed: (dateTime) {
+            print('onDateLongPressed: $dateTime');
+          },
         ),
         const SizedBox(height: 10),
         Row(
@@ -427,6 +433,12 @@ class _MyHomePageState extends State<MyHomePage> {
           value: _rangeDatePickerWithActionButtonsWithValue,
           onValueChanged: (dates) => setState(
               () => _rangeDatePickerWithActionButtonsWithValue = dates),
+          onDateTapped: (DateTime dateTime){
+            print('onDateTapped: $dateTime');
+          },
+          onDateLongPressed: (dateTime) {
+            print('onDateLongPressed: $dateTime');
+          },
         ),
         const SizedBox(height: 10),
         Row(

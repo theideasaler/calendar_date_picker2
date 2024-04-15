@@ -11,9 +11,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 part '_impl/_calendar_view.dart';
+
 part '_impl/_date_picker_mode_toggle_button.dart';
+
 part '_impl/_day_picker.dart';
+
 part '_impl/_focus_date.dart';
+
 part '_impl/year_picker.dart';
 
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
@@ -40,6 +44,8 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onValueChanged,
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
+    this.onDateTapped,
+    this.onDateLongPressed,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -79,6 +85,12 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// Called when the displayed month changed
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
+
+  /// Called when a date is tapped
+  final Function(DateTime)? onDateTapped;
+
+  /// Called when a date is long pressed
+  final Function(DateTime)? onDateLongPressed;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
@@ -299,6 +311,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           selectedDates: _selectedDates,
           onChanged: _handleDayChanged,
           onDisplayedMonthChanged: _handleMonthChanged,
+          onDateTapped: widget.onDateTapped,
+          onDateLongPressed: widget.onDateLongPressed,
         );
       case DatePickerMode.year:
         return Padding(

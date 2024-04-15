@@ -11,6 +11,8 @@ class _DayPicker extends StatefulWidget {
     required this.displayedMonth,
     required this.selectedDates,
     required this.onChanged,
+    required this.onDateTapped,
+    required this.onDateLongPressed,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +29,12 @@ class _DayPicker extends StatefulWidget {
 
   /// The month whose days are displayed by this picker.
   final DateTime displayedMonth;
+
+  /// Called when a date is tapped
+  final Function(DateTime)? onDateTapped;
+
+  /// Called when a date is long pressed
+  final Function(DateTime)? onDateLongPressed;
 
   @override
   _DayPickerState createState() => _DayPickerState();
@@ -306,7 +314,13 @@ class _DayPickerState extends State<_DayPicker> {
         } else {
           dayWidget = InkResponse(
             focusNode: _dayFocusNodes[day - 1],
-            onTap: () => widget.onChanged(dayToBuild),
+            onTap: () {
+              widget.onChanged(dayToBuild);
+              widget.onDateTapped?.call(dayToBuild);
+            },
+            onLongPress: (){
+              widget.onDateLongPressed?.call(dayToBuild);
+            },
             radius: _dayPickerRowHeight / 2 + 4,
             splashColor: selectedDayBackground.withOpacity(0.38),
             child: Semantics(
