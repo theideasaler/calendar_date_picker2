@@ -31,10 +31,10 @@ class _DayPicker extends StatefulWidget {
   final DateTime displayedMonth;
 
   /// Called when a date is tapped
-  final Function(DateTime)? onDateTapped;
+  final Function(DateTime dateTime)? onDateTapped;
 
   /// Called when a date is long pressed
-  final Function(DateTime)? onDateLongPressed;
+  final Function(DateTime dateTime)? onDateLongPressed;
 
   @override
   _DayPickerState createState() => _DayPickerState();

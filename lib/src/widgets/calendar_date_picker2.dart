@@ -87,10 +87,10 @@ class CalendarDatePicker2 extends StatefulWidget {
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
 
   /// Called when a date is tapped
-  final Function(DateTime)? onDateTapped;
+  final Function(DateTime dateTime)? onDateTapped;
 
   /// Called when a date is long pressed
-  final Function(DateTime)? onDateLongPressed;
+  final Function(DateTime dateTime)? onDateLongPressed;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
