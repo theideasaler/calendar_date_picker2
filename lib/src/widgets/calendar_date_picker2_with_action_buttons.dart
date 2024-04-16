@@ -10,7 +10,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onCancelTapped,
     this.onOkTapped,
     this.onDateTapped,
-    this.onDateLongPressed,
     Key? key,
   }) : super(key: key);
 
@@ -33,9 +32,6 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
   /// Called when a date is tapped
   final Function(DateTime)? onDateTapped;
-
-  /// Called when a date is long pressed
-  final Function(DateTime)? onDateLongPressed;
 
   @override
   State<CalendarDatePicker2WithActionButtons> createState() =>
@@ -93,7 +89,6 @@ class _CalendarDatePicker2WithActionButtonsState
             onValueChanged: (values) => _editCache = values,
             onDisplayedMonthChanged: widget.onDisplayedMonthChanged,
             onDateTapped: widget.onDateTapped,
-            onDateLongPressed: widget.onDateLongPressed,
           ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),

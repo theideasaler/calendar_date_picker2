@@ -314,9 +314,6 @@ class _MyHomePageState extends State<MyHomePage> {
           onDateTapped: (DateTime dateTime){
             print('onDateTapped: $dateTime');
           },
-          onDateLongPressed: (dateTime) {
-            print('onDateLongPressed: $dateTime');
-          },
         ),
         const SizedBox(height: 10),
         Row(
@@ -435,9 +432,6 @@ class _MyHomePageState extends State<MyHomePage> {
               () => _rangeDatePickerWithActionButtonsWithValue = dates),
           onDateTapped: (DateTime dateTime){
             print('onDateTapped: $dateTime');
-          },
-          onDateLongPressed: (dateTime) {
-            print('onDateLongPressed: $dateTime');
           },
         ),
         const SizedBox(height: 10),

@@ -11,7 +11,6 @@ class _CalendarView extends StatefulWidget {
     required this.onChanged,
     required this.onDisplayedMonthChanged,
     required this.onDateTapped,
-    required this.onDateLongPressed,
     Key? key,
   }) : super(key: key);
 
@@ -34,9 +33,6 @@ class _CalendarView extends StatefulWidget {
 
   /// Called when a date is tapped
   final Function(DateTime dateTime)? onDateTapped;
-
-  /// Called when a date is long pressed
-  final Function(DateTime dateTime)? onDateLongPressed;
 
   @override
   _CalendarViewState createState() => _CalendarViewState();
@@ -312,7 +308,6 @@ class _CalendarViewState extends State<_CalendarView> {
       config: widget.config,
       displayedMonth: month,
       onDateTapped: widget.onDateTapped,
-      onDateLongPressed: widget.onDateLongPressed,
     );
   }
 

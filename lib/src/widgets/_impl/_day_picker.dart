@@ -12,7 +12,6 @@ class _DayPicker extends StatefulWidget {
     required this.selectedDates,
     required this.onChanged,
     required this.onDateTapped,
-    required this.onDateLongPressed,
     Key? key,
   }) : super(key: key);
 
@@ -32,9 +31,6 @@ class _DayPicker extends StatefulWidget {
 
   /// Called when a date is tapped
   final Function(DateTime dateTime)? onDateTapped;
-
-  /// Called when a date is long pressed
-  final Function(DateTime dateTime)? onDateLongPressed;
 
   @override
   _DayPickerState createState() => _DayPickerState();
@@ -317,9 +313,6 @@ class _DayPickerState extends State<_DayPicker> {
             onTap: () {
               widget.onChanged(dayToBuild);
               widget.onDateTapped?.call(dayToBuild);
-            },
-            onLongPress: (){
-              widget.onDateLongPressed?.call(dayToBuild);
             },
             radius: _dayPickerRowHeight / 2 + 4,
             splashColor: selectedDayBackground.withOpacity(0.38),

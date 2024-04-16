@@ -45,7 +45,6 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
     this.onDateTapped,
-    this.onDateLongPressed,
     Key? key,
   }) : super(key: key) {
     const valid = true;
@@ -88,9 +87,6 @@ class CalendarDatePicker2 extends StatefulWidget {
 
   /// Called when a date is tapped
   final Function(DateTime dateTime)? onDateTapped;
-
-  /// Called when a date is long pressed
-  final Function(DateTime dateTime)? onDateLongPressed;
 
   @override
   State<CalendarDatePicker2> createState() => _CalendarDatePicker2State();
@@ -312,7 +308,6 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           onChanged: _handleDayChanged,
           onDisplayedMonthChanged: _handleMonthChanged,
           onDateTapped: widget.onDateTapped,
-          onDateLongPressed: widget.onDateLongPressed,
         );
       case DatePickerMode.year:
         return Padding(
