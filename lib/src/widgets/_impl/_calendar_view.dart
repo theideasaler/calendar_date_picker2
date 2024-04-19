@@ -322,25 +322,36 @@ class _CalendarViewState extends State<_CalendarView> {
             child: Row(
               children: <Widget>[
                 if (widget.config.centerAlignModePicker != true) const Spacer(),
-                IconButton(
-                  icon: widget.config.lastMonthIcon ??
-                      const Icon(Icons.chevron_left),
-                  color: controlColor,
-                  tooltip: _isDisplayingFirstMonth
-                      ? null
-                      : _localizations.previousMonthTooltip,
-                  onPressed:
-                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                MergeSemantics(
+                  child: Semantics(
+                    label: _isDisplayingFirstMonth
+                        ? null
+                        : _localizations.previousMonthTooltip,
+                    button: true,
+                    child: IconButton(
+                      icon: widget.config.lastMonthIcon ??
+                          const Icon(Icons.chevron_left),
+                      color: controlColor,
+                      onPressed:
+                          _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                    ),
+                  ),
                 ),
                 if (widget.config.centerAlignModePicker == true) const Spacer(),
-                IconButton(
-                  icon: widget.config.nextMonthIcon ??
-                      const Icon(Icons.chevron_right),
-                  color: controlColor,
-                  tooltip: _isDisplayingLastMonth
-                      ? null
-                      : _localizations.nextMonthTooltip,
-                  onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                MergeSemantics(
+                  child: Semantics(
+                    tooltip: _isDisplayingLastMonth
+                        ? null
+                        : _localizations.nextMonthTooltip,
+                    button: true,
+                    child: IconButton(
+                      icon: widget.config.nextMonthIcon ??
+                          const Icon(Icons.chevron_right),
+                      color: controlColor,
+                      onPressed:
+                          _isDisplayingLastMonth ? null : _handleNextMonth,
+                    ),
+                  ),
                 ),
               ],
             ),
