@@ -159,7 +159,6 @@ var results = await showCalendarDatePicker2Dialog(
 | rangeBidirectional          | bool?                          | Flag to enable selecting dates range also in reverse-chronological order            |
 | calendarViewScrollPhysics   | ScrollPhysics?                 | The scroll physics for the calendar month view                                      |
 | daySplashColor              | Color?                         | The splash color of the day widget                                                  |
-| allowSameValueSelection     | bool?                          | When set to true, [onValueChanged] will be called on the same value selection       |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
