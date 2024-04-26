@@ -1,3 +1,9 @@
+## [0.5.6]
+
+- refactor: change `rangeBidirectional` to `bool?`
+- feat: add `daySplashColor` into calendar config
+- feat: add `allowSameValueSelection` into calendar config
+
 ## [0.5.5]
 
 - doc: update README.md
