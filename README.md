@@ -127,6 +127,7 @@ var results = await showCalendarDatePicker2Dialog(
 | lastDate                    | DateTime?                      | The latest allowable DateTime user can select                                       |
 | currentDate                 | DateTime?                      | The DateTime representing today which will be outlined in calendar                  |
 | calendarViewMode            | DatePickerMode?                | The initially displayed view of the calendar picker                                 |
+| allowSameValueSelection     | bool?                          | Flag to control [onValueChanged] behavior                                           |
 | weekdayLabels               | List\<String\>?                | Custom weekday labels, should starts with Sunday                                    |
 | weekdayLabelTextStyle       | TextStyle?                     | Custom text style for weekday labels                                                |
 | firstDayOfWeek              | int?                           | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday. |
@@ -134,23 +135,25 @@ var results = await showCalendarDatePicker2Dialog(
 | lastMonthIcon               | Widget?                        | Custom icon for last month button control                                           |
 | nextMonthIcon               | Widget?                        | Custom icon for next month button control                                           |
 | controlsTextStyle           | TextStyle?                     | Custom text style for calendar mode toggle control                                  |
+| dayBorderRadius             | BorderRadius?                  | Custom border radius for day indicator                                              |
 | dayTextStyle                | TextStyle?                     | Custom text style for calendar day text                                             |
+| todayTextStyle              | TextStyle?                     | Custom text style for current calendar day                                          |
+| disabledDayTextStyle        | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
+| dayTextStylePredicate       | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
 | selectedDayTextStyle        | TextStyle?                     | Custom text style for selected calendar day text                                    |
 | selectedRangeDayTextStyle   | TextStyle?                     | Custom text style for selected range calendar day(s)                                |
 | selectedDayHighlightColor   | Color?                         | The highlight color selected day                                                    |
 | selectedRangeHighlightColor | Color?                         | The highlight color for day(s) included in the selected range                       |
-| disabledDayTextStyle        | TextStyle?                     | Custom text style for disabled calendar day(s)                                      |
-| todayTextStyle              | TextStyle?                     | Custom text style for current calendar day                                          |
+| selectableDayPredicate      | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
+| daySplashColor              | Color?                         | The splash color of the day widget                                                  |
+| dayBuilder                  | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
 | yearTextStyle               | TextStyle?                     | Custom text style for years list                                                    |
 | selectedYearTextStyle       | TextStyle?                     | Custom text style for selected year                                                 |
-| dayBorderRadius             | BorderRadius?                  | Custom border radius for day indicator                                              |
 | yearBorderRadius            | BorderRadius?                  | Custom border radius for year indicator                                             |
-| selectableDayPredicate      | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
-| dayTextStylePredicate       | CalendarDayTextStylePredicate? | Function to provide full control over calendar days text style                      |
-| dayBuilder                  | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
 | yearBuilder                 | CalendarYearBuilder?           | Function to provide full control over year widget UI                                |
-| disableModePicker           | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
 | centerAlignModePicker       | bool?                          | Flag to centralize year and month text label in controls                            |
+| disableModePicker           | bool?                          | Flag to disable mode picker and hide the toggle icon                                |
+| modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
 | customModePickerIcon        | Widget?                        | Custom icon for the mode picker button icon                                         |
 | modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
 | rangeBidirectional          | bool?                          | Flag to enable selecting dates range also in reverse-chronological order            |
