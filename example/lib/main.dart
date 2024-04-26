@@ -132,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
       decoration: TextDecoration.underline,
     );
     final config = CalendarDatePicker2WithActionButtonsConfig(
+      calendarViewScrollPhysics: const NeverScrollableScrollPhysics(),
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.purple[800],

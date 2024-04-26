@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.5.3-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.5.5-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -24,6 +24,7 @@ CalendarDatePicker2 consists of two main widgets:
 - Supports three modes: single, multi and range
 - Built-in `showCalendarDatePicker2Dialog`
 - Multi-language supports
+- Support of Material 3
 
 ## How to use
 
@@ -35,7 +36,8 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  calendar_date_picker2: ^0.5.3
+calendar_date_picker2: ^0.5.5
+
 ```
 
 ### Basic setup
@@ -153,6 +155,7 @@ var results = await showCalendarDatePicker2Dialog(
 | customModePickerIcon        | Widget?                        | Custom icon for the mode picker button icon                                         |
 | modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
 | rangeBidirectional          | bool                           | Flag to enable selecting dates range also in reverse-chronological order            |
+| calendarViewScrollPhysics   | ScrollPhysics?                 | The scroll physics for the calendar month view                                      |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
