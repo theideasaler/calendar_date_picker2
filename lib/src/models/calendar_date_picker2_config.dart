@@ -69,9 +69,10 @@ class CalendarDatePicker2Config {
     this.customModePickerIcon,
     this.modePickerTextHandler,
     this.selectedRangeDayTextStyle,
-    this.rangeBidirectional = false,
+    this.rangeBidirectional,
     this.calendarViewScrollPhysics,
-    this.splashColor,
+    this.daySplashColor,
+    this.allowSameValueSelection,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -178,16 +179,18 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
-  /// Whether the range selection can be also made in reverse-chronological
-  /// order.
+  /// Whether the range selection can be also made in reverse-chronological order.
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
-  final bool rangeBidirectional;
+  final bool? rangeBidirectional;
 
   /// The scroll physics for the calendar month view
   final ScrollPhysics? calendarViewScrollPhysics;
 
   /// The splash color of the day widget
-  final Color? splashColor;
+  final Color? daySplashColor;
+
+  /// When set to true, [onValueChanged] will be called on the same value selection
+  final bool? allowSameValueSelection;
 
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -223,7 +226,8 @@ class CalendarDatePicker2Config {
     CalendarModePickerTextHandler? modePickerTextHandler,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
-    Color? splashColor,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -269,7 +273,9 @@ class CalendarDatePicker2Config {
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
-      splashColor: splashColor ?? this.splashColor,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      allowSameValueSelection:
+          allowSameValueSelection ?? this.allowSameValueSelection,
     );
   }
 }
@@ -308,9 +314,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
-    bool rangeBidirectional = false,
+    bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
-    Color? splashColor,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -354,7 +361,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           modePickerTextHandler: modePickerTextHandler,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
-          splashColor: splashColor,
+          daySplashColor: daySplashColor,
+          allowSameValueSelection: allowSameValueSelection,
         );
 
   /// The gap between calendar and action buttons
@@ -428,7 +436,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
-    Color? splashColor,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -472,7 +481,6 @@ class CalendarDatePicker2WithActionButtonsConfig
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
-      splashColor: splashColor ?? this.splashColor,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
@@ -488,7 +496,9 @@ class CalendarDatePicker2WithActionButtonsConfig
       buttonPadding: buttonPadding ?? this.buttonPadding,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
-      splashColor: splashColor ?? this.splashColor,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      allowSameValueSelection:
+          allowSameValueSelection ?? this.allowSameValueSelection,
     );
   }
 }

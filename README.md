@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v0.5.5-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v0.5.6-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -36,8 +36,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^0.5.5
-
+calendar_date_picker2: ^0.5.6
 ```
 
 ### Basic setup
@@ -154,8 +153,10 @@ var results = await showCalendarDatePicker2Dialog(
 | centerAlignModePicker       | bool?                          | Flag to centralize year and month text label in controls                            |
 | customModePickerIcon        | Widget?                        | Custom icon for the mode picker button icon                                         |
 | modePickerTextHandler       | CalendarModePickerTextHandler? | Function to control mode picker displayed text                                      |
-| rangeBidirectional          | bool                           | Flag to enable selecting dates range also in reverse-chronological order            |
+| rangeBidirectional          | bool?                          | Flag to enable selecting dates range also in reverse-chronological order            |
 | calendarViewScrollPhysics   | ScrollPhysics?                 | The scroll physics for the calendar month view                                      |
+| daySplashColor              | Color?                         | The splash color of the day widget                                                  |
+| allowSameValueSelection     | bool?                          | When set to true, [onValueChanged] will be called on the same value selection       |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
@@ -224,6 +225,6 @@ There are some tips before creating a PR:
 
 - Please always create an issue/feature before raising a PR
 - Please always create a minimum reproducible example for an issue
-- Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `flutter format . -l 80` if you are not using VS Code
+- Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `dart format . -l 80` if you are not using VS Code
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
 - Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit

@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime(2021, 8, 13),
   ];
   List<DateTime?> _singleDatePickerValueWithDefaultValue = [
-    DateTime.now(),
+    DateTime.now().add(const Duration(days: 1)),
   ];
   List<DateTime?> _multiDatePickerValueWithDefaultValue = [
     DateTime(today.year, today.month, 1),

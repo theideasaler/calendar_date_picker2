@@ -256,8 +256,6 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
             break;
           }
 
-          final bidirectional = widget.config.rangeBidirectional;
-
           final isRangeSet =
               selectedDates.length > 1 && selectedDates[1] != null;
           final isSelectedDayBeforeStartDate =
@@ -265,7 +263,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
           if (isRangeSet) {
             selectedDates = [value, null];
-          } else if (isSelectedDayBeforeStartDate && !bidirectional) {
+          } else if (isSelectedDayBeforeStartDate &&
+              widget.config.rangeBidirectional != true) {
             selectedDates = [value, null];
           } else {
             selectedDates = [selectedDates[0], value];
@@ -282,7 +281,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           widget.config.calendarType != CalendarDatePicker2Type.single ||
               !DateUtils.isSameDay(selectedDates[0],
                   _selectedDates.isNotEmpty ? _selectedDates[0] : null);
-      if (isValueDifferent) {
+      if (isValueDifferent || widget.config.allowSameValueSelection == true) {
         _selectedDates = [...selectedDates];
         widget.onValueChanged?.call(_selectedDates);
       }
