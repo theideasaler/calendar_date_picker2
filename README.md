@@ -126,7 +126,7 @@ var results = await showCalendarDatePicker2Dialog(
 | firstDate                   | DateTime?                      | The earliest allowable DateTime user can select                                     |
 | lastDate                    | DateTime?                      | The latest allowable DateTime user can select                                       |
 | currentDate                 | DateTime?                      | The DateTime representing today which will be outlined in calendar                  |
-| calendarViewMode            | DatePickerMode?                | The initially displayed view of the calendar picker                                 |
+| calendarViewMode            | CalendarDatePicker2Mode?       | The initially displayed view of the calendar picker                                 |
 | allowSameValueSelection     | bool?                          | Flag to control [onValueChanged] behavior                                           |
 | weekdayLabels               | List\<String\>?                | Custom weekday labels, should starts with Sunday                                    |
 | weekdayLabelTextStyle       | TextStyle?                     | Custom text style for weekday labels                                                |
