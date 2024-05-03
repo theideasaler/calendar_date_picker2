@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../calendar_date_picker2.dart';
-
 enum CalendarDatePicker2Type {
   single,
   multi,
@@ -10,6 +8,18 @@ enum CalendarDatePicker2Type {
   ///
   /// See also [CalendarDatePicker2Config.rangeBidirectional].
   range,
+}
+
+/// Custom enum for a date picker mode including day, month, and year.
+enum CalendarDatePicker2Mode {
+  /// Choosing a day.
+  day,
+
+  /// Choosing a month.
+  month,
+
+  /// Choosing a year.
+  year,
 }
 
 typedef CalendarDayTextStylePredicate = TextStyle? Function({
