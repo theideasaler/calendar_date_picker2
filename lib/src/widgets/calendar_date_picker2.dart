@@ -5,12 +5,10 @@
 import 'dart:math' as math;
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 part '_impl/_calendar_view.dart';
 part '_impl/_date_picker_mode_toggle_button.dart';
@@ -189,7 +187,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     });
   }
 
-  void _handleDateChanged(DateTime date, {bool fromYearPicker = false}) {
+  void _handleDisplayedMonthDateChanged(
+    DateTime date, {
+    bool fromYearPicker = false,
+  }) {
     _vibrate();
     setState(() {
       final currentDisplayedMonthDate = DateTime(
@@ -229,7 +230,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     _vibrate();
     setState(() {
       _mode = CalendarDatePicker2Mode.day;
-      _handleDateChanged(value);
+      _handleDisplayedMonthDateChanged(value);
     });
   }
 
@@ -244,7 +245,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
     setState(() {
       _mode = CalendarDatePicker2Mode.day;
-      _handleDateChanged(value, fromYearPicker: true);
+      _handleDisplayedMonthDateChanged(value, fromYearPicker: true);
     });
   }
 
@@ -317,7 +318,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           initialMonth: _currentDisplayedMonthDate,
           selectedDates: _selectedDates,
           onChanged: _handleDayChanged,
-          onDisplayedMonthChanged: _handleDateChanged,
+          onDisplayedMonthChanged: _handleDisplayedMonthDateChanged,
         );
       case CalendarDatePicker2Mode.month:
         return Padding(
@@ -362,8 +363,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
         _DatePickerModeToggleButton(
           config: widget.config,
           mode: _mode,
-          month: _currentDisplayedMonthDate.month,
-          year: _currentDisplayedMonthDate.year,
+          monthDate: _currentDisplayedMonthDate,
           onMonthPressed: () {
             if (_mode == CalendarDatePicker2Mode.year) {
               _handleModeChanged(CalendarDatePicker2Mode.month);

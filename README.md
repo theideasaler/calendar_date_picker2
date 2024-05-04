@@ -144,7 +144,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectedRangeDayTextStyle   | TextStyle?                     | Custom text style for selected range calendar day(s)                                |
 | selectedDayHighlightColor   | Color?                         | The highlight color selected day                                                    |
 | selectedRangeHighlightColor | Color?                         | The highlight color for day(s) included in the selected range                       |
-| selectableDayPredicate      | SelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
+| CalendarSelectableDayPredicate      | CalendarSelectableDayPredicate?        | Function to provide full control over which dates in the calendar can be selected   |
 | daySplashColor              | Color?                         | The splash color of the day widget                                                  |
 | dayBuilder                  | CalendarDayBuilder?            | Function to provide full control over day widget UI                                 |
 | yearTextStyle               | TextStyle?                     | Custom text style for years list                                                    |

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 int getMonthFirstDayOffset(int year, int month, int firstDayOfWeekIndex) {
   // 0-based day of week for the month and year, with 0 representing Monday.
   final int weekdayFromMonday = DateTime(year, month).weekday - 1;
@@ -11,22 +14,26 @@ int getMonthFirstDayOffset(int year, int month, int firstDayOfWeekIndex) {
   return (weekdayFromMonday - firstDayOfWeekIndex) % 7;
 }
 
-String getMonthName(int year, int month) {
-  final List<String> shortMonthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+DateFormat getLocaleShortMonthFormat(Locale locale) {
+  final String localeName = Intl.canonicalizedLocale(locale.toString());
+  var monthFormat = DateFormat.MMM();
+  if (DateFormat.localeExists(localeName)) {
+    monthFormat = DateFormat.MMM(localeName);
+  } else if (DateFormat.localeExists(locale.languageCode)) {
+    monthFormat = DateFormat.MMM(locale.languageCode);
+  }
 
-  final DateTime dateFromMonth = DateTime(year, month);
-  return shortMonthNames[dateFromMonth.month - 1];
+  return monthFormat;
+}
+
+DateFormat getLocaleFullMonthFormat(Locale locale) {
+  final String localeName = Intl.canonicalizedLocale(locale.toString());
+  var monthFormat = DateFormat.MMMM();
+  if (DateFormat.localeExists(localeName)) {
+    monthFormat = DateFormat.MMMM(localeName);
+  } else if (DateFormat.localeExists(locale.languageCode)) {
+    monthFormat = DateFormat.MMMM(locale.languageCode);
+  }
+
+  return monthFormat;
 }

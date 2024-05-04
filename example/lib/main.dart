@@ -297,6 +297,12 @@ class _MyHomePageState extends State<MyHomePage> {
       disabledDayTextStyle: const TextStyle(
         color: Colors.grey,
       ),
+      centerAlignModePicker: true,
+      useAbbrLabelForMonthModePicker: true,
+      firstDate: DateTime(DateTime.now().year - 2, DateTime.now().month - 1,
+          DateTime.now().day - 5),
+      lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
+          DateTime.now().day + 10),
       selectableDayPredicate: (day) => !day
           .difference(DateTime.now().subtract(const Duration(days: 3)))
           .isNegative,
@@ -333,6 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildDefaultMultiDatePickerWithValue() {
     final config = CalendarDatePicker2Config(
+      disableMonthPicker: true,
       calendarType: CalendarDatePicker2Type.multi,
       selectedDayHighlightColor: Colors.indigo,
     );
