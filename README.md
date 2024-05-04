@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.0-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.1-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -28,6 +28,7 @@ CalendarDatePicker2 consists of two main widgets:
 - Support of Material 3
 
 ## Migrate from 0.x.x
+
 Version 1.x.x will by default enable month picker. If you want to migrate to v1.x.x from v0.x.x and would like to keep the old behavior, you will need to set `disableMonthPicker` to `true`.
 
 ## How to use
@@ -40,7 +41,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.0.0
+calendar_date_picker2: ^1.0.1
 ```
 
 ### Basic setup
@@ -166,6 +167,7 @@ var results = await showCalendarDatePicker2Dialog(
 | calendarViewScrollPhysics      | ScrollPhysics?                    | The scroll physics for the calendar month view                                        |
 | disableMonthPicker             | bool?                             | Flag to disable month picker                                                          |
 | useAbbrLabelForMonthModePicker | bool?                             | Use Abbreviation label for month mode picker, only works when month picker is enabled |
+| monthBuilder                   | CalendarMonthBuilder?             | Function to provide full control over month widget UI                                 |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
