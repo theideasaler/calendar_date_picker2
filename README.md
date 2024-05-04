@@ -185,9 +185,7 @@ var results = await showCalendarDatePicker2Dialog(
 
 By using the configs above, you could make your own custom calendar picker as your need.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/17869748/223992571-f153515d-170d-48f6-afce-84f59f58940b.png">
-<img width="200" alt="image" src="https://github.com/theideasaler/calendar_date_picker2/assets/17869748/f10683b7-aa13-4abe-8d2e-8bac4066e611">
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/17869748/223992976-5539a3af-6409-4983-958b-ca927a9d714f.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/17869748/223992571-f153515d-170d-48f6-afce-84f59f58940b.png"><img width="200" alt="image" src="https://github.com/theideasaler/calendar_date_picker2/assets/17869748/f10683b7-aa13-4abe-8d2e-8bac4066e611"><img width="200" alt="image" src="https://user-images.githubusercontent.com/17869748/223992976-5539a3af-6409-4983-958b-ca927a9d714f.png">
 
 ```dart
 CalendarDatePicker2WithActionButtons(
