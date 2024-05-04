@@ -10,3 +10,23 @@ int getMonthFirstDayOffset(int year, int month, int firstDayOfWeekIndex) {
   // and the day corresponding to the first of the month.
   return (weekdayFromMonday - firstDayOfWeekIndex) % 7;
 }
+
+String getMonthName(int year, int month) {
+  final List<String> shortMonthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
+  final DateTime dateFromMonth = DateTime(year, month);
+  return shortMonthNames[dateFromMonth.month - 1];
+}

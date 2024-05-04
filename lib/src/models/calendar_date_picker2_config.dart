@@ -10,6 +10,18 @@ enum CalendarDatePicker2Type {
   range,
 }
 
+/// Custom enum for a date picker mode including day, month, and year.
+enum CalendarDatePicker2Mode {
+  /// Choosing a day.
+  day,
+
+  /// Choosing a month.
+  month,
+
+  /// Choosing a year.
+  year,
+}
+
 typedef CalendarDayTextStylePredicate = TextStyle? Function({
   required DateTime date,
 });
@@ -32,6 +44,15 @@ typedef CalendarYearBuilder = Widget? Function({
   bool? isCurrentYear,
 });
 
+typedef CalendarMonthBuilder = Widget? Function({
+  required int month,
+  TextStyle? textStyle,
+  BoxDecoration? decoration,
+  bool? isSelected,
+  bool? isDisabled,
+  bool? isCurrentMonth,
+});
+
 typedef CalendarModePickerTextHandler = String? Function({
   required DateTime monthDate,
 });
@@ -42,7 +63,7 @@ class CalendarDatePicker2Config {
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.firstDayOfWeek,
@@ -58,12 +79,16 @@ class CalendarDatePicker2Config {
     this.todayTextStyle,
     this.yearTextStyle,
     this.selectedYearTextStyle,
+    this.monthTextStyle,
+    this.selectedMonthTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
+    this.monthBorderRadius,
     this.selectableDayPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
     this.yearBuilder,
+    this.monthBuilder,
     this.disableModePicker,
     this.centerAlignModePicker,
     this.customModePickerIcon,
@@ -78,7 +103,7 @@ class CalendarDatePicker2Config {
         lastDate =
             DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
-        calendarViewMode = calendarViewMode ?? DatePickerMode.day;
+        calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day;
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;
@@ -93,7 +118,7 @@ class CalendarDatePicker2Config {
   final DateTime currentDate;
 
   /// The initially displayed view of the calendar picker.
-  final DatePickerMode calendarViewMode;
+  final CalendarDatePicker2Mode calendarViewMode;
 
   /// Custom weekday labels for the current locale, MUST starts from Sunday
   /// Examples:
@@ -149,11 +174,20 @@ class CalendarDatePicker2Config {
   // Custom text style for selected year(s)
   final TextStyle? selectedYearTextStyle;
 
+  // Custom text style for month list
+  final TextStyle? monthTextStyle;
+
+  // Custom text style for selected month(s)
+  final TextStyle? selectedMonthTextStyle;
+
   /// Custom border radius for day indicator
   final BorderRadius? dayBorderRadius;
 
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
+
+  /// Custom border radius for month indicator
+  final BorderRadius? monthBorderRadius;
 
   /// Function to provide full control over which dates in the calendar can be selected.
   final SelectableDayPredicate? selectableDayPredicate;
@@ -166,6 +200,9 @@ class CalendarDatePicker2Config {
 
   /// Function to provide full control over year widget UI
   final CalendarYearBuilder? yearBuilder;
+
+  /// Function to provide full control over month widget UI
+  final CalendarMonthBuilder? monthBuilder;
 
   /// Flag to disable mode picker and hide the mode toggle button icon
   final bool? disableModePicker;
@@ -197,7 +234,7 @@ class CalendarDatePicker2Config {
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
     int? firstDayOfWeek,
@@ -214,12 +251,16 @@ class CalendarDatePicker2Config {
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    BorderRadius? monthBorderRadius,
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -256,8 +297,12 @@ class CalendarDatePicker2Config {
           selectedYearTextStyle ?? this.selectedYearTextStyle,
       selectedRangeDayTextStyle:
           selectedRangeDayTextStyle ?? this.selectedRangeDayTextStyle,
+      monthTextStyle: monthTextStyle ?? this.monthTextStyle,
+      selectedMonthTextStyle:
+          selectedMonthTextStyle ?? this.selectedMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
       dayTextStylePredicate:
@@ -287,7 +332,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
     int? firstDayOfWeek,
@@ -304,12 +349,16 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    BorderRadius? monthBorderRadius,
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -349,12 +398,16 @@ class CalendarDatePicker2WithActionButtonsConfig
           todayTextStyle: todayTextStyle,
           yearTextStyle: yearTextStyle,
           selectedYearTextStyle: selectedYearTextStyle,
+          monthTextStyle: monthTextStyle,
+          selectedMonthTextStyle: selectedMonthTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
+          monthBorderRadius: monthBorderRadius,
           selectableDayPredicate: selectableDayPredicate,
           dayTextStylePredicate: dayTextStylePredicate,
           dayBuilder: dayBuilder,
           yearBuilder: yearBuilder,
+          monthBuilder: monthBuilder,
           disableModePicker: disableModePicker,
           centerAlignModePicker: centerAlignModePicker,
           customModePickerIcon: customModePickerIcon,
@@ -398,7 +451,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
     int? firstDayOfWeek,
@@ -415,12 +468,16 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
+    BorderRadius? monthBorderRadius,
     SelectableDayPredicate? selectableDayPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -466,14 +523,19 @@ class CalendarDatePicker2WithActionButtonsConfig
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      monthTextStyle: monthTextStyle ?? this.monthTextStyle,
+      selectedMonthTextStyle:
+          selectedMonthTextStyle ?? this.selectedMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      monthBuilder: monthBuilder ?? this.monthBuilder,
       disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePicker:
           centerAlignModePicker ?? this.centerAlignModePicker,
