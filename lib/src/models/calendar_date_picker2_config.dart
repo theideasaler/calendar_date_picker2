@@ -57,6 +57,12 @@ typedef CalendarModePickerTextHandler = String? Function({
   required DateTime monthDate,
 });
 
+typedef CalendarSelectableDayPredicate = bool Function(DateTime day);
+
+typedef CalendarSelectableYearPredicate = bool Function(int year);
+
+typedef CalendarSelectableMonthPredicate = bool Function(int year, int month);
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -85,6 +91,8 @@ class CalendarDatePicker2Config {
     this.yearBorderRadius,
     this.monthBorderRadius,
     this.selectableDayPredicate,
+    this.selectableMonthPredicate,
+    this.selectableYearPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
     this.yearBuilder,
@@ -98,6 +106,8 @@ class CalendarDatePicker2Config {
     this.calendarViewScrollPhysics,
     this.daySplashColor,
     this.allowSameValueSelection,
+    this.disableMonthPicker,
+    this.useAbbrLabelForMonthModePicker,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -190,7 +200,13 @@ class CalendarDatePicker2Config {
   final BorderRadius? monthBorderRadius;
 
   /// Function to provide full control over which dates in the calendar can be selected.
-  final SelectableDayPredicate? selectableDayPredicate;
+  final CalendarSelectableDayPredicate? selectableDayPredicate;
+
+  /// Function to provide full control over which month in the month list can be selected.
+  final CalendarSelectableMonthPredicate? selectableMonthPredicate;
+
+  /// Function to provide full control over which year in the year list be selected.
+  final CalendarSelectableYearPredicate? selectableYearPredicate;
 
   /// Function to provide full control over calendar days text style
   final CalendarDayTextStylePredicate? dayTextStylePredicate;
@@ -229,6 +245,12 @@ class CalendarDatePicker2Config {
   /// When set to true, [onValueChanged] will be called on the same value selection
   final bool? allowSameValueSelection;
 
+  /// Flag to disable month picker
+  final bool? disableMonthPicker;
+
+  /// Use Abbreviation label for month mode picker, only works when month picker is enabled
+  final bool? useAbbrLabelForMonthModePicker;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -256,7 +278,9 @@ class CalendarDatePicker2Config {
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
@@ -269,6 +293,8 @@ class CalendarDatePicker2Config {
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
     bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -305,6 +331,10 @@ class CalendarDatePicker2Config {
       monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
+      selectableMonthPredicate:
+          selectableMonthPredicate ?? this.selectableMonthPredicate,
+      selectableYearPredicate:
+          selectableYearPredicate ?? this.selectableYearPredicate,
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
@@ -321,6 +351,9 @@ class CalendarDatePicker2Config {
       daySplashColor: daySplashColor ?? this.daySplashColor,
       allowSameValueSelection:
           allowSameValueSelection ?? this.allowSameValueSelection,
+      disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
+      useAbbrLabelForMonthModePicker:
+          useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
     );
   }
 }
@@ -354,7 +387,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
@@ -367,6 +402,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
     bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -404,6 +441,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           yearBorderRadius: yearBorderRadius,
           monthBorderRadius: monthBorderRadius,
           selectableDayPredicate: selectableDayPredicate,
+          selectableMonthPredicate: selectableMonthPredicate,
+          selectableYearPredicate: selectableYearPredicate,
           dayTextStylePredicate: dayTextStylePredicate,
           dayBuilder: dayBuilder,
           yearBuilder: yearBuilder,
@@ -416,6 +455,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           calendarViewScrollPhysics: calendarViewScrollPhysics,
           daySplashColor: daySplashColor,
           allowSameValueSelection: allowSameValueSelection,
+          disableMonthPicker: disableMonthPicker,
+          useAbbrLabelForMonthModePicker: useAbbrLabelForMonthModePicker,
         );
 
   /// The gap between calendar and action buttons
@@ -473,7 +514,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
@@ -495,6 +538,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
     bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -531,6 +576,10 @@ class CalendarDatePicker2WithActionButtonsConfig
       monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
+      selectableMonthPredicate:
+          selectableMonthPredicate ?? this.selectableMonthPredicate,
+      selectableYearPredicate:
+          selectableYearPredicate ?? this.selectableYearPredicate,
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
@@ -561,6 +610,9 @@ class CalendarDatePicker2WithActionButtonsConfig
       daySplashColor: daySplashColor ?? this.daySplashColor,
       allowSameValueSelection:
           allowSameValueSelection ?? this.allowSameValueSelection,
+      disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
+      useAbbrLabelForMonthModePicker:
+          useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
     );
   }
 }

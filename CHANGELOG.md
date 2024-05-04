@@ -1,3 +1,11 @@
+## [1.0.0]
+
+- BREAKING: feat: add month picker
+- feat: add `disableMonthPicker` into config
+- feat: add `useAbbrLabelForMonthModePicker` into config
+- feat: add `selectableMonthPredicate` into config
+- feat: add `selectableYearPredicate` into config
+
 ## [0.5.6]
 
 - refactor: change `rangeBidirectional` to `bool?`

@@ -2,16 +2,13 @@ part of '../calendar_date_picker2.dart';
 
 /// A scrollable grid of months to allow picking a month.
 ///
-/// The month picker widget is rarely used directly. Instead, consider using
-/// [CalendarDatePicker2], or [showDatePicker2] which create full date pickers.
+/// The month picker widget is rarely used directly. Instead, consider using [CalendarDatePicker2]
 ///
 /// See also:
 ///
 ///  * [CalendarDatePicker2], which provides a Material Design date picker
 ///    interface.
 ///
-///  * [showDatePicker2], which shows a dialog containing a Material Design
-///    date picker.
 ///
 class _MonthPicker extends StatefulWidget {
   /// Creates a month picker.
@@ -20,7 +17,6 @@ class _MonthPicker extends StatefulWidget {
     required this.selectedDates,
     required this.onChanged,
     required this.initialMonth,
-    this.dragStartBehavior = DragStartBehavior.start,
     Key? key,
   }) : super(key: key);
 
@@ -38,18 +34,13 @@ class _MonthPicker extends StatefulWidget {
   /// The initial month to display.
   final DateTime initialMonth;
 
-  /// {@macro flutter.widgets.scrollable.dragStartBehavior}
-  final DragStartBehavior dragStartBehavior;
-
   @override
   State<_MonthPicker> createState() => _MonthPickerState();
 }
 
 class _MonthPickerState extends State<_MonthPicker> {
   late ScrollController _scrollController;
-
-  // The approximate number of years necessary to fill the available space.
-  static const int minMonths = 12;
+  late Locale _locale;
 
   @override
   void initState() {
@@ -73,35 +64,51 @@ class _MonthPickerState extends State<_MonthPicker> {
     }
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    assert(debugCheckHasMaterialLocalizations(context));
+    _locale = Localizations.localeOf(context);
+  }
+
   double _scrollOffsetForMonth(DateTime date) {
     final int initialMonthIndex = date.month - DateTime.january;
     final int initialMonthRow = initialMonthIndex ~/ _monthPickerColumnCount;
     final int centeredMonthRow = initialMonthRow - 2;
-    return _itemCount < minMonths
-        ? 0
-        : centeredMonthRow * _monthPickerRowHeight;
+    return centeredMonthRow * _monthPickerRowHeight;
   }
 
   Widget _buildMonthItem(BuildContext context, int index) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Backfill the _MonthPicker with disabled months if necessary.
-    final int offset =
-        _itemCount < minMonths ? (minMonths - _itemCount) ~/ 2 : 0;
-    final int month = DateTime.january + index - offset;
-    final bool isSelected = widget.selectedDates.isNotEmpty &&
-        widget.selectedDates[0] != null &&
-        widget.selectedDates[0]!.month == month;
-    final bool isDisabled = month < widget.config.firstDate.month;
+    final int month = 1 + index;
     final bool isCurrentMonth = month == widget.config.currentDate.month;
     const double decorationHeight = 36.0;
     const double decorationWidth = 72.0;
 
+    final bool isSelected = widget.selectedDates.isNotEmpty &&
+        widget.selectedDates.any((date) => date != null && date.month == month);
+    var isMonthSelectable =
+        widget.initialMonth.year >= widget.config.firstDate.year &&
+            widget.initialMonth.year <= widget.config.lastDate.year;
+    if (isMonthSelectable) {
+      if (widget.initialMonth.year == widget.config.firstDate.year) {
+        isMonthSelectable = month >= widget.config.firstDate.month;
+      }
+
+      if (widget.initialMonth.year == widget.config.lastDate.year) {
+        isMonthSelectable = month <= widget.config.lastDate.month;
+      }
+    }
+    final monthSelectableFromPredicate = widget.config.selectableMonthPredicate
+            ?.call(widget.initialMonth.year, month) ??
+        true;
+    isMonthSelectable = isMonthSelectable && monthSelectableFromPredicate;
+
     final Color textColor;
     if (isSelected) {
       textColor = colorScheme.onPrimary;
-    } else if (isDisabled) {
+    } else if (!isMonthSelectable) {
       textColor = colorScheme.onSurface.withOpacity(0.38);
     } else if (isCurrentMonth) {
       textColor =
@@ -123,7 +130,7 @@ class _MonthPickerState extends State<_MonthPicker> {
         borderRadius: widget.config.monthBorderRadius ??
             BorderRadius.circular(decorationHeight / 2),
       );
-    } else if (isCurrentMonth && !isDisabled) {
+    } else if (isCurrentMonth && isMonthSelectable) {
       decoration = BoxDecoration(
         border: Border.all(
           color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
@@ -138,7 +145,7 @@ class _MonthPickerState extends State<_MonthPicker> {
           textStyle: itemStyle,
           decoration: decoration,
           isSelected: isSelected,
-          isDisabled: isDisabled,
+          isDisabled: !isMonthSelectable,
           isCurrentMonth: isCurrentMonth,
         ) ??
         Center(
@@ -151,11 +158,8 @@ class _MonthPickerState extends State<_MonthPicker> {
                 selected: isSelected,
                 button: true,
                 child: Text(
-                  // show the month as a name
-                  getMonthName(
-                    DateUtils.dateOnly(DateTime.now()).year,
-                    month,
-                  ),
+                  getLocaleShortMonthFormat(_locale)
+                      .format(DateTime(widget.initialMonth.year, month)),
                   style: itemStyle,
                 ),
               ),
@@ -163,14 +167,14 @@ class _MonthPickerState extends State<_MonthPicker> {
           ),
         );
 
-    if (isDisabled) {
+    if (!isMonthSelectable) {
       monthItem = ExcludeSemantics(
         child: monthItem,
       );
     } else {
       monthItem = InkWell(
         key: ValueKey<int>(month),
-        onTap: isDisabled
+        onTap: !isMonthSelectable
             ? null
             : () {
                 widget.onChanged(DateUtils.dateOnly(
@@ -184,10 +188,6 @@ class _MonthPickerState extends State<_MonthPicker> {
     return monthItem;
   }
 
-  int get _itemCount {
-    return DateTime.december - DateTime.january + 1;
-  }
-
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
@@ -197,10 +197,9 @@ class _MonthPickerState extends State<_MonthPicker> {
         Expanded(
           child: GridView.builder(
             controller: _scrollController,
-            dragStartBehavior: widget.dragStartBehavior,
             gridDelegate: _monthPickerGridDelegate,
             itemBuilder: _buildMonthItem,
-            itemCount: math.max(_itemCount, minMonths),
+            itemCount: 12,
             padding:
                 const EdgeInsets.symmetric(horizontal: _monthPickerPadding),
           ),
