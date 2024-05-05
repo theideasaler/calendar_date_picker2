@@ -5,9 +5,6 @@
 ## [1.0.1]
 
 - doc: update README.md
-## [1.0.1]
-
-- doc: update README.md
 
 ## [1.0.0]
 
