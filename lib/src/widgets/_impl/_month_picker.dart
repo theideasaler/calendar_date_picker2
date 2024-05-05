@@ -82,12 +82,17 @@ class _MonthPickerState extends State<_MonthPicker> {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final int month = 1 + index;
-    final bool isCurrentMonth = month == widget.config.currentDate.month;
+    final bool isCurrentMonth =
+        widget.initialMonth.year == widget.config.currentDate.year &&
+            widget.config.currentDate.month == month;
     const double decorationHeight = 36.0;
     const double decorationWidth = 72.0;
 
     final bool isSelected = widget.selectedDates.isNotEmpty &&
-        widget.selectedDates.any((date) => date != null && date.month == month);
+        widget.selectedDates.any((date) =>
+            date != null &&
+            widget.initialMonth.year == date.year &&
+            date.month == month);
     var isMonthSelectable =
         widget.initialMonth.year >= widget.config.firstDate.year &&
             widget.initialMonth.year <= widget.config.lastDate.year;

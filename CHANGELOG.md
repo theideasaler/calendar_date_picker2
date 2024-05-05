@@ -1,10 +1,17 @@
+## [1.0.2]
+
+- fix: current month & selected validation logics
+
+## [1.0.1]
+
+- doc: update README.md
 ## [1.0.1]
 
 - doc: update README.md
 
 ## [1.0.0]
 
-- BREAKING: feat: add month picker
+- **BREAKING**: feat: add month picker
 - feat: add `monthBuilder` into config
 - feat: add `disableMonthPicker` into config
 - feat: add `useAbbrLabelForMonthModePicker` into config
