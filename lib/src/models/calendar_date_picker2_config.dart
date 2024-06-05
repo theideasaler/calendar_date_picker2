@@ -108,6 +108,9 @@ class CalendarDatePicker2Config {
     this.allowSameValueSelection,
     this.disableMonthPicker,
     this.useAbbrLabelForMonthModePicker,
+    this.dayMaxWidth,
+    this.hideMonthPickerDividers,
+    this.hideYearPickerDividers,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -251,6 +254,15 @@ class CalendarDatePicker2Config {
   /// Use Abbreviation label for month mode picker, only works when month picker is enabled
   final bool? useAbbrLabelForMonthModePicker;
 
+  /// Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings
+  final double? dayMaxWidth;
+
+  /// Flag to hide dividers on month picker
+  final bool? hideMonthPickerDividers;
+
+  /// Flag to hide dividers on year picker
+  final bool? hideYearPickerDividers;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -295,6 +307,9 @@ class CalendarDatePicker2Config {
     bool? allowSameValueSelection,
     bool? disableMonthPicker,
     bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -354,6 +369,11 @@ class CalendarDatePicker2Config {
       disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
       useAbbrLabelForMonthModePicker:
           useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
+      dayMaxWidth: dayMaxWidth ?? this.dayMaxWidth,
+      hideMonthPickerDividers:
+          hideMonthPickerDividers ?? this.hideMonthPickerDividers,
+      hideYearPickerDividers:
+          hideYearPickerDividers ?? this.hideYearPickerDividers,
     );
   }
 }
@@ -404,6 +424,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? allowSameValueSelection,
     bool? disableMonthPicker,
     bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -457,6 +480,9 @@ class CalendarDatePicker2WithActionButtonsConfig
           allowSameValueSelection: allowSameValueSelection,
           disableMonthPicker: disableMonthPicker,
           useAbbrLabelForMonthModePicker: useAbbrLabelForMonthModePicker,
+          dayMaxWidth: dayMaxWidth,
+          hideMonthPickerDividers: hideMonthPickerDividers,
+          hideYearPickerDividers: hideYearPickerDividers,
         );
 
   /// The gap between calendar and action buttons
@@ -540,6 +566,9 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? allowSameValueSelection,
     bool? disableMonthPicker,
     bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -613,6 +642,11 @@ class CalendarDatePicker2WithActionButtonsConfig
       disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
       useAbbrLabelForMonthModePicker:
           useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
+      dayMaxWidth: dayMaxWidth ?? this.dayMaxWidth,
+      hideMonthPickerDividers:
+          hideMonthPickerDividers ?? this.hideMonthPickerDividers,
+      hideYearPickerDividers:
+          hideYearPickerDividers ?? this.hideYearPickerDividers,
     );
   }
 }

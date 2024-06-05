@@ -251,8 +251,13 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () async {
               final values = await showCalendarDatePicker2Dialog(
                 context: context,
-                config: config,
-                dialogSize: const Size(325, 400),
+                config: config.copyWith(
+                  dayMaxWidth: 32,
+                  controlsHeight: 40,
+                  disableMonthPicker: true,
+                  hideYearPickerDividers: true,
+                ),
+                dialogSize: const Size(280, 350),
                 borderRadius: BorderRadius.circular(15),
                 value: _dialogCalendarPickerValue,
                 dialogBackgroundColor: Colors.white,
@@ -312,11 +317,17 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const SizedBox(height: 10),
         const Text('Single Date Picker (With default value)'),
-        CalendarDatePicker2(
-          config: config,
-          value: _singleDatePickerValueWithDefaultValue,
-          onValueChanged: (dates) =>
-              setState(() => _singleDatePickerValueWithDefaultValue = dates),
+        SizedBox(
+          width: 270,
+          child: CalendarDatePicker2(
+            config: config.copyWith(
+              dayMaxWidth: 32,
+              controlsHeight: 40,
+            ),
+            value: _singleDatePickerValueWithDefaultValue,
+            onValueChanged: (dates) =>
+                setState(() => _singleDatePickerValueWithDefaultValue = dates),
+          ),
         ),
         const SizedBox(height: 10),
         Row(

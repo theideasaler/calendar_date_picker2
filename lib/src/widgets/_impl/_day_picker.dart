@@ -306,10 +306,14 @@ class _DayPickerState extends State<_DayPicker> {
             child: dayWidget,
           );
         } else {
+          var dayInkRadius = _dayPickerRowHeight / 2 + 4;
+          if (widget.config.dayMaxWidth != null) {
+            dayInkRadius = (widget.config.dayMaxWidth! + 2) / 2 + 4;
+          }
           dayWidget = InkResponse(
             focusNode: _dayFocusNodes[day - 1],
             onTap: () => widget.onChanged(dayToBuild),
-            radius: _dayPickerRowHeight / 2 + 4,
+            radius: dayInkRadius,
             splashColor: daySplashColor,
             child: Semantics(
               // We want the day of month to be spoken first irrespective of the
@@ -338,7 +342,9 @@ class _DayPickerState extends State<_DayPicker> {
       child: GridView.custom(
         padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
-        gridDelegate: _dayPickerGridDelegate,
+        gridDelegate: widget.config.dayMaxWidth != null
+            ? _DayPickerGridDelegate(dayMaxWidth: widget.config.dayMaxWidth)
+            : _dayPickerGridDelegate,
         childrenDelegate: SliverChildListDelegate(
           dayItems,
           addRepaintBoundaries: false,
@@ -375,14 +381,17 @@ class _DayPickerState extends State<_DayPicker> {
 }
 
 class _DayPickerGridDelegate extends SliverGridDelegate {
-  const _DayPickerGridDelegate();
+  const _DayPickerGridDelegate({this.dayMaxWidth});
+
+  /// Max day widget width
+  final double? dayMaxWidth;
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     const int columnCount = DateTime.daysPerWeek;
     final double tileWidth = constraints.crossAxisExtent / columnCount;
     final double tileHeight = math.min(
-      _dayPickerRowHeight,
+      dayMaxWidth != null ? dayMaxWidth! + 2 : _dayPickerRowHeight,
       constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
     );
     return SliverGridRegularTileLayout(
