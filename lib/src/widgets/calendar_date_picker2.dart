@@ -352,11 +352,17 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     assert(debugCheckHasMaterial(context));
     assert(debugCheckHasMaterialLocalizations(context));
     assert(debugCheckHasDirectionality(context));
+    var maxContentHeight = _maxDayPickerHeight;
+    if (widget.config.dayMaxWidth != null) {
+      maxContentHeight =
+          (widget.config.dayMaxWidth! + 2) * (_maxDayPickerRowCount + 1);
+    }
+
     return Stack(
       children: <Widget>[
         SizedBox(
           height: (widget.config.controlsHeight ?? _subHeaderHeight) +
-              _maxDayPickerHeight,
+              maxContentHeight,
           child: _buildPicker(),
         ),
         // Put the mode toggle button on top so that it won't be covered up by the _CalendarView
