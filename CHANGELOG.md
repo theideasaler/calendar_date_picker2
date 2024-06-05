@@ -1,3 +1,8 @@
+## [1.0.3]
+- feat: add `dayMaxWidth` into config
+- feat: add `hideMonthPickerDividers` into config
+- feat: add `hideYearPickerDividers` into config
+
 ## [1.0.2]
 
 - fix: current month & selected validation logics
