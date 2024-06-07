@@ -48,24 +48,15 @@ class CalendarDatePicker2 extends StatefulWidget {
     this.onDisplayedMonthChanged,
     Key? key,
   }) : super(key: key) {
-    const valid = true;
-    const invalid = false;
-
     if (config.calendarType == CalendarDatePicker2Type.single) {
-      assert(value.length < 2,
+      assert(value.length <= 1,
           'Error: single date picker only allows maximum one initial date');
     }
 
     if (config.calendarType == CalendarDatePicker2Type.range &&
         value.length > 1) {
-      final isRangePickerValueValid = value[0] == null
-          ? (value[1] != null ? invalid : valid)
-          : (value[1] != null
-              ? (value[1]!.isBefore(value[0]!) ? invalid : valid)
-              : valid);
-
       assert(
-        isRangePickerValueValid,
+        value.length == 2 && value[0].isBefore(value[1]),
         'Error: range date picker must has start date set before setting end date, and start date must before end date.',
       );
     }
@@ -75,10 +66,10 @@ class CalendarDatePicker2 extends StatefulWidget {
   final CalendarDatePicker2Config config;
 
   /// The selected [DateTime]s that the picker should display.
-  final List<DateTime?> value;
+  final List<DateTime> value;
 
   /// Called when the selected dates changed
-  final ValueChanged<List<DateTime?>>? onValueChanged;
+  final ValueChanged<List<DateTime>>? onValueChanged;
 
   /// Date to control calendar displayed month
   final DateTime? displayedMonthDate;
@@ -92,7 +83,7 @@ class CalendarDatePicker2 extends StatefulWidget {
 
 class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   bool _announcedInitialDate = false;
-  late List<DateTime?> _selectedDates;
+  late List<DateTime> _selectedDates;
   late CalendarDatePicker2Mode _mode;
   late DateTime _currentDisplayedMonthDate;
   final GlobalKey _dayPickerKey = GlobalKey();
@@ -106,9 +97,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     super.initState();
     final config = widget.config;
     final initialDate = widget.displayedMonthDate ??
-        (widget.value.isNotEmpty && widget.value[0] != null
-            ? DateTime(widget.value[0]!.year, widget.value[0]!.month)
-            : DateUtils.dateOnly(DateTime.now()));
+        DateUtils.dateOnly(
+            widget.value.isNotEmpty ? widget.value[0] : DateTime.now());
     _mode = config.calendarViewMode;
     _currentDisplayedMonthDate = DateTime(initialDate.year, initialDate.month);
     _selectedDates = widget.value.toList();
@@ -142,12 +132,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     if (!_announcedInitialDate && _selectedDates.isNotEmpty) {
       _announcedInitialDate = true;
       for (final date in _selectedDates) {
-        if (date != null) {
-          SemanticsService.announce(
-            _localizations.formatFullDate(date),
-            _textDirection,
-          );
-        }
+        SemanticsService.announce(
+          _localizations.formatFullDate(date),
+          _textDirection,
+        );
       }
     }
   }
@@ -172,16 +160,14 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       _mode = mode;
       if (_selectedDates.isNotEmpty) {
         for (final date in _selectedDates) {
-          if (date != null) {
-            SemanticsService.announce(
-              _mode == CalendarDatePicker2Mode.day
-                  ? _localizations.formatMonthYear(date)
-                  : _mode == CalendarDatePicker2Mode.month
-                      ? _localizations.formatMonthYear(date)
-                      : _localizations.formatYear(date),
-              _textDirection,
-            );
-          }
+          SemanticsService.announce(
+            _mode == CalendarDatePicker2Mode.day
+                ? _localizations.formatMonthYear(date)
+                : _mode == CalendarDatePicker2Mode.month
+                    ? _localizations.formatMonthYear(date)
+                    : _localizations.formatYear(date),
+            _textDirection,
+          );
         }
       }
     });
@@ -206,12 +192,12 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
       if (fromYearPicker) {
         final selectedDatesInThisYear = _selectedDates
-            .where((d) => d?.year == date.year)
+            .where((d) => d.year == date.year)
             .toList()
-          ..sort((d1, d2) => d1!.compareTo(d2!));
+          ..sort((d1, d2) => d1.compareTo(d2));
         if (selectedDatesInThisYear.isNotEmpty) {
           newDisplayedMonthDate =
-              DateTime(date.year, selectedDatesInThisYear[0]!.month);
+              DateTime(date.year, selectedDatesInThisYear[0].month);
         }
       }
 
@@ -249,64 +235,66 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     });
   }
 
-  void _handleDayChanged(DateTime value) {
+  void _handleDayChanged(DateTime newlySelectedDate) {
     _vibrate();
-    setState(() {
-      var selectedDates = [..._selectedDates];
-      selectedDates.removeWhere((d) => d == null);
 
-      final calendarType = widget.config.calendarType;
-      switch (calendarType) {
-        case CalendarDatePicker2Type.single:
-          selectedDates = [value];
+    var selectedDates = [..._selectedDates];
+    var preventRefresh = false;
+
+    switch (widget.config.calendarType) {
+      case CalendarDatePicker2Type.single:
+        var previouslySelectedDate =
+            selectedDates.isEmpty ? null : selectedDates[0];
+        if (widget.config.allowSameValueSelection == false &&
+            DateUtils.isSameDay(previouslySelectedDate, newlySelectedDate)) {
+          preventRefresh = true;
+        } else {
+          selectedDates = [newlySelectedDate];
+        }
+        break;
+
+      case CalendarDatePicker2Type.multi:
+        final index = selectedDates
+            .indexWhere((d) => DateUtils.isSameDay(d, newlySelectedDate));
+        if (index != -1) {
+          selectedDates.removeAt(index);
+        } else {
+          selectedDates.add(newlySelectedDate);
+        }
+        selectedDates.sort((d1, d2) => d1.compareTo(d2));
+        break;
+
+      case CalendarDatePicker2Type.range:
+        if (selectedDates.isEmpty) {
+          selectedDates = [newlySelectedDate];
           break;
+        }
 
-        case CalendarDatePicker2Type.multi:
-          final index =
-              selectedDates.indexWhere((d) => DateUtils.isSameDay(d, value));
-          if (index != -1) {
-            selectedDates.removeAt(index);
-          } else {
-            selectedDates.add(value);
-          }
-          break;
+        var previouslySelectedDate = selectedDates[0];
+        if (selectedDates.length > 1) {
+          // range previously set, so we reset the range to let the user start a
+          // new range selection
+          selectedDates = [newlySelectedDate];
+        } else if (widget.config.rangeBidirectional != true &&
+            newlySelectedDate.isBefore(previouslySelectedDate)) {
+          // the user selected a date before the previously selected date, while
+          // the bidirectional range selection is disabled, so we reset the range
+          // to let the user start a new range selection
+          selectedDates = [newlySelectedDate];
+        } else {
+          // The user previously selected a date, and just selected a new date
+          selectedDates = [selectedDates[0], newlySelectedDate];
+        }
 
-        case CalendarDatePicker2Type.range:
-          if (selectedDates.isEmpty) {
-            selectedDates.add(value);
-            break;
-          }
+        break;
+    }
 
-          final isRangeSet =
-              selectedDates.length > 1 && selectedDates[1] != null;
-          final isSelectedDayBeforeStartDate =
-              value.isBefore(selectedDates[0]!);
-
-          if (isRangeSet) {
-            selectedDates = [value, null];
-          } else if (isSelectedDayBeforeStartDate &&
-              widget.config.rangeBidirectional != true) {
-            selectedDates = [value, null];
-          } else {
-            selectedDates = [selectedDates[0], value];
-          }
-
-          break;
-      }
-
-      selectedDates
-        ..removeWhere((d) => d == null)
-        ..sort((d1, d2) => d1!.compareTo(d2!));
-
-      final isValueDifferent =
-          widget.config.calendarType != CalendarDatePicker2Type.single ||
-              !DateUtils.isSameDay(selectedDates[0],
-                  _selectedDates.isNotEmpty ? _selectedDates[0] : null);
-      if (isValueDifferent || widget.config.allowSameValueSelection == true) {
-        _selectedDates = [...selectedDates];
-        widget.onValueChanged?.call(_selectedDates);
-      }
-    });
+    if (!preventRefresh) {
+      setState(() {
+        _selectedDates = selectedDates;
+      });
+      widget.onValueChanged?.call(_selectedDates);
+    }
   }
 
   Widget _buildPicker() {

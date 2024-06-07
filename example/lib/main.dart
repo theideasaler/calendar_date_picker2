@@ -43,26 +43,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<DateTime?> _dialogCalendarPickerValue = [
+  List<DateTime> _dialogCalendarPickerValue = [
     DateTime(2021, 8, 10),
     DateTime(2021, 8, 13),
   ];
-  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
+  List<DateTime> _singleDatePickerValueWithDefaultValue = [
     DateTime.now().add(const Duration(days: 1)),
   ];
-  List<DateTime?> _multiDatePickerValueWithDefaultValue = [
+  List<DateTime> _multiDatePickerValueWithDefaultValue = [
     DateTime(today.year, today.month, 1),
     DateTime(today.year, today.month, 5),
     DateTime(today.year, today.month, 14),
     DateTime(today.year, today.month, 17),
     DateTime(today.year, today.month, 25),
   ];
-  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
+  List<DateTime> _rangeDatePickerValueWithDefaultValue = [
     DateTime(1999, 5, 6),
     DateTime(1999, 5, 21),
   ];
 
-  List<DateTime?> _rangeDatePickerWithActionButtonsWithValue = [
+  List<DateTime> _rangeDatePickerWithActionButtonsWithValue = [
     DateTime.now(),
     DateTime.now().add(const Duration(days: 5)),
   ];

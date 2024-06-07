@@ -12,10 +12,10 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final List<DateTime?> value;
+  final List<DateTime> value;
 
   /// Called when the user taps 'OK' button
-  final ValueChanged<List<DateTime?>>? onValueChanged;
+  final ValueChanged<List<DateTime>>? onValueChanged;
 
   /// Called when the user navigates to a new month/year in the picker.
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
@@ -36,8 +36,8 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
 
 class _CalendarDatePicker2WithActionButtonsState
     extends State<CalendarDatePicker2WithActionButtons> {
-  List<DateTime?> _values = [];
-  List<DateTime?> _editCache = [];
+  List<DateTime> _values = [];
+  List<DateTime> _editCache = [];
 
   @override
   void initState() {
@@ -53,9 +53,7 @@ class _CalendarDatePicker2WithActionButtonsState
 
     if (isValueSame) {
       for (var i = 0; i < oldWidget.value.length; i++) {
-        var isSame = (oldWidget.value[i] == null && widget.value[i] == null) ||
-            DateUtils.isSameDay(oldWidget.value[i], widget.value[i]);
-        if (!isSame) {
+        if (!DateUtils.isSameDay(oldWidget.value[i], widget.value[i])) {
           isValueSame = false;
           break;
         }
