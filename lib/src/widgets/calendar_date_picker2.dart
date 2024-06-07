@@ -283,7 +283,22 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
           selectedDates = [newlySelectedDate];
         } else {
           // The user previously selected a date, and just selected a new date
-          selectedDates = [selectedDates[0], newlySelectedDate];
+          // so we set the new selected date, taking into account the rangeSelectionCoercionMode
+          switch (widget.config.rangeSelectionCoercionMode) {
+            case RangeSelectionCoercionMode.noCoercion:
+              // default behavior keeping the range as-is ignoring selectableDayPredicate result
+              break;
+            case RangeSelectionCoercionMode.coerceEndDate:
+              // stop the range before the next non-selectable day after startDate
+              selectedDates =
+                  _coerceEndDate([previouslySelectedDate, newlySelectedDate]);
+              break;
+            case RangeSelectionCoercionMode.coerceStartDate:
+              // stop the range after the last non-selectable day before endDate
+              selectedDates =
+                  _coerceStartDate([previouslySelectedDate, newlySelectedDate]);
+              break;
+          }
         }
 
         break;
@@ -295,6 +310,52 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       });
       widget.onValueChanged?.call(_selectedDates);
     }
+  }
+
+  List<DateTime> _coerceEndDate(List<DateTime> range) {
+    var reversed = range[1].isBefore(range[0]);
+    final DateTime start = reversed ? range[1] : range[0];
+    final DateTime maxEnd = reversed ? range[0] : range[1];
+
+    // start from the start, and scroll until end date OR un-selectable date reached
+    var newEnd = start;
+    do {
+      var nextDate = newEnd.add(const Duration(days: 1));
+      var isDateSelectable = widget.config.selectableDayPredicate!(nextDate);
+      if (!isDateSelectable) {
+        final newRange = [start, newEnd];
+        widget.config.onRangeSelectionCoerced?.call(
+          originalRange: range,
+          adjustedRange: newRange,
+        );
+        return newRange;
+      }
+      newEnd = nextDate;
+    } while (newEnd.isBefore(maxEnd));
+    return range;
+  }
+
+  List<DateTime> _coerceStartDate(List<DateTime> range) {
+    var reversed = range[1].isBefore(range[0]);
+    final DateTime minStart = reversed ? range[1] : range[0];
+    final DateTime end = reversed ? range[0] : range[1];
+
+    // start from the end, and scroll until start date OR un-selectable date reached
+    var newStart = end;
+    do {
+      var nextDate = newStart.subtract(const Duration(days: 1));
+      var isDateSelectable = widget.config.selectableDayPredicate!(nextDate);
+      if (!isDateSelectable) {
+        final newRange = [newStart, end];
+        widget.config.onRangeSelectionCoerced?.call(
+          originalRange: range,
+          adjustedRange: newRange,
+        );
+        return newRange;
+      }
+      newStart = nextDate;
+    } while (newStart.isAfter(minStart));
+    return range;
   }
 
   Widget _buildPicker() {

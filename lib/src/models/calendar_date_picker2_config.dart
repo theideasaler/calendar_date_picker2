@@ -63,6 +63,26 @@ typedef CalendarSelectableYearPredicate = bool Function(int year);
 
 typedef CalendarSelectableMonthPredicate = bool Function(int year, int month);
 
+typedef AdjustedRangeSelectionCallback = void Function({
+  required List<DateTime> originalRange,
+  required List<DateTime> adjustedRange,
+});
+
+enum RangeSelectionCoercionMode {
+  /// Default, allows including non-selectable days.
+  noCoercion,
+
+  /// When the selected range is including non-selectable day(s), changes the
+  /// selected end date to the day before the first non-selectable day in the
+  /// range. Requires [CalendarDatePicker2Config.selectableDayPredicate]
+  coerceEndDate,
+
+  /// When the selected range is including non-selectable day(s), changes the
+  /// selected start date to the day after the last non-selectable day in the
+  /// range. Requires [CalendarDatePicker2Config.selectableDayPredicate]
+  coerceStartDate,
+}
+
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
@@ -70,6 +90,7 @@ class CalendarDatePicker2Config {
     DateTime? lastDate,
     DateTime? currentDate,
     CalendarDatePicker2Mode? calendarViewMode,
+    RangeSelectionCoercionMode? rangeSelectionCoercionMode,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.firstDayOfWeek,
@@ -111,12 +132,27 @@ class CalendarDatePicker2Config {
     this.dayMaxWidth,
     this.hideMonthPickerDividers,
     this.hideYearPickerDividers,
+    this.onRangeSelectionCoerced,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
             DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
-        calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day;
+        calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day,
+        rangeSelectionCoercionMode = rangeSelectionCoercionMode ??
+            RangeSelectionCoercionMode.noCoercion {
+    if (this.calendarType == CalendarDatePicker2Type.range) {
+      assert(
+          selectableDayPredicate == null &&
+              this.rangeSelectionCoercionMode !=
+                  RangeSelectionCoercionMode.noCoercion,
+          "in range mode, 'selectableDayPredicate' cannot be null when 'rangeSelectionCoercionMode' to something else than 'noCoercion'");
+    }
+    if (rangeBidirectional != null) {
+      assert(this.calendarType == CalendarDatePicker2Type.range,
+          "'rangeBidirectional' can only be set in range mode");
+    }
+  }
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;
@@ -263,6 +299,16 @@ class CalendarDatePicker2Config {
   /// Flag to hide dividers on year picker
   final bool? hideYearPickerDividers;
 
+  /// Whether the range selection can include disabled dates.
+  /// See [RangeSelectionCoercionMode] for more details.
+  /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
+  final RangeSelectionCoercionMode rangeSelectionCoercionMode;
+
+  /// Callback when the selected range has been adjusted (e.g. the start or end
+  /// date have been modified to not include a non-selectable day, related to
+  /// [rangeSelectionCoercionMode]).
+  final AdjustedRangeSelectionCallback? onRangeSelectionCoerced;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -310,6 +356,8 @@ class CalendarDatePicker2Config {
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    RangeSelectionCoercionMode? rangeSelectionCoercionMode,
+    AdjustedRangeSelectionCallback? onRangeSelectionCoerced,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -374,6 +422,10 @@ class CalendarDatePicker2Config {
           hideMonthPickerDividers ?? this.hideMonthPickerDividers,
       hideYearPickerDividers:
           hideYearPickerDividers ?? this.hideYearPickerDividers,
+      rangeSelectionCoercionMode:
+          rangeSelectionCoercionMode ?? this.rangeSelectionCoercionMode,
+      onRangeSelectionCoerced:
+          onRangeSelectionCoerced ?? this.onRangeSelectionCoerced,
     );
   }
 }
@@ -427,6 +479,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    RangeSelectionCoercionMode? rangeSelectionCoercionMode,
+    AdjustedRangeSelectionCallback? onRangeSelectionCoerced,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -483,6 +537,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayMaxWidth: dayMaxWidth,
           hideMonthPickerDividers: hideMonthPickerDividers,
           hideYearPickerDividers: hideYearPickerDividers,
+          rangeSelectionCoercionMode: rangeSelectionCoercionMode,
+          onRangeSelectionCoerced: onRangeSelectionCoerced,
         );
 
   /// The gap between calendar and action buttons
@@ -569,6 +625,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    RangeSelectionCoercionMode? rangeSelectionCoercionMode,
+    AdjustedRangeSelectionCallback? onRangeSelectionCoerced,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -621,6 +679,10 @@ class CalendarDatePicker2WithActionButtonsConfig
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
+      rangeSelectionCoercionMode:
+          rangeSelectionCoercionMode ?? this.rangeSelectionCoercionMode,
+      onRangeSelectionCoerced:
+          onRangeSelectionCoerced ?? this.onRangeSelectionCoerced,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
       cancelButtonTextStyle:
