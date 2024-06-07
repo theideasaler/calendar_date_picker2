@@ -239,6 +239,10 @@ There are some tips before creating a PR:
 
 - Please always create an issue/feature before raising a PR
 - Please always create a minimum reproducible example for an issue
-- Please use the official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) as your formatter or use `dart format . -l 80` if you are not using VS Code
+- Please use the
+  official [Dart Extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code)
+  as your formatter or use `dart format . -l 80` if you are not using VS Code. If using Android
+  Studio, it should use the `.editorconfig` by default so you can safely enable auto-format.
 - Please keep your changes to its minimum needed scope (avoid introducing unrelated changes)
-- Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) by adding `feat:` or `fix:` to your PR commit
+- Please follow this git commit [convention](https://www.conventionalcommits.org/en/v1.0.0-beta.2/)
+  by adding `feat:` or `fix:` to your PR commit

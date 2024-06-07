@@ -1,0 +1,31 @@
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 100
+tab_width = 4
+ij_continuation_indent_size = 8
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = true
+ij_smart_tabs = false
+ij_visual_guides =
+ij_wrap_on_typing = false
+
+[*.dart]
+max_line_length = 80
+
+[{*.yaml,*.yml,pubspec.lock}]
+indent_size = 2
+ij_yaml_align_values_properties = do_not_align
+ij_yaml_autoinsert_sequence_marker = true
+ij_yaml_block_mapping_on_new_line = false
+ij_yaml_indent_sequence_value = true
+ij_yaml_keep_indents_on_empty_lines = false
+ij_yaml_keep_line_breaks = true
+ij_yaml_sequence_on_new_line = false
+ij_yaml_space_before_colon = false
+ij_yaml_spaces_within_braces = true
+ij_yaml_spaces_within_brackets = true
