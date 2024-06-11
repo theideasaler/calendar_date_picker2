@@ -89,18 +89,20 @@ class _DayPickerState extends State<_DayPicker> {
       TextStyle? headerStyle, MaterialLocalizations localizations) {
     final List<Widget> result = <Widget>[];
     final weekdays =
-        widget.config.weekdayLabels ?? localizations.narrowWeekdays;
+        widget.config.weekdayLabels ?? ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     final firstDayOfWeek =
         widget.config.firstDayOfWeek ?? localizations.firstDayOfWeekIndex;
     assert(firstDayOfWeek >= 0 && firstDayOfWeek <= 6,
         'firstDayOfWeek must between 0 and 6');
-    for (int i = firstDayOfWeek; true; i = (i + 1) % 7) {
+    for (int i = 0; i < weekdays.length; i++) {
       final String weekday = weekdays[i];
       result.add(ExcludeSemantics(
         child: Center(
           child: Text(
             weekday,
-            style: widget.config.weekdayLabelTextStyle ?? headerStyle,
+            style: weekdays[i] == 'S'
+                ? widget.config.weekendTextStyle
+                : widget.config.weekdayLabelTextStyle ?? headerStyle,
           ),
         ),
       ));

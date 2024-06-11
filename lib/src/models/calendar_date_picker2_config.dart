@@ -70,6 +70,7 @@ class CalendarDatePicker2Config {
     DateTime? lastDate,
     DateTime? currentDate,
     CalendarDatePicker2Mode? calendarViewMode,
+    this.weekendTextStyle,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.firstDayOfWeek,
@@ -263,6 +264,8 @@ class CalendarDatePicker2Config {
   /// Flag to hide dividers on year picker
   final bool? hideYearPickerDividers;
 
+  final TextStyle? weekendTextStyle;
+
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
@@ -310,8 +313,10 @@ class CalendarDatePicker2Config {
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    TextStyle? weekendTextStyle,
   }) {
     return CalendarDatePicker2Config(
+      weekendTextStyle: weekendTextStyle,
       calendarType: calendarType ?? this.calendarType,
       firstDate: DateUtils.dateOnly(firstDate ?? this.firstDate),
       lastDate: DateUtils.dateOnly(lastDate ?? this.lastDate),
@@ -569,6 +574,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    TextStyle? weekendTextStyle,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
