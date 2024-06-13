@@ -1,3 +1,12 @@
+## [1.0.4]
+- feat: add `scroll` mode into `CalendarDatePicker2Mode`
+- feat: add `hideScrollCalendarStickyWeekLabelsHeader` into config
+- feat: add `hideScrollCalendarStickyWeekLabelsHeaderDivider` into config
+- feat: add `hideScrollCalendarWeekLabelsHeader` into config
+- feat: add `scrollCalendarConstraints` into config
+- feat: add `scrollViewMonthYearBuilder` into config
+- feat: add `scrollViewOnScrolling` into config
+
 ## [1.0.3]
 - feat: add `dayMaxWidth` into config
 - feat: add `hideMonthPickerDividers` into config
