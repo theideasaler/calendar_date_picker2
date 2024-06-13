@@ -19,7 +19,7 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
   /// Called when the user taps 'OK' button
   final ValueChanged<List<DateTime?>>? onValueChanged;
 
-  /// Called when the user navigates to a new month/year in the picker.
+  /// Called when the user navigates to a new month/year in the picker under non-scroll mode
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
 
   /// The calendar configurations including action buttons

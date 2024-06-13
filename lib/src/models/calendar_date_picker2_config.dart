@@ -137,7 +137,7 @@ class CalendarDatePicker2Config {
     this.hideMonthPickerDividers,
     this.hideYearPickerDividers,
     this.hideScrollCalendarStickyWeekLabelsHeader,
-    this.hideScrollCalendarStickyWeekLabelsHeaderDividers,
+    this.hideScrollCalendarStickyWeekLabelsHeaderDivider,
     this.hideScrollCalendarWeekLabelsHeader,
     this.scrollCalendarConstraints,
     this.scrollViewMonthYearBuilder,
@@ -294,13 +294,13 @@ class CalendarDatePicker2Config {
   /// Flag to hide dividers on year picker
   final bool? hideYearPickerDividers;
 
-  /// Flag to hide scroll week labels header
+  /// Flag to hide top week labels header on scroll view
   final bool? hideScrollCalendarStickyWeekLabelsHeader;
 
-  /// Flag to hide dividers below scroll week labels header
-  final bool? hideScrollCalendarStickyWeekLabelsHeaderDividers;
+  /// Flag to hide top week labels header divider on scroll view
+  final bool? hideScrollCalendarStickyWeekLabelsHeaderDivider;
 
-  /// Flag to hide scroll week labels header in month calendar
+  /// Flag to hide month calendar week labels header on scroll view
   final bool? hideScrollCalendarWeekLabelsHeader;
 
   /// BoxConstraints for the scroll calendar view, only work for scroll mode
@@ -309,7 +309,7 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over scroll calendar month year UI
   final CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder;
 
-  /// Function to callback over scroll calendar on scrolling
+  /// Function to callback over scrolling on scroll view
   final CalendarScrollViewOnScrolling? scrollViewOnScrolling;
 
   /// Copy the current [CalendarDatePicker2Config] with some new values
@@ -361,7 +361,7 @@ class CalendarDatePicker2Config {
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
     bool? hideScrollCalendarStickyWeekLabelsHeader,
-    bool? hideScrollCalendarStickyWeekLabelsHeaderDividers,
+    bool? hideScrollCalendarStickyWeekLabelsHeaderDivider,
     bool? hideScrollCalendarWeekLabelsHeader,
     BoxConstraints? scrollCalendarConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
@@ -433,9 +433,9 @@ class CalendarDatePicker2Config {
       hideScrollCalendarStickyWeekLabelsHeader:
           hideScrollCalendarStickyWeekLabelsHeader ??
               this.hideScrollCalendarStickyWeekLabelsHeader,
-      hideScrollCalendarStickyWeekLabelsHeaderDividers:
-          hideScrollCalendarStickyWeekLabelsHeaderDividers ??
-              this.hideScrollCalendarStickyWeekLabelsHeaderDividers,
+      hideScrollCalendarStickyWeekLabelsHeaderDivider:
+          hideScrollCalendarStickyWeekLabelsHeaderDivider ??
+              this.hideScrollCalendarStickyWeekLabelsHeaderDivider,
       hideScrollCalendarWeekLabelsHeader: hideScrollCalendarWeekLabelsHeader ??
           this.hideScrollCalendarWeekLabelsHeader,
       scrollCalendarConstraints:
@@ -499,7 +499,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
     bool? hideScrollCalendarStickyWeekLabelsHeader,
-    bool? hideScrollCalendarStickyWeekLabelsHeaderDividers,
+    bool? hideScrollCalendarStickyWeekLabelsHeaderDivider,
     bool? hideScrollCalendarWeekLabelsHeader,
     BoxConstraints? scrollCalendarConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
@@ -562,8 +562,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           hideYearPickerDividers: hideYearPickerDividers,
           hideScrollCalendarStickyWeekLabelsHeader:
               hideScrollCalendarStickyWeekLabelsHeader,
-          hideScrollCalendarStickyWeekLabelsHeaderDividers:
-              hideScrollCalendarStickyWeekLabelsHeaderDividers,
+          hideScrollCalendarStickyWeekLabelsHeaderDivider:
+              hideScrollCalendarStickyWeekLabelsHeaderDivider,
           hideScrollCalendarWeekLabelsHeader:
               hideScrollCalendarWeekLabelsHeader,
           scrollCalendarConstraints: scrollCalendarConstraints,
@@ -656,7 +656,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
     bool? hideScrollCalendarStickyWeekLabelsHeader,
-    bool? hideScrollCalendarStickyWeekLabelsHeaderDividers,
+    bool? hideScrollCalendarStickyWeekLabelsHeaderDivider,
     bool? hideScrollCalendarWeekLabelsHeader,
     BoxConstraints? scrollCalendarConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
@@ -742,9 +742,9 @@ class CalendarDatePicker2WithActionButtonsConfig
       hideScrollCalendarStickyWeekLabelsHeader:
           hideScrollCalendarStickyWeekLabelsHeader ??
               this.hideScrollCalendarStickyWeekLabelsHeader,
-      hideScrollCalendarStickyWeekLabelsHeaderDividers:
-          hideScrollCalendarStickyWeekLabelsHeaderDividers ??
-              this.hideScrollCalendarStickyWeekLabelsHeaderDividers,
+      hideScrollCalendarStickyWeekLabelsHeaderDivider:
+          hideScrollCalendarStickyWeekLabelsHeaderDivider ??
+              this.hideScrollCalendarStickyWeekLabelsHeaderDivider,
       hideScrollCalendarWeekLabelsHeader: hideScrollCalendarWeekLabelsHeader ??
           this.hideScrollCalendarWeekLabelsHeader,
       scrollCalendarConstraints:
