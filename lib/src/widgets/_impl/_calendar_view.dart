@@ -298,8 +298,7 @@ class _CalendarViewState extends State<_CalendarView> {
         DateUtils.addMonthsToMonthDate(widget.config.firstDate, index);
     return _DayPicker(
       key: ValueKey<DateTime>(month),
-      selectedDates: (widget.selectedDates..removeWhere((d) => d == null))
-          .cast<DateTime>(),
+      selectedDates: widget.selectedDates.whereType<DateTime>().toList(),
       onChanged: _handleDateSelected,
       config: widget.config,
       displayedMonth: month,

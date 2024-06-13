@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// Get the number of days offset for the first day in a month.
 int getMonthFirstDayOffset(int year, int month, int firstDayOfWeekIndex) {
   // 0-based day of week for the month and year, with 0 representing Monday.
   final int weekdayFromMonday = DateTime(year, month).weekday - 1;
@@ -14,6 +15,7 @@ int getMonthFirstDayOffset(int year, int month, int firstDayOfWeekIndex) {
   return (weekdayFromMonday - firstDayOfWeekIndex) % 7;
 }
 
+/// Get short month format for the given locale.
 DateFormat getLocaleShortMonthFormat(Locale locale) {
   final String localeName = Intl.canonicalizedLocale(locale.toString());
   var monthFormat = DateFormat.MMM();
@@ -26,6 +28,7 @@ DateFormat getLocaleShortMonthFormat(Locale locale) {
   return monthFormat;
 }
 
+/// Get full month format for the given locale.
 DateFormat getLocaleFullMonthFormat(Locale locale) {
   final String localeName = Intl.canonicalizedLocale(locale.toString());
   var monthFormat = DateFormat.MMMM();

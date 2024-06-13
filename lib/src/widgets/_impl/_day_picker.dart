@@ -52,7 +52,7 @@ class _DayPickerState extends State<_DayPicker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Check to see if the focused date is in this month, if so focus it.
-    final DateTime? focusedDate = _FocusedDate.maybeOf(context);
+    final DateTime? focusedDate = _FocusedDate.maybeOf(context)?.date;
     if (focusedDate != null &&
         DateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
       _dayFocusNodes[focusedDate.day - 1].requestFocus();
@@ -135,6 +135,10 @@ class _DayPickerState extends State<_DayPicker> {
         widget.config.firstDayOfWeek ?? localizations.firstDayOfWeekIndex);
 
     final List<Widget> dayItems = _dayHeaders(headerStyle, localizations);
+    if (widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll &&
+        widget.config.hideScrollCalendarWeekLabelsHeader == true) {
+      dayItems.clear();
+    }
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
     // a leap year.
     int day = -dayOffset;
@@ -342,9 +346,7 @@ class _DayPickerState extends State<_DayPicker> {
       child: GridView.custom(
         padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
-        gridDelegate: widget.config.dayMaxWidth != null
-            ? _DayPickerGridDelegate(dayMaxWidth: widget.config.dayMaxWidth)
-            : _dayPickerGridDelegate,
+        gridDelegate: _DayPickerGridDelegate(config: widget.config),
         childrenDelegate: SliverChildListDelegate(
           dayItems,
           addRepaintBoundaries: false,
@@ -381,18 +383,26 @@ class _DayPickerState extends State<_DayPicker> {
 }
 
 class _DayPickerGridDelegate extends SliverGridDelegate {
-  const _DayPickerGridDelegate({this.dayMaxWidth});
+  const _DayPickerGridDelegate({this.config});
 
-  /// Max day widget width
-  final double? dayMaxWidth;
+  /// The calendar configurations
+  final CalendarDatePicker2Config? config;
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     const int columnCount = DateTime.daysPerWeek;
     final double tileWidth = constraints.crossAxisExtent / columnCount;
+    var totalRowsCount = _maxDayPickerRowCount + 1;
+    if (config?.calendarViewMode == CalendarDatePicker2Mode.scroll &&
+        config?.hideScrollCalendarWeekLabelsHeader == true) {
+      totalRowsCount -= 1;
+    }
+    var rowHeight = config?.dayMaxWidth != null
+        ? (config!.dayMaxWidth! + 2)
+        : _dayPickerRowHeight;
     final double tileHeight = math.min(
-      dayMaxWidth != null ? dayMaxWidth! + 2 : _dayPickerRowHeight,
-      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
+      rowHeight,
+      constraints.viewportMainAxisExtent / totalRowsCount,
     );
     return SliverGridRegularTileLayout(
       childCrossAxisExtent: tileWidth,
@@ -407,5 +417,3 @@ class _DayPickerGridDelegate extends SliverGridDelegate {
   @override
   bool shouldRelayout(_DayPickerGridDelegate oldDelegate) => false;
 }
-
-const _DayPickerGridDelegate _dayPickerGridDelegate = _DayPickerGridDelegate();

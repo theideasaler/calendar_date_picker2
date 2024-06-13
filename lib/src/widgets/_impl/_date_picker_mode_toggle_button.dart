@@ -141,7 +141,7 @@ class _DatePickerModeToggleButtonState
             ? MainAxisAlignment.center
             : MainAxisAlignment.start;
     final horizontalPadding =
-        widget.config.centerAlignModePicker == true ? 0.0 : 8.0;
+        widget.config.centerAlignModePicker == true ? 10.0 : 8.0;
 
     return widget.config.disableMonthPicker == true
         ? [
@@ -234,7 +234,7 @@ class _DatePickerModeToggleButtonState
                     ),
                   ),
                   SizedBox(
-                    width: widget.config.centerAlignModePicker == true ? 50 : 5,
+                    width: widget.config.centerAlignModePicker == true ? 15 : 5,
                   ),
                   Semantics(
                     label: MaterialLocalizations.of(context)
