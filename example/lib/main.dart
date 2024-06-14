@@ -306,7 +306,7 @@ class _MyHomePageState extends State<MyHomePage> {
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
-      hideScrollCalendarWeekLabelsHeader: true,
+      hideScrollCalendarMonthWeekHeader: true,
       scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
       selectedDayHighlightColor: Colors.purple[800],
       closeDialogOnCancelTapped: true,
@@ -569,7 +569,7 @@ class _MyHomePageState extends State<MyHomePage> {
               config: config.copyWith(
                 dayMaxWidth: 32,
                 controlsHeight: 40,
-                hideScrollCalendarStickyWeekLabelsHeader: true,
+                hideScrollCalendarTopHeader: true,
               ),
               value: _singleDatePickerValueWithDefaultValue,
               onValueChanged: (dates) => setState(
@@ -862,7 +862,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         );
       },
-      hideScrollCalendarWeekLabelsHeader: true,
+      hideScrollCalendarMonthWeekHeader: true,
       disableModePicker: true,
     );
     return SizedBox(
