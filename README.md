@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.4-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.5-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.0.4
+calendar_date_picker2: ^1.0.5
 ```
 
 ### Basic setup
@@ -129,58 +129,58 @@ var results = await showCalendarDatePicker2Dialog(
 
 ### For CalendarDatePicker2Config:
 
-| Option                                          | Type                                | Description                                                                                                   |
-| ----------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| calendarType                                    | CalendarDatePicker2Type?            | Calendar picker type, has 3 values: single, multi, range                                                      |
-| rangeBidirectional                              | bool?                               | Flag to enable selecting dates range also in reverse-chronological order                                      |
-| firstDate                                       | DateTime?                           | The earliest allowable DateTime user can select                                                               |
-| lastDate                                        | DateTime?                           | The latest allowable DateTime user can select                                                                 |
-| currentDate                                     | DateTime?                           | The DateTime representing today which will be outlined in calendar                                            |
-| calendarViewMode                                | CalendarDatePicker2Mode?            | The initially displayed view of the calendar picker, with four options available: day, month, year and scroll |
-| calendarViewScrollPhysics                       | ScrollPhysics?                      | The scroll physics for the calendar month view                                                                |
-| allowSameValueSelection                         | bool?                               | Flag to control [onValueChanged] behavior                                                                     |
-| weekdayLabels                                   | List\<String\>?                     | Custom weekday labels, should starts with Sunday                                                              |
-| weekdayLabelTextStyle                           | TextStyle?                          | Custom text style for weekday labels                                                                          |
-| firstDayOfWeek                                  | int?                                | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.                           |
-| lastMonthIcon                                   | Widget?                             | Custom icon for last month button control                                                                     |
-| nextMonthIcon                                   | Widget?                             | Custom icon for next month button control                                                                     |
-| controlsHeight                                  | double?                             | Custom height for calendar control toggle's height                                                            |
-| controlsTextStyle                               | TextStyle?                          | Custom text style for calendar mode toggle control                                                            |
-| centerAlignModePicker                           | bool?                               | Flag to centralize year and month text label in controls                                                      |
-| disableModePicker                               | bool?                               | Flag to disable mode picker and hide the toggle icon                                                          |
-| modePickerTextHandler                           | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
-| customModePickerIcon                            | Widget?                             | Custom icon for the mode picker button icon                                                                   |
-| modePickerTextHandler                           | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
-| useAbbrLabelForMonthModePicker                  | bool?                               | Use Abbreviation label for month mode picker, only works when month picker is enabled                         |
-| dayMaxWidth                                     | double?                             | Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings               |
-| dayBorderRadius                                 | BorderRadius?                       | Custom border radius for day indicator                                                                        |
-| dayTextStyle                                    | TextStyle?                          | Custom text style for calendar day text                                                                       |
-| todayTextStyle                                  | TextStyle?                          | Custom text style for current calendar day                                                                    |
-| disabledDayTextStyle                            | TextStyle?                          | Custom text style for disabled calendar day(s)                                                                |
-| dayTextStylePredicate                           | CalendarDayTextStylePredicate?      | Function to provide full control over calendar days text style                                                |
-| selectedDayTextStyle                            | TextStyle?                          | Custom text style for selected calendar day text                                                              |
-| selectedRangeDayTextStyle                       | TextStyle?                          | Custom text style for selected range calendar day(s)                                                          |
-| selectedDayHighlightColor                       | Color?                              | The highlight color selected day                                                                              |
-| selectedRangeHighlightColor                     | Color?                              | The highlight color for day(s) included in the selected range                                                 |
-| selectableDayPredicate                          | CalendarSelectableDayPredicate?     | Function to provide full control over which dates in the calendar can be selected                             |
-| daySplashColor                                  | Color?                              | The splash color of the day widget                                                                            |
-| dayBuilder                                      | CalendarDayBuilder?                 | Function to provide full control over day widget UI                                                           |
-| monthBuilder                                    | CalendarMonthBuilder?               | Function to provide full control over month widget UI                                                         |
-| hideMonthPickerDividers                         | bool?                               | Flag to hide dividers on month picker                                                                         |
-| selectableMonthPredicate                        | CalendarSelectableMonthPredicate?   | Function to provide full control over which month in the month list can be selected.                          |
-| disableMonthPicker                              | bool?                               | Flag to disable month picker                                                                                  |
-| yearBorderRadius                                | BorderRadius?                       | Custom border radius for year indicator                                                                       |
-| yearTextStyle                                   | TextStyle?                          | Custom text style for years list                                                                              |
-| selectedYearTextStyle                           | TextStyle?                          | Custom text style for selected year                                                                           |
-| selectableYearPredicate                         | CalendarSelectableYearPredicate?    | Function to provide full control over which year in the year list be selected.                                |
-| yearBuilder                                     | CalendarYearBuilder?                | Function to provide full control over year widget UI                                                          |
-| hideYearPickerDividers                          | bool?                               | Flag to hide dividers on year picker                                                                          |
-| hideScrollCalendarStickyWeekLabelsHeader        | bool?                               | Flag to hide top week labels header on scroll view picker                                                     |
-| hideScrollCalendarStickyWeekLabelsHeaderDivider | bool?                               | Flag to hide top week labels header divider on scroll view                                                    |
-| hideScrollCalendarWeekLabelsHeader              | bool?                               | Flag to hide month calendar week labels header on scroll view                                                 |
-| scrollCalendarConstraints                       | BoxConstraints?                     | BoxConstraints for the scroll calendar view, only work for scroll mode                                        |
-| scrollViewMonthYearBuilder                      | CalendarScrollViewMonthYearBuilder? | Function to provide full control over scroll calendar month year UI                                           |
-| scrollViewOnScrolling                           | CalendarScrollViewOnScrolling?      | Function to callback over scrolling on scroll view                                                            |
+| Option                             | Type                                | Description                                                                                                   |
+| ---------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| calendarType                       | CalendarDatePicker2Type?            | Calendar picker type, has 3 values: single, multi, range                                                      |
+| rangeBidirectional                 | bool?                               | Flag to enable selecting dates range also in reverse-chronological order                                      |
+| firstDate                          | DateTime?                           | The earliest allowable DateTime user can select                                                               |
+| lastDate                           | DateTime?                           | The latest allowable DateTime user can select                                                                 |
+| currentDate                        | DateTime?                           | The DateTime representing today which will be outlined in calendar                                            |
+| calendarViewMode                   | CalendarDatePicker2Mode?            | The initially displayed view of the calendar picker, with four options available: day, month, year and scroll |
+| calendarViewScrollPhysics          | ScrollPhysics?                      | The scroll physics for the calendar month view                                                                |
+| allowSameValueSelection            | bool?                               | Flag to control [onValueChanged] behavior                                                                     |
+| weekdayLabels                      | List\<String\>?                     | Custom weekday labels, should starts with Sunday                                                              |
+| weekdayLabelTextStyle              | TextStyle?                          | Custom text style for weekday labels                                                                          |
+| firstDayOfWeek                     | int?                                | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.                           |
+| lastMonthIcon                      | Widget?                             | Custom icon for last month button control                                                                     |
+| nextMonthIcon                      | Widget?                             | Custom icon for next month button control                                                                     |
+| controlsHeight                     | double?                             | Custom height for calendar control toggle's height                                                            |
+| controlsTextStyle                  | TextStyle?                          | Custom text style for calendar mode toggle control                                                            |
+| centerAlignModePicker              | bool?                               | Flag to centralize year and month text label in controls                                                      |
+| disableModePicker                  | bool?                               | Flag to disable mode picker and hide the toggle icon                                                          |
+| modePickerTextHandler              | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
+| customModePickerIcon               | Widget?                             | Custom icon for the mode picker button icon                                                                   |
+| modePickerTextHandler              | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
+| useAbbrLabelForMonthModePicker     | bool?                               | Use Abbreviation label for month mode picker, only works when month picker is enabled                         |
+| dayMaxWidth                        | double?                             | Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings               |
+| dayBorderRadius                    | BorderRadius?                       | Custom border radius for day indicator                                                                        |
+| dayTextStyle                       | TextStyle?                          | Custom text style for calendar day text                                                                       |
+| todayTextStyle                     | TextStyle?                          | Custom text style for current calendar day                                                                    |
+| disabledDayTextStyle               | TextStyle?                          | Custom text style for disabled calendar day(s)                                                                |
+| dayTextStylePredicate              | CalendarDayTextStylePredicate?      | Function to provide full control over calendar days text style                                                |
+| selectedDayTextStyle               | TextStyle?                          | Custom text style for selected calendar day text                                                              |
+| selectedRangeDayTextStyle          | TextStyle?                          | Custom text style for selected range calendar day(s)                                                          |
+| selectedDayHighlightColor          | Color?                              | The highlight color selected day                                                                              |
+| selectedRangeHighlightColor        | Color?                              | The highlight color for day(s) included in the selected range                                                 |
+| selectableDayPredicate             | CalendarSelectableDayPredicate?     | Function to provide full control over which dates in the calendar can be selected                             |
+| daySplashColor                     | Color?                              | The splash color of the day widget                                                                            |
+| dayBuilder                         | CalendarDayBuilder?                 | Function to provide full control over day widget UI                                                           |
+| monthBuilder                       | CalendarMonthBuilder?               | Function to provide full control over month widget UI                                                         |
+| hideMonthPickerDividers            | bool?                               | Flag to hide dividers on month picker                                                                         |
+| selectableMonthPredicate           | CalendarSelectableMonthPredicate?   | Function to provide full control over which month in the month list can be selected.                          |
+| disableMonthPicker                 | bool?                               | Flag to disable month picker                                                                                  |
+| yearBorderRadius                   | BorderRadius?                       | Custom border radius for year indicator                                                                       |
+| yearTextStyle                      | TextStyle?                          | Custom text style for years list                                                                              |
+| selectedYearTextStyle              | TextStyle?                          | Custom text style for selected year                                                                           |
+| selectableYearPredicate            | CalendarSelectableYearPredicate?    | Function to provide full control over which year in the year list be selected.                                |
+| yearBuilder                        | CalendarYearBuilder?                | Function to provide full control over year widget UI                                                          |
+| hideYearPickerDividers             | bool?                               | Flag to hide dividers on year picker                                                                          |
+| hideScrollCalendarTopHeader        | bool?                               | Flag to hide top week labels header on scroll view picker                                                     |
+| hideScrollCalendarTopHeaderDivider | bool?                               | Flag to hide top week labels header divider on scroll view                                                    |
+| hideScrollCalendarMonthWeekHeader  | bool?                               | Flag to hide month calendar week labels header on scroll view                                                 |
+| scrollCalendarConstraints          | BoxConstraints?                     | BoxConstraints for the scroll calendar view, only work for scroll mode                                        |
+| scrollViewMonthYearBuilder         | CalendarScrollViewMonthYearBuilder? | Function to provide full control over scroll calendar month year UI                                           |
+| scrollViewOnScrolling              | CalendarScrollViewOnScrolling?      | Function to callback over scrolling on scroll view                                                            |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 

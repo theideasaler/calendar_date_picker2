@@ -1,3 +1,8 @@
+## [1.0.5]
+- fix: rename `hideScrollCalendarStickyWeekLabelsHeader` to `hideScrollCalendarTopHeader`
+- fix: rename `hideScrollCalendarStickyWeekLabelsHeaderDivider` to `hideScrollCalendarTopHeaderDivider`
+- fix: rename `hideScrollCalendarWeekLabelsHeader` to `hideScrollCalendarMonthWeekHeader`
+
 ## [1.0.4]
 - feat: add `scroll` mode into `CalendarDatePicker2Mode`
 - feat: add `hideScrollCalendarStickyWeekLabelsHeader` into config
