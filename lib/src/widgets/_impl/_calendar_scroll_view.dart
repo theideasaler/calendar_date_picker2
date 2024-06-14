@@ -160,9 +160,7 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
             children: [
               _CalendarScrollViewHeader(widget.config),
               if (_showWeekBottomDivider &&
-                  widget.config
-                          .hideScrollCalendarTopHeaderDivider !=
-                      true)
+                  widget.config.hideScrollCalendarTopHeaderDivider != true)
                 const Divider(height: 0),
             ],
           ),

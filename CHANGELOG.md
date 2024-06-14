@@ -1,3 +1,6 @@
+## [1.0.6]
+- fix: pub dev analyzer warning
+
 ## [1.0.5]
 - fix: rename `hideScrollCalendarStickyWeekLabelsHeader` to `hideScrollCalendarTopHeader`
 - fix: rename `hideScrollCalendarStickyWeekLabelsHeaderDivider` to `hideScrollCalendarTopHeaderDivider`
