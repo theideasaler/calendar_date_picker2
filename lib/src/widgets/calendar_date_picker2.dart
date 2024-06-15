@@ -42,21 +42,22 @@ const double _monthNavButtonsWidth = 108.0;
 class CalendarDatePicker2 extends StatefulWidget {
   CalendarDatePicker2({
     required this.config,
-    required this.value,
+    required List<DateTime?> value,
     this.onValueChanged,
     this.displayedMonthDate,
     this.onDisplayedMonthChanged,
     Key? key,
-  }) : super(key: key) {
+  })  : value = value.where((date) => date != null).cast<DateTime>().toList(),
+        super(key: key) {
     if (config.calendarType == CalendarDatePicker2Type.single) {
-      assert(value.length <= 1,
+      assert(this.value.length <= 1,
           'Error: single date picker only allows maximum one initial date');
     }
 
     if (config.calendarType == CalendarDatePicker2Type.range &&
-        value.length > 1) {
+        this.value.length > 1) {
       assert(
-        value.length == 2 && value[0].isBefore(value[1]),
+        this.value.length == 2 && this.value[0].isBefore(this.value[1]),
         'Error: range date picker must has start date set before setting end date, and start date must before end date.',
       );
     }
