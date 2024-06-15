@@ -141,11 +141,11 @@ class CalendarDatePicker2Config {
         calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day,
         rangeSelectionCoercionMode = rangeSelectionCoercionMode ??
             RangeSelectionCoercionMode.noCoercion {
-    if (this.calendarType == CalendarDatePicker2Type.range) {
+    if (this.calendarType == CalendarDatePicker2Type.range &&
+        selectableDayPredicate == null) {
       assert(
-          selectableDayPredicate == null &&
-              this.rangeSelectionCoercionMode !=
-                  RangeSelectionCoercionMode.noCoercion,
+          this.rangeSelectionCoercionMode !=
+              RangeSelectionCoercionMode.noCoercion,
           "in range mode, 'selectableDayPredicate' cannot be null when 'rangeSelectionCoercionMode' to something else than 'noCoercion'");
     }
     if (rangeBidirectional != null) {
