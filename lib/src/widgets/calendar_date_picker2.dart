@@ -246,7 +246,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       case CalendarDatePicker2Type.single:
         var previouslySelectedDate =
             selectedDates.isEmpty ? null : selectedDates[0];
-        if (widget.config.allowSameValueSelection == false &&
+        if (widget.config.allowSameValueSelection != true &&
             DateUtils.isSameDay(previouslySelectedDate, newlySelectedDate)) {
           preventRefresh = true;
         } else {
