@@ -1,3 +1,9 @@
+## [1.1.0]
+- feat: add `animateToDisplayedMonthDate` into config
+- feat: add `dayViewController` into config
+- feat: add `monthViewController` into config
+- feat: add `yearViewController` into config
+
 ## [1.0.9]
 - fix: rename `scrollCalendarTopHeaderTextStyle` to `scrollViewTopHeaderTextStyle`
 - fix: rename `hideScrollCalendarTopHeader` to `hideScrollViewTopHeader`
