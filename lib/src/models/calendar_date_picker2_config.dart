@@ -136,6 +136,7 @@ class CalendarDatePicker2Config {
     this.dayMaxWidth,
     this.hideMonthPickerDividers,
     this.hideYearPickerDividers,
+    this.scrollCalendarTopHeaderTextStyle,
     this.hideScrollCalendarTopHeader,
     this.hideScrollCalendarTopHeaderDivider,
     this.hideScrollCalendarMonthWeekHeader,
@@ -298,6 +299,9 @@ class CalendarDatePicker2Config {
   /// Flag to hide top week labels header on scroll view
   final bool? hideScrollCalendarTopHeader;
 
+  /// Custom text style for scroll view top week labels header
+  final TextStyle? scrollCalendarTopHeaderTextStyle;
+
   /// Flag to hide top week labels header divider on scroll view
   final bool? hideScrollCalendarTopHeaderDivider;
 
@@ -364,6 +368,7 @@ class CalendarDatePicker2Config {
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    TextStyle? scrollCalendarTopHeaderTextStyle,
     bool? hideScrollCalendarTopHeader,
     bool? hideScrollCalendarTopHeaderDivider,
     bool? hideScrollCalendarMonthWeekHeader,
@@ -435,6 +440,8 @@ class CalendarDatePicker2Config {
           hideMonthPickerDividers ?? this.hideMonthPickerDividers,
       hideYearPickerDividers:
           hideYearPickerDividers ?? this.hideYearPickerDividers,
+      scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle ??
+          this.scrollCalendarTopHeaderTextStyle,
       hideScrollCalendarTopHeader:
           hideScrollCalendarTopHeader ?? this.hideScrollCalendarTopHeader,
       hideScrollCalendarTopHeaderDivider: hideScrollCalendarTopHeaderDivider ??
@@ -502,6 +509,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    TextStyle? scrollCalendarTopHeaderTextStyle,
     bool? hideScrollCalendarTopHeader,
     bool? hideScrollCalendarTopHeaderDivider,
     bool? hideScrollCalendarMonthWeekHeader,
@@ -565,6 +573,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayMaxWidth: dayMaxWidth,
           hideMonthPickerDividers: hideMonthPickerDividers,
           hideYearPickerDividers: hideYearPickerDividers,
+          scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle,
           hideScrollCalendarTopHeader: hideScrollCalendarTopHeader,
           hideScrollCalendarTopHeaderDivider:
               hideScrollCalendarTopHeaderDivider,
@@ -659,6 +668,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
+    TextStyle? scrollCalendarTopHeaderTextStyle,
     bool? hideScrollCalendarTopHeader,
     bool? hideScrollCalendarTopHeaderDivider,
     bool? hideScrollCalendarMonthWeekHeader,
@@ -744,6 +754,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           hideMonthPickerDividers ?? this.hideMonthPickerDividers,
       hideYearPickerDividers:
           hideYearPickerDividers ?? this.hideYearPickerDividers,
+      scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle ??
+          this.scrollCalendarTopHeaderTextStyle,
       hideScrollCalendarTopHeader:
           hideScrollCalendarTopHeader ?? this.hideScrollCalendarTopHeader,
       hideScrollCalendarTopHeaderDivider: hideScrollCalendarTopHeaderDivider ??

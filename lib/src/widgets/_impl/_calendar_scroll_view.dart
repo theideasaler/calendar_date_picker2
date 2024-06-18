@@ -391,7 +391,9 @@ class _CalendarScrollViewHeader extends StatelessWidget {
         child: Center(
           child: Text(
             weekday,
-            style: config.weekdayLabelTextStyle ?? headerStyle,
+            style: config.scrollCalendarTopHeaderTextStyle ??
+                config.weekdayLabelTextStyle ??
+                headerStyle,
           ),
         ),
       ));

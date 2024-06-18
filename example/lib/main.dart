@@ -661,6 +661,10 @@ class _MyHomePageState extends State<MyHomePage> {
       calendarType: CalendarDatePicker2Type.multi,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
       selectedDayHighlightColor: Colors.indigo,
+      scrollCalendarTopHeaderTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
     );
     return SizedBox(
       width: 375,
