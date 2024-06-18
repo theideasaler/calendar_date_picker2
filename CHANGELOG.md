@@ -1,3 +1,6 @@
+## [1.0.8]
+- feat: add `scrollCalendarTopHeaderTextStyle` into config
+
 ## [1.0.7]
 - feat: add `scrollViewController` into config
 
