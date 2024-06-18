@@ -70,13 +70,6 @@ class CalendarDatePicker2 extends StatefulWidget {
         'Error: range date picker must has start date set before setting end date, and start date must before end date.',
       );
     }
-
-    if (config.calendarViewMode == CalendarDatePicker2Mode.scroll) {
-      assert(
-        config.scrollCalendarConstraints?.maxHeight != null,
-        'calendar constraint with maxHeight must be provided when calendarViewMode is scroll',
-      );
-    }
   }
 
   /// The calendar UI related configurations
