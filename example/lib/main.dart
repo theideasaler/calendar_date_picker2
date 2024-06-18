@@ -43,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _scrollController = ScrollController();
   List<DateTime?> _dialogCalendarPickerValue = [
     DateTime(2021, 8, 10),
     DateTime(2021, 8, 13),
@@ -66,6 +67,23 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime.now(),
     DateTime.now().add(const Duration(days: 5)),
   ];
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 1000) {
+        // ignore: avoid_print
+        print('scrolling distance: ${_scrollController.offset}');
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +325,6 @@ class _MyHomePageState extends State<MyHomePage> {
       calendarType: CalendarDatePicker2Type.range,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
       hideScrollCalendarMonthWeekHeader: true,
-      scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
       selectedDayHighlightColor: Colors.purple[800],
       closeDialogOnCancelTapped: true,
       firstDayOfWeek: 1,
@@ -525,7 +542,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildScrollSingleDatePickerWithValue() {
     final config = CalendarDatePicker2Config(
       calendarViewMode: CalendarDatePicker2Mode.scroll,
-      scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
       selectedDayHighlightColor: Colors.amber[900],
       weekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       weekdayLabelTextStyle: const TextStyle(
@@ -565,8 +581,10 @@ class _MyHomePageState extends State<MyHomePage> {
           const Text('Scroll Single Date Picker'),
           SizedBox(
             width: 270,
+            height: 800,
             child: CalendarDatePicker2(
               config: config.copyWith(
+                scrollViewController: _scrollController,
                 dayMaxWidth: 32,
                 controlsHeight: 40,
                 hideScrollCalendarTopHeader: true,
@@ -642,7 +660,6 @@ class _MyHomePageState extends State<MyHomePage> {
       disableMonthPicker: true,
       calendarType: CalendarDatePicker2Type.multi,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
-      scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
       selectedDayHighlightColor: Colors.indigo,
     );
     return SizedBox(
@@ -652,11 +669,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           const SizedBox(height: 10),
           const Text('Scroll Multi Date Picker'),
-          CalendarDatePicker2(
-            config: config,
-            value: _multiDatePickerValueWithDefaultValue,
-            onValueChanged: (dates) =>
-                setState(() => _multiDatePickerValueWithDefaultValue = dates),
+          SizedBox(
+            height: 800,
+            child: CalendarDatePicker2(
+              config: config,
+              value: _multiDatePickerValueWithDefaultValue,
+              onValueChanged: (dates) =>
+                  setState(() => _multiDatePickerValueWithDefaultValue = dates),
+            ),
           ),
           const SizedBox(height: 10),
           Wrap(
@@ -734,7 +754,6 @@ class _MyHomePageState extends State<MyHomePage> {
       calendarType: CalendarDatePicker2Type.range,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
       rangeBidirectional: true,
-      scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
       selectedDayHighlightColor: Colors.teal[800],
       weekdayLabelTextStyle: const TextStyle(
         color: Colors.black87,
@@ -753,11 +772,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           const SizedBox(height: 10),
           const Text('Scroll Range Date Picker'),
-          CalendarDatePicker2(
-            config: config,
-            value: _rangeDatePickerValueWithDefaultValue,
-            onValueChanged: (dates) =>
-                setState(() => _rangeDatePickerValueWithDefaultValue = dates),
+          SizedBox(
+            height: 800,
+            child: CalendarDatePicker2(
+              config: config,
+              value: _rangeDatePickerValueWithDefaultValue,
+              onValueChanged: (dates) =>
+                  setState(() => _rangeDatePickerValueWithDefaultValue = dates),
+            ),
           ),
           const SizedBox(height: 10),
           Row(

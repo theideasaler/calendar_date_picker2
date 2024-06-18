@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Display CalendarDatePicker with action buttons
 class CalendarDatePicker2WithActionButtons extends StatefulWidget {
-  const CalendarDatePicker2WithActionButtons({
+  CalendarDatePicker2WithActionButtons({
     required this.value,
     required this.config,
     this.onValueChanged,
@@ -11,7 +11,14 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onCancelTapped,
     this.onOkTapped,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    if (config.calendarViewMode == CalendarDatePicker2Mode.scroll) {
+      assert(
+        config.scrollCalendarConstraints?.maxHeight != null,
+        'scrollConstraint with maxHeight must be provided when used withCalendarDatePicker2WithActionButtons under scroll mode',
+      );
+    }
+  }
 
   /// The selected [DateTime]s that the picker should display.
   final List<DateTime?> value;

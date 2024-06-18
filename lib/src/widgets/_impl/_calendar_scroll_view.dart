@@ -44,7 +44,7 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
+    _controller = widget.config.scrollViewController ?? ScrollController();
     _controller.addListener(_scrollListener);
 
     // Calculate the index for the initially displayed month. This is needed to

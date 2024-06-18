@@ -19,6 +19,9 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
   String? barrierLabel,
   TransitionBuilder? builder,
 }) {
+  final dialogHeight = config.dayMaxWidth != null
+      ? dialogSize.height
+      : max(dialogSize.height, 410);
   var dialog = Dialog(
     insetPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
     backgroundColor: dialogBackgroundColor ?? Theme.of(context).canvasColor,
@@ -28,15 +31,20 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
     clipBehavior: Clip.antiAlias,
     child: SizedBox(
       width: dialogSize.width,
-      height: config.dayMaxWidth != null
-          ? dialogSize.height
-          : max(dialogSize.height, 410),
+      height: dialogHeight.toDouble(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CalendarDatePicker2WithActionButtons(
             value: value,
-            config: config.copyWith(openedFromDialog: true),
+            config: config.copyWith(
+              openedFromDialog: true,
+              scrollCalendarConstraints: config.scrollCalendarConstraints ??
+                  (config.calendarViewMode == CalendarDatePicker2Mode.scroll
+                      ? BoxConstraints(
+                          maxHeight: dialogHeight.toDouble() - 24 * 2)
+                      : null),
+            ),
           ),
         ],
       ),
