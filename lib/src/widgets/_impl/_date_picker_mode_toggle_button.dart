@@ -140,8 +140,9 @@ class _DatePickerModeToggleButtonState
         widget.config.centerAlignModePicker == true
             ? MainAxisAlignment.center
             : MainAxisAlignment.start;
-    final horizontalPadding =
-        widget.config.centerAlignModePicker == true ? 10.0 : 8.0;
+    final horizontalPadding = widget.config.centerAlignModePicker == true
+        ? (widget.config.dayMaxWidth ?? (_dayPickerRowHeight - 2)) / 4
+        : 8.0;
 
     return widget.config.disableMonthPicker == true
         ? [

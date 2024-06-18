@@ -80,12 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -478,6 +472,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       firstDayOfWeek: 1,
       controlsHeight: 50,
+      dayMaxWidth: 25,
+      animateToDisplayedMonthDate: true,
       controlsTextStyle: const TextStyle(
         color: Colors.black,
         fontSize: 15,
@@ -496,9 +492,11 @@ class _MyHomePageState extends State<MyHomePage> {
           DateTime.now().day - 5),
       lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
           DateTime.now().day + 10),
-      selectableDayPredicate: (day) => !day
-          .difference(DateTime.now().subtract(const Duration(days: 3)))
-          .isNegative,
+      selectableDayPredicate: (day) =>
+          !day
+              .difference(DateTime.now().subtract(const Duration(days: 3)))
+              .isNegative &&
+          day.isBefore(DateTime.now().add(const Duration(days: 30))),
     );
     return SizedBox(
       width: 375,
@@ -510,10 +508,8 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             width: 270,
             child: CalendarDatePicker2(
-              config: config.copyWith(
-                dayMaxWidth: 32,
-                controlsHeight: 40,
-              ),
+              displayedMonthDate: _singleDatePickerValueWithDefaultValue.first,
+              config: config,
               value: _singleDatePickerValueWithDefaultValue,
               onValueChanged: (dates) => setState(
                   () => _singleDatePickerValueWithDefaultValue = dates),

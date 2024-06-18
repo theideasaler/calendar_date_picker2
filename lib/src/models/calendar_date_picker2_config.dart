@@ -102,6 +102,8 @@ class CalendarDatePicker2Config {
     this.lastMonthIcon,
     this.nextMonthIcon,
     this.controlsTextStyle,
+    this.animateToDisplayedMonthDate,
+    this.dayViewController,
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
@@ -122,6 +124,8 @@ class CalendarDatePicker2Config {
     this.dayBuilder,
     this.yearBuilder,
     this.monthBuilder,
+    this.monthViewController,
+    this.yearViewController,
     this.disableModePicker,
     this.centerAlignModePicker,
     this.customModePickerIcon,
@@ -192,6 +196,12 @@ class CalendarDatePicker2Config {
   /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
+  /// Flag to always animate to the displayedMonthDate
+  final bool? animateToDisplayedMonthDate;
+
+  /// Custom page controller for the calendar day view mode
+  final PageController? dayViewController;
+
   /// Custom text style for all calendar days
   final TextStyle? dayTextStyle;
 
@@ -255,6 +265,12 @@ class CalendarDatePicker2Config {
 
   /// Function to provide full control over month widget UI
   final CalendarMonthBuilder? monthBuilder;
+
+  /// Custom scroll controller for the calendar month view
+  final ScrollController? monthViewController;
+
+  /// Custom scroll controller for the calendar year view
+  final ScrollController? yearViewController;
 
   /// Flag to disable mode picker and hide the mode toggle button icon
   final bool? disableModePicker;
@@ -334,6 +350,8 @@ class CalendarDatePicker2Config {
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -355,6 +373,8 @@ class CalendarDatePicker2Config {
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
     CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -391,6 +411,9 @@ class CalendarDatePicker2Config {
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
+      animateToDisplayedMonthDate:
+          animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
@@ -420,6 +443,9 @@ class CalendarDatePicker2Config {
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      monthBuilder: monthBuilder ?? this.monthBuilder,
+      monthViewController: monthViewController ?? this.monthViewController,
+      yearViewController: yearViewController ?? this.yearViewController,
       disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePicker:
           centerAlignModePicker ?? this.centerAlignModePicker,
@@ -475,6 +501,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -496,6 +524,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
     CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -539,6 +569,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           lastMonthIcon: lastMonthIcon,
           nextMonthIcon: nextMonthIcon,
           controlsTextStyle: controlsTextStyle,
+          animateToDisplayedMonthDate: animateToDisplayedMonthDate,
+          dayViewController: dayViewController,
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedRangeDayTextStyle: selectedRangeDayTextStyle,
@@ -560,6 +592,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayBuilder: dayBuilder,
           yearBuilder: yearBuilder,
           monthBuilder: monthBuilder,
+          monthViewController: monthViewController,
+          yearViewController: yearViewController,
           disableModePicker: disableModePicker,
           centerAlignModePicker: centerAlignModePicker,
           customModePickerIcon: customModePickerIcon,
@@ -624,6 +658,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     TextStyle? selectedRangeDayTextStyle,
@@ -645,6 +681,8 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
     CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
@@ -690,6 +728,9 @@ class CalendarDatePicker2WithActionButtonsConfig
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
+      animateToDisplayedMonthDate:
+          animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedRangeDayTextStyle:
@@ -720,6 +761,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       dayBuilder: dayBuilder ?? this.dayBuilder,
       yearBuilder: yearBuilder ?? this.yearBuilder,
       monthBuilder: monthBuilder ?? this.monthBuilder,
+      monthViewController: monthViewController ?? this.monthViewController,
+      yearViewController: yearViewController ?? this.yearViewController,
       disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePicker:
           centerAlignModePicker ?? this.centerAlignModePicker,

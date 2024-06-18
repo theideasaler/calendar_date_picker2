@@ -49,9 +49,10 @@ class _CalendarViewState extends State<_CalendarView> {
   void initState() {
     super.initState();
     _currentMonth = widget.initialMonth;
-    _pageController = PageController(
-        initialPage:
-            DateUtils.monthDelta(widget.config.firstDate, _currentMonth));
+    _pageController = widget.config.dayViewController ??
+        PageController(
+            initialPage:
+                DateUtils.monthDelta(widget.config.firstDate, _currentMonth));
     _shortcutMap = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.arrowLeft):
           DirectionalFocusIntent(TraversalDirection.left),
@@ -90,7 +91,8 @@ class _CalendarViewState extends State<_CalendarView> {
       // https://github.com/flutter/flutter/issues/103561#issuecomment-1125512962
       // https://github.com/flutter/website/blob/3e6d87f13ad2a8dd9cf16081868cc3b3794abb90/src/development/tools/sdk/release-notes/release-notes-3.0.0.md#your-code
       _ambiguate(WidgetsBinding.instance)!.addPostFrameCallback(
-        (Duration timeStamp) => _showMonth(widget.initialMonth, jump: true),
+        (Duration timeStamp) => _showMonth(widget.initialMonth,
+            jump: widget.config.animateToDisplayedMonthDate != true),
       );
     }
   }
