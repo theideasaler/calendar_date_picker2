@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.9-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.0-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.0.9
+calendar_date_picker2: ^1.1.0
 ```
 
 ### Basic setup
@@ -139,6 +139,7 @@ var results = await showCalendarDatePicker2Dialog(
 | calendarViewMode               | CalendarDatePicker2Mode?            | The initially displayed view of the calendar picker, with four options available: day, month, year and scroll |
 | calendarViewScrollPhysics      | ScrollPhysics?                      | The scroll physics for the calendar month view                                                                |
 | allowSameValueSelection        | bool?                               | Flag to control [onValueChanged] behavior                                                                     |
+| animateToDisplayedMonthDate    | bool?                               | Flag to always animate to the displayedMonthDate                                                              |
 | weekdayLabels                  | List\<String\>?                     | Custom weekday labels, should starts with Sunday                                                              |
 | weekdayLabelTextStyle          | TextStyle?                          | Custom text style for weekday labels                                                                          |
 | firstDayOfWeek                 | int?                                | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.                           |
@@ -152,6 +153,7 @@ var results = await showCalendarDatePicker2Dialog(
 | customModePickerIcon           | Widget?                             | Custom icon for the mode picker button icon                                                                   |
 | modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
 | useAbbrLabelForMonthModePicker | bool?                               | Use Abbreviation label for month mode picker, only works when month picker is enabled                         |
+| dayViewController              | PageController?                     | Custom page controller for the calendar day view                                                              |
 | dayMaxWidth                    | double?                             | Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings               |
 | dayBorderRadius                | BorderRadius?                       | Custom border radius for day indicator                                                                        |
 | dayTextStyle                   | TextStyle?                          | Custom text style for calendar day text                                                                       |
@@ -165,10 +167,12 @@ var results = await showCalendarDatePicker2Dialog(
 | selectableDayPredicate         | CalendarSelectableDayPredicate?     | Function to provide full control over which dates in the calendar can be selected                             |
 | daySplashColor                 | Color?                              | The splash color of the day widget                                                                            |
 | dayBuilder                     | CalendarDayBuilder?                 | Function to provide full control over day widget UI                                                           |
+| monthViewController            | ScrollController?                   | Custom scroll controller for the calendar month view                                                          |
 | monthBuilder                   | CalendarMonthBuilder?               | Function to provide full control over month widget UI                                                         |
 | hideMonthPickerDividers        | bool?                               | Flag to hide dividers on month picker                                                                         |
 | selectableMonthPredicate       | CalendarSelectableMonthPredicate?   | Function to provide full control over which month in the month list can be selected.                          |
 | disableMonthPicker             | bool?                               | Flag to disable month picker                                                                                  |
+| yearViewController             | ScrollController?                   | Custom scroll controller for the calendar year view                                                           |
 | yearBorderRadius               | BorderRadius?                       | Custom border radius for year indicator                                                                       |
 | yearTextStyle                  | TextStyle?                          | Custom text style for years list                                                                              |
 | selectedYearTextStyle          | TextStyle?                          | Custom text style for selected year                                                                           |
