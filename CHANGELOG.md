@@ -1,3 +1,6 @@
+## [1.0.7]
+- feat: add `scrollViewController` into config
+
 ## [1.0.6]
 - fix: pub dev analyzer warning
 

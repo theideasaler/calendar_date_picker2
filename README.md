@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.6-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.7-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.0.6
+calendar_date_picker2: ^1.0.7
 ```
 
 ### Basic setup
@@ -181,6 +181,7 @@ var results = await showCalendarDatePicker2Dialog(
 | scrollCalendarConstraints          | BoxConstraints?                     | BoxConstraints for the scroll calendar view, only work for scroll mode                                        |
 | scrollViewMonthYearBuilder         | CalendarScrollViewMonthYearBuilder? | Function to provide full control over scroll calendar month year UI                                           |
 | scrollViewOnScrolling              | CalendarScrollViewOnScrolling?      | Function to callback over scrolling on scroll view                                                            |
+| scrollViewController               | ScrollController?                   | Custom scroll controller to the scroll calendar view                                                          |
 
 ### In addition to the configurations above, CalendarDatePicker2WithActionButtonsConfig has 9 extra options
 
