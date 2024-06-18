@@ -39,7 +39,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
             value: value,
             config: config.copyWith(
               openedFromDialog: true,
-              scrollCalendarConstraints: config.scrollCalendarConstraints ??
+              scrollViewConstraints: config.scrollViewConstraints ??
                   (config.calendarViewMode == CalendarDatePicker2Mode.scroll
                       ? BoxConstraints(
                           maxHeight: dialogHeight.toDouble() - 24 * 2)

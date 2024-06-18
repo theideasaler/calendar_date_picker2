@@ -347,7 +347,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
         );
       case CalendarDatePicker2Mode.scroll:
         return Container(
-          constraints: widget.config.scrollCalendarConstraints,
+          constraints: widget.config.scrollViewConstraints,
           child: _CalendarScrollView(
             config: widget.config,
             key: _dayPickerKey,

@@ -136,7 +136,7 @@ class _DayPickerState extends State<_DayPicker> {
 
     final List<Widget> dayItems = _dayHeaders(headerStyle, localizations);
     if (widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll &&
-        widget.config.hideScrollCalendarMonthWeekHeader == true) {
+        widget.config.hideScrollViewMonthWeekHeader == true) {
       dayItems.clear();
     }
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
@@ -394,7 +394,7 @@ class _DayPickerGridDelegate extends SliverGridDelegate {
     final double tileWidth = constraints.crossAxisExtent / columnCount;
     var totalRowsCount = _maxDayPickerRowCount + 1;
     if (config?.calendarViewMode == CalendarDatePicker2Mode.scroll &&
-        config?.hideScrollCalendarMonthWeekHeader == true) {
+        config?.hideScrollViewMonthWeekHeader == true) {
       totalRowsCount -= 1;
     }
     var rowHeight = config?.dayMaxWidth != null

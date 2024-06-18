@@ -1,3 +1,10 @@
+## [1.0.9]
+- fix: rename `scrollCalendarTopHeaderTextStyle` to `scrollViewTopHeaderTextStyle`
+- fix: rename `hideScrollCalendarTopHeader` to `hideScrollViewTopHeader`
+- fix: rename  `hideScrollCalendarTopHeaderDivider` to `hideScrollViewTopHeaderDivider`
+- fix: rename `hideScrollCalendarMonthWeekHeader` to `hideScrollViewMonthWeekHeader`
+- fix: rename `scrollCalendarConstraints` to `scrollViewConstraints`
+
 ## [1.0.8]
 - feat: add `scrollCalendarTopHeaderTextStyle` into config
 

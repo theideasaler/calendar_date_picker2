@@ -103,7 +103,7 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
         ? (widget.config.dayMaxWidth! + 2)
         : _dayPickerRowHeight;
     if (widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll &&
-        widget.config.hideScrollCalendarMonthWeekHeader == true) {
+        widget.config.hideScrollViewMonthWeekHeader == true) {
       totalRowsCount -= 1;
     }
     final maxContentHeight = rowHeight * totalRowsCount;
@@ -154,13 +154,13 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
 
     return Column(
       children: <Widget>[
-        if (widget.config.hideScrollCalendarTopHeader != true)
+        if (widget.config.hideScrollViewTopHeader != true)
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               _CalendarScrollViewHeader(widget.config),
               if (_showWeekBottomDivider &&
-                  widget.config.hideScrollCalendarTopHeaderDivider != true)
+                  widget.config.hideScrollViewTopHeaderDivider != true)
                 const Divider(height: 0),
             ],
           ),
@@ -391,7 +391,7 @@ class _CalendarScrollViewHeader extends StatelessWidget {
         child: Center(
           child: Text(
             weekday,
-            style: config.scrollCalendarTopHeaderTextStyle ??
+            style: config.scrollViewTopHeaderTextStyle ??
                 config.weekdayLabelTextStyle ??
                 headerStyle,
           ),
