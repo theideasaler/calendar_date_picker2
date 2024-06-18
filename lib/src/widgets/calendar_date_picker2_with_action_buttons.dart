@@ -14,8 +14,8 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
   }) : super(key: key) {
     if (config.calendarViewMode == CalendarDatePicker2Mode.scroll) {
       assert(
-        config.scrollCalendarConstraints?.maxHeight != null,
-        'scrollConstraint with maxHeight must be provided when used withCalendarDatePicker2WithActionButtons under scroll mode',
+        config.scrollViewConstraints?.maxHeight != null,
+        'scrollViewConstraint with maxHeight must be provided when used withCalendarDatePicker2WithActionButtons under scroll mode',
       );
     }
   }

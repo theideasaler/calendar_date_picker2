@@ -136,11 +136,11 @@ class CalendarDatePicker2Config {
     this.dayMaxWidth,
     this.hideMonthPickerDividers,
     this.hideYearPickerDividers,
-    this.scrollCalendarTopHeaderTextStyle,
-    this.hideScrollCalendarTopHeader,
-    this.hideScrollCalendarTopHeaderDivider,
-    this.hideScrollCalendarMonthWeekHeader,
-    this.scrollCalendarConstraints,
+    this.scrollViewTopHeaderTextStyle,
+    this.hideScrollViewTopHeader,
+    this.hideScrollViewTopHeaderDivider,
+    this.hideScrollViewMonthWeekHeader,
+    this.scrollViewConstraints,
     this.scrollViewMonthYearBuilder,
     this.scrollViewOnScrolling,
     this.scrollViewController,
@@ -297,19 +297,19 @@ class CalendarDatePicker2Config {
   final bool? hideYearPickerDividers;
 
   /// Flag to hide top week labels header on scroll view
-  final bool? hideScrollCalendarTopHeader;
+  final bool? hideScrollViewTopHeader;
 
   /// Custom text style for scroll view top week labels header
-  final TextStyle? scrollCalendarTopHeaderTextStyle;
+  final TextStyle? scrollViewTopHeaderTextStyle;
 
   /// Flag to hide top week labels header divider on scroll view
-  final bool? hideScrollCalendarTopHeaderDivider;
+  final bool? hideScrollViewTopHeaderDivider;
 
   /// Flag to hide month calendar week labels header on scroll view
-  final bool? hideScrollCalendarMonthWeekHeader;
+  final bool? hideScrollViewMonthWeekHeader;
 
   /// BoxConstraints for the scroll calendar view, only work for scroll mode
-  final BoxConstraints? scrollCalendarConstraints;
+  final BoxConstraints? scrollViewConstraints;
 
   /// Function to provide full control over scroll calendar month year UI
   final CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder;
@@ -368,11 +368,11 @@ class CalendarDatePicker2Config {
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
-    TextStyle? scrollCalendarTopHeaderTextStyle,
-    bool? hideScrollCalendarTopHeader,
-    bool? hideScrollCalendarTopHeaderDivider,
-    bool? hideScrollCalendarMonthWeekHeader,
-    BoxConstraints? scrollCalendarConstraints,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
@@ -440,16 +440,16 @@ class CalendarDatePicker2Config {
           hideMonthPickerDividers ?? this.hideMonthPickerDividers,
       hideYearPickerDividers:
           hideYearPickerDividers ?? this.hideYearPickerDividers,
-      scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle ??
-          this.scrollCalendarTopHeaderTextStyle,
-      hideScrollCalendarTopHeader:
-          hideScrollCalendarTopHeader ?? this.hideScrollCalendarTopHeader,
-      hideScrollCalendarTopHeaderDivider: hideScrollCalendarTopHeaderDivider ??
-          this.hideScrollCalendarTopHeaderDivider,
-      hideScrollCalendarMonthWeekHeader: hideScrollCalendarMonthWeekHeader ??
-          this.hideScrollCalendarMonthWeekHeader,
-      scrollCalendarConstraints:
-          scrollCalendarConstraints ?? this.scrollCalendarConstraints,
+      scrollViewTopHeaderTextStyle:
+          scrollViewTopHeaderTextStyle ?? this.scrollViewTopHeaderTextStyle,
+      hideScrollViewTopHeader:
+          hideScrollViewTopHeader ?? this.hideScrollViewTopHeader,
+      hideScrollViewTopHeaderDivider:
+          hideScrollViewTopHeaderDivider ?? this.hideScrollViewTopHeaderDivider,
+      hideScrollViewMonthWeekHeader:
+          hideScrollViewMonthWeekHeader ?? this.hideScrollViewMonthWeekHeader,
+      scrollViewConstraints:
+          scrollViewConstraints ?? this.scrollViewConstraints,
       scrollViewMonthYearBuilder:
           scrollViewMonthYearBuilder ?? this.scrollViewMonthYearBuilder,
       scrollViewOnScrolling:
@@ -509,11 +509,11 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
-    TextStyle? scrollCalendarTopHeaderTextStyle,
-    bool? hideScrollCalendarTopHeader,
-    bool? hideScrollCalendarTopHeaderDivider,
-    bool? hideScrollCalendarMonthWeekHeader,
-    BoxConstraints? scrollCalendarConstraints,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
@@ -573,12 +573,11 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayMaxWidth: dayMaxWidth,
           hideMonthPickerDividers: hideMonthPickerDividers,
           hideYearPickerDividers: hideYearPickerDividers,
-          scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle,
-          hideScrollCalendarTopHeader: hideScrollCalendarTopHeader,
-          hideScrollCalendarTopHeaderDivider:
-              hideScrollCalendarTopHeaderDivider,
-          hideScrollCalendarMonthWeekHeader: hideScrollCalendarMonthWeekHeader,
-          scrollCalendarConstraints: scrollCalendarConstraints,
+          scrollViewTopHeaderTextStyle: scrollViewTopHeaderTextStyle,
+          hideScrollViewTopHeader: hideScrollViewTopHeader,
+          hideScrollViewTopHeaderDivider: hideScrollViewTopHeaderDivider,
+          hideScrollViewMonthWeekHeader: hideScrollViewMonthWeekHeader,
+          scrollViewConstraints: scrollViewConstraints,
           scrollViewMonthYearBuilder: scrollViewMonthYearBuilder,
           scrollViewOnScrolling: scrollViewOnScrolling,
           scrollViewController: scrollViewController,
@@ -668,11 +667,11 @@ class CalendarDatePicker2WithActionButtonsConfig
     double? dayMaxWidth,
     bool? hideMonthPickerDividers,
     bool? hideYearPickerDividers,
-    TextStyle? scrollCalendarTopHeaderTextStyle,
-    bool? hideScrollCalendarTopHeader,
-    bool? hideScrollCalendarTopHeaderDivider,
-    bool? hideScrollCalendarMonthWeekHeader,
-    BoxConstraints? scrollCalendarConstraints,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
     CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
@@ -754,16 +753,16 @@ class CalendarDatePicker2WithActionButtonsConfig
           hideMonthPickerDividers ?? this.hideMonthPickerDividers,
       hideYearPickerDividers:
           hideYearPickerDividers ?? this.hideYearPickerDividers,
-      scrollCalendarTopHeaderTextStyle: scrollCalendarTopHeaderTextStyle ??
-          this.scrollCalendarTopHeaderTextStyle,
-      hideScrollCalendarTopHeader:
-          hideScrollCalendarTopHeader ?? this.hideScrollCalendarTopHeader,
-      hideScrollCalendarTopHeaderDivider: hideScrollCalendarTopHeaderDivider ??
-          this.hideScrollCalendarTopHeaderDivider,
-      hideScrollCalendarMonthWeekHeader: hideScrollCalendarMonthWeekHeader ??
-          this.hideScrollCalendarMonthWeekHeader,
-      scrollCalendarConstraints:
-          scrollCalendarConstraints ?? this.scrollCalendarConstraints,
+      scrollViewTopHeaderTextStyle:
+          scrollViewTopHeaderTextStyle ?? this.scrollViewTopHeaderTextStyle,
+      hideScrollViewTopHeader:
+          hideScrollViewTopHeader ?? this.hideScrollViewTopHeader,
+      hideScrollViewTopHeaderDivider:
+          hideScrollViewTopHeaderDivider ?? this.hideScrollViewTopHeaderDivider,
+      hideScrollViewMonthWeekHeader:
+          hideScrollViewMonthWeekHeader ?? this.hideScrollViewMonthWeekHeader,
+      scrollViewConstraints:
+          scrollViewConstraints ?? this.scrollViewConstraints,
       scrollViewMonthYearBuilder:
           scrollViewMonthYearBuilder ?? this.scrollViewMonthYearBuilder,
       scrollViewOnScrolling:

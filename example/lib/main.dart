@@ -324,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
-      hideScrollCalendarMonthWeekHeader: true,
+      hideScrollViewMonthWeekHeader: true,
       selectedDayHighlightColor: Colors.purple[800],
       closeDialogOnCancelTapped: true,
       firstDayOfWeek: 1,
@@ -587,7 +587,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 scrollViewController: _scrollController,
                 dayMaxWidth: 32,
                 controlsHeight: 40,
-                hideScrollCalendarTopHeader: true,
+                hideScrollViewTopHeader: true,
               ),
               value: _singleDatePickerValueWithDefaultValue,
               onValueChanged: (dates) => setState(
@@ -661,7 +661,7 @@ class _MyHomePageState extends State<MyHomePage> {
       calendarType: CalendarDatePicker2Type.multi,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
       selectedDayHighlightColor: Colors.indigo,
-      scrollCalendarTopHeaderTextStyle: const TextStyle(
+      scrollViewTopHeaderTextStyle: const TextStyle(
         color: Colors.black87,
         fontWeight: FontWeight.bold,
       ),
@@ -850,7 +850,7 @@ class _MyHomePageState extends State<MyHomePage> {
       calendarType: CalendarDatePicker2Type.range,
       calendarViewMode: CalendarDatePicker2Mode.scroll,
       rangeBidirectional: true,
-      scrollCalendarConstraints: const BoxConstraints(maxHeight: 800),
+      scrollViewConstraints: const BoxConstraints(maxHeight: 800),
       scrollViewMonthYearBuilder: (monthDate) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -888,7 +888,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         );
       },
-      hideScrollCalendarMonthWeekHeader: true,
+      hideScrollViewMonthWeekHeader: true,
       disableModePicker: true,
     );
     return SizedBox(
