@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.7-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.8-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.0.7
+calendar_date_picker2: ^1.0.8
 ```
 
 ### Basic setup
@@ -175,6 +175,7 @@ var results = await showCalendarDatePicker2Dialog(
 | selectableYearPredicate            | CalendarSelectableYearPredicate?    | Function to provide full control over which year in the year list be selected.                                |
 | yearBuilder                        | CalendarYearBuilder?                | Function to provide full control over year widget UI                                                          |
 | hideYearPickerDividers             | bool?                               | Flag to hide dividers on year picker                                                                          |
+| scrollCalendarTopHeaderTextStyle   | TextStyle?                          | Custom text style for scroll view top week labels header                                                      |
 | hideScrollCalendarTopHeader        | bool?                               | Flag to hide top week labels header on scroll view picker                                                     |
 | hideScrollCalendarTopHeaderDivider | bool?                               | Flag to hide top week labels header divider on scroll view                                                    |
 | hideScrollCalendarMonthWeekHeader  | bool?                               | Flag to hide month calendar week labels header on scroll view                                                 |
