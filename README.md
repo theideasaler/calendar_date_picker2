@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.0-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.1-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.0
+calendar_date_picker2: ^1.1.1
 ```
 
 ### Basic setup
@@ -138,6 +138,7 @@ var results = await showCalendarDatePicker2Dialog(
 | currentDate                    | DateTime?                           | The DateTime representing today which will be outlined in calendar                                            |
 | calendarViewMode               | CalendarDatePicker2Mode?            | The initially displayed view of the calendar picker, with four options available: day, month, year and scroll |
 | calendarViewScrollPhysics      | ScrollPhysics?                      | The scroll physics for the calendar month view                                                                |
+| dynamicCalendarRows            | bool?                               | Flag to enable dynamic calendar rows based on specific month                                                  |
 | allowSameValueSelection        | bool?                               | Flag to control [onValueChanged] behavior                                                                     |
 | animateToDisplayedMonthDate    | bool?                               | Flag to always animate to the displayedMonthDate                                                              |
 | weekdayLabels                  | List\<String\>?                     | Custom weekday labels, should starts with Sunday                                                              |

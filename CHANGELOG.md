@@ -1,3 +1,6 @@
+## [1.1.1]
+- feat: add `dynamicCalendarRows` into config
+
 ## [1.1.0]
 - feat: add `animateToDisplayedMonthDate` into config
 - feat: add `dayViewController` into config
