@@ -1,3 +1,6 @@
+## [1.1.2]
+- fix: pub dev analyzer warning
+
 ## [1.1.1]
 - feat: add `dynamicCalendarRows` into config
 
