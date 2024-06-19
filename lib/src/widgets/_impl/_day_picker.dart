@@ -11,6 +11,7 @@ class _DayPicker extends StatefulWidget {
     required this.displayedMonth,
     required this.selectedDates,
     required this.onChanged,
+    required this.dayRowsCount,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +28,9 @@ class _DayPicker extends StatefulWidget {
 
   /// The month whose days are displayed by this picker.
   final DateTime displayedMonth;
+
+  /// The number of rows to display in the day picker.
+  final int dayRowsCount;
 
   @override
   _DayPickerState createState() => _DayPickerState();
@@ -346,7 +350,10 @@ class _DayPickerState extends State<_DayPicker> {
       child: GridView.custom(
         padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
-        gridDelegate: _DayPickerGridDelegate(config: widget.config),
+        gridDelegate: _DayPickerGridDelegate(
+          config: widget.config,
+          dayRowsCount: widget.dayRowsCount,
+        ),
         childrenDelegate: SliverChildListDelegate(
           dayItems,
           addRepaintBoundaries: false,
@@ -383,16 +390,22 @@ class _DayPickerState extends State<_DayPicker> {
 }
 
 class _DayPickerGridDelegate extends SliverGridDelegate {
-  const _DayPickerGridDelegate({this.config});
+  const _DayPickerGridDelegate({
+    required this.config,
+    required this.dayRowsCount,
+  });
 
   /// The calendar configurations
   final CalendarDatePicker2Config? config;
+
+  /// The number of rows to display in the day picker.
+  final int dayRowsCount;
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     const int columnCount = DateTime.daysPerWeek;
     final double tileWidth = constraints.crossAxisExtent / columnCount;
-    var totalRowsCount = _maxDayPickerRowCount + 1;
+    var totalRowsCount = dayRowsCount + 1;
     if (config?.calendarViewMode == CalendarDatePicker2Mode.scroll &&
         config?.hideScrollViewMonthWeekHeader == true) {
       totalRowsCount -= 1;

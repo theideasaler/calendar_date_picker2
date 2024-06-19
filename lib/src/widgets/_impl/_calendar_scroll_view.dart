@@ -98,12 +98,20 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
         : _initialMonthIndex + index;
     final DateTime month =
         DateUtils.addMonthsToMonthDate(widget.config.firstDate, monthIndex);
-    var totalRowsCount = _maxDayPickerRowCount + 1;
+    final dayRowsCount = widget.config.dynamicCalendarRows == true
+        ? getDayRowsCount(
+            month.year,
+            month.month,
+            widget.config.firstDayOfWeek ?? _localizations.firstDayOfWeekIndex,
+          )
+        : _maxDayPickerRowCount;
+    var totalRowsCount = dayRowsCount + 1;
     var rowHeight = widget.config.dayMaxWidth != null
         ? (widget.config.dayMaxWidth! + 2)
         : _dayPickerRowHeight;
     if (widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll &&
         widget.config.hideScrollViewMonthWeekHeader == true) {
+      // Exclude header row
       totalRowsCount -= 1;
     }
     final maxContentHeight = rowHeight * totalRowsCount;
@@ -142,6 +150,7 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
             selectedDates: widget.selectedDates.whereType<DateTime>().toList(),
             displayedMonth: month,
             onChanged: widget.onChanged,
+            dayRowsCount: dayRowsCount,
           ),
         ),
       ],

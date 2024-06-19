@@ -494,7 +494,7 @@ class _MyHomePageState extends State<MyHomePage> {
           DateTime.now().day + 10),
       selectableDayPredicate: (day) =>
           !day
-              .difference(DateTime.now().subtract(const Duration(days: 3)))
+              .difference(DateTime.now().add(const Duration(days: 3)))
               .isNegative &&
           day.isBefore(DateTime.now().add(const Duration(days: 30))),
     );
@@ -714,6 +714,28 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
+      dynamicCalendarRows: true,
+      disabledDayTextStyle:
+          const TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
+      selectableDayPredicate: (day) {
+        if (_rangeDatePickerValueWithDefaultValue.isEmpty ||
+            _rangeDatePickerValueWithDefaultValue.length == 2) {
+          // exclude Wednesday
+          return day.weekday != DateTime.wednesday;
+        } else {
+          // Make sure range does not contain any Wednesday
+          final firstDate = _rangeDatePickerValueWithDefaultValue.first;
+          final range = [firstDate!, day]..sort();
+          for (var date = range.first;
+              date.compareTo(range.last) <= 0;
+              date = date.add(const Duration(days: 1))) {
+            if (date.weekday == DateTime.wednesday) {
+              return false;
+            }
+          }
+        }
+        return true;
+      },
     );
     return SizedBox(
       width: 375,
@@ -764,6 +786,28 @@ class _MyHomePageState extends State<MyHomePage> {
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
+      dynamicCalendarRows: true,
+      disabledDayTextStyle:
+          const TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
+      selectableDayPredicate: (day) {
+        if (_rangeDatePickerValueWithDefaultValue.isEmpty ||
+            _rangeDatePickerValueWithDefaultValue.length == 2) {
+          // exclude Wednesday
+          return day.weekday != DateTime.wednesday;
+        } else {
+          // Make sure range does not contain any Wednesday
+          final firstDate = _rangeDatePickerValueWithDefaultValue.first;
+          final range = [firstDate!, day]..sort();
+          for (var date = range.first;
+              date.compareTo(range.last) <= 0;
+              date = date.add(const Duration(days: 1))) {
+            if (date.weekday == DateTime.wednesday) {
+              return false;
+            }
+          }
+        }
+        return true;
+      },
     );
     return SizedBox(
       width: 375,
