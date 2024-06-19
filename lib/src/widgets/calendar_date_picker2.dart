@@ -365,11 +365,18 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     assert(debugCheckHasMaterial(context));
     assert(debugCheckHasMaterialLocalizations(context));
     assert(debugCheckHasDirectionality(context));
-    var maxContentHeight = _maxDayPickerHeight;
-    if (widget.config.dayMaxWidth != null) {
-      maxContentHeight =
-          (widget.config.dayMaxWidth! + 2) * (_maxDayPickerRowCount + 1);
-    }
+    final dayRowsCount = widget.config.dynamicCalendarRows == true
+        ? getDayRowsCount(
+            _currentDisplayedMonthDate.year,
+            _currentDisplayedMonthDate.month,
+            widget.config.firstDayOfWeek ?? _localizations.firstDayOfWeekIndex,
+          )
+        : _maxDayPickerRowCount;
+    final totalRowsCount = dayRowsCount + 1;
+    final rowHeight = widget.config.dayMaxWidth != null
+        ? (widget.config.dayMaxWidth! + 2)
+        : _dayPickerRowHeight;
+    final maxContentHeight = rowHeight * totalRowsCount;
 
     return widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll
         ? _buildPicker()

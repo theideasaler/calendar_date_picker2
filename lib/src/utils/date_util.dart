@@ -40,3 +40,12 @@ DateFormat getLocaleFullMonthFormat(Locale locale) {
 
   return monthFormat;
 }
+
+/// Get the number of rows required to display all days in a month.
+int getDayRowsCount(int year, int month, int firstDayOfWeekIndex) {
+  final int monthFirstDayOffset =
+      getMonthFirstDayOffset(year, month, firstDayOfWeekIndex);
+  final int totalDays = DateUtils.getDaysInMonth(year, month);
+  final int remainingDays = totalDays - (7 - monthFirstDayOffset);
+  return (remainingDays / 7).ceil() + 1;
+}

@@ -304,6 +304,14 @@ class _CalendarViewState extends State<_CalendarView> {
       onChanged: _handleDateSelected,
       config: widget.config,
       displayedMonth: month,
+      dayRowsCount: widget.config.dynamicCalendarRows == true
+          ? getDayRowsCount(
+              month.year,
+              month.month,
+              widget.config.firstDayOfWeek ??
+                  _localizations.firstDayOfWeekIndex,
+            )
+          : _maxDayPickerRowCount,
     );
   }
 
