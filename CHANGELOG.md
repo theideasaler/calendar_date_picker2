@@ -1,5 +1,8 @@
+## [1.1.4]
+- fix: update README.md
+
 ## [1.1.3]
-- feat: change onValueChanged's type from `ValueChanged<List<DateTime?>>?` to `ValueChanged<List<DateTime>>?`
+- feat: change `onValueChanged` type to `ValueChanged<List<DateTime>>?`
 
 ## [1.1.2]
 - fix: pub dev analyzer warning

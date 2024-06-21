@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.3-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.4-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.3
+calendar_date_picker2: ^1.1.4
 ```
 
 ### Basic setup
@@ -119,13 +119,13 @@ var results = await showCalendarDatePicker2Dialog(
 
 ### For CalendarDatePicker2 widget
 
-| Argument                | Type                          | Description                                                                            |
-| ----------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
-| config                  | CalendarDatePicker2Config     | Calendar UI related configurations                                                     |
-| value                   | List\<DateTime?\>             | The selected [DateTime]s that the picker should display.                               |
-| onValueChanged          | ValueChanged<List<DateTime>>? | Called when the selected dates changed                                                 |
-| displayedMonthDate      | DateTime?                     | Date to control calendar displayed month                                               |
-| onDisplayedMonthChanged | ValueChanged\<DateTime\>?     | Called when the user navigates to a new month/year in the picker under non-scroll mode |
+| Argument                | Type                            | Description                                                                            |
+| ----------------------- | ------------------------------- | -------------------------------------------------------------------------------------- |
+| config                  | CalendarDatePicker2Config       | Calendar UI related configurations                                                     |
+| value                   | List\<DateTime?\>               | The selected [DateTime]s that the picker should display.                               |
+| onValueChanged          | ValueChanged<List\<DateTime\>>? | Called when the selected dates changed                                                 |
+| displayedMonthDate      | DateTime?                       | Date to control calendar displayed month                                               |
+| onDisplayedMonthChanged | ValueChanged\<DateTime\>?       | Called when the user navigates to a new month/year in the picker under non-scroll mode |
 
 ### For CalendarDatePicker2Config:
 
