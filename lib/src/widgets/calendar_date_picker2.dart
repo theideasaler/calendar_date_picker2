@@ -76,7 +76,7 @@ class CalendarDatePicker2 extends StatefulWidget {
   final List<DateTime?> value;
 
   /// Called when the selected dates changed
-  final ValueChanged<List<DateTime?>>? onValueChanged;
+  final ValueChanged<List<DateTime>>? onValueChanged;
 
   /// Date to control calendar displayed month
   final DateTime? displayedMonthDate;
@@ -302,7 +302,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
                   _selectedDates.isNotEmpty ? _selectedDates[0] : null);
       if (isValueDifferent || widget.config.allowSameValueSelection == true) {
         _selectedDates = [...selectedDates];
-        widget.onValueChanged?.call(_selectedDates);
+        widget.onValueChanged
+            ?.call(_selectedDates.whereType<DateTime>().toList());
       }
     });
   }
