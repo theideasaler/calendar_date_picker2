@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.4-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.5-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.4
+calendar_date_picker2: ^1.1.5
 ```
 
 ### Basic setup
@@ -143,6 +143,7 @@ var results = await showCalendarDatePicker2Dialog(
 | animateToDisplayedMonthDate    | bool?                               | Flag to always animate to the displayedMonthDate                                                              |
 | weekdayLabels                  | List\<String\>?                     | Custom weekday labels, should starts with Sunday                                                              |
 | weekdayLabelTextStyle          | TextStyle?                          | Custom text style for weekday labels                                                                          |
+| weekdayLabelBuilder            | CalendarWeekdayLabelBuilder?        | Function to provide full control over weekday label widget                                                    |
 | firstDayOfWeek                 | int?                                | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.                           |
 | lastMonthIcon                  | Widget?                             | Custom icon for last month button control                                                                     |
 | nextMonthIcon                  | Widget?                             | Custom icon for next month button control                                                                     |
@@ -151,6 +152,7 @@ var results = await showCalendarDatePicker2Dialog(
 | centerAlignModePicker          | bool?                               | Flag to centralize year and month text label in controls                                                      |
 | disableModePicker              | bool?                               | Flag to disable mode picker and hide the toggle icon                                                          |
 | modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
+| modePickerBuilder              | CalendarModePickerBuilder?          | Function to provide full control over mode picker UI                                                          |
 | customModePickerIcon           | Widget?                             | Custom icon for the mode picker button icon                                                                   |
 | modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
 | useAbbrLabelForMonthModePicker | bool?                               | Use Abbreviation label for month mode picker, only works when month picker is enabled                         |

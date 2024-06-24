@@ -1,3 +1,8 @@
+## [1.1.5]
+- refactor: add `isMonthPicker` into `CalendarModePickerTextHandler`
+- feat: add `weekdayLabelBuilder` into config
+- feat: add `modePickerBuilder` into config
+
 ## [1.1.4]
 - fix: update README.md
 

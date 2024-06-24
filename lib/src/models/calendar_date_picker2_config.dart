@@ -303,7 +303,7 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
-  /// Custom builder for the mode picker widget
+  /// Function to provide full control over mode picker UI
   final CalendarModePickerBuilder? modePickerBuilder;
 
   /// Whether the range selection can be also made in reverse-chronological order.
