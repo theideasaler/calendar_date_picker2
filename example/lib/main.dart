@@ -488,6 +488,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       centerAlignModePicker: true,
       useAbbrLabelForMonthModePicker: true,
+      modePickerTextHandler: ({required monthDate, isMonthPicker}) {
+        if (isMonthPicker ?? false) {
+          // Custom month picker text
+          return '${getLocaleShortMonthFormat(const Locale('en')).format(monthDate)} C';
+        }
+
+        return null;
+      },
       firstDate: DateTime(DateTime.now().year - 2, DateTime.now().month - 1,
           DateTime.now().day - 5),
       lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
@@ -715,6 +723,42 @@ class _MyHomePageState extends State<MyHomePage> {
         fontWeight: FontWeight.bold,
       ),
       dynamicCalendarRows: true,
+      modePickerBuilder: ({required monthDate, isMonthPicker}) {
+        return Center(
+          child: Container(
+            padding: const EdgeInsets.all(5),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: BoxDecoration(
+              color: isMonthPicker == true ? Colors.red : Colors.teal[800],
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Text(
+              isMonthPicker == true
+                  ? getLocaleShortMonthFormat(const Locale('en'))
+                      .format(monthDate)
+                  : monthDate.year.toString(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
+      },
+      weekdayLabelBuilder: ({required weekday, isScrollViewTopHeader}) {
+        if (weekday == DateTime.wednesday) {
+          return const Center(
+            child: Text(
+              'W',
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        }
+        return null;
+      },
       disabledDayTextStyle:
           const TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
       selectableDayPredicate: (day) {
@@ -787,6 +831,27 @@ class _MyHomePageState extends State<MyHomePage> {
         fontWeight: FontWeight.bold,
       ),
       dynamicCalendarRows: true,
+      weekdayLabelBuilder: ({required weekday, isScrollViewTopHeader}) {
+        if (weekday == DateTime.wednesday && isScrollViewTopHeader != true) {
+          return const Center(
+            child: Text(
+              'W',
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        }
+        return null;
+      },
+      modePickerTextHandler: ({required monthDate, isMonthPicker}) {
+        if (isMonthPicker ?? false) {
+          return '${getLocaleShortMonthFormat(const Locale('en')).format(monthDate)} New';
+        }
+
+        return null;
+      },
       disabledDayTextStyle:
           const TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
       selectableDayPredicate: (day) {
