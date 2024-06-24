@@ -154,7 +154,6 @@ var results = await showCalendarDatePicker2Dialog(
 | modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
 | modePickerBuilder              | CalendarModePickerBuilder?          | Function to provide full control over mode picker UI                                                          |
 | customModePickerIcon           | Widget?                             | Custom icon for the mode picker button icon                                                                   |
-| modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
 | useAbbrLabelForMonthModePicker | bool?                               | Use Abbreviation label for month mode picker, only works when month picker is enabled                         |
 | dayViewController              | PageController?                     | Custom page controller for the calendar day view                                                              |
 | dayMaxWidth                    | double?                             | Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings               |
