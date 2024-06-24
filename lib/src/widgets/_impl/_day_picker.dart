@@ -101,12 +101,13 @@ class _DayPickerState extends State<_DayPicker> {
     for (int i = firstDayOfWeek; true; i = (i + 1) % 7) {
       final String weekday = weekdays[i];
       result.add(ExcludeSemantics(
-        child: Center(
-          child: Text(
-            weekday,
-            style: widget.config.weekdayLabelTextStyle ?? headerStyle,
-          ),
-        ),
+        child: widget.config.weekdayLabelBuilder?.call(weekday: i) ??
+            Center(
+              child: Text(
+                weekday,
+                style: widget.config.weekdayLabelTextStyle ?? headerStyle,
+              ),
+            ),
       ));
       if (i == (firstDayOfWeek - 1) % 7) break;
     }

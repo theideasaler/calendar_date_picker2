@@ -158,31 +158,33 @@ class _DatePickerModeToggleButtonState
                     onTap: widget.config.disableModePicker == true
                         ? null
                         : widget.onYearPressed,
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: horizontalPadding),
-                      child: Row(
-                        mainAxisAlignment: modePickerMainAxisAlignment,
-                        children: <Widget>[
-                          Flexible(
-                            child: Text(
-                              widget.config.modePickerTextHandler
-                                      ?.call(monthDate: widget.monthDate) ??
-                                  _localizations
-                                      .formatMonthYear(widget.monthDate),
-                              overflow: TextOverflow.ellipsis,
-                              style: controlTextStyle,
-                            ),
-                          ),
-                          widget.config.disableModePicker == true
-                              ? const SizedBox()
-                              : RotationTransition(
-                                  turns: _yearController,
-                                  child: modePickerIcon,
+                    child: widget.config.modePickerBuilder
+                            ?.call(monthDate: widget.monthDate) ??
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: horizontalPadding),
+                          child: Row(
+                            mainAxisAlignment: modePickerMainAxisAlignment,
+                            children: <Widget>[
+                              Flexible(
+                                child: Text(
+                                  widget.config.modePickerTextHandler
+                                          ?.call(monthDate: widget.monthDate) ??
+                                      _localizations
+                                          .formatMonthYear(widget.monthDate),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: controlTextStyle,
                                 ),
-                        ],
-                      ),
-                    ),
+                              ),
+                              widget.config.disableModePicker == true
+                                  ? const SizedBox()
+                                  : RotationTransition(
+                                      turns: _yearController,
+                                      child: modePickerIcon,
+                                    ),
+                            ],
+                          ),
+                        ),
                   ),
                 ),
               ),
@@ -207,30 +209,39 @@ class _DatePickerModeToggleButtonState
                         onTap: widget.config.disableModePicker == true
                             ? null
                             : widget.onMonthPressed,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: horizontalPadding),
-                          child: Row(
-                            mainAxisAlignment: modePickerMainAxisAlignment,
-                            children: <Widget>[
-                              Text(
-                                (widget.config.useAbbrLabelForMonthModePicker ==
-                                            true
-                                        ? getLocaleShortMonthFormat
-                                        : getLocaleFullMonthFormat)(_locale)
-                                    .format(widget.monthDate),
-                                overflow: TextOverflow.ellipsis,
-                                style: controlTextStyle,
+                        child: widget.config.modePickerBuilder?.call(
+                              monthDate: widget.monthDate,
+                              isMonthPicker: true,
+                            ) ??
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalPadding),
+                              child: Row(
+                                mainAxisAlignment: modePickerMainAxisAlignment,
+                                children: <Widget>[
+                                  Text(
+                                    widget.config.modePickerTextHandler?.call(
+                                          monthDate: widget.monthDate,
+                                          isMonthPicker: true,
+                                        ) ??
+                                        (widget.config.useAbbrLabelForMonthModePicker ==
+                                                        true
+                                                    ? getLocaleShortMonthFormat
+                                                    : getLocaleFullMonthFormat)(
+                                                _locale)
+                                            .format(widget.monthDate),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: controlTextStyle,
+                                  ),
+                                  widget.config.disableModePicker == true
+                                      ? const SizedBox()
+                                      : RotationTransition(
+                                          turns: _monthController,
+                                          child: modePickerIcon,
+                                        ),
+                                ],
                               ),
-                              widget.config.disableModePicker == true
-                                  ? const SizedBox()
-                                  : RotationTransition(
-                                      turns: _monthController,
-                                      child: modePickerIcon,
-                                    ),
-                            ],
-                          ),
-                        ),
+                            ),
                       ),
                     ),
                   ),
@@ -249,26 +260,31 @@ class _DatePickerModeToggleButtonState
                         onTap: widget.config.disableModePicker == true
                             ? null
                             : widget.onYearPressed,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: horizontalPadding),
-                          child: Row(
-                            mainAxisAlignment: modePickerMainAxisAlignment,
-                            children: <Widget>[
-                              Text(
-                                _localizations.formatYear(widget.monthDate),
-                                overflow: TextOverflow.ellipsis,
-                                style: controlTextStyle,
+                        child: widget.config.modePickerBuilder
+                                ?.call(monthDate: widget.monthDate) ??
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalPadding),
+                              child: Row(
+                                mainAxisAlignment: modePickerMainAxisAlignment,
+                                children: <Widget>[
+                                  Text(
+                                    widget.config.modePickerTextHandler?.call(
+                                            monthDate: widget.monthDate) ??
+                                        _localizations
+                                            .formatYear(widget.monthDate),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: controlTextStyle,
+                                  ),
+                                  widget.config.disableModePicker == true
+                                      ? const SizedBox()
+                                      : RotationTransition(
+                                          turns: _yearController,
+                                          child: modePickerIcon,
+                                        ),
+                                ],
                               ),
-                              widget.config.disableModePicker == true
-                                  ? const SizedBox()
-                                  : RotationTransition(
-                                      turns: _yearController,
-                                      child: modePickerIcon,
-                                    ),
-                            ],
-                          ),
-                        ),
+                            ),
                       ),
                     ),
                   ),

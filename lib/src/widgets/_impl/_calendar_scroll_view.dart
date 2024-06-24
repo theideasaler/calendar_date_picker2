@@ -398,12 +398,14 @@ class _CalendarScrollViewHeader extends StatelessWidget {
       final String weekday = weekdays[i];
       result.add(ExcludeSemantics(
         child: Center(
-          child: Text(
-            weekday,
-            style: config.scrollViewTopHeaderTextStyle ??
-                config.weekdayLabelTextStyle ??
-                headerStyle,
-          ),
+          child: config.weekdayLabelBuilder
+                  ?.call(weekday: i, isScrollViewTopHeader: true) ??
+              Text(
+                weekday,
+                style: config.scrollViewTopHeaderTextStyle ??
+                    config.weekdayLabelTextStyle ??
+                    headerStyle,
+              ),
         ),
       ));
       if (i == (firstDayOfWeek - 1) % 7) break;

@@ -31,9 +31,10 @@ enum CalendarDatePicker2Mode {
   scroll,
 }
 
-/// Predicate to determine the text style for a day.
-typedef CalendarDayTextStylePredicate = TextStyle? Function({
-  required DateTime date,
+/// Custom builder for the weekday label widget
+typedef CalendarWeekdayLabelBuilder = Widget? Function({
+  required int weekday,
+  bool? isScrollViewTopHeader,
 });
 
 /// Custom builder for the day widget
@@ -66,17 +67,29 @@ typedef CalendarMonthBuilder = Widget? Function({
   bool? isCurrentMonth,
 });
 
-/// Handler for the text displayed in the mode picker
-typedef CalendarModePickerTextHandler = String? Function({
-  required DateTime monthDate,
-});
-
 /// Builder for the month and year in the scroll calendar view.
 typedef CalendarScrollViewMonthYearBuilder = Widget Function(
     DateTime monthDate);
 
+/// Builder for the mode picker widget
+///
+/// [isMonthPicker] will be true if function is called to build month picker
+typedef CalendarModePickerBuilder = Widget? Function(
+    {required DateTime monthDate, bool? isMonthPicker});
+
+/// Handler for the text displayed in the mode picker
+///
+/// [isMonthPicker] will be true if function is called for month picker text
+typedef CalendarModePickerTextHandler = String? Function(
+    {required DateTime monthDate, bool? isMonthPicker});
+
 /// Callback for the scroll calendar view on scrolling
-typedef CalendarScrollViewOnScrolling = Widget Function(double offset);
+typedef CalendarScrollViewOnScrolling = void Function(double offset);
+
+/// Predicate to determine the text style for a day.
+typedef CalendarDayTextStylePredicate = TextStyle? Function({
+  required DateTime date,
+});
 
 /// Predicate to determine whether a day should be selectable.
 typedef CalendarSelectableDayPredicate = bool Function(DateTime day);
@@ -97,6 +110,7 @@ class CalendarDatePicker2Config {
     CalendarDatePicker2Mode? calendarViewMode,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
+    this.weekdayLabelBuilder,
     this.firstDayOfWeek,
     this.controlsHeight,
     this.lastMonthIcon,
@@ -130,6 +144,7 @@ class CalendarDatePicker2Config {
     this.centerAlignModePicker,
     this.customModePickerIcon,
     this.modePickerTextHandler,
+    this.modePickerBuilder,
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional,
     this.calendarViewScrollPhysics,
@@ -181,6 +196,9 @@ class CalendarDatePicker2Config {
 
   /// Custom text style for weekday labels
   final TextStyle? weekdayLabelTextStyle;
+
+  /// Function to provide full control over weekday label widget
+  final CalendarWeekdayLabelBuilder? weekdayLabelBuilder;
 
   /// Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.
   final int? firstDayOfWeek;
@@ -285,6 +303,9 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
+  /// Custom builder for the mode picker widget
+  final CalendarModePickerBuilder? modePickerBuilder;
+
   /// Whether the range selection can be also made in reverse-chronological order.
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
   final bool? rangeBidirectional;
@@ -351,6 +372,7 @@ class CalendarDatePicker2Config {
     CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
@@ -385,6 +407,7 @@ class CalendarDatePicker2Config {
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    CalendarModePickerBuilder? modePickerBuilder,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
@@ -413,6 +436,7 @@ class CalendarDatePicker2Config {
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -459,6 +483,7 @@ class CalendarDatePicker2Config {
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
@@ -504,6 +529,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
@@ -538,6 +564,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    CalendarModePickerBuilder? modePickerBuilder,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
@@ -573,6 +600,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           calendarViewMode: calendarViewMode,
           weekdayLabels: weekdayLabels,
           weekdayLabelTextStyle: weekdayLabelTextStyle,
+          weekdayLabelBuilder: weekdayLabelBuilder,
           firstDayOfWeek: firstDayOfWeek,
           controlsHeight: controlsHeight,
           lastMonthIcon: lastMonthIcon,
@@ -607,6 +635,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           centerAlignModePicker: centerAlignModePicker,
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
+          modePickerBuilder: modePickerBuilder,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
           daySplashColor: daySplashColor,
@@ -663,6 +692,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
@@ -697,6 +727,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    CalendarModePickerBuilder? modePickerBuilder,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -734,6 +765,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
@@ -780,6 +812,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
