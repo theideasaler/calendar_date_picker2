@@ -225,6 +225,11 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   }
 
   void _handleMonthChanged(DateTime value) {
+    if (widget.config.finestMode == CalendarDatePicker2Mode.month ||
+        widget.config.finestMode == CalendarDatePicker2Mode.year) {
+      _handleDayChanged(value);
+      return;
+    }
     _vibrate();
     setState(() {
       _mode = CalendarDatePicker2Mode.day;
@@ -233,6 +238,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   }
 
   void _handleYearChanged(DateTime value) {
+    if (widget.config.finestMode == CalendarDatePicker2Mode.year) {
+      _handleDayChanged(value);
+      return;
+    }
     _vibrate();
 
     if (value.isBefore(widget.config.firstDate)) {
@@ -242,7 +251,9 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     }
 
     setState(() {
-      _mode = CalendarDatePicker2Mode.day;
+      _mode = widget.config.finestMode == CalendarDatePicker2Mode.scroll
+          ? CalendarDatePicker2Mode.day
+          : widget.config.finestMode;
       _handleDisplayedMonthDateChanged(value, fromYearPicker: true);
     });
   }
@@ -396,7 +407,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
                   } else {
                     _handleModeChanged(
                       _mode == CalendarDatePicker2Mode.month
-                          ? CalendarDatePicker2Mode.day
+                          ? widget.config.finestMode ==
+                                  CalendarDatePicker2Mode.scroll
+                              ? CalendarDatePicker2Mode.day
+                              : widget.config.finestMode
                           : CalendarDatePicker2Mode.month,
                     );
                   }
@@ -407,7 +421,10 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
                   } else {
                     _handleModeChanged(
                       _mode == CalendarDatePicker2Mode.year
-                          ? CalendarDatePicker2Mode.day
+                          ? widget.config.finestMode ==
+                                  CalendarDatePicker2Mode.scroll
+                              ? CalendarDatePicker2Mode.day
+                              : widget.config.finestMode
                           : CalendarDatePicker2Mode.year,
                     );
                   }

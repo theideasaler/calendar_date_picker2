@@ -155,7 +155,9 @@ class _DatePickerModeToggleButtonState
                 child: SizedBox(
                   height: (widget.config.controlsHeight ?? _subHeaderHeight),
                   child: InkWell(
-                    onTap: widget.config.disableModePicker == true
+                    onTap: widget.config.disableModePicker == true ||
+                            widget.config.finestMode ==
+                                CalendarDatePicker2Mode.year
                         ? null
                         : widget.onYearPressed,
                     child: widget.config.modePickerBuilder
@@ -176,7 +178,9 @@ class _DatePickerModeToggleButtonState
                                   style: controlTextStyle,
                                 ),
                               ),
-                              widget.config.disableModePicker == true
+                              widget.config.disableModePicker == true ||
+                                      widget.config.finestMode ==
+                                          CalendarDatePicker2Mode.year
                                   ? const SizedBox()
                                   : RotationTransition(
                                       turns: _yearController,
@@ -197,57 +201,74 @@ class _DatePickerModeToggleButtonState
                     ? MainAxisAlignment.center
                     : MainAxisAlignment.start,
                 children: [
-                  Semantics(
-                    label: MaterialLocalizations.of(context)
-                        .selectYearSemanticsLabel,
-                    excludeSemantics: true,
-                    button: true,
-                    child: SizedBox(
-                      height:
-                          (widget.config.controlsHeight ?? _subHeaderHeight),
-                      child: InkWell(
-                        onTap: widget.config.disableModePicker == true
-                            ? null
-                            : widget.onMonthPressed,
-                        child: widget.config.modePickerBuilder?.call(
-                              monthDate: widget.monthDate,
-                              isMonthPicker: true,
-                            ) ??
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalPadding),
-                              child: Row(
-                                mainAxisAlignment: modePickerMainAxisAlignment,
-                                children: <Widget>[
-                                  Text(
-                                    widget.config.modePickerTextHandler?.call(
-                                          monthDate: widget.monthDate,
-                                          isMonthPicker: true,
-                                        ) ??
-                                        (widget.config.useAbbrLabelForMonthModePicker ==
-                                                        true
-                                                    ? getLocaleShortMonthFormat
-                                                    : getLocaleFullMonthFormat)(
-                                                _locale)
-                                            .format(widget.monthDate),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: controlTextStyle,
-                                  ),
-                                  widget.config.disableModePicker == true
-                                      ? const SizedBox()
-                                      : RotationTransition(
-                                          turns: _monthController,
-                                          child: modePickerIcon,
-                                        ),
-                                ],
+                  if (widget.config.finestMode !=
+                          CalendarDatePicker2Mode.year &&
+                      widget.config.finestMode !=
+                          CalendarDatePicker2Mode.month) ...[
+                    Semantics(
+                      label: MaterialLocalizations.of(context)
+                          .selectYearSemanticsLabel,
+                      excludeSemantics: true,
+                      button: true,
+                      child: SizedBox(
+                        height:
+                            (widget.config.controlsHeight ?? _subHeaderHeight),
+                        child: InkWell(
+                          onTap: widget.config.disableModePicker == true ||
+                                  (widget.config.finestMode ==
+                                          CalendarDatePicker2Mode.month ||
+                                      widget.config.finestMode ==
+                                          CalendarDatePicker2Mode.year)
+                              ? null
+                              : widget.onMonthPressed,
+                          child: widget.config.modePickerBuilder?.call(
+                                monthDate: widget.monthDate,
+                                isMonthPicker: true,
+                              ) ??
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: horizontalPadding),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      modePickerMainAxisAlignment,
+                                  children: <Widget>[
+                                    Text(
+                                      widget.config.modePickerTextHandler?.call(
+                                            monthDate: widget.monthDate,
+                                            isMonthPicker: true,
+                                          ) ??
+                                          (widget.config.useAbbrLabelForMonthModePicker ==
+                                                          true
+                                                      ? getLocaleShortMonthFormat
+                                                      : getLocaleFullMonthFormat)(
+                                                  _locale)
+                                              .format(widget.monthDate),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: controlTextStyle,
+                                    ),
+                                    widget.config.disableModePicker == true ||
+                                            (widget.config.finestMode ==
+                                                    CalendarDatePicker2Mode
+                                                        .month ||
+                                                widget.config.finestMode ==
+                                                    CalendarDatePicker2Mode
+                                                        .year)
+                                        ? const SizedBox()
+                                        : RotationTransition(
+                                            turns: _monthController,
+                                            child: modePickerIcon,
+                                          ),
+                                  ],
+                                ),
                               ),
-                            ),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: widget.config.centerAlignModePicker == true ? 15 : 5,
-                  ),
+                    SizedBox(
+                      width:
+                          widget.config.centerAlignModePicker == true ? 15 : 5,
+                    ),
+                  ],
                   Semantics(
                     label: MaterialLocalizations.of(context)
                         .selectYearSemanticsLabel,
@@ -257,7 +278,9 @@ class _DatePickerModeToggleButtonState
                       height:
                           (widget.config.controlsHeight ?? _subHeaderHeight),
                       child: InkWell(
-                        onTap: widget.config.disableModePicker == true
+                        onTap: widget.config.disableModePicker == true ||
+                                widget.config.finestMode ==
+                                    CalendarDatePicker2Mode.year
                             ? null
                             : widget.onYearPressed,
                         child: widget.config.modePickerBuilder
@@ -276,7 +299,9 @@ class _DatePickerModeToggleButtonState
                                     overflow: TextOverflow.ellipsis,
                                     style: controlTextStyle,
                                   ),
-                                  widget.config.disableModePicker == true
+                                  widget.config.disableModePicker == true ||
+                                          widget.config.finestMode ==
+                                              CalendarDatePicker2Mode.year
                                       ? const SizedBox()
                                       : RotationTransition(
                                           turns: _yearController,
