@@ -128,6 +128,9 @@ class _MonthPickerState extends State<_MonthPicker> {
     if (isSelected) {
       itemStyle = widget.config.selectedMonthTextStyle ?? itemStyle;
     }
+    if (!isMonthSelectable) {
+      itemStyle = widget.config.disabledMonthTextStyle ?? itemStyle;
+    }
 
     BoxDecoration? decoration;
     if (isSelected) {
