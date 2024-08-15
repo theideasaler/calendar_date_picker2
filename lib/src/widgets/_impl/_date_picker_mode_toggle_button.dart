@@ -116,9 +116,8 @@ class _DatePickerModeToggleButtonState
             // Give space for the prev/next month buttons that are underneath this row
             SizedBox(width: datePickerOffsetPadding),
           ..._buildModePickerButtons(),
-          if (widget.mode == CalendarDatePicker2Mode.day)
-            // Give space for the prev/next month buttons that are underneath this row
-            SizedBox(width: datePickerOffsetPadding),
+          // Give space for the prev/next month buttons that are underneath this row
+          SizedBox(width: datePickerOffsetPadding),
         ],
       ),
     );
@@ -217,21 +216,24 @@ class _DatePickerModeToggleButtonState
                               padding: EdgeInsets.symmetric(
                                   horizontal: horizontalPadding),
                               child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: modePickerMainAxisAlignment,
                                 children: <Widget>[
-                                  Text(
-                                    widget.config.modePickerTextHandler?.call(
-                                          monthDate: widget.monthDate,
-                                          isMonthPicker: true,
-                                        ) ??
-                                        (widget.config.useAbbrLabelForMonthModePicker ==
-                                                        true
-                                                    ? getLocaleShortMonthFormat
-                                                    : getLocaleFullMonthFormat)(
-                                                _locale)
-                                            .format(widget.monthDate),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: controlTextStyle,
+                                  Flexible(
+                                    child: Text(
+                                      widget.config.modePickerTextHandler?.call(
+                                            monthDate: widget.monthDate,
+                                            isMonthPicker: true,
+                                          ) ??
+                                          (widget.config.useAbbrLabelForMonthModePicker ==
+                                                          true
+                                                      ? getLocaleShortMonthFormat
+                                                      : getLocaleFullMonthFormat)(
+                                                  _locale)
+                                              .format(widget.monthDate),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: controlTextStyle,
+                                    ),
                                   ),
                                   widget.config.disableModePicker == true
                                       ? const SizedBox()
@@ -244,9 +246,6 @@ class _DatePickerModeToggleButtonState
                             ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: widget.config.centerAlignModePicker == true ? 15 : 5,
                   ),
                   Semantics(
                     label: MaterialLocalizations.of(context)
@@ -266,15 +265,18 @@ class _DatePickerModeToggleButtonState
                               padding: EdgeInsets.symmetric(
                                   horizontal: horizontalPadding),
                               child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: modePickerMainAxisAlignment,
                                 children: <Widget>[
-                                  Text(
-                                    widget.config.modePickerTextHandler?.call(
-                                            monthDate: widget.monthDate) ??
-                                        _localizations
-                                            .formatYear(widget.monthDate),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: controlTextStyle,
+                                  Flexible(
+                                    child: Text(
+                                      widget.config.modePickerTextHandler?.call(
+                                              monthDate: widget.monthDate) ??
+                                          _localizations
+                                              .formatYear(widget.monthDate),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: controlTextStyle,
+                                    ),
                                   ),
                                   widget.config.disableModePicker == true
                                       ? const SizedBox()
