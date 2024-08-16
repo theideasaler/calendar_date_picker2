@@ -112,11 +112,11 @@ class _YearPickerState extends State<YearPicker> {
     }
     TextStyle? itemStyle = widget.config.yearTextStyle ??
         textTheme.bodyLarge?.apply(color: textColor);
-    if (isSelected) {
-      itemStyle = widget.config.selectedYearTextStyle ?? itemStyle;
-    }
     if (isDisabled) {
       itemStyle = widget.config.disabledYearTextStyle ?? itemStyle;
+    }
+    if (isSelected) {
+      itemStyle = widget.config.selectedYearTextStyle ?? itemStyle;
     }
 
     BoxDecoration? decoration;
