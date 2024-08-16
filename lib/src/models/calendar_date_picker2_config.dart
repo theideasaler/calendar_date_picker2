@@ -108,6 +108,7 @@ class CalendarDatePicker2Config {
     DateTime? lastDate,
     DateTime? currentDate,
     CalendarDatePicker2Mode? calendarViewMode,
+    CalendarDatePicker2Mode finestMode = CalendarDatePicker2Mode.day,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.weekdayLabelBuilder,
@@ -164,7 +165,6 @@ class CalendarDatePicker2Config {
     this.scrollViewOnScrolling,
     this.scrollViewController,
     this.dynamicCalendarRows,
-    CalendarDatePicker2Mode finestMode = CalendarDatePicker2Mode.day,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -174,7 +174,13 @@ class CalendarDatePicker2Config {
                 calendarType != CalendarDatePicker2Type.single)
             ? CalendarDatePicker2Mode.day
             : finestMode,
-        calendarViewMode = calendarViewMode ?? finestMode;
+        calendarViewMode = (calendarViewMode == CalendarDatePicker2Mode.month &&
+                finestMode == CalendarDatePicker2Mode.day)
+            ? CalendarDatePicker2Mode.month
+            : (calendarViewMode == CalendarDatePicker2Mode.year &&
+                    finestMode == CalendarDatePicker2Mode.day)
+                ? CalendarDatePicker2Mode.year
+                : calendarViewMode ?? finestMode;
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;

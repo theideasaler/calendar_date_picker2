@@ -214,11 +214,7 @@ class _DatePickerModeToggleButtonState
                         height:
                             (widget.config.controlsHeight ?? _subHeaderHeight),
                         child: InkWell(
-                          onTap: widget.config.disableModePicker == true ||
-                                  (widget.config.finestMode ==
-                                          CalendarDatePicker2Mode.month ||
-                                      widget.config.finestMode ==
-                                          CalendarDatePicker2Mode.year)
+                          onTap: widget.config.disableModePicker == true
                               ? null
                               : widget.onMonthPressed,
                           child: widget.config.modePickerBuilder?.call(

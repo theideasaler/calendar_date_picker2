@@ -61,11 +61,11 @@ class _MonthPickerState extends State<_MonthPicker> {
           widget.selectedDates.isNotEmpty && widget.selectedDates[0] != null
               ? _scrollOffsetForMonth(widget.selectedDates[0]!)
               : _scrollOffsetForMonth(DateUtils.dateOnly(DateTime.now()));
+      // Check if Position is attached
+      // Otherwise Scroll Controller will jump into a NullPointer Exception
+      // This is because it checks for `_maxScrollExtent!` to account for potential overscroll
       if (_scrollController.position.hasContentDimensions) {
-        _scrollController.jumpTo(scrollOffset.clamp(
-          _scrollController.position.minScrollExtent,
-          _scrollController.position.maxScrollExtent,
-        ));
+        _scrollController.jumpTo(scrollOffset);
       }
     }
   }
