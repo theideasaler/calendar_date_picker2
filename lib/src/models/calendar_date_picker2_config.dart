@@ -108,6 +108,7 @@ class CalendarDatePicker2Config {
     DateTime? lastDate,
     DateTime? currentDate,
     CalendarDatePicker2Mode? calendarViewMode,
+    CalendarDatePicker2Mode finestMode = CalendarDatePicker2Mode.day,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
     this.weekdayLabelBuilder,
@@ -171,7 +172,17 @@ class CalendarDatePicker2Config {
         lastDate =
             DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
-        calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day;
+        finestMode = (finestMode == CalendarDatePicker2Mode.scroll ||
+                calendarType != CalendarDatePicker2Type.single)
+            ? CalendarDatePicker2Mode.day
+            : finestMode,
+        calendarViewMode = (calendarViewMode == CalendarDatePicker2Mode.month &&
+                finestMode == CalendarDatePicker2Mode.day)
+            ? CalendarDatePicker2Mode.month
+            : (calendarViewMode == CalendarDatePicker2Mode.year &&
+                    finestMode == CalendarDatePicker2Mode.day)
+                ? CalendarDatePicker2Mode.year
+                : calendarViewMode ?? finestMode;
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;
@@ -371,6 +382,15 @@ class CalendarDatePicker2Config {
   /// This will make calendar height dynamic to fit real month rows
   final bool? dynamicCalendarRows;
 
+  /// The finest Mode that can be selected
+  ///
+  /// This only takes effect when [calendarType] is [CalendarDatePicker2Type.single]
+  /// When this is [CalendarDatePicker2Mode.scroll] it takes no effect
+  ///
+  /// If it is [CalendarDatePicker2Mode.month] users can only select years and months. Returning always the First Day of that month
+  /// If it is [CalendarDatePicker2Mode.year] users can only select years. Returning always the First Day of that year
+  final CalendarDatePicker2Mode finestMode;
+
   /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -436,6 +456,7 @@ class CalendarDatePicker2Config {
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    CalendarDatePicker2Mode? finestMode,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -528,6 +549,7 @@ class CalendarDatePicker2Config {
           scrollViewOnScrolling ?? this.scrollViewOnScrolling,
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
+      finestMode: finestMode ?? this.finestMode,
     );
   }
 }
@@ -599,6 +621,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    CalendarDatePicker2Mode finestMode = CalendarDatePicker2Mode.day,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -672,6 +695,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewOnScrolling: scrollViewOnScrolling,
           scrollViewController: scrollViewController,
           dynamicCalendarRows: dynamicCalendarRows,
+          finestMode: finestMode,
         );
 
   /// The gap between calendar and action buttons
@@ -775,6 +799,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    CalendarDatePicker2Mode? finestMode,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -880,6 +905,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewOnScrolling ?? this.scrollViewOnScrolling,
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
+      finestMode: finestMode ?? this.finestMode,
     );
   }
 }
