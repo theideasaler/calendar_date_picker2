@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// Custom enum for a date picker type including single, multi, and range.
 enum CalendarDatePicker2Type {
+  /// Allows selecting a single date.
   single,
+
+  /// Allows selecting multiple dates.
   multi,
 
   /// Allows selecting a range of two dates.
@@ -10,10 +14,30 @@ enum CalendarDatePicker2Type {
   range,
 }
 
-typedef CalendarDayTextStylePredicate = TextStyle? Function({
-  required DateTime date,
+/// Custom enum for a date picker mode including day, month, and year.
+enum CalendarDatePicker2Mode {
+  /// Choosing a day.
+  day,
+
+  /// Choosing a month.
+  month,
+
+  /// Choosing a year.
+  year,
+
+  /// Choosing a vertically scrollable calendar.
+  ///
+  /// The calendar must be wrapped inside a height-constrained widget
+  scroll,
+}
+
+/// Custom builder for the weekday label widget
+typedef CalendarWeekdayLabelBuilder = Widget? Function({
+  required int weekday,
+  bool? isScrollViewTopHeader,
 });
 
+/// Custom builder for the day widget
 typedef CalendarDayBuilder = Widget? Function({
   required DateTime date,
   TextStyle? textStyle,
@@ -23,6 +47,7 @@ typedef CalendarDayBuilder = Widget? Function({
   bool? isToday,
 });
 
+/// Custom builder for the year widget
 typedef CalendarYearBuilder = Widget? Function({
   required int year,
   TextStyle? textStyle,
@@ -32,24 +57,67 @@ typedef CalendarYearBuilder = Widget? Function({
   bool? isCurrentYear,
 });
 
-typedef CalendarModePickerTextHandler = String? Function({
-  required DateTime monthDate,
+/// Custom builder for the month widget
+typedef CalendarMonthBuilder = Widget? Function({
+  required int month,
+  TextStyle? textStyle,
+  BoxDecoration? decoration,
+  bool? isSelected,
+  bool? isDisabled,
+  bool? isCurrentMonth,
 });
 
+/// Builder for the month and year in the scroll calendar view.
+typedef CalendarScrollViewMonthYearBuilder = Widget Function(
+    DateTime monthDate);
+
+/// Builder for the mode picker widget
+///
+/// [isMonthPicker] will be true if function is called to build month picker
+typedef CalendarModePickerBuilder = Widget? Function(
+    {required DateTime monthDate, bool? isMonthPicker});
+
+/// Handler for the text displayed in the mode picker
+///
+/// [isMonthPicker] will be true if function is called for month picker text
+typedef CalendarModePickerTextHandler = String? Function(
+    {required DateTime monthDate, bool? isMonthPicker});
+
+/// Callback for the scroll calendar view on scrolling
+typedef CalendarScrollViewOnScrolling = void Function(double offset);
+
+/// Predicate to determine the text style for a day.
+typedef CalendarDayTextStylePredicate = TextStyle? Function({
+  required DateTime date,
+});
+
+/// Predicate to determine whether a day should be selectable.
+typedef CalendarSelectableDayPredicate = bool Function(DateTime day);
+
+/// Predicate to determine whether a year should be selectable.
+typedef CalendarSelectableYearPredicate = bool Function(int year);
+
+/// Predicate to determine whether a month should be selectable.
+typedef CalendarSelectableMonthPredicate = bool Function(int year, int month);
+
+/// Custom configuration for CalendarDatePicker2
 class CalendarDatePicker2Config {
   CalendarDatePicker2Config({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     this.weekdayLabels,
     this.weekdayLabelTextStyle,
+    this.weekdayLabelBuilder,
     this.firstDayOfWeek,
     this.controlsHeight,
     this.lastMonthIcon,
     this.nextMonthIcon,
     this.controlsTextStyle,
+    this.animateToDisplayedMonthDate,
+    this.dayViewController,
     this.dayTextStyle,
     this.selectedDayTextStyle,
     this.selectedDayHighlightColor,
@@ -58,25 +126,52 @@ class CalendarDatePicker2Config {
     this.todayTextStyle,
     this.yearTextStyle,
     this.selectedYearTextStyle,
+    this.disabledYearTextStyle,
+    this.monthTextStyle,
+    this.selectedMonthTextStyle,
+    this.disabledMonthTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
+    this.monthBorderRadius,
     this.selectableDayPredicate,
+    this.selectableMonthPredicate,
+    this.selectableYearPredicate,
     this.dayTextStylePredicate,
     this.dayBuilder,
     this.yearBuilder,
+    this.monthBuilder,
+    this.monthViewController,
+    this.yearViewController,
     this.disableModePicker,
     this.centerAlignModePicker,
     this.customModePickerIcon,
     this.modePickerTextHandler,
+    this.modePickerBuilder,
     this.selectedRangeDayTextStyle,
-    this.rangeBidirectional = false,
+    this.rangeBidirectional,
     this.calendarViewScrollPhysics,
+    this.daySplashColor,
+    this.allowSameValueSelection,
+    this.disableMonthPicker,
+    this.useAbbrLabelForMonthModePicker,
+    this.dayMaxWidth,
+    this.hideMonthPickerDividers,
+    this.hideYearPickerDividers,
+    this.scrollViewTopHeaderTextStyle,
+    this.hideScrollViewTopHeader,
+    this.hideScrollViewTopHeaderDivider,
+    this.hideScrollViewMonthWeekHeader,
+    this.scrollViewConstraints,
+    this.scrollViewMonthYearBuilder,
+    this.scrollViewOnScrolling,
+    this.scrollViewController,
+    this.dynamicCalendarRows,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
             DateUtils.dateOnly(lastDate ?? DateTime(DateTime.now().year + 50)),
         currentDate = currentDate ?? DateUtils.dateOnly(DateTime.now()),
-        calendarViewMode = calendarViewMode ?? DatePickerMode.day;
+        calendarViewMode = calendarViewMode ?? CalendarDatePicker2Mode.day;
 
   /// The enabled date picker mode
   final CalendarDatePicker2Type calendarType;
@@ -91,7 +186,7 @@ class CalendarDatePicker2Config {
   final DateTime currentDate;
 
   /// The initially displayed view of the calendar picker.
-  final DatePickerMode calendarViewMode;
+  final CalendarDatePicker2Mode calendarViewMode;
 
   /// Custom weekday labels for the current locale, MUST starts from Sunday
   /// Examples:
@@ -103,6 +198,9 @@ class CalendarDatePicker2Config {
 
   /// Custom text style for weekday labels
   final TextStyle? weekdayLabelTextStyle;
+
+  /// Function to provide full control over weekday label widget
+  final CalendarWeekdayLabelBuilder? weekdayLabelBuilder;
 
   /// Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.
   final int? firstDayOfWeek;
@@ -118,6 +216,12 @@ class CalendarDatePicker2Config {
 
   /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
+
+  /// Flag to always animate to the displayedMonthDate
+  final bool? animateToDisplayedMonthDate;
+
+  /// Custom page controller for the calendar day view mode
+  final PageController? dayViewController;
 
   /// Custom text style for all calendar days
   final TextStyle? dayTextStyle;
@@ -141,11 +245,23 @@ class CalendarDatePicker2Config {
   /// Custom text style for today
   final TextStyle? todayTextStyle;
 
-  // Custom text style for years list
+  /// Custom text style for years list
   final TextStyle? yearTextStyle;
 
-  // Custom text style for selected year(s)
+  /// Custom text style for selected year(s)
   final TextStyle? selectedYearTextStyle;
+
+  /// Custom text style for disabled year(s)
+  final TextStyle? disabledYearTextStyle;
+
+  /// Custom text style for month list
+  final TextStyle? monthTextStyle;
+
+  /// Custom text style for selected month(s)
+  final TextStyle? selectedMonthTextStyle;
+
+  /// Custom text style for disabled month(s)
+  final TextStyle? disabledMonthTextStyle;
 
   /// Custom border radius for day indicator
   final BorderRadius? dayBorderRadius;
@@ -153,8 +269,17 @@ class CalendarDatePicker2Config {
   /// Custom border radius for year indicator
   final BorderRadius? yearBorderRadius;
 
+  /// Custom border radius for month indicator
+  final BorderRadius? monthBorderRadius;
+
   /// Function to provide full control over which dates in the calendar can be selected.
-  final SelectableDayPredicate? selectableDayPredicate;
+  final CalendarSelectableDayPredicate? selectableDayPredicate;
+
+  /// Function to provide full control over which month in the month list can be selected.
+  final CalendarSelectableMonthPredicate? selectableMonthPredicate;
+
+  /// Function to provide full control over which year in the year list be selected.
+  final CalendarSelectableYearPredicate? selectableYearPredicate;
 
   /// Function to provide full control over calendar days text style
   final CalendarDayTextStylePredicate? dayTextStylePredicate;
@@ -164,6 +289,15 @@ class CalendarDatePicker2Config {
 
   /// Function to provide full control over year widget UI
   final CalendarYearBuilder? yearBuilder;
+
+  /// Function to provide full control over month widget UI
+  final CalendarMonthBuilder? monthBuilder;
+
+  /// Custom scroll controller for the calendar month view
+  final ScrollController? monthViewController;
+
+  /// Custom scroll controller for the calendar year view
+  final ScrollController? yearViewController;
 
   /// Flag to disable mode picker and hide the mode toggle button icon
   final bool? disableModePicker;
@@ -177,27 +311,83 @@ class CalendarDatePicker2Config {
   /// Function to control mode picker displayed text
   final CalendarModePickerTextHandler? modePickerTextHandler;
 
-  /// Whether the range selection can be also made in reverse-chronological
-  /// order.
+  /// Function to provide full control over mode picker UI
+  final CalendarModePickerBuilder? modePickerBuilder;
+
+  /// Whether the range selection can be also made in reverse-chronological order.
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
-  final bool rangeBidirectional;
+  final bool? rangeBidirectional;
 
   /// The scroll physics for the calendar month view
   final ScrollPhysics? calendarViewScrollPhysics;
 
+  /// The splash color of the day widget
+  final Color? daySplashColor;
+
+  /// When set to true, [onValueChanged] will be called on the same value selection
+  final bool? allowSameValueSelection;
+
+  /// Flag to disable month picker
+  final bool? disableMonthPicker;
+
+  /// Use Abbreviation label for month mode picker, only works when month picker is enabled
+  final bool? useAbbrLabelForMonthModePicker;
+
+  /// Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings
+  final double? dayMaxWidth;
+
+  /// Flag to hide dividers on month picker
+  final bool? hideMonthPickerDividers;
+
+  /// Flag to hide dividers on year picker
+  final bool? hideYearPickerDividers;
+
+  /// Flag to hide top week labels header on scroll view
+  final bool? hideScrollViewTopHeader;
+
+  /// Custom text style for scroll view top week labels header
+  final TextStyle? scrollViewTopHeaderTextStyle;
+
+  /// Flag to hide top week labels header divider on scroll view
+  final bool? hideScrollViewTopHeaderDivider;
+
+  /// Flag to hide month calendar week labels header on scroll view
+  final bool? hideScrollViewMonthWeekHeader;
+
+  /// BoxConstraints for the scroll calendar view, only work for scroll mode
+  final BoxConstraints? scrollViewConstraints;
+
+  /// Function to provide full control over scroll calendar month year UI
+  final CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder;
+
+  /// Function to callback over scrolling on scroll view
+  final CalendarScrollViewOnScrolling? scrollViewOnScrolling;
+
+  /// Custom scroll controller to the scroll calendar view
+  final ScrollController? scrollViewController;
+
+  /// Flag to enable dynamic calendar rows based on specific month
+  ///
+  /// This will make calendar height dynamic to fit real month rows
+  final bool? dynamicCalendarRows;
+
+  /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -206,19 +396,46 @@ class CalendarDatePicker2Config {
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    BorderRadius? monthBorderRadius,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    CalendarModePickerBuilder? modePickerBuilder,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
+    CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
+    CalendarScrollViewOnScrolling? scrollViewOnScrolling,
+    ScrollController? scrollViewController,
+    bool? dynamicCalendarRows,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -229,11 +446,15 @@ class CalendarDatePicker2Config {
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
+      animateToDisplayedMonthDate:
+          animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedDayHighlightColor:
@@ -245,29 +466,73 @@ class CalendarDatePicker2Config {
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      disabledYearTextStyle:
+          disabledYearTextStyle ?? this.disabledYearTextStyle,
       selectedRangeDayTextStyle:
           selectedRangeDayTextStyle ?? this.selectedRangeDayTextStyle,
+      monthTextStyle: monthTextStyle ?? this.monthTextStyle,
+      selectedMonthTextStyle:
+          selectedMonthTextStyle ?? this.selectedMonthTextStyle,
+      disabledMonthTextStyle:
+          disabledMonthTextStyle ?? this.disabledMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
+      selectableMonthPredicate:
+          selectableMonthPredicate ?? this.selectableMonthPredicate,
+      selectableYearPredicate:
+          selectableYearPredicate ?? this.selectableYearPredicate,
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      monthBuilder: monthBuilder ?? this.monthBuilder,
+      monthViewController: monthViewController ?? this.monthViewController,
+      yearViewController: yearViewController ?? this.yearViewController,
       disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePicker:
           centerAlignModePicker ?? this.centerAlignModePicker,
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      allowSameValueSelection:
+          allowSameValueSelection ?? this.allowSameValueSelection,
+      disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
+      useAbbrLabelForMonthModePicker:
+          useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
+      dayMaxWidth: dayMaxWidth ?? this.dayMaxWidth,
+      hideMonthPickerDividers:
+          hideMonthPickerDividers ?? this.hideMonthPickerDividers,
+      hideYearPickerDividers:
+          hideYearPickerDividers ?? this.hideYearPickerDividers,
+      scrollViewTopHeaderTextStyle:
+          scrollViewTopHeaderTextStyle ?? this.scrollViewTopHeaderTextStyle,
+      hideScrollViewTopHeader:
+          hideScrollViewTopHeader ?? this.hideScrollViewTopHeader,
+      hideScrollViewTopHeaderDivider:
+          hideScrollViewTopHeaderDivider ?? this.hideScrollViewTopHeaderDivider,
+      hideScrollViewMonthWeekHeader:
+          hideScrollViewMonthWeekHeader ?? this.hideScrollViewMonthWeekHeader,
+      scrollViewConstraints:
+          scrollViewConstraints ?? this.scrollViewConstraints,
+      scrollViewMonthYearBuilder:
+          scrollViewMonthYearBuilder ?? this.scrollViewMonthYearBuilder,
+      scrollViewOnScrolling:
+          scrollViewOnScrolling ?? this.scrollViewOnScrolling,
+      scrollViewController: scrollViewController ?? this.scrollViewController,
+      dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
     );
   }
 }
 
+/// Custom configuration for CalendarDatePicker2 with action buttons
 class CalendarDatePicker2WithActionButtonsConfig
     extends CalendarDatePicker2Config {
   CalendarDatePicker2WithActionButtonsConfig({
@@ -275,14 +540,17 @@ class CalendarDatePicker2WithActionButtonsConfig
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     Color? selectedDayHighlightColor,
@@ -291,19 +559,46 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    BorderRadius? monthBorderRadius,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
-    bool rangeBidirectional = false,
+    CalendarModePickerBuilder? modePickerBuilder,
+    bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
+    CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
+    CalendarScrollViewOnScrolling? scrollViewOnScrolling,
+    ScrollController? scrollViewController,
+    bool? dynamicCalendarRows,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -321,11 +616,14 @@ class CalendarDatePicker2WithActionButtonsConfig
           calendarViewMode: calendarViewMode,
           weekdayLabels: weekdayLabels,
           weekdayLabelTextStyle: weekdayLabelTextStyle,
+          weekdayLabelBuilder: weekdayLabelBuilder,
           firstDayOfWeek: firstDayOfWeek,
           controlsHeight: controlsHeight,
           lastMonthIcon: lastMonthIcon,
           nextMonthIcon: nextMonthIcon,
           controlsTextStyle: controlsTextStyle,
+          animateToDisplayedMonthDate: animateToDisplayedMonthDate,
+          dayViewController: dayViewController,
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
           selectedRangeDayTextStyle: selectedRangeDayTextStyle,
@@ -335,18 +633,45 @@ class CalendarDatePicker2WithActionButtonsConfig
           todayTextStyle: todayTextStyle,
           yearTextStyle: yearTextStyle,
           selectedYearTextStyle: selectedYearTextStyle,
+          disabledYearTextStyle: disabledYearTextStyle,
+          monthTextStyle: monthTextStyle,
+          selectedMonthTextStyle: selectedMonthTextStyle,
+          disabledMonthTextStyle: disabledMonthTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
+          monthBorderRadius: monthBorderRadius,
           selectableDayPredicate: selectableDayPredicate,
+          selectableMonthPredicate: selectableMonthPredicate,
+          selectableYearPredicate: selectableYearPredicate,
           dayTextStylePredicate: dayTextStylePredicate,
           dayBuilder: dayBuilder,
           yearBuilder: yearBuilder,
+          monthBuilder: monthBuilder,
+          monthViewController: monthViewController,
+          yearViewController: yearViewController,
           disableModePicker: disableModePicker,
           centerAlignModePicker: centerAlignModePicker,
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
+          modePickerBuilder: modePickerBuilder,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
+          daySplashColor: daySplashColor,
+          allowSameValueSelection: allowSameValueSelection,
+          disableMonthPicker: disableMonthPicker,
+          useAbbrLabelForMonthModePicker: useAbbrLabelForMonthModePicker,
+          dayMaxWidth: dayMaxWidth,
+          hideMonthPickerDividers: hideMonthPickerDividers,
+          hideYearPickerDividers: hideYearPickerDividers,
+          scrollViewTopHeaderTextStyle: scrollViewTopHeaderTextStyle,
+          hideScrollViewTopHeader: hideScrollViewTopHeader,
+          hideScrollViewTopHeaderDivider: hideScrollViewTopHeaderDivider,
+          hideScrollViewMonthWeekHeader: hideScrollViewMonthWeekHeader,
+          scrollViewConstraints: scrollViewConstraints,
+          scrollViewMonthYearBuilder: scrollViewMonthYearBuilder,
+          scrollViewOnScrolling: scrollViewOnScrolling,
+          scrollViewController: scrollViewController,
+          dynamicCalendarRows: dynamicCalendarRows,
         );
 
   /// The gap between calendar and action buttons
@@ -382,14 +707,17 @@ class CalendarDatePicker2WithActionButtonsConfig
     DateTime? firstDate,
     DateTime? lastDate,
     DateTime? currentDate,
-    DatePickerMode? calendarViewMode,
+    CalendarDatePicker2Mode? calendarViewMode,
     List<String>? weekdayLabels,
     TextStyle? weekdayLabelTextStyle,
+    CalendarWeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
     Widget? nextMonthIcon,
     TextStyle? controlsTextStyle,
+    bool? animateToDisplayedMonthDate,
+    PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
     TextStyle? selectedRangeDayTextStyle,
@@ -399,16 +727,27 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
+    TextStyle? monthTextStyle,
+    TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
-    SelectableDayPredicate? selectableDayPredicate,
+    BorderRadius? monthBorderRadius,
+    CalendarSelectableDayPredicate? selectableDayPredicate,
+    CalendarSelectableMonthPredicate? selectableMonthPredicate,
+    CalendarSelectableYearPredicate? selectableYearPredicate,
     CalendarDayTextStylePredicate? dayTextStylePredicate,
     CalendarDayBuilder? dayBuilder,
     CalendarYearBuilder? yearBuilder,
+    CalendarMonthBuilder? monthBuilder,
+    ScrollController? monthViewController,
+    ScrollController? yearViewController,
     bool? disableModePicker,
     bool? centerAlignModePicker,
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
+    CalendarModePickerBuilder? modePickerBuilder,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -420,6 +759,22 @@ class CalendarDatePicker2WithActionButtonsConfig
     EdgeInsets? buttonPadding,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
+    Color? daySplashColor,
+    bool? allowSameValueSelection,
+    bool? disableMonthPicker,
+    bool? useAbbrLabelForMonthModePicker,
+    double? dayMaxWidth,
+    bool? hideMonthPickerDividers,
+    bool? hideYearPickerDividers,
+    TextStyle? scrollViewTopHeaderTextStyle,
+    bool? hideScrollViewTopHeader,
+    bool? hideScrollViewTopHeaderDivider,
+    bool? hideScrollViewMonthWeekHeader,
+    BoxConstraints? scrollViewConstraints,
+    CalendarScrollViewMonthYearBuilder? scrollViewMonthYearBuilder,
+    CalendarScrollViewOnScrolling? scrollViewOnScrolling,
+    ScrollController? scrollViewController,
+    bool? dynamicCalendarRows,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -430,11 +785,15 @@ class CalendarDatePicker2WithActionButtonsConfig
       weekdayLabels: weekdayLabels ?? this.weekdayLabels,
       weekdayLabelTextStyle:
           weekdayLabelTextStyle ?? this.weekdayLabelTextStyle,
+      weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
+      animateToDisplayedMonthDate:
+          animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
       selectedRangeDayTextStyle:
@@ -448,20 +807,36 @@ class CalendarDatePicker2WithActionButtonsConfig
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      disabledYearTextStyle:
+          disabledYearTextStyle ?? this.disabledYearTextStyle,
+      monthTextStyle: monthTextStyle ?? this.monthTextStyle,
+      selectedMonthTextStyle:
+          selectedMonthTextStyle ?? this.selectedMonthTextStyle,
+      disabledMonthTextStyle:
+          disabledMonthTextStyle ?? this.disabledMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
+      monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
       selectableDayPredicate:
           selectableDayPredicate ?? this.selectableDayPredicate,
+      selectableMonthPredicate:
+          selectableMonthPredicate ?? this.selectableMonthPredicate,
+      selectableYearPredicate:
+          selectableYearPredicate ?? this.selectableYearPredicate,
       dayTextStylePredicate:
           dayTextStylePredicate ?? this.dayTextStylePredicate,
       dayBuilder: dayBuilder ?? this.dayBuilder,
       yearBuilder: yearBuilder ?? this.yearBuilder,
+      monthBuilder: monthBuilder ?? this.monthBuilder,
+      monthViewController: monthViewController ?? this.monthViewController,
+      yearViewController: yearViewController ?? this.yearViewController,
       disableModePicker: disableModePicker ?? this.disableModePicker,
       centerAlignModePicker:
           centerAlignModePicker ?? this.centerAlignModePicker,
       customModePickerIcon: customModePickerIcon ?? this.customModePickerIcon,
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
+      modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,
@@ -478,6 +853,33 @@ class CalendarDatePicker2WithActionButtonsConfig
       buttonPadding: buttonPadding ?? this.buttonPadding,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
+      daySplashColor: daySplashColor ?? this.daySplashColor,
+      allowSameValueSelection:
+          allowSameValueSelection ?? this.allowSameValueSelection,
+      disableMonthPicker: disableMonthPicker ?? this.disableMonthPicker,
+      useAbbrLabelForMonthModePicker:
+          useAbbrLabelForMonthModePicker ?? this.useAbbrLabelForMonthModePicker,
+      dayMaxWidth: dayMaxWidth ?? this.dayMaxWidth,
+      hideMonthPickerDividers:
+          hideMonthPickerDividers ?? this.hideMonthPickerDividers,
+      hideYearPickerDividers:
+          hideYearPickerDividers ?? this.hideYearPickerDividers,
+      scrollViewTopHeaderTextStyle:
+          scrollViewTopHeaderTextStyle ?? this.scrollViewTopHeaderTextStyle,
+      hideScrollViewTopHeader:
+          hideScrollViewTopHeader ?? this.hideScrollViewTopHeader,
+      hideScrollViewTopHeaderDivider:
+          hideScrollViewTopHeaderDivider ?? this.hideScrollViewTopHeaderDivider,
+      hideScrollViewMonthWeekHeader:
+          hideScrollViewMonthWeekHeader ?? this.hideScrollViewMonthWeekHeader,
+      scrollViewConstraints:
+          scrollViewConstraints ?? this.scrollViewConstraints,
+      scrollViewMonthYearBuilder:
+          scrollViewMonthYearBuilder ?? this.scrollViewMonthYearBuilder,
+      scrollViewOnScrolling:
+          scrollViewOnScrolling ?? this.scrollViewOnScrolling,
+      scrollViewController: scrollViewController ?? this.scrollViewController,
+      dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
     );
   }
 }

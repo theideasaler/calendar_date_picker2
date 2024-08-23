@@ -11,6 +11,7 @@ class _DayPicker extends StatefulWidget {
     required this.displayedMonth,
     required this.selectedDates,
     required this.onChanged,
+    required this.dayRowsCount,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +28,9 @@ class _DayPicker extends StatefulWidget {
 
   /// The month whose days are displayed by this picker.
   final DateTime displayedMonth;
+
+  /// The number of rows to display in the day picker.
+  final int dayRowsCount;
 
   @override
   _DayPickerState createState() => _DayPickerState();
@@ -52,7 +56,7 @@ class _DayPickerState extends State<_DayPicker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Check to see if the focused date is in this month, if so focus it.
-    final DateTime? focusedDate = _FocusedDate.maybeOf(context);
+    final DateTime? focusedDate = _FocusedDate.maybeOf(context)?.date;
     if (focusedDate != null &&
         DateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
       _dayFocusNodes[focusedDate.day - 1].requestFocus();
@@ -97,12 +101,13 @@ class _DayPickerState extends State<_DayPicker> {
     for (int i = firstDayOfWeek; true; i = (i + 1) % 7) {
       final String weekday = weekdays[i];
       result.add(ExcludeSemantics(
-        child: Center(
-          child: Text(
-            weekday,
-            style: widget.config.weekdayLabelTextStyle ?? headerStyle,
-          ),
-        ),
+        child: widget.config.weekdayLabelBuilder?.call(weekday: i) ??
+            Center(
+              child: Text(
+                weekday,
+                style: widget.config.weekdayLabelTextStyle ?? headerStyle,
+              ),
+            ),
       ));
       if (i == (firstDayOfWeek - 1) % 7) break;
     }
@@ -124,6 +129,8 @@ class _DayPickerState extends State<_DayPicker> {
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
+    final Color daySplashColor =
+        widget.config.daySplashColor ?? selectedDayBackground.withOpacity(0.38);
 
     final int year = widget.displayedMonth.year;
     final int month = widget.displayedMonth.month;
@@ -133,6 +140,10 @@ class _DayPickerState extends State<_DayPicker> {
         widget.config.firstDayOfWeek ?? localizations.firstDayOfWeekIndex);
 
     final List<Widget> dayItems = _dayHeaders(headerStyle, localizations);
+    if (widget.config.calendarViewMode == CalendarDatePicker2Mode.scroll &&
+        widget.config.hideScrollViewMonthWeekHeader == true) {
+      dayItems.clear();
+    }
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
     // a leap year.
     int day = -dayOffset;
@@ -304,11 +315,15 @@ class _DayPickerState extends State<_DayPicker> {
             child: dayWidget,
           );
         } else {
+          var dayInkRadius = _dayPickerRowHeight / 2 + 4;
+          if (widget.config.dayMaxWidth != null) {
+            dayInkRadius = (widget.config.dayMaxWidth! + 2) / 2 + 4;
+          }
           dayWidget = InkResponse(
             focusNode: _dayFocusNodes[day - 1],
             onTap: () => widget.onChanged(dayToBuild),
-            radius: _dayPickerRowHeight / 2 + 4,
-            splashColor: selectedDayBackground.withOpacity(0.38),
+            radius: dayInkRadius,
+            splashColor: daySplashColor,
             child: Semantics(
               // We want the day of month to be spoken first irrespective of the
               // locale-specific preferences or TextDirection. This is because
@@ -336,7 +351,10 @@ class _DayPickerState extends State<_DayPicker> {
       child: GridView.custom(
         padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
-        gridDelegate: _dayPickerGridDelegate,
+        gridDelegate: _DayPickerGridDelegate(
+          config: widget.config,
+          dayRowsCount: widget.dayRowsCount,
+        ),
         childrenDelegate: SliverChildListDelegate(
           dayItems,
           addRepaintBoundaries: false,
@@ -373,15 +391,32 @@ class _DayPickerState extends State<_DayPicker> {
 }
 
 class _DayPickerGridDelegate extends SliverGridDelegate {
-  const _DayPickerGridDelegate();
+  const _DayPickerGridDelegate({
+    required this.config,
+    required this.dayRowsCount,
+  });
+
+  /// The calendar configurations
+  final CalendarDatePicker2Config? config;
+
+  /// The number of rows to display in the day picker.
+  final int dayRowsCount;
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     const int columnCount = DateTime.daysPerWeek;
     final double tileWidth = constraints.crossAxisExtent / columnCount;
+    var totalRowsCount = dayRowsCount + 1;
+    if (config?.calendarViewMode == CalendarDatePicker2Mode.scroll &&
+        config?.hideScrollViewMonthWeekHeader == true) {
+      totalRowsCount -= 1;
+    }
+    var rowHeight = config?.dayMaxWidth != null
+        ? (config!.dayMaxWidth! + 2)
+        : _dayPickerRowHeight;
     final double tileHeight = math.min(
-      _dayPickerRowHeight,
-      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
+      rowHeight,
+      constraints.viewportMainAxisExtent / totalRowsCount,
     );
     return SliverGridRegularTileLayout(
       childCrossAxisExtent: tileWidth,
@@ -396,5 +431,3 @@ class _DayPickerGridDelegate extends SliverGridDelegate {
   @override
   bool shouldRelayout(_DayPickerGridDelegate oldDelegate) => false;
 }
-
-const _DayPickerGridDelegate _dayPickerGridDelegate = _DayPickerGridDelegate();
