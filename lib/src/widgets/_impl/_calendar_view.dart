@@ -49,9 +49,10 @@ class _CalendarViewState extends State<_CalendarView> {
   void initState() {
     super.initState();
     _currentMonth = widget.initialMonth;
-    _pageController = PageController(
-        initialPage:
-            DateUtils.monthDelta(widget.config.firstDate, _currentMonth));
+    _pageController = widget.config.dayViewController ??
+        PageController(
+            initialPage:
+                DateUtils.monthDelta(widget.config.firstDate, _currentMonth));
     _shortcutMap = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.arrowLeft):
           DirectionalFocusIntent(TraversalDirection.left),
@@ -90,7 +91,8 @@ class _CalendarViewState extends State<_CalendarView> {
       // https://github.com/flutter/flutter/issues/103561#issuecomment-1125512962
       // https://github.com/flutter/website/blob/3e6d87f13ad2a8dd9cf16081868cc3b3794abb90/src/development/tools/sdk/release-notes/release-notes-3.0.0.md#your-code
       _ambiguate(WidgetsBinding.instance)!.addPostFrameCallback(
-        (Duration timeStamp) => _showMonth(widget.initialMonth, jump: true),
+        (Duration timeStamp) => _showMonth(widget.initialMonth,
+            jump: widget.config.animateToDisplayedMonthDate != true),
       );
     }
   }
@@ -298,11 +300,18 @@ class _CalendarViewState extends State<_CalendarView> {
         DateUtils.addMonthsToMonthDate(widget.config.firstDate, index);
     return _DayPicker(
       key: ValueKey<DateTime>(month),
-      selectedDates: (widget.selectedDates..removeWhere((d) => d == null))
-          .cast<DateTime>(),
+      selectedDates: widget.selectedDates.whereType<DateTime>().toList(),
       onChanged: _handleDateSelected,
       config: widget.config,
       displayedMonth: month,
+      dayRowsCount: widget.config.dynamicCalendarRows == true
+          ? getDayRowsCount(
+              month.year,
+              month.month,
+              widget.config.firstDayOfWeek ??
+                  _localizations.firstDayOfWeekIndex,
+            )
+          : _maxDayPickerRowCount,
     );
   }
 
@@ -329,6 +338,9 @@ class _CalendarViewState extends State<_CalendarView> {
                         : _localizations.previousMonthTooltip,
                     button: true,
                     child: IconButton(
+                      splashRadius: widget.config.dayMaxWidth != null
+                          ? widget.config.dayMaxWidth! * 2 / 3
+                          : null,
                       icon: widget.config.lastMonthIcon ??
                           const Icon(Icons.chevron_left),
                       color: controlColor,
@@ -345,6 +357,9 @@ class _CalendarViewState extends State<_CalendarView> {
                         : _localizations.nextMonthTooltip,
                     button: true,
                     child: IconButton(
+                      splashRadius: widget.config.dayMaxWidth != null
+                          ? widget.config.dayMaxWidth! * 2 / 3
+                          : null,
                       icon: widget.config.nextMonthIcon ??
                           const Icon(Icons.chevron_right),
                       color: controlColor,

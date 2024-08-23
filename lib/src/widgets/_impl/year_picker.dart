@@ -58,7 +58,8 @@ class _YearPickerState extends State<YearPicker> {
         widget.selectedDates.isNotEmpty && widget.selectedDates[0] != null
             ? _scrollOffsetForYear(widget.selectedDates[0]!)
             : _scrollOffsetForYear(DateUtils.dateOnly(DateTime.now()));
-    _scrollController = ScrollController(initialScrollOffset: scrollOffset);
+    _scrollController = widget.config.yearViewController ??
+        ScrollController(initialScrollOffset: scrollOffset);
   }
 
   @override
@@ -90,8 +91,11 @@ class _YearPickerState extends State<YearPicker> {
     final int year = widget.config.firstDate.year + index - offset;
     final bool isSelected = widget.selectedDates.any((d) => d?.year == year);
     final bool isCurrentYear = year == widget.config.currentDate.year;
-    final bool isDisabled = year < widget.config.firstDate.year ||
-        year > widget.config.lastDate.year;
+    final yearSelectableFromPredicate =
+        widget.config.selectableYearPredicate?.call(year) ?? true;
+    final isDisabled = (year < widget.config.firstDate.year ||
+            year > widget.config.lastDate.year) ||
+        !yearSelectableFromPredicate;
     const double decorationHeight = 36.0;
     const double decorationWidth = 72.0;
 
@@ -108,6 +112,9 @@ class _YearPickerState extends State<YearPicker> {
     }
     TextStyle? itemStyle = widget.config.yearTextStyle ??
         textTheme.bodyLarge?.apply(color: textColor);
+    if (isDisabled) {
+      itemStyle = widget.config.disabledYearTextStyle ?? itemStyle;
+    }
     if (isSelected) {
       itemStyle = widget.config.selectedYearTextStyle ?? itemStyle;
     }
@@ -184,7 +191,11 @@ class _YearPickerState extends State<YearPicker> {
     assert(debugCheckHasMaterial(context));
     return Column(
       children: <Widget>[
-        const Divider(),
+        Divider(
+          color: widget.config.hideYearPickerDividers == true
+              ? Colors.transparent
+              : null,
+        ),
         Expanded(
           child: GridView.builder(
             controller: _scrollController,
@@ -195,7 +206,11 @@ class _YearPickerState extends State<YearPicker> {
             padding: const EdgeInsets.symmetric(horizontal: _yearPickerPadding),
           ),
         ),
-        const Divider(),
+        Divider(
+          color: widget.config.hideYearPickerDividers == true
+              ? Colors.transparent
+              : null,
+        ),
       ],
     );
   }

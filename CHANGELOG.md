@@ -1,3 +1,84 @@
+## [1.1.5]
+- refactor: add `isMonthPicker` into `CalendarModePickerTextHandler`
+- feat: add `weekdayLabelBuilder` into config
+- feat: add `modePickerBuilder` into config
+
+## [1.1.4]
+- fix: update README.md
+
+## [1.1.3]
+- feat: change `onValueChanged` type to `ValueChanged<List<DateTime>>?`
+
+## [1.1.2]
+- fix: pub dev analyzer warning
+
+## [1.1.1]
+- feat: add `dynamicCalendarRows` into config
+
+## [1.1.0]
+- feat: add `animateToDisplayedMonthDate` into config
+- feat: add `dayViewController` into config
+- feat: add `monthViewController` into config
+- feat: add `yearViewController` into config
+
+## [1.0.9]
+- fix: rename `scrollCalendarTopHeaderTextStyle` to `scrollViewTopHeaderTextStyle`
+- fix: rename `hideScrollCalendarTopHeader` to `hideScrollViewTopHeader`
+- fix: rename  `hideScrollCalendarTopHeaderDivider` to `hideScrollViewTopHeaderDivider`
+- fix: rename `hideScrollCalendarMonthWeekHeader` to `hideScrollViewMonthWeekHeader`
+- fix: rename `scrollCalendarConstraints` to `scrollViewConstraints`
+
+## [1.0.8]
+- feat: add `scrollCalendarTopHeaderTextStyle` into config
+
+## [1.0.7]
+- feat: add `scrollViewController` into config
+
+## [1.0.6]
+- fix: pub dev analyzer warning
+
+## [1.0.5]
+- fix: rename `hideScrollCalendarStickyWeekLabelsHeader` to `hideScrollCalendarTopHeader`
+- fix: rename `hideScrollCalendarStickyWeekLabelsHeaderDivider` to `hideScrollCalendarTopHeaderDivider`
+- fix: rename `hideScrollCalendarWeekLabelsHeader` to `hideScrollCalendarMonthWeekHeader`
+
+## [1.0.4]
+- feat: add `scroll` mode into `CalendarDatePicker2Mode`
+- feat: add `hideScrollCalendarStickyWeekLabelsHeader` into config
+- feat: add `hideScrollCalendarStickyWeekLabelsHeaderDivider` into config
+- feat: add `hideScrollCalendarWeekLabelsHeader` into config
+- feat: add `scrollCalendarConstraints` into config
+- feat: add `scrollViewMonthYearBuilder` into config
+- feat: add `scrollViewOnScrolling` into config
+
+## [1.0.3]
+- feat: add `dayMaxWidth` into config
+- feat: add `hideMonthPickerDividers` into config
+- feat: add `hideYearPickerDividers` into config
+
+## [1.0.2]
+
+- fix: current month & selected validation logics
+
+## [1.0.1]
+
+- doc: update README.md
+
+## [1.0.0]
+
+- **BREAKING**: feat: add month picker
+- feat: add `monthBuilder` into config
+- feat: add `disableMonthPicker` into config
+- feat: add `useAbbrLabelForMonthModePicker` into config
+- feat: add `selectableMonthPredicate` into config
+- feat: add `selectableYearPredicate` into config
+
+## [0.5.6]
+
+- refactor: change `rangeBidirectional` to `bool?`
+- feat: add `daySplashColor` into calendar config
+- feat: add `allowSameValueSelection` into calendar config
+
 ## [0.5.5]
 
 - doc: update README.md

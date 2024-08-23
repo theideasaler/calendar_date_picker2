@@ -1,8 +1,9 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 
+/// Display CalendarDatePicker with action buttons
 class CalendarDatePicker2WithActionButtons extends StatefulWidget {
-  const CalendarDatePicker2WithActionButtons({
+  CalendarDatePicker2WithActionButtons({
     required this.value,
     required this.config,
     this.onValueChanged,
@@ -10,14 +11,22 @@ class CalendarDatePicker2WithActionButtons extends StatefulWidget {
     this.onCancelTapped,
     this.onOkTapped,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    if (config.calendarViewMode == CalendarDatePicker2Mode.scroll) {
+      assert(
+        config.scrollViewConstraints?.maxHeight != null,
+        'scrollViewConstraint with maxHeight must be provided when used withCalendarDatePicker2WithActionButtons under scroll mode',
+      );
+    }
+  }
 
+  /// The selected [DateTime]s that the picker should display.
   final List<DateTime?> value;
 
   /// Called when the user taps 'OK' button
   final ValueChanged<List<DateTime?>>? onValueChanged;
 
-  /// Called when the user navigates to a new month/year in the picker.
+  /// Called when the user navigates to a new month/year in the picker under non-scroll mode
   final ValueChanged<DateTime>? onDisplayedMonthChanged;
 
   /// The calendar configurations including action buttons
