@@ -166,6 +166,7 @@ class CalendarDatePicker2Config {
     this.scrollViewOnScrolling,
     this.scrollViewController,
     this.dynamicCalendarRows,
+    this.dayModeScrollDirection,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -371,6 +372,9 @@ class CalendarDatePicker2Config {
   /// This will make calendar height dynamic to fit real month rows
   final bool? dynamicCalendarRows;
 
+  /// Axis scroll direction for [CalendarDatePicker2Mode.day] mode
+  final Axis? dayModeScrollDirection;
+
   /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -436,6 +440,7 @@ class CalendarDatePicker2Config {
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    Axis? dayModeScrollDirection,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -528,6 +533,7 @@ class CalendarDatePicker2Config {
           scrollViewOnScrolling ?? this.scrollViewOnScrolling,
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
+      dayModeScrollDirection: dayModeScrollDirection,
     );
   }
 }
@@ -608,6 +614,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
+    Axis? dayModeScrollDirection,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -672,6 +679,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewOnScrolling: scrollViewOnScrolling,
           scrollViewController: scrollViewController,
           dynamicCalendarRows: dynamicCalendarRows,
+          dayModeScrollDirection: dayModeScrollDirection,
         );
 
   /// The gap between calendar and action buttons
@@ -775,6 +783,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    Axis? dayModeScrollDirection,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -880,6 +889,8 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewOnScrolling ?? this.scrollViewOnScrolling,
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
+      dayModeScrollDirection:
+          dayModeScrollDirection ?? this.dayModeScrollDirection,
     );
   }
 }
