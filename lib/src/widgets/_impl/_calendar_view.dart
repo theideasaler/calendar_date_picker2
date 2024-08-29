@@ -336,7 +336,9 @@ class _CalendarViewState extends State<_CalendarView> {
                       ? widget.config.dayMaxWidth! * 2 / 3
                       : null,
                   icon: widget.config.lastMonthIcon ??
-                      const Icon(Icons.chevron_left),
+                      Icon(widget.config.dayModeScrollDirection == Axis.vertical
+                          ? Icons.keyboard_arrow_up
+                          : Icons.chevron_left),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth
                       ? null
@@ -350,7 +352,10 @@ class _CalendarViewState extends State<_CalendarView> {
                       ? widget.config.dayMaxWidth! * 2 / 3
                       : null,
                   icon: widget.config.nextMonthIcon ??
-                      const Icon(Icons.chevron_right),
+                      Icon(widget.config.dayModeScrollDirection ==
+                              Axis.vertical
+                          ? Icons.keyboard_arrow_down
+                          : Icons.chevron_right),
                   color: controlColor,
                   tooltip: _isDisplayingLastMonth
                       ? null
@@ -377,6 +382,8 @@ class _CalendarViewState extends State<_CalendarView> {
                           widget.config.firstDate, widget.config.lastDate) +
                       1,
                   onPageChanged: _handleMonthPageChanged,
+                  scrollDirection:
+                      widget.config.dayModeScrollDirection ?? Axis.horizontal,
                 ),
               ),
             ),
