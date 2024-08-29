@@ -370,21 +370,22 @@ class _DayPickerState extends State<_DayPicker> {
     TextStyle dayTextStyle,
   ) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Spacer(),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            decoration: decoration,
-            child: Center(
-              child: Text(
-                localizations.formatDecimal(day),
-                style: dayTextStyle,
+        Expanded(
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: decoration,
+              child: Center(
+                child: Text(
+                  localizations.formatDecimal(day),
+                  style: dayTextStyle,
+                ),
               ),
             ),
           ),
         ),
-        const Spacer(),
       ],
     );
   }
