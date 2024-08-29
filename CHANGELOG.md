@@ -1,3 +1,10 @@
+## [1.1.6]
+- refactor: amend default day widget builder to enable flexible day widget width
+- feat: add `disabledYearTextStyle` into config
+- feat: add `disabledMonthTextStyle` into config
+- feat: add `dayModeScrollDirection` into config
+- feat: add `modePickersGap` into config
+
 ## [1.1.5]
 - refactor: add `isMonthPicker` into `CalendarModePickerTextHandler`
 - feat: add `weekdayLabelBuilder` into config
