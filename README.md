@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.5-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.6-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.5
+calendar_date_picker2: ^1.1.6
 ```
 
 ### Basic setup
@@ -150,6 +150,7 @@ var results = await showCalendarDatePicker2Dialog(
 | controlsHeight                 | double?                             | Custom height for calendar control toggle's height                                                            |
 | controlsTextStyle              | TextStyle?                          | Custom text style for calendar mode toggle control                                                            |
 | centerAlignModePicker          | bool?                               | Flag to centralize year and month text label in controls                                                      |
+| modePickersGap                 | double?                             | Custom gap distance between month and year mode pickers                                                       |
 | disableModePicker              | bool?                               | Flag to disable mode picker and hide the toggle icon                                                          |
 | modePickerTextHandler          | CalendarModePickerTextHandler?      | Function to control mode picker displayed text                                                                |
 | modePickerBuilder              | CalendarModePickerBuilder?          | Function to provide full control over mode picker UI                                                          |
@@ -158,26 +159,31 @@ var results = await showCalendarDatePicker2Dialog(
 | dayViewController              | PageController?                     | Custom page controller for the calendar day view                                                              |
 | dayMaxWidth                    | double?                             | Max width of day widget. When [dayMaxWidth] is not null, it will override default size settings               |
 | dayBorderRadius                | BorderRadius?                       | Custom border radius for day indicator                                                                        |
-| dayTextStyle                   | TextStyle?                          | Custom text style for calendar day text                                                                       |
-| todayTextStyle                 | TextStyle?                          | Custom text style for current calendar day                                                                    |
+| dayTextStyle                   | TextStyle?                          | Custom text style for calendar day(s)                                                                         |
+| todayTextStyle                 | TextStyle?                          | Custom text style for current calendar day(s)                                                                 |
+| selectedDayTextStyle           | TextStyle?                          | Custom text style for selected calendar day(s)                                                                |
 | disabledDayTextStyle           | TextStyle?                          | Custom text style for disabled calendar day(s)                                                                |
-| dayTextStylePredicate          | CalendarDayTextStylePredicate?      | Function to provide full control over calendar days text style                                                |
-| selectedDayTextStyle           | TextStyle?                          | Custom text style for selected calendar day text                                                              |
 | selectedRangeDayTextStyle      | TextStyle?                          | Custom text style for selected range calendar day(s)                                                          |
+| dayTextStylePredicate          | CalendarDayTextStylePredicate?      | Function to provide full control over calendar day(s) text style                                              |
 | selectedDayHighlightColor      | Color?                              | The highlight color selected day                                                                              |
 | selectedRangeHighlightColor    | Color?                              | The highlight color for day(s) included in the selected range                                                 |
 | selectableDayPredicate         | CalendarSelectableDayPredicate?     | Function to provide full control over which dates in the calendar can be selected                             |
 | daySplashColor                 | Color?                              | The splash color of the day widget                                                                            |
 | dayBuilder                     | CalendarDayBuilder?                 | Function to provide full control over day widget UI                                                           |
+| dayModeScrollDirection         | Axis?                               | Axis scroll direction for [CalendarDatePicker2Mode.day] mode                                                  |
 | monthViewController            | ScrollController?                   | Custom scroll controller for the calendar month view                                                          |
 | monthBuilder                   | CalendarMonthBuilder?               | Function to provide full control over month widget UI                                                         |
 | hideMonthPickerDividers        | bool?                               | Flag to hide dividers on month picker                                                                         |
 | selectableMonthPredicate       | CalendarSelectableMonthPredicate?   | Function to provide full control over which month in the month list can be selected.                          |
 | disableMonthPicker             | bool?                               | Flag to disable month picker                                                                                  |
+| monthTextStyle                 | TextStyle?                          | Custom text style for month(s)                                                                                |
+| selectedMonthTextStyle         | TextStyle?                          | Custom text style for selected month(s)                                                                       |
+| disabledMonthTextStyle         | TextStyle?                          | Custom text style for disabled month(s)                                                                       |
 | yearViewController             | ScrollController?                   | Custom scroll controller for the calendar year view                                                           |
 | yearBorderRadius               | BorderRadius?                       | Custom border radius for year indicator                                                                       |
-| yearTextStyle                  | TextStyle?                          | Custom text style for years list                                                                              |
-| selectedYearTextStyle          | TextStyle?                          | Custom text style for selected year                                                                           |
+| yearTextStyle                  | TextStyle?                          | Custom text style for year(s)                                                                                 |
+| selectedYearTextStyle          | TextStyle?                          | Custom text style for selected year(s)                                                                        |
+| disabledYearTextStyle          | TextStyle?                          | Custom text style for disabled year(s)                                                                        |
 | selectableYearPredicate        | CalendarSelectableYearPredicate?    | Function to provide full control over which year in the year list be selected.                                |
 | yearBuilder                    | CalendarYearBuilder?                | Function to provide full control over year widget UI                                                          |
 | hideYearPickerDividers         | bool?                               | Flag to hide dividers on year picker                                                                          |
