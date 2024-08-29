@@ -373,6 +373,8 @@ class CalendarDatePicker2Config {
   final bool? dynamicCalendarRows;
 
   /// Axis scroll direction for [CalendarDatePicker2Mode.day] mode
+  ///
+  /// Only works when [calendarViewMode] is not [CalendarDatePicker2Mode.scroll]
   final Axis? dayModeScrollDirection;
 
   /// Copy the current [CalendarDatePicker2Config] with some new values
@@ -533,7 +535,8 @@ class CalendarDatePicker2Config {
           scrollViewOnScrolling ?? this.scrollViewOnScrolling,
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
-      dayModeScrollDirection: dayModeScrollDirection,
+      dayModeScrollDirection:
+          dayModeScrollDirection ?? this.dayModeScrollDirection,
     );
   }
 }
@@ -605,6 +608,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     CalendarScrollViewOnScrolling? scrollViewOnScrolling,
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
+    Axis? dayModeScrollDirection,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -614,7 +618,6 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
-    Axis? dayModeScrollDirection,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,

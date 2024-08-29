@@ -82,7 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
@@ -334,6 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
       centerAlignModePicker: true,
       customModePickerIcon: const SizedBox(),
       selectedDayTextStyle: dayTextStyle.copyWith(color: Colors.white),
+      scrollViewConstraints: const BoxConstraints(maxHeight: 661),
       dayTextStylePredicate: ({required date}) {
         TextStyle? textStyle;
         if (date.weekday == DateTime.saturday ||
@@ -620,6 +623,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildMultiDatePickerWithValue() {
     final config = CalendarDatePicker2Config(
+      dayModeScrollDirection: Axis.vertical,
       disableMonthPicker: true,
       calendarType: CalendarDatePicker2Type.multi,
       selectedDayHighlightColor: Colors.indigo,
