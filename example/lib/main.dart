@@ -491,6 +491,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       centerAlignModePicker: true,
       useAbbrLabelForMonthModePicker: true,
+      modePickersGap: 0,
       modePickerTextHandler: ({required monthDate, isMonthPicker}) {
         if (isMonthPicker ?? false) {
           // Custom month picker text
@@ -587,7 +588,7 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(height: 10),
           const Text('Scroll Single Date Picker'),
           SizedBox(
-            width: 270,
+            width: 250,
             height: 800,
             child: CalendarDatePicker2(
               config: config.copyWith(
@@ -635,11 +636,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           const SizedBox(height: 10),
           const Text('Multi Date Picker'),
-          CalendarDatePicker2(
-            config: config,
-            value: _multiDatePickerValueWithDefaultValue,
-            onValueChanged: (dates) =>
-                setState(() => _multiDatePickerValueWithDefaultValue = dates),
+          SizedBox(
+            width: 300,
+            child: CalendarDatePicker2(
+              config: config,
+              value: _multiDatePickerValueWithDefaultValue,
+              onValueChanged: (dates) =>
+                  setState(() => _multiDatePickerValueWithDefaultValue = dates),
+            ),
           ),
           const SizedBox(height: 10),
           Wrap(
