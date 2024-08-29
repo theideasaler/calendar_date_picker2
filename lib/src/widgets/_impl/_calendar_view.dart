@@ -352,8 +352,7 @@ class _CalendarViewState extends State<_CalendarView> {
                       ? widget.config.dayMaxWidth! * 2 / 3
                       : null,
                   icon: widget.config.nextMonthIcon ??
-                      Icon(widget.config.dayModeScrollDirection ==
-                              Axis.vertical
+                      Icon(widget.config.dayModeScrollDirection == Axis.vertical
                           ? Icons.keyboard_arrow_down
                           : Icons.chevron_right),
                   color: controlColor,
