@@ -147,6 +147,7 @@ class CalendarDatePicker2Config {
     this.customModePickerIcon,
     this.modePickerTextHandler,
     this.modePickerBuilder,
+    this.modePickersGap,
     this.selectedRangeDayTextStyle,
     this.rangeBidirectional,
     this.calendarViewScrollPhysics,
@@ -315,6 +316,9 @@ class CalendarDatePicker2Config {
   /// Function to provide full control over mode picker UI
   final CalendarModePickerBuilder? modePickerBuilder;
 
+  /// Custom gap distance between month and year mode pickers
+  final double? modePickersGap;
+
   /// Whether the range selection can be also made in reverse-chronological order.
   /// Only applicable when [calendarType] is [CalendarDatePicker2Type.range].
   final bool? rangeBidirectional;
@@ -424,6 +428,7 @@ class CalendarDatePicker2Config {
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
     CalendarModePickerBuilder? modePickerBuilder,
+    double? modePickersGap,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
@@ -505,6 +510,7 @@ class CalendarDatePicker2Config {
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
+      modePickersGap: modePickersGap ?? this.modePickersGap,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
@@ -590,6 +596,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
     CalendarModePickerBuilder? modePickerBuilder,
+    double? modePickersGap,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
@@ -664,6 +671,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           customModePickerIcon: customModePickerIcon,
           modePickerTextHandler: modePickerTextHandler,
           modePickerBuilder: modePickerBuilder,
+          modePickersGap: modePickersGap,
           rangeBidirectional: rangeBidirectional,
           calendarViewScrollPhysics: calendarViewScrollPhysics,
           daySplashColor: daySplashColor,
@@ -759,6 +767,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Widget? customModePickerIcon,
     CalendarModePickerTextHandler? modePickerTextHandler,
     CalendarModePickerBuilder? modePickerBuilder,
+    double? modePickersGap,
     double? gapBetweenCalendarAndButtons,
     TextStyle? cancelButtonTextStyle,
     Widget? cancelButton,
@@ -849,6 +858,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       modePickerTextHandler:
           modePickerTextHandler ?? this.modePickerTextHandler,
       modePickerBuilder: modePickerBuilder ?? this.modePickerBuilder,
+      modePickersGap: modePickersGap ?? this.modePickersGap,
       rangeBidirectional: rangeBidirectional ?? this.rangeBidirectional,
       gapBetweenCalendarAndButtons:
           gapBetweenCalendarAndButtons ?? this.gapBetweenCalendarAndButtons,

@@ -116,8 +116,9 @@ class _DatePickerModeToggleButtonState
             // Give space for the prev/next month buttons that are underneath this row
             SizedBox(width: datePickerOffsetPadding),
           ..._buildModePickerButtons(),
-          // Give space for the prev/next month buttons that are underneath this row
-          SizedBox(width: datePickerOffsetPadding),
+          if (widget.mode == CalendarDatePicker2Mode.day)
+            // Give space for the prev/next month buttons that are underneath this row
+            SizedBox(width: datePickerOffsetPadding),
         ],
       ),
     );
@@ -192,9 +193,7 @@ class _DatePickerModeToggleButtonState
         : [
             Expanded(
               child: Row(
-                mainAxisAlignment: widget.config.centerAlignModePicker == true
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.start,
+                mainAxisAlignment: modePickerMainAxisAlignment,
                 children: [
                   Semantics(
                     label: MaterialLocalizations.of(context)
@@ -217,7 +216,6 @@ class _DatePickerModeToggleButtonState
                                   horizontal: horizontalPadding),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: modePickerMainAxisAlignment,
                                 children: <Widget>[
                                   Flexible(
                                     child: Text(
@@ -247,6 +245,10 @@ class _DatePickerModeToggleButtonState
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: widget.config.modePickersGap ??
+                        (widget.config.centerAlignModePicker == true ? 15 : 5),
+                  ),
                   Semantics(
                     label: MaterialLocalizations.of(context)
                         .selectYearSemanticsLabel,
@@ -266,7 +268,6 @@ class _DatePickerModeToggleButtonState
                                   horizontal: horizontalPadding),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: modePickerMainAxisAlignment,
                                 children: <Widget>[
                                   Flexible(
                                     child: Text(
