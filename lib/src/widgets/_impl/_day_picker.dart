@@ -257,6 +257,16 @@ class _DayPickerState extends State<_DayPicker> {
                 (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
                     .withOpacity(0.15),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 0, // No blur for sharp shadow
+                color: widget.config.selectedRangeHighlightColor ??
+                    (widget.config.selectedDayHighlightColor ??
+                            selectedDayBackground)
+                        .withOpacity(0.15), // Shadow color (same as background)
+                offset: Offset(1, 0), // Shadow offset (1px right)
+              ),
+            ],
           );
 
           if (DateUtils.isSameDay(
