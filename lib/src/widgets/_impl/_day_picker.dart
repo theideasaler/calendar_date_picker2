@@ -256,15 +256,28 @@ class _DayPickerState extends State<_DayPicker> {
               DateUtils.dateOnly(widget.selectedDates[0]), dayToBuild);
           final isEndDate = DateUtils.isSameDay(
               DateUtils.dateOnly(widget.selectedDates[1]), dayToBuild);
-          final rangePickerIncludedDayDecoration = BoxDecoration(
+          var rangePickerIncludedDayDecoration = BoxDecoration(
             color: widget.config.selectedRangeHighlightColor ??
                 (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
                     .withOpacity(0.15),
           );
+          if (widget.config.selectedRangeDecorationPredicate != null) {
+            rangePickerIncludedDayDecoration =
+                widget.config.selectedRangeDecorationPredicate?.call(
+                      dayToBuild: dayToBuild,
+                      decoration: rangePickerIncludedDayDecoration,
+                      isStartDate: isStartDate,
+                      isEndDate: isEndDate,
+                    ) ??
+                    rangePickerIncludedDayDecoration;
+          }
           final rangePickerIncludedDayHighlight =
-              widget.config.selectedRangeHighlightBuilder?.call(dayToBuild,
-                  isStartDate: isStartDate, isEndDate: isEndDate);
+              widget.config.selectedRangeHighlightBuilder?.call(
+            dayToBuild: dayToBuild,
+            isStartDate: isStartDate,
+            isEndDate: isEndDate,
+          );
 
           if (isStartDate) {
             dayWidget = Stack(

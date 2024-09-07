@@ -922,6 +922,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
       disableModePicker: true,
+      rangeBidirectional: true,
     );
     return SizedBox(
       width: 375,
