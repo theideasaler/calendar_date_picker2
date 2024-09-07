@@ -1,3 +1,8 @@
+## [1.1.7]
+- fix: fix small screen range highlight height for flexible day widget
+- feat: add `selectedRangeDecorationPredicate` into config
+- feat: add `selectedRangeHighlightBuilder` into config
+
 ## [1.1.6]
 - refactor: amend default day widget builder to enable flexible day widget width
 - feat: add `disabledYearTextStyle` into config
