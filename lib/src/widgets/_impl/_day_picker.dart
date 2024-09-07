@@ -252,53 +252,73 @@ class _DayPickerState extends State<_DayPicker> {
             );
 
         if (isDateInBetweenRangePickerSelectedDates) {
+          final isStartDate = DateUtils.isSameDay(
+              DateUtils.dateOnly(widget.selectedDates[0]), dayToBuild);
+          final isEndDate = DateUtils.isSameDay(
+              DateUtils.dateOnly(widget.selectedDates[1]), dayToBuild);
           final rangePickerIncludedDayDecoration = BoxDecoration(
             color: widget.config.selectedRangeHighlightColor ??
                 (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
                     .withOpacity(0.15),
           );
+          final rangePickerIncludedDayHighlight =
+              widget.config.selectedRangeHighlightBuilder?.call(dayToBuild,
+                  isStartDate: isStartDate, isEndDate: isEndDate);
 
-          if (DateUtils.isSameDay(
-            DateUtils.dateOnly(widget.selectedDates[0]),
-            dayToBuild,
-          )) {
+          if (isStartDate) {
             dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Row(children: [
-                  const Spacer(),
-                  Expanded(
-                    child: Container(
-                      decoration: rangePickerIncludedDayDecoration,
-                    ),
-                  ),
-                ]),
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      const Spacer(),
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 0.5,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                    ]),
                 dayWidget,
               ],
             );
-          } else if (DateUtils.isSameDay(
-            DateUtils.dateOnly(widget.selectedDates[1]),
-            dayToBuild,
-          )) {
+          } else if (isEndDate) {
             dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Row(children: [
-                  Expanded(
-                    child: Container(
-                      decoration: rangePickerIncludedDayDecoration,
-                    ),
-                  ),
-                  const Spacer(),
-                ]),
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 0.5,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                    ]),
                 dayWidget,
               ],
             );
           } else {
             dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Container(
-                  decoration: rangePickerIncludedDayDecoration,
-                ),
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                    ]),
                 dayWidget,
               ],
             );

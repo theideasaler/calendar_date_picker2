@@ -77,6 +77,10 @@ typedef CalendarScrollViewMonthYearBuilder = Widget Function(
 typedef CalendarModePickerBuilder = Widget? Function(
     {required DateTime monthDate, bool? isMonthPicker});
 
+/// Function to provide full control over range picker highlight
+typedef CalendarSelectedRangeHighlightBuilder = Widget
+    Function(DateTime dayToBuild, {bool isStartDate, bool isEndDate});
+
 /// Handler for the text displayed in the mode picker
 ///
 /// [isMonthPicker] will be true if function is called for month picker text
@@ -168,6 +172,7 @@ class CalendarDatePicker2Config {
     this.scrollViewController,
     this.dynamicCalendarRows,
     this.dayModeScrollDirection,
+    this.selectedRangeHighlightBuilder,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -381,6 +386,9 @@ class CalendarDatePicker2Config {
   /// Only works when [calendarViewMode] is not [CalendarDatePicker2Mode.scroll]
   final Axis? dayModeScrollDirection;
 
+  /// Function to provide full control over range picker highlight
+  final CalendarSelectedRangeHighlightBuilder? selectedRangeHighlightBuilder;
+
   /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -448,6 +456,7 @@ class CalendarDatePicker2Config {
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     Axis? dayModeScrollDirection,
+    CalendarSelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -543,6 +552,8 @@ class CalendarDatePicker2Config {
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
       dayModeScrollDirection:
           dayModeScrollDirection ?? this.dayModeScrollDirection,
+      selectedRangeHighlightBuilder:
+          selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
     );
   }
 }
@@ -616,6 +627,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     Axis? dayModeScrollDirection,
+    CalendarSelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -691,6 +703,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewController: scrollViewController,
           dynamicCalendarRows: dynamicCalendarRows,
           dayModeScrollDirection: dayModeScrollDirection,
+          selectedRangeHighlightBuilder: selectedRangeHighlightBuilder,
         );
 
   /// The gap between calendar and action buttons
@@ -796,6 +809,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     Axis? dayModeScrollDirection,
+    CalendarSelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -904,6 +918,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
       dayModeScrollDirection:
           dayModeScrollDirection ?? this.dayModeScrollDirection,
+      selectedRangeHighlightBuilder:
+          selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
     );
   }
 }
