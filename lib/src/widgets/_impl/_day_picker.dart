@@ -252,53 +252,86 @@ class _DayPickerState extends State<_DayPicker> {
             );
 
         if (isDateInBetweenRangePickerSelectedDates) {
-          final rangePickerIncludedDayDecoration = BoxDecoration(
+          final isStartDate = DateUtils.isSameDay(
+              DateUtils.dateOnly(widget.selectedDates[0]), dayToBuild);
+          final isEndDate = DateUtils.isSameDay(
+              DateUtils.dateOnly(widget.selectedDates[1]), dayToBuild);
+          var rangePickerIncludedDayDecoration = BoxDecoration(
             color: widget.config.selectedRangeHighlightColor ??
                 (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
                     .withOpacity(0.15),
           );
-
-          if (DateUtils.isSameDay(
-            DateUtils.dateOnly(widget.selectedDates[0]),
-            dayToBuild,
-          )) {
-            dayWidget = Stack(
-              children: [
-                Row(children: [
-                  const Spacer(),
-                  Expanded(
-                    child: Container(
+          if (widget.config.selectedRangeDecorationPredicate != null) {
+            rangePickerIncludedDayDecoration =
+                widget.config.selectedRangeDecorationPredicate?.call(
+                      dayToBuild: dayToBuild,
                       decoration: rangePickerIncludedDayDecoration,
-                    ),
-                  ),
-                ]),
+                      isStartDate: isStartDate,
+                      isEndDate: isEndDate,
+                    ) ??
+                    rangePickerIncludedDayDecoration;
+          }
+          final rangePickerIncludedDayHighlight =
+              widget.config.selectedRangeHighlightBuilder?.call(
+            dayToBuild: dayToBuild,
+            isStartDate: isStartDate,
+            isEndDate: isEndDate,
+          );
+
+          if (isStartDate) {
+            dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      const Spacer(),
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 0.5,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                    ]),
                 dayWidget,
               ],
             );
-          } else if (DateUtils.isSameDay(
-            DateUtils.dateOnly(widget.selectedDates[1]),
-            dayToBuild,
-          )) {
+          } else if (isEndDate) {
             dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Row(children: [
-                  Expanded(
-                    child: Container(
-                      decoration: rangePickerIncludedDayDecoration,
-                    ),
-                  ),
-                  const Spacer(),
-                ]),
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 0.5,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                    ]),
                 dayWidget,
               ],
             );
           } else {
             dayWidget = Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Container(
-                  decoration: rangePickerIncludedDayDecoration,
-                ),
+                rangePickerIncludedDayHighlight ??
+                    Row(children: [
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            decoration: rangePickerIncludedDayDecoration,
+                          ),
+                        ),
+                      ),
+                    ]),
                 dayWidget,
               ],
             );
