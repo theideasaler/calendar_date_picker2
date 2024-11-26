@@ -731,7 +731,11 @@ class _MyHomePageState extends State<MyHomePage> {
         fontWeight: FontWeight.bold,
       ),
       dynamicCalendarRows: true,
-      modePickerBuilder: ({required monthDate, isMonthPicker}) {
+      modePickerBuilder: ({
+        required monthDate,
+        isMonthPicker,
+        required CalendarDatePicker2Mode mode,
+      }) {
         return Center(
           child: Container(
             padding: const EdgeInsets.all(5),
