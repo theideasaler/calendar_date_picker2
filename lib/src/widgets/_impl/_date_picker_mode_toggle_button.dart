@@ -160,8 +160,8 @@ class _DatePickerModeToggleButtonState
                         ? null
                         : widget.onYearPressed,
                     child: widget.config.modePickerBuilder?.call(
+                          viewMode: widget.mode,
                           monthDate: widget.monthDate,
-                          mode: widget.mode,
                         ) ??
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -213,9 +213,9 @@ class _DatePickerModeToggleButtonState
                             ? null
                             : widget.onMonthPressed,
                         child: widget.config.modePickerBuilder?.call(
+                              viewMode: widget.mode,
                               monthDate: widget.monthDate,
                               isMonthPicker: true,
-                              mode: widget.mode,
                             ) ??
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -270,8 +270,8 @@ class _DatePickerModeToggleButtonState
                             ? null
                             : widget.onYearPressed,
                         child: widget.config.modePickerBuilder?.call(
+                              viewMode: widget.mode,
                               monthDate: widget.monthDate,
-                              mode: widget.mode,
                             ) ??
                             Padding(
                               padding: EdgeInsets.symmetric(

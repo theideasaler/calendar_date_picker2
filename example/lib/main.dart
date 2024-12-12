@@ -732,9 +732,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       dynamicCalendarRows: true,
       modePickerBuilder: ({
+        required viewMode,
         required monthDate,
         isMonthPicker,
-        required CalendarDatePicker2Mode mode,
       }) {
         return Center(
           child: Container(
