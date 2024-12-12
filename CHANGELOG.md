@@ -1,3 +1,6 @@
+## [1.1.8]
+- feat: add `mode` into `modePickerBuilder`
+
 ## [1.1.7]
 - fix: fix small screen range highlight height for flexible day widget
 - feat: add `selectedRangeDecorationPredicate` into config

@@ -82,8 +82,11 @@ typedef ScrollViewMonthYearBuilder = Widget Function(DateTime monthDate);
 /// Builder for the mode picker widget
 ///
 /// [isMonthPicker] will be true if function is called to build month picker
-typedef ModePickerBuilder = Widget? Function(
-    {required DateTime monthDate, bool? isMonthPicker});
+typedef ModePickerBuilder = Widget? Function({
+  required DateTime monthDate,
+  bool? isMonthPicker,
+  required CalendarDatePicker2Mode mode,
+});
 
 /// Predicate to determine the day widget box decoration for a day in selected range
 typedef SelectedRangeDecorationPredicate = BoxDecoration? Function({
