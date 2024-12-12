@@ -331,36 +331,40 @@ class _CalendarViewState extends State<_CalendarView> {
             child: Row(
               children: <Widget>[
                 if (widget.config.centerAlignModePicker != true) const Spacer(),
-                IconButton(
-                  splashRadius: widget.config.dayMaxWidth != null
-                      ? widget.config.dayMaxWidth! * 2 / 3
-                      : null,
-                  icon: widget.config.lastMonthIcon ??
-                      Icon(widget.config.dayModeScrollDirection == Axis.vertical
-                          ? Icons.keyboard_arrow_up
-                          : Icons.chevron_left),
-                  color: controlColor,
-                  tooltip: _isDisplayingFirstMonth
-                      ? null
-                      : _localizations.previousMonthTooltip,
-                  onPressed:
-                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
-                ),
+                if (widget.config.hideLastMonthIcon != true)
+                  IconButton(
+                    splashRadius: widget.config.dayMaxWidth != null
+                        ? widget.config.dayMaxWidth! * 2 / 3
+                        : null,
+                    icon: widget.config.lastMonthIcon ??
+                        Icon(widget.config.dayModeScrollDirection ==
+                                Axis.vertical
+                            ? Icons.keyboard_arrow_up
+                            : Icons.chevron_left),
+                    color: controlColor,
+                    tooltip: _isDisplayingFirstMonth
+                        ? null
+                        : _localizations.previousMonthTooltip,
+                    onPressed:
+                        _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                  ),
                 if (widget.config.centerAlignModePicker == true) const Spacer(),
-                IconButton(
-                  splashRadius: widget.config.dayMaxWidth != null
-                      ? widget.config.dayMaxWidth! * 2 / 3
-                      : null,
-                  icon: widget.config.nextMonthIcon ??
-                      Icon(widget.config.dayModeScrollDirection == Axis.vertical
-                          ? Icons.keyboard_arrow_down
-                          : Icons.chevron_right),
-                  color: controlColor,
-                  tooltip: _isDisplayingLastMonth
-                      ? null
-                      : _localizations.nextMonthTooltip,
-                  onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
-                ),
+                if (widget.config.hideNextMonthIcon != true)
+                  IconButton(
+                    splashRadius: widget.config.dayMaxWidth != null
+                        ? widget.config.dayMaxWidth! * 2 / 3
+                        : null,
+                    icon: widget.config.nextMonthIcon ??
+                        Icon(widget.config.dayModeScrollDirection ==
+                                Axis.vertical
+                            ? Icons.keyboard_arrow_down
+                            : Icons.chevron_right),
+                    color: controlColor,
+                    tooltip: _isDisplayingLastMonth
+                        ? null
+                        : _localizations.nextMonthTooltip,
+                    onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                  ),
               ],
             ),
           ),

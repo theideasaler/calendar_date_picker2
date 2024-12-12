@@ -788,6 +788,8 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         return true;
       },
+      hideLastMonthIcon: true,
+      hideNextMonthIcon: true,
     );
     return SizedBox(
       width: 375,
