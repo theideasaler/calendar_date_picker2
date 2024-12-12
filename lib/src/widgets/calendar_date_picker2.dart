@@ -151,6 +151,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
   }
 
   void _vibrate() {
+    if (widget.config.disableVibration == true) return;
+
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:

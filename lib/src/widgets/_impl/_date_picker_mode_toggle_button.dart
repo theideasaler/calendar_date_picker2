@@ -148,7 +148,8 @@ class _DatePickerModeToggleButtonState
         ? [
             Flexible(
               child: Semantics(
-                label:
+                label: widget.config.semanticsDictionary?[
+                        CalendarDatePicker2SemanticsLabel.selectYear] ??
                     MaterialLocalizations.of(context).selectYearSemanticsLabel,
                 excludeSemantics: true,
                 button: true,
@@ -196,8 +197,10 @@ class _DatePickerModeToggleButtonState
                 mainAxisAlignment: modePickerMainAxisAlignment,
                 children: [
                   Semantics(
-                    label: MaterialLocalizations.of(context)
-                        .selectYearSemanticsLabel,
+                    label: widget.config.semanticsDictionary?[
+                            CalendarDatePicker2SemanticsLabel.selectMonth] ??
+                        MaterialLocalizations.of(context)
+                            .selectYearSemanticsLabel,
                     excludeSemantics: true,
                     button: true,
                     child: SizedBox(
@@ -250,8 +253,10 @@ class _DatePickerModeToggleButtonState
                         (widget.config.centerAlignModePicker == true ? 15 : 5),
                   ),
                   Semantics(
-                    label: MaterialLocalizations.of(context)
-                        .selectYearSemanticsLabel,
+                    label: widget.config.semanticsDictionary?[
+                            CalendarDatePicker2SemanticsLabel.selectYear] ??
+                        MaterialLocalizations.of(context)
+                            .selectYearSemanticsLabel,
                     excludeSemantics: true,
                     button: true,
                     child: SizedBox(

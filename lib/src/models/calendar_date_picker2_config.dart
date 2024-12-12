@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Custom semantic label types
+enum CalendarDatePicker2SemanticsLabel {
+  /// Semantic label for month mode picker
+  selectMonth,
+
+  /// Semantic label for year mode picker
+  selectYear,
+}
+
 /// Custom enum for a date picker type including single, multi, and range.
 enum CalendarDatePicker2Type {
   /// Allows selecting a single date.
@@ -128,9 +137,13 @@ class CalendarDatePicker2Config {
     this.firstDayOfWeek,
     this.controlsHeight,
     this.lastMonthIcon,
+    this.hideLastMonthIcon,
     this.nextMonthIcon,
+    this.hideNextMonthIcon,
     this.controlsTextStyle,
     this.animateToDisplayedMonthDate,
+    this.semanticsDictionary,
+    this.disableVibration,
     this.dayViewController,
     this.dayTextStyle,
     this.selectedDayTextStyle,
@@ -229,14 +242,26 @@ class CalendarDatePicker2Config {
   /// Custom icon for last month button control
   final Widget? lastMonthIcon;
 
+  /// Flag to hide last month icon
+  final bool? hideLastMonthIcon;
+
   /// Custom icon for next month button control
   final Widget? nextMonthIcon;
+
+  /// Flag to hide next month icon
+  final bool? hideNextMonthIcon;
 
   /// Custom text style for calendar mode toggle control
   final TextStyle? controlsTextStyle;
 
   /// Flag to always animate to the displayedMonthDate
   final bool? animateToDisplayedMonthDate;
+
+  /// Custom dictionary for semantics labels
+  final Map<CalendarDatePicker2SemanticsLabel, String?>? semanticsDictionary;
+
+  /// Flag to disable vibration on date selection
+  final bool? disableVibration;
 
   /// Custom page controller for the calendar day view mode
   final PageController? dayViewController;
@@ -416,9 +441,13 @@ class CalendarDatePicker2Config {
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
+    bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
+    bool? hideNextMonthIcon,
     TextStyle? controlsTextStyle,
     bool? animateToDisplayedMonthDate,
+    Map<CalendarDatePicker2SemanticsLabel, String?>? semanticsDictionary,
+    bool? disableVibration,
     PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
@@ -486,10 +515,14 @@ class CalendarDatePicker2Config {
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
+      hideLastMonthIcon: hideLastMonthIcon ?? this.hideLastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
+      hideNextMonthIcon: hideNextMonthIcon ?? this.hideNextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       animateToDisplayedMonthDate:
           animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      semanticsDictionary: semanticsDictionary ?? this.semanticsDictionary,
+      disableVibration: disableVibration ?? this.disableVibration,
       dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
@@ -590,9 +623,13 @@ class CalendarDatePicker2WithActionButtonsConfig
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
+    bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
+    bool? hideNextMonthIcon,
     TextStyle? controlsTextStyle,
     bool? animateToDisplayedMonthDate,
+    Map<CalendarDatePicker2SemanticsLabel, String?>? semanticsDictionary,
+    bool? disableVibration,
     PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
@@ -667,9 +704,13 @@ class CalendarDatePicker2WithActionButtonsConfig
           firstDayOfWeek: firstDayOfWeek,
           controlsHeight: controlsHeight,
           lastMonthIcon: lastMonthIcon,
+          hideLastMonthIcon: hideLastMonthIcon,
           nextMonthIcon: nextMonthIcon,
+          hideNextMonthIcon: hideNextMonthIcon,
           controlsTextStyle: controlsTextStyle,
           animateToDisplayedMonthDate: animateToDisplayedMonthDate,
+          semanticsDictionary: semanticsDictionary,
+          disableVibration: disableVibration,
           dayViewController: dayViewController,
           dayTextStyle: dayTextStyle,
           selectedDayTextStyle: selectedDayTextStyle,
@@ -765,9 +806,13 @@ class CalendarDatePicker2WithActionButtonsConfig
     int? firstDayOfWeek,
     double? controlsHeight,
     Widget? lastMonthIcon,
+    bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
+    bool? hideNextMonthIcon,
     TextStyle? controlsTextStyle,
     bool? animateToDisplayedMonthDate,
+    Map<CalendarDatePicker2SemanticsLabel, String?>? semanticsDictionary,
+    bool? disableVibration,
     PageController? dayViewController,
     TextStyle? dayTextStyle,
     TextStyle? selectedDayTextStyle,
@@ -844,10 +889,14 @@ class CalendarDatePicker2WithActionButtonsConfig
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
+      hideLastMonthIcon: hideLastMonthIcon ?? this.hideLastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
+      hideNextMonthIcon: hideNextMonthIcon ?? this.hideNextMonthIcon,
       controlsTextStyle: controlsTextStyle ?? this.controlsTextStyle,
       animateToDisplayedMonthDate:
           animateToDisplayedMonthDate ?? this.animateToDisplayedMonthDate,
+      semanticsDictionary: semanticsDictionary ?? this.semanticsDictionary,
+      disableVibration: disableVibration ?? this.disableVibration,
       dayViewController: dayViewController ?? this.dayViewController,
       dayTextStyle: dayTextStyle ?? this.dayTextStyle,
       selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
