@@ -1,5 +1,8 @@
 ## [1.1.8]
-- feat: add `mode` into `modePickerBuilder`
+- feat: add `hideLastMonthIcon` & `hideNextMonthIcon` into config
+- feat: add `semanticsDictionary` into config
+- feat: add `disableVibration` into config
+- **BREAKING**: feat: add `viewMode` into `modePickerBuilder`
 
 ## [1.1.7]
 - fix: fix small screen range highlight height for flexible day widget

@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.7-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.8-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.7
+calendar_date_picker2: ^1.1.8
 ```
 
 ### Basic setup
@@ -141,12 +141,16 @@ var results = await showCalendarDatePicker2Dialog(
 | dynamicCalendarRows              | bool?                             | Flag to enable dynamic calendar rows based on specific month                                                  |
 | allowSameValueSelection          | bool?                             | Flag to control [onValueChanged] behavior                                                                     |
 | animateToDisplayedMonthDate      | bool?                             | Flag to always animate to the displayedMonthDate                                                              |
+| semanticsDictionary              | Map?                              | Custom dictionary for semantics labels                                                                        |
+| disableVibration                 | bool?                             | Flag to disable vibration on date selection                                                                   |
 | weekdayLabels                    | List\<String\>?                   | Custom weekday labels, should starts with Sunday                                                              |
 | weekdayLabelTextStyle            | TextStyle?                        | Custom text style for weekday labels                                                                          |
 | weekdayLabelBuilder              | WeekdayLabelBuilder?              | Function to provide full control over weekday label widget                                                    |
 | firstDayOfWeek                   | int?                              | Index of the first day of week, where 0 points to Sunday, and 6 points to Saturday.                           |
 | lastMonthIcon                    | Widget?                           | Custom icon for last month button control                                                                     |
+| hideLastMonthIcon                | bool?                             | Flag to hide last month icon                                                                                  |
 | nextMonthIcon                    | Widget?                           | Custom icon for next month button control                                                                     |
+| hideNextMonthIcon                | bool?                             | Flag to hide next month icon                                                                                  |
 | controlsHeight                   | double?                           | Custom height for calendar control toggle's height                                                            |
 | controlsTextStyle                | TextStyle?                        | Custom text style for calendar mode toggle control                                                            |
 | centerAlignModePicker            | bool?                             | Flag to centralize year and month text label in controls                                                      |
