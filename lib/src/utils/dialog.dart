@@ -9,6 +9,7 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
   required CalendarDatePicker2WithActionButtonsConfig config,
   required Size dialogSize,
   List<DateTime?> value = const [],
+  ValueChanged<List<DateTime?>>? onValueChanged,
   BorderRadius? borderRadius,
   bool useRootNavigator = true,
   bool barrierDismissible = true,
@@ -19,9 +20,14 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
   String? barrierLabel,
   TransitionBuilder? builder,
 }) {
-  final dialogHeight = config.dayMaxWidth != null
-      ? dialogSize.height
-      : max(dialogSize.height, 410);
+  final dialogHeight = config.dayMaxWidth != null ? dialogSize.height : max(dialogSize.height, 410);
+
+  final dialogConfig = config.copyWith(
+    openedFromDialog: true,
+    scrollViewConstraints:
+        config.scrollViewConstraints ?? (config.calendarViewMode == CalendarDatePicker2Mode.scroll ? BoxConstraints(maxHeight: dialogHeight.toDouble() - 24 * 2) : null),
+  );
+
   var dialog = Dialog(
     insetPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
     backgroundColor: dialogBackgroundColor ?? Theme.of(context).canvasColor,
@@ -35,17 +41,17 @@ Future<List<DateTime?>?> showCalendarDatePicker2Dialog({
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CalendarDatePicker2WithActionButtons(
-            value: value,
-            config: config.copyWith(
-              openedFromDialog: true,
-              scrollViewConstraints: config.scrollViewConstraints ??
-                  (config.calendarViewMode == CalendarDatePicker2Mode.scroll
-                      ? BoxConstraints(
-                          maxHeight: dialogHeight.toDouble() - 24 * 2)
-                      : null),
+          if (onValueChanged != null)
+            CalendarDatePicker2(
+              value: value,
+              config: dialogConfig,
+              onValueChanged: onValueChanged,
+            )
+          else
+            CalendarDatePicker2WithActionButtons(
+              value: value,
+              config: dialogConfig,
             ),
-          ),
         ],
       ),
     ),
