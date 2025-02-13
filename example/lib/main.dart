@@ -268,6 +268,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         );
       },
+      selectedRangeDecorationPredicate: (
+          {required dayToBuild,
+          required decoration,
+          required isEndDate,
+          required isStartDate}) {
+        return decoration.copyWith(
+          color: isStartDate == true
+              ? Colors.purple[800]
+              : isEndDate == true
+                  ? Colors.purple[800]
+                  : Colors.purple[400],
+        );
+      },
+      selectedRangeHighlightBuilder: (
+          {required dayToBuild, required isEndDate, required isStartDate}) {
+        return const SizedBox();
+      },
     );
     return SizedBox(
       width: 375,
