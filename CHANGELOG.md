@@ -1,3 +1,7 @@
+## [1.1.9]
+- fix: `SelectedRangeDecorationPredicate` function argument type
+- fix: `SelectedRangeHighlightBuilder` function argument type
+
 ## [1.1.8]
 - feat: add `hideLastMonthIcon` & `hideNextMonthIcon` into config
 - feat: add `semanticsDictionary` into config
