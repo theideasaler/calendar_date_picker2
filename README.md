@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.8-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.1.9-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -45,7 +45,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.8
+calendar_date_picker2: ^1.1.9
 ```
 
 ### Basic setup
