@@ -1,6 +1,6 @@
 # CalendarDatePicker2
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.1.9-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v2.0.0-blue)](https://pub.dev/packages/calendar_date_picker2)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/theideasaler/calendar_date_picker2?style=social)](https://github.com/theideasaler/calendar_date_picker2)
 
@@ -35,6 +35,9 @@ CalendarDatePicker2 consists of two main widgets:
 
 Version 1.x.x will by default enable month picker. If you want to migrate to v1.x.x from v0.x.x and would like to keep the old behavior, you will need to set `disableMonthPicker` to `true`.
 
+## Migrate from 1.x.x
+If your flutter SDK is above flutter SDK 3.27.0, you can safely migrate to v2.x.x. Otherwise you should use v1.x.x to avoid dependency issues.
+
 ## How to use
 
 **Make sure to check out [examples](https://github.com/theideasaler/calendar_date_picker2/tree/main/example) for more details.**
@@ -45,7 +48,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-calendar_date_picker2: ^1.1.9
+calendar_date_picker2: ^2.0.0
 ```
 
 ### Basic setup

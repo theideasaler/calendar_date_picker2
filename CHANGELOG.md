@@ -1,3 +1,6 @@
+## [2.0.0]
+- **BREAKING**: feat: migrate to SDK v3.27
+
 ## [1.1.9]
 - fix: `SelectedRangeDecorationPredicate` function argument type
 - fix: `SelectedRangeHighlightBuilder` function argument type
