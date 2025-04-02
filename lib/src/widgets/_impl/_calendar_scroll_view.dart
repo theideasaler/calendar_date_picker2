@@ -92,7 +92,7 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
     final TextTheme textTheme = themeData.textTheme;
-    final Color controlColor = colorScheme.onSurface.withValues(alpha: 0.60);
+    final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
     final int monthIndex = beforeInitialMonth
         ? _initialMonthIndex - index - 1
         : _initialMonthIndex + index;
@@ -418,7 +418,7 @@ class _CalendarScrollViewHeader extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
     final TextStyle? headerStyle = themeData.textTheme.bodySmall?.apply(
-      color: colorScheme.onSurface.withValues(alpha: 0.60),
+      color: colorScheme.onSurface.withOpacity(0.60),
     );
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);

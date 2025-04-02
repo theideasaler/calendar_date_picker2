@@ -121,17 +121,17 @@ class _DayPickerState extends State<_DayPicker> {
         MaterialLocalizations.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? headerStyle = textTheme.bodySmall?.apply(
-      color: colorScheme.onSurface.withValues(alpha: 0.60),
+      color: colorScheme.onSurface.withOpacity(0.60),
     );
     final TextStyle dayStyle = textTheme.bodySmall!;
-    final Color enabledDayColor = colorScheme.onSurface.withValues(alpha: 0.87);
+    final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
     final Color disabledDayColor =
-        colorScheme.onSurface.withValues(alpha: 0.38);
+        colorScheme.onSurface.withOpacity(0.38);
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
     final Color daySplashColor = widget.config.daySplashColor ??
-        selectedDayBackground.withValues(alpha: 0.38);
+        selectedDayBackground.withOpacity(0.38);
 
     final int year = widget.displayedMonth.year;
     final int month = widget.displayedMonth.month;
@@ -261,7 +261,7 @@ class _DayPickerState extends State<_DayPicker> {
             color: widget.config.selectedRangeHighlightColor ??
                 (widget.config.selectedDayHighlightColor ??
                         selectedDayBackground)
-                    .withValues(alpha: 0.15),
+                    .withOpacity(0.15),
           );
           if (widget.config.selectedRangeDecorationPredicate != null) {
             rangePickerIncludedDayDecoration =

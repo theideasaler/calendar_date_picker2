@@ -115,12 +115,12 @@ class _MonthPickerState extends State<_MonthPicker> {
     if (isSelected) {
       textColor = colorScheme.onPrimary;
     } else if (!isMonthSelectable) {
-      textColor = colorScheme.onSurface.withValues(alpha: 0.38);
+      textColor = colorScheme.onSurface.withOpacity(0.38);
     } else if (isCurrentMonth) {
       textColor =
           widget.config.selectedDayHighlightColor ?? colorScheme.primary;
     } else {
-      textColor = colorScheme.onSurface.withValues(alpha: 0.87);
+      textColor = colorScheme.onSurface.withOpacity(0.87);
     }
 
     TextStyle? itemStyle = widget.config.monthTextStyle ??
