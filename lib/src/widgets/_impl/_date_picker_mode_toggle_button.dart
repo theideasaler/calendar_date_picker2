@@ -128,7 +128,7 @@ class _DatePickerModeToggleButtonState
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
     final TextTheme textTheme = themeData.textTheme;
-    final Color controlColor = colorScheme.onSurface.withValues(alpha: 0.60);
+    final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
     final controlTextStyle = widget.config.controlsTextStyle ??
         textTheme.titleSmall?.copyWith(color: controlColor);
     final modePickerIcon = widget.config.customModePickerIcon ??
