@@ -228,11 +228,16 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
   void _handleMonthChanged(DateTime value) {
     _vibrate();
-    if (widget.config.autoTransitionToDayView != false) {
-      _mode = CalendarDatePicker2Mode.day;
-    }
+
     setState(() {
+      if (widget.config.isPickMonthMode != true) {
+        _mode = CalendarDatePicker2Mode.day;
+      }
+
       _handleDisplayedMonthDateChanged(value);
+
+      _selectedDates.removeLast();
+      _selectedDates.add(_currentDisplayedMonthDate);
     });
   }
 
@@ -246,7 +251,11 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     }
 
     setState(() {
-      _mode = CalendarDatePicker2Mode.day;
+      if (widget.config.calendarViewMode == CalendarDatePicker2Mode.month) {
+        _mode = CalendarDatePicker2Mode.month;
+      } else {
+        _mode = CalendarDatePicker2Mode.day;
+      }
       _handleDisplayedMonthDateChanged(value, fromYearPicker: true);
     });
   }
@@ -395,7 +404,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
                 mode: _mode,
                 monthDate: _currentDisplayedMonthDate,
                 onMonthPressed: () {
-                  if (_mode == CalendarDatePicker2Mode.year) {
+                  if (_mode == CalendarDatePicker2Mode.year || widget.config.isPickMonthMode == true) {
                     _handleModeChanged(CalendarDatePicker2Mode.month);
                   } else {
                     _handleModeChanged(
