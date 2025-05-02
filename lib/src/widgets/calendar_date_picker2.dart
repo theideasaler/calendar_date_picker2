@@ -238,6 +238,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
       _selectedDates.removeLast();
       _selectedDates.add(_currentDisplayedMonthDate);
+
+      widget.onValueChanged?.call(_selectedDates.whereType<DateTime>().toList());
     });
   }
 
