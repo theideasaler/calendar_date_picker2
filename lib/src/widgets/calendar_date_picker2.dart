@@ -228,10 +228,12 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
 
   void _handleMonthChanged(DateTime value) {
     _vibrate();
-    setState(() {
-      _mode = CalendarDatePicker2Mode.day;
-      _handleDisplayedMonthDateChanged(value);
-    });
+    if (widget.config.autoTransitionToDayView != false) {
+      setState(() {
+        _mode = CalendarDatePicker2Mode.day;
+        _handleDisplayedMonthDateChanged(value);
+      });
+    }
   }
 
   void _handleYearChanged(DateTime value) {
