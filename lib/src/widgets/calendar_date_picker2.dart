@@ -261,6 +261,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       _handleDisplayedMonthDateChanged(value, fromYearPicker: true);
     });
 
+    _selectedDates.removeLast();
+    _selectedDates.add(value);
     widget.onValueChanged?.call(_selectedDates.whereType<DateTime>().toList());
   }
 
