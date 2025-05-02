@@ -701,7 +701,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
-    this.autoTransitionToDayView,
+    bool? autoTransitionToDayView,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -803,9 +803,6 @@ class CalendarDatePicker2WithActionButtonsConfig
 
   /// Custom wrapping padding for Ok & Cancel buttons
   final EdgeInsets? buttonPadding;
-
-  /// Flag to auto transition to day view when the user selects a month
-  final bool? autoTransitionToDayView;
 
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
