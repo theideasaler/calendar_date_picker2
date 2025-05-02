@@ -251,7 +251,7 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     }
 
     setState(() {
-      if (widget.config.calendarViewMode == CalendarDatePicker2Mode.month) {
+      if (widget.config.calendarViewMode == CalendarDatePicker2Mode.month || widget.config.calendarViewMode == CalendarDatePicker2Mode.year) {
         _mode = CalendarDatePicker2Mode.month;
       } else {
         _mode = CalendarDatePicker2Mode.day;
