@@ -508,6 +508,7 @@ class CalendarDatePicker2Config {
     Axis? dayModeScrollDirection,
     SelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
     SelectedRangeDecorationPredicate? selectedRangeDecorationPredicate,
+    bool? autoTransitionToDayView,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -611,6 +612,7 @@ class CalendarDatePicker2Config {
           selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
       selectedRangeDecorationPredicate: selectedRangeDecorationPredicate ??
           this.selectedRangeDecorationPredicate,
+        autoTransitionToDayView: autoTransitionToDayView ?? this.autoTransitionToDayView,
     );
   }
 }
@@ -699,6 +701,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
+    this.autoTransitionToDayView,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -771,6 +774,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayModeScrollDirection: dayModeScrollDirection,
           selectedRangeHighlightBuilder: selectedRangeHighlightBuilder,
           selectedRangeDecorationPredicate: selectedRangeDecorationPredicate,
+          autoTransitionToDayView: autoTransitionToDayView,
         );
 
   /// The gap between calendar and action buttons
@@ -799,6 +803,9 @@ class CalendarDatePicker2WithActionButtonsConfig
 
   /// Custom wrapping padding for Ok & Cancel buttons
   final EdgeInsets? buttonPadding;
+
+  /// Flag to auto transition to day view when the user selects a month
+  final bool? autoTransitionToDayView;
 
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
@@ -882,6 +889,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Axis? dayModeScrollDirection,
     SelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
     SelectedRangeDecorationPredicate? selectedRangeDecorationPredicate,
+    bool? autoTransitionToDayView,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -998,6 +1006,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
       selectedRangeDecorationPredicate: selectedRangeDecorationPredicate ??
           this.selectedRangeDecorationPredicate,
+      autoTransitionToDayView: autoTransitionToDayView,
     );
   }
 }
