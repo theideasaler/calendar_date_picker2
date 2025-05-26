@@ -64,7 +64,7 @@ class CalendarDatePicker2 extends StatefulWidget {
 
       assert(
         isRangePickerValueValid,
-        'Error: range date picker must has start date set before setting end date, and start date must before end date.',
+        'Error: range date picker must have start date set before setting end date, and start date must be before end date.',
       );
     }
   }
