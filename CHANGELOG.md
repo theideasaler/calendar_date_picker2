@@ -1,3 +1,7 @@
+## [2.0.1]
+- fix: default month picker `isMonthSelectable` logics
+- fix: range picker start & end dates assertion message
+
 ## [2.0.0]
 - **BREAKING**: feat: migrate to SDK v3.27
 
