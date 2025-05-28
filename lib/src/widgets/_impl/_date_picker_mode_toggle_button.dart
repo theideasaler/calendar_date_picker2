@@ -151,7 +151,6 @@ class _DatePickerModeToggleButtonState
                 label: widget.config.semanticsDictionary?[
                         CalendarDatePicker2SemanticsLabel.selectYear] ??
                     MaterialLocalizations.of(context).selectYearSemanticsLabel,
-                excludeSemantics: true,
                 button: true,
                 child: SizedBox(
                   height: (widget.config.controlsHeight ?? _subHeaderHeight),
@@ -203,7 +202,6 @@ class _DatePickerModeToggleButtonState
                             CalendarDatePicker2SemanticsLabel.selectMonth] ??
                         MaterialLocalizations.of(context)
                             .selectYearSemanticsLabel,
-                    excludeSemantics: true,
                     button: true,
                     child: SizedBox(
                       height:
@@ -260,7 +258,6 @@ class _DatePickerModeToggleButtonState
                             CalendarDatePicker2SemanticsLabel.selectYear] ??
                         MaterialLocalizations.of(context)
                             .selectYearSemanticsLabel,
-                    excludeSemantics: true,
                     button: true,
                     child: SizedBox(
                       height:
