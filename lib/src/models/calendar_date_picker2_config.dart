@@ -200,6 +200,7 @@ class CalendarDatePicker2Config {
     this.dayModeScrollDirection,
     this.selectedRangeHighlightBuilder,
     this.selectedRangeDecorationPredicate,
+    this.isPickMonthMode,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -431,6 +432,9 @@ class CalendarDatePicker2Config {
   /// Predicate to determine the day widget box decoration for a day in selected range
   final SelectedRangeDecorationPredicate? selectedRangeDecorationPredicate;
 
+  /// Flag to auto transition to day view when the user selects a month
+  final bool? isPickMonthMode;
+
   /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -504,6 +508,7 @@ class CalendarDatePicker2Config {
     Axis? dayModeScrollDirection,
     SelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
     SelectedRangeDecorationPredicate? selectedRangeDecorationPredicate,
+    bool? isPickMonthMode,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -607,6 +612,7 @@ class CalendarDatePicker2Config {
           selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
       selectedRangeDecorationPredicate: selectedRangeDecorationPredicate ??
           this.selectedRangeDecorationPredicate,
+        isPickMonthMode: isPickMonthMode ?? this.isPickMonthMode,
     );
   }
 }
@@ -695,6 +701,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
+    bool? isPickMonthMode,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -767,6 +774,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           dayModeScrollDirection: dayModeScrollDirection,
           selectedRangeHighlightBuilder: selectedRangeHighlightBuilder,
           selectedRangeDecorationPredicate: selectedRangeDecorationPredicate,
+          isPickMonthMode: isPickMonthMode,
         );
 
   /// The gap between calendar and action buttons
@@ -878,6 +886,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     Axis? dayModeScrollDirection,
     SelectedRangeHighlightBuilder? selectedRangeHighlightBuilder,
     SelectedRangeDecorationPredicate? selectedRangeDecorationPredicate,
+    bool? isPickMonthMode,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -994,6 +1003,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           selectedRangeHighlightBuilder ?? this.selectedRangeHighlightBuilder,
       selectedRangeDecorationPredicate: selectedRangeDecorationPredicate ??
           this.selectedRangeDecorationPredicate,
+      isPickMonthMode: isPickMonthMode,
     );
   }
 }
