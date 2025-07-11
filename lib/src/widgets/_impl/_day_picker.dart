@@ -121,12 +121,12 @@ class _DayPickerState extends State<_DayPicker> {
         MaterialLocalizations.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final TextStyle? headerStyle = textTheme.bodySmall?.apply(
-      color: colorScheme.onSurface.withValues(alpha: 0.60),
+      color: colorScheme.onSurface.withOpacity(alpha: 0.60),
     );
     final TextStyle dayStyle = textTheme.bodySmall!;
-    final Color enabledDayColor = colorScheme.onSurface.withValues(alpha: 0.87);
+    final Color enabledDayColor = colorScheme.onSurface.withOpacity(alpha: 0.87);
     final Color disabledDayColor =
-        colorScheme.onSurface.withValues(alpha: 0.38);
+        colorScheme.onSurface.withOpacity(alpha: 0.38);
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
