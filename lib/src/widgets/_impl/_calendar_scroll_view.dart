@@ -1,4 +1,4 @@
-part of '../calendar_date_picker2.dart';
+part of '../calendar_date_picker2_fixed.dart';
 
 /// Displays a scrollable calendar grid that allows a user to select dates
 class _CalendarScrollView extends StatefulWidget {

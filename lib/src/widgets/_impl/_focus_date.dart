@@ -1,4 +1,4 @@
-part of '../calendar_date_picker2.dart';
+part of '../calendar_date_picker2_fixed.dart';
 
 /// InheritedWidget indicating what the current focused date is for its children.
 ///

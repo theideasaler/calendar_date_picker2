@@ -1,4 +1,4 @@
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:calendar_date_picker2_fixed/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

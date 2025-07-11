@@ -1,3 +1,8 @@
+## [2.0.1+1]
+
+- Fixed build error caused by use of non-existent `Color.withValues()` method.
+- Replaced with `Color.withOpacity()` to restore Flutter 3.x compatibility.
+
 ## [2.0.1]
 - fix: default month picker `isMonthSelectable` logics
 - fix: range picker start & end dates assertion message

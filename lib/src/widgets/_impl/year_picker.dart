@@ -1,4 +1,4 @@
-part of '../calendar_date_picker2.dart';
+part of '../calendar_date_picker2_fixed.dart';
 
 /// A scrollable grid of years to allow picking a year.
 ///

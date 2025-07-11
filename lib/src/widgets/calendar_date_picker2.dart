@@ -4,7 +4,7 @@
 
 import 'dart:math' as math;
 
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:calendar_date_picker2_fixed/calendar_date_picker2_fixed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

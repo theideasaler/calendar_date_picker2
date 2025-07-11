@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:calendar_date_picker2_fixed/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 
 /// Display CalendarDatePicker with action buttons

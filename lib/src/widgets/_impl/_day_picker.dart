@@ -1,4 +1,4 @@
-part of '../calendar_date_picker2.dart';
+part of '../calendar_date_picker2_fixed.dart';
 
 /// Displays the days of a given month and allows choosing a day.
 ///
