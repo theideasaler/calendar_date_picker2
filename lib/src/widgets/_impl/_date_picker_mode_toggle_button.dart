@@ -195,113 +195,134 @@ class _DatePickerModeToggleButtonState
           ]
         : [
             Expanded(
-              child: Row(
-                mainAxisAlignment: modePickerMainAxisAlignment,
-                children: [
-                  Semantics(
-                    label: widget.config.semanticsDictionary?[
-                            CalendarDatePicker2SemanticsLabel.selectMonth] ??
-                        MaterialLocalizations.of(context)
-                            .selectYearSemanticsLabel,
-                    excludeSemantics: true,
-                    button: true,
-                    child: SizedBox(
-                      height:
-                          (widget.config.controlsHeight ?? _subHeaderHeight),
-                      child: InkWell(
-                        onTap: widget.config.disableModePicker == true
-                            ? null
-                            : widget.onMonthPressed,
-                        child: widget.config.modePickerBuilder?.call(
-                              viewMode: widget.mode,
-                              monthDate: widget.monthDate,
-                              isMonthPicker: true,
-                            ) ??
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalPadding),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Text(
-                                      widget.config.modePickerTextHandler?.call(
-                                            monthDate: widget.monthDate,
-                                            isMonthPicker: true,
-                                          ) ??
-                                          (widget.config.useAbbrLabelForMonthModePicker ==
-                                                          true
-                                                      ? getLocaleShortMonthFormat
-                                                      : getLocaleFullMonthFormat)(
-                                                  _locale)
-                                              .format(widget.monthDate),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: controlTextStyle,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // Calculate adaptive spacing based on available width
+                  final availableWidth = constraints.maxWidth;
+                  final adaptiveGap = widget.config.modePickersGap ??
+                      (availableWidth < 200
+                          ? 2.0
+                          : widget.config.centerAlignModePicker == true
+                              ? 15
+                              : 5);
+                  final adaptiveHorizontalPadding = availableWidth < 200
+                      ? horizontalPadding * 0.5
+                      : horizontalPadding;
+
+                  return Row(
+                    mainAxisAlignment: modePickerMainAxisAlignment,
+                    children: [
+                      Flexible(
+                        child: Semantics(
+                          label: widget.config.semanticsDictionary?[
+                                  CalendarDatePicker2SemanticsLabel
+                                      .selectMonth] ??
+                              MaterialLocalizations.of(context)
+                                  .selectYearSemanticsLabel,
+                          excludeSemantics: true,
+                          button: true,
+                          child: SizedBox(
+                            height: (widget.config.controlsHeight ??
+                                _subHeaderHeight),
+                            child: InkWell(
+                              onTap: widget.config.disableModePicker == true
+                                  ? null
+                                  : widget.onMonthPressed,
+                              child: widget.config.modePickerBuilder?.call(
+                                    viewMode: widget.mode,
+                                    monthDate: widget.monthDate,
+                                    isMonthPicker: true,
+                                  ) ??
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: adaptiveHorizontalPadding),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: Text(
+                                            widget.config.modePickerTextHandler
+                                                    ?.call(
+                                                  monthDate: widget.monthDate,
+                                                  isMonthPicker: true,
+                                                ) ??
+                                                (widget.config.useAbbrLabelForMonthModePicker ==
+                                                            true
+                                                        ? getLocaleShortMonthFormat
+                                                        : getLocaleFullMonthFormat)(_locale)
+                                                    .format(widget.monthDate),
+                                            overflow: TextOverflow.ellipsis,
+                                            style: controlTextStyle,
+                                          ),
+                                        ),
+                                        widget.config.disableModePicker == true
+                                            ? const SizedBox()
+                                            : RotationTransition(
+                                                turns: _monthController,
+                                                child: modePickerIcon,
+                                              ),
+                                      ],
                                     ),
                                   ),
-                                  widget.config.disableModePicker == true
-                                      ? const SizedBox()
-                                      : RotationTransition(
-                                          turns: _monthController,
-                                          child: modePickerIcon,
-                                        ),
-                                ],
-                              ),
                             ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: widget.config.modePickersGap ??
-                        (widget.config.centerAlignModePicker == true ? 15 : 5),
-                  ),
-                  Semantics(
-                    label: widget.config.semanticsDictionary?[
-                            CalendarDatePicker2SemanticsLabel.selectYear] ??
-                        MaterialLocalizations.of(context)
-                            .selectYearSemanticsLabel,
-                    excludeSemantics: true,
-                    button: true,
-                    child: SizedBox(
-                      height:
-                          (widget.config.controlsHeight ?? _subHeaderHeight),
-                      child: InkWell(
-                        onTap: widget.config.disableModePicker == true
-                            ? null
-                            : widget.onYearPressed,
-                        child: widget.config.modePickerBuilder?.call(
-                              viewMode: widget.mode,
-                              monthDate: widget.monthDate,
-                            ) ??
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalPadding),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Text(
-                                      widget.config.modePickerTextHandler?.call(
-                                              monthDate: widget.monthDate) ??
-                                          _localizations
-                                              .formatYear(widget.monthDate),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: controlTextStyle,
+                      SizedBox(width: adaptiveGap),
+                      Flexible(
+                        child: Semantics(
+                          label: widget.config.semanticsDictionary?[
+                                  CalendarDatePicker2SemanticsLabel
+                                      .selectYear] ??
+                              MaterialLocalizations.of(context)
+                                  .selectYearSemanticsLabel,
+                          excludeSemantics: true,
+                          button: true,
+                          child: SizedBox(
+                            height: (widget.config.controlsHeight ??
+                                _subHeaderHeight),
+                            child: InkWell(
+                              onTap: widget.config.disableModePicker == true
+                                  ? null
+                                  : widget.onYearPressed,
+                              child: widget.config.modePickerBuilder?.call(
+                                    viewMode: widget.mode,
+                                    monthDate: widget.monthDate,
+                                  ) ??
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: adaptiveHorizontalPadding),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: Text(
+                                            widget.config.modePickerTextHandler
+                                                    ?.call(
+                                                        monthDate:
+                                                            widget.monthDate) ??
+                                                _localizations.formatYear(
+                                                    widget.monthDate),
+                                            overflow: TextOverflow.ellipsis,
+                                            style: controlTextStyle,
+                                          ),
+                                        ),
+                                        widget.config.disableModePicker == true
+                                            ? const SizedBox()
+                                            : RotationTransition(
+                                                turns: _yearController,
+                                                child: modePickerIcon,
+                                              ),
+                                      ],
                                     ),
                                   ),
-                                  widget.config.disableModePicker == true
-                                      ? const SizedBox()
-                                      : RotationTransition(
-                                          turns: _yearController,
-                                          child: modePickerIcon,
-                                        ),
-                                ],
-                              ),
                             ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
+                    ],
+                  );
+                },
               ),
             ),
           ];
