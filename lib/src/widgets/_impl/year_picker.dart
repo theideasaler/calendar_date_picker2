@@ -48,6 +48,8 @@ class YearPicker extends StatefulWidget {
 class _YearPickerState extends State<YearPicker> {
   late ScrollController _scrollController;
 
+  late List<FocusNode> _yearFocusNodes;
+
   // The approximate number of years necessary to fill the available space.
   static const int minYears = 18;
 
@@ -60,6 +62,12 @@ class _YearPickerState extends State<YearPicker> {
             : _scrollOffsetForYear(DateUtils.dateOnly(DateTime.now()));
     _scrollController = widget.config.yearViewController ??
         ScrollController(initialScrollOffset: scrollOffset);
+
+    _yearFocusNodes = List<FocusNode>.generate(
+      math.max(widget.config.totalYears, minYears),
+      (index) =>
+          FocusNode(debugLabel: 'Year ${widget.config.firstDate.year + index}'),
+    );
   }
 
   @override
@@ -79,111 +87,18 @@ class _YearPickerState extends State<YearPicker> {
     final int initialYearRow = initialYearIndex ~/ _yearPickerColumnCount;
     // Move the offset down by 2 rows to approximately center it.
     final int centeredYearRow = initialYearRow - 2;
-    return _itemCount < minYears ? 0 : centeredYearRow * _yearPickerRowHeight;
+    return widget.config.totalYears < minYears
+        ? 0
+        : centeredYearRow * _yearPickerRowHeight;
   }
 
-  Widget _buildYearItem(BuildContext context, int index) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    // Backfill the _YearPicker with disabled years if necessary.
-    final int offset = _itemCount < minYears ? (minYears - _itemCount) ~/ 2 : 0;
-    final int year = widget.config.firstDate.year + index - offset;
-    final bool isSelected = widget.selectedDates.any((d) => d?.year == year);
-    final bool isCurrentYear = year == widget.config.currentDate.year;
-    final yearSelectableFromPredicate =
-        widget.config.selectableYearPredicate?.call(year) ?? true;
-    final isDisabled = (year < widget.config.firstDate.year ||
-            year > widget.config.lastDate.year) ||
-        !yearSelectableFromPredicate;
-    const double decorationHeight = 36.0;
-    const double decorationWidth = 72.0;
-
-    final Color textColor;
-    if (isSelected) {
-      textColor = colorScheme.onPrimary;
-    } else if (isDisabled) {
-      textColor = colorScheme.onSurface.withValues(alpha: 0.38);
-    } else if (isCurrentYear) {
-      textColor =
-          widget.config.selectedDayHighlightColor ?? colorScheme.primary;
-    } else {
-      textColor = colorScheme.onSurface.withValues(alpha: 0.87);
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    for (var focusNode in _yearFocusNodes) {
+      focusNode.dispose();
     }
-    TextStyle? itemStyle = widget.config.yearTextStyle ??
-        textTheme.bodyLarge?.apply(color: textColor);
-    if (isDisabled) {
-      itemStyle = widget.config.disabledYearTextStyle ?? itemStyle;
-    }
-    if (isSelected) {
-      itemStyle = widget.config.selectedYearTextStyle ?? itemStyle;
-    }
-
-    BoxDecoration? decoration;
-    if (isSelected) {
-      decoration = BoxDecoration(
-        color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        borderRadius: widget.config.yearBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
-      );
-    } else if (isCurrentYear && !isDisabled) {
-      decoration = BoxDecoration(
-        border: Border.all(
-          color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        ),
-        borderRadius: widget.config.yearBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
-      );
-    }
-
-    Widget yearItem = widget.config.yearBuilder?.call(
-          year: year,
-          textStyle: itemStyle,
-          decoration: decoration,
-          isSelected: isSelected,
-          isDisabled: isDisabled,
-          isCurrentYear: isCurrentYear,
-        ) ??
-        Center(
-          child: Container(
-            decoration: decoration,
-            height: decorationHeight,
-            width: decorationWidth,
-            child: Center(
-              child: Semantics(
-                selected: isSelected,
-                button: true,
-                child: Text(
-                  year.toString(),
-                  style: itemStyle,
-                ),
-              ),
-            ),
-          ),
-        );
-
-    if (isDisabled) {
-      yearItem = ExcludeSemantics(
-        child: yearItem,
-      );
-    } else {
-      yearItem = InkWell(
-        key: ValueKey<int>(year),
-        onTap: () => widget.onChanged(
-          DateTime(
-            year,
-            widget.initialMonth.month,
-          ),
-        ),
-        child: yearItem,
-      );
-    }
-
-    return yearItem;
-  }
-
-  int get _itemCount {
-    return widget.config.lastDate.year - widget.config.firstDate.year + 1;
+    super.dispose();
   }
 
   @override
@@ -200,9 +115,17 @@ class _YearPickerState extends State<YearPicker> {
           child: GridView.builder(
             controller: _scrollController,
             dragStartBehavior: widget.dragStartBehavior,
-            gridDelegate: _yearPickerGridDelegate,
-            itemBuilder: _buildYearItem,
-            itemCount: math.max(_itemCount, minYears),
+            gridDelegate: const _YearPickerGridDelegate(),
+            itemBuilder: (_, index) => YearPickerItem(
+              index,
+              focusNode: _yearFocusNodes[index],
+              config: widget.config,
+              selectedDates: widget.selectedDates,
+              onChanged: widget.onChanged,
+              initialMonth: widget.initialMonth,
+              minYears: minYears,
+            ),
+            itemCount: math.max(widget.config.totalYears, minYears),
             padding: const EdgeInsets.symmetric(horizontal: _yearPickerPadding),
           ),
         ),
@@ -237,6 +160,3 @@ class _YearPickerGridDelegate extends SliverGridDelegate {
   @override
   bool shouldRelayout(_YearPickerGridDelegate oldDelegate) => false;
 }
-
-const _YearPickerGridDelegate _yearPickerGridDelegate =
-    _YearPickerGridDelegate();

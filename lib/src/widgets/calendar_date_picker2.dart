@@ -6,6 +6,7 @@ import 'dart:math' as math;
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:calendar_date_picker2/src/widgets/_impl/_calendar_navigation_mixin.dart';
+import 'package:calendar_date_picker2/src/widgets/_impl/year_picker_item.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
