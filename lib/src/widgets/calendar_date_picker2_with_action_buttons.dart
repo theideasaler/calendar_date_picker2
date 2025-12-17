@@ -96,19 +96,21 @@ class _CalendarDatePicker2WithActionButtonsState
           ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),
-        Row(
-          mainAxisAlignment: widget.config.actionButtonAlignment ?? MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            if ((widget.config.actionButtonLeftPadding ?? 0) > 0)
-              SizedBox(width: widget.config.actionButtonLeftPadding),
-            _buildCancelButton(Theme.of(context).colorScheme, localizations),
-            if ((widget.config.gapBetweenCalendarAndButtons ?? 0) > 0)
-              SizedBox(width: widget.config.gapBetweenCalendarAndButtons),
-            _buildOkButton(Theme.of(context).colorScheme, localizations),
-              if ((widget.config.actionButtonRightPadding ?? 0) > 0)
-              SizedBox(width: widget.config.actionButtonRightPadding),
-          ],
+      Padding(
+          padding: EdgeInsets.only(
+            left: widget.config.actionButtonLeftPadding ?? 0,
+            right: widget.config.actionButtonRightPadding ?? 0,
+          ),
+          child: Row(
+            mainAxisAlignment: widget.config.actionButtonAlignment ?? MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _buildCancelButton(Theme.of(context).colorScheme, localizations),
+              if ((widget.config.gapBetweenCalendarAndButtons ?? 0) > 0)
+                SizedBox(width: widget.config.gapBetweenCalendarAndButtons),
+              _buildOkButton(Theme.of(context).colorScheme, localizations),
+            ],
+          ),
         ),
       ],
     );
