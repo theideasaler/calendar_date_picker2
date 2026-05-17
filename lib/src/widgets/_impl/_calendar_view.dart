@@ -123,7 +123,8 @@ class _CalendarViewState extends State<_CalendarView> {
           // the same day of the month.
           _focusedDay = _focusableDayForMonth(_currentMonth, _focusedDay!.day);
         }
-        SemanticsService.announce(
+        SemanticsService.sendAnnouncement(
+          View.of(context),
           _localizations.formatMonthYear(_currentMonth),
           _textDirection,
         );

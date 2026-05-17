@@ -141,7 +141,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       _announcedInitialDate = true;
       for (final date in _selectedDates) {
         if (date != null) {
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             _localizations.formatFullDate(date),
             _textDirection,
           );
@@ -173,7 +174,8 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
       if (_selectedDates.isNotEmpty) {
         for (final date in _selectedDates) {
           if (date != null) {
-            SemanticsService.announce(
+            SemanticsService.sendAnnouncement(
+              View.of(context),
               _mode == CalendarDatePicker2Mode.day
                   ? _localizations.formatMonthYear(date)
                   : _mode == CalendarDatePicker2Mode.month
