@@ -16,6 +16,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.1
+  lints: ^2.1.1
 
 screenshots:
   - description: CalendarDatePicker2 day view demo
