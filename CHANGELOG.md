@@ -1,3 +1,6 @@
+## [3.0.0]
+- feat: bump SDK to v3.35.0+
+
 ## [2.0.1]
 - fix: default month picker `isMonthSelectable` logics
 - fix: range picker start & end dates assertion message

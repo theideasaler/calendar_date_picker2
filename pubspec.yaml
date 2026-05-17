@@ -1,6 +1,6 @@
 name: calendar_date_picker2
 description: A lightweight and customizable calendar picker based on Flutter CalendarDatePicker, with support for single date picker, range picker and multi picker.
-version: 2.0.1
+version: 3.0.0
 homepage: https://github.com/theideasaler/calendar_date_picker2
 
 environment:
@@ -15,8 +15,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  lints: ^2.1.1
+  flutter_lints: ^3.0.0
+  lints: ^3.0.0
 
 screenshots:
   - description: CalendarDatePicker2 day view demo
