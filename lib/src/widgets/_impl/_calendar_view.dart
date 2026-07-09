@@ -7,6 +7,9 @@ class _CalendarView extends StatefulWidget {
   const _CalendarView({
     required this.config,
     required this.initialMonth,
+    required this.viewMode,
+    required this.onMonthPressed,
+    required this.onYearPressed,
     required this.selectedDates,
     required this.onChanged,
     required this.onDisplayedMonthChanged,
@@ -18,6 +21,15 @@ class _CalendarView extends StatefulWidget {
 
   /// The initial month to display.
   final DateTime initialMonth;
+
+  /// The current picker view mode from parent state.
+  final CalendarDatePicker2Mode viewMode;
+
+  /// Called when month mode toggle should be triggered.
+  final VoidCallback onMonthPressed;
+
+  /// Called when year mode toggle should be triggered.
+  final VoidCallback onYearPressed;
 
   /// The currently selected dates.
   ///
@@ -320,55 +332,73 @@ class _CalendarViewState extends State<_CalendarView> {
   Widget build(BuildContext context) {
     final Color controlColor =
         Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.60);
+    final customHeaderBuilder = widget.config.headerBuilder;
 
     return Semantics(
       child: Column(
         children: <Widget>[
-          Container(
-            padding: widget.config.centerAlignModePicker != true
-                ? const EdgeInsetsDirectional.only(start: 16, end: 4)
-                : const EdgeInsetsDirectional.only(start: 8, end: 8),
-            height: (widget.config.controlsHeight ?? _subHeaderHeight),
-            child: Row(
-              children: <Widget>[
-                if (widget.config.centerAlignModePicker != true) const Spacer(),
-                if (widget.config.hideLastMonthIcon != true)
-                  IconButton(
-                    splashRadius: widget.config.dayMaxWidth != null
-                        ? widget.config.dayMaxWidth! * 2 / 3
-                        : null,
-                    icon: widget.config.lastMonthIcon ??
-                        Icon(widget.config.dayModeScrollDirection ==
-                                Axis.vertical
-                            ? Icons.keyboard_arrow_up
-                            : Icons.chevron_left),
-                    color: controlColor,
-                    tooltip: _isDisplayingFirstMonth
-                        ? null
-                        : _localizations.previousMonthTooltip,
-                    onPressed:
-                        _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+          customHeaderBuilder != null
+              ? SizedBox(
+                  height: (widget.config.controlsHeight ?? _subHeaderHeight),
+                  child: customHeaderBuilder(
+                    monthDate: _currentMonth,
+                    viewMode: widget.viewMode,
+                    onMonthTap: widget.onMonthPressed,
+                    onYearTap: widget.onYearPressed,
+                    onPreviousMonthTap: _handlePreviousMonth,
+                    onNextMonthTap: _handleNextMonth,
+                    isPreviousMonthDisabled: _isDisplayingFirstMonth,
+                    isNextMonthDisabled: _isDisplayingLastMonth,
                   ),
-                if (widget.config.centerAlignModePicker == true) const Spacer(),
-                if (widget.config.hideNextMonthIcon != true)
-                  IconButton(
-                    splashRadius: widget.config.dayMaxWidth != null
-                        ? widget.config.dayMaxWidth! * 2 / 3
-                        : null,
-                    icon: widget.config.nextMonthIcon ??
-                        Icon(widget.config.dayModeScrollDirection ==
-                                Axis.vertical
-                            ? Icons.keyboard_arrow_down
-                            : Icons.chevron_right),
-                    color: controlColor,
-                    tooltip: _isDisplayingLastMonth
-                        ? null
-                        : _localizations.nextMonthTooltip,
-                    onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                )
+              : Container(
+                  padding: widget.config.centerAlignModePicker != true
+                      ? const EdgeInsetsDirectional.only(start: 16, end: 4)
+                      : const EdgeInsetsDirectional.only(start: 8, end: 8),
+                  height: (widget.config.controlsHeight ?? _subHeaderHeight),
+                  child: Row(
+                    children: <Widget>[
+                      if (widget.config.centerAlignModePicker != true)
+                        const Spacer(),
+                      if (widget.config.hideLastMonthIcon != true)
+                        IconButton(
+                          splashRadius: widget.config.dayMaxWidth != null
+                              ? widget.config.dayMaxWidth! * 2 / 3
+                              : null,
+                          icon: widget.config.lastMonthIcon ??
+                              Icon(widget.config.dayModeScrollDirection ==
+                                      Axis.vertical
+                                  ? Icons.keyboard_arrow_up
+                                  : Icons.chevron_left),
+                          color: controlColor,
+                          tooltip: _isDisplayingFirstMonth
+                              ? null
+                              : _localizations.previousMonthTooltip,
+                          onPressed:
+                              _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                        ),
+                      if (widget.config.centerAlignModePicker == true)
+                        const Spacer(),
+                      if (widget.config.hideNextMonthIcon != true)
+                        IconButton(
+                          splashRadius: widget.config.dayMaxWidth != null
+                              ? widget.config.dayMaxWidth! * 2 / 3
+                              : null,
+                          icon: widget.config.nextMonthIcon ??
+                              Icon(widget.config.dayModeScrollDirection ==
+                                      Axis.vertical
+                                  ? Icons.keyboard_arrow_down
+                                  : Icons.chevron_right),
+                          color: controlColor,
+                          tooltip: _isDisplayingLastMonth
+                              ? null
+                              : _localizations.nextMonthTooltip,
+                          onPressed:
+                              _isDisplayingLastMonth ? null : _handleNextMonth,
+                        ),
+                    ],
                   ),
-              ],
-            ),
-          ),
+                ),
           Expanded(
             child: FocusableActionDetector(
               shortcuts: _shortcutMap,
