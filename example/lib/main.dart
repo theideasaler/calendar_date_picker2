@@ -748,29 +748,66 @@ class _MyHomePageState extends State<MyHomePage> {
         fontWeight: FontWeight.bold,
       ),
       dynamicCalendarRows: true,
-      modePickerBuilder: ({
-        required viewMode,
+      controlsHeight: 48,
+      headerBuilder: ({
         required monthDate,
-        isMonthPicker,
+        required viewMode,
+        required onMonthTap,
+        required onYearTap,
+        required onPreviousMonthTap,
+        required onNextMonthTap,
+        required isPreviousMonthDisabled,
+        required isNextMonthDisabled,
       }) {
-        return Center(
-          child: Container(
-            padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            decoration: BoxDecoration(
-              color: isMonthPicker == true ? Colors.red : Colors.teal[800],
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Text(
-              isMonthPicker == true
-                  ? getLocaleShortMonthFormat(const Locale('en'))
-                      .format(monthDate)
-                  : monthDate.year.toString(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+        final controlColor = Colors.white.withValues(alpha: 0.9);
+        final monthText = getLocaleShortMonthFormat(const Locale('en'))
+            .format(monthDate);
+        final yearText = monthDate.year.toString();
+        return Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF1E1F23),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed:
+                    isPreviousMonthDisabled ? null : onPreviousMonthTap,
+                icon: const Icon(Icons.chevron_left),
+                color: controlColor,
               ),
-            ),
+              TextButton.icon(
+                onPressed: onMonthTap,
+                iconAlignment: IconAlignment.end,
+                icon: Icon(Icons.arrow_drop_down, color: controlColor),
+                label: Text(
+                  monthText,
+                  style: TextStyle(
+                    color: controlColor,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              TextButton.icon(
+                onPressed: onYearTap,
+                iconAlignment: IconAlignment.end,
+                icon: Icon(Icons.arrow_drop_down, color: controlColor),
+                label: Text(
+                  yearText,
+                  style: TextStyle(
+                    color: controlColor,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: isNextMonthDisabled ? null : onNextMonthTap,
+                icon: const Icon(Icons.chevron_right),
+                color: controlColor,
+              ),
+            ],
           ),
         );
       },
@@ -809,8 +846,6 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         return true;
       },
-      hideLastMonthIcon: true,
-      hideNextMonthIcon: true,
     );
     return SizedBox(
       width: 375,
