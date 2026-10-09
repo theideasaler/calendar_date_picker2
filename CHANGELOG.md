@@ -1,3 +1,6 @@
+## [4.0.0]
+- feat: bump SDK to v3.47.0+
+
 ## [3.0.0]
 - feat: bump SDK to v3.35.0+
 

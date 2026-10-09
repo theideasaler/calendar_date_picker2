@@ -87,7 +87,7 @@ class _CalendarViewState extends State<_CalendarView> {
     if (widget.initialMonth != oldWidget.initialMonth &&
         widget.initialMonth != _currentMonth) {
       // We can't interrupt this widget build with a scroll, so do it next frame
-      // Add workaround to fix Flutter 3.0.0 compiler issue
+      // Add workaround to fix Flutter compiler issue
       // https://github.com/flutter/flutter/issues/103561#issuecomment-1125512962
       // https://github.com/flutter/website/blob/3e6d87f13ad2a8dd9cf16081868cc3b3794abb90/src/development/tools/sdk/release-notes/release-notes-3.0.0.md#your-code
       _ambiguate(WidgetsBinding.instance)!.addPostFrameCallback(
