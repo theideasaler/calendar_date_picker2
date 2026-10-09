@@ -96,14 +96,21 @@ class _CalendarDatePicker2WithActionButtonsState
           ),
         ),
         SizedBox(height: widget.config.gapBetweenCalendarAndButtons ?? 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildCancelButton(Theme.of(context).colorScheme, localizations),
-            if ((widget.config.gapBetweenCalendarAndButtons ?? 0) > 0)
-              SizedBox(width: widget.config.gapBetweenCalendarAndButtons),
-            _buildOkButton(Theme.of(context).colorScheme, localizations),
-          ],
+      Padding(
+          padding: EdgeInsets.only(
+            left: widget.config.actionButtonLeftPadding ?? 0,
+            right: widget.config.actionButtonRightPadding ?? 0,
+          ),
+          child: Row(
+            mainAxisAlignment: widget.config.actionButtonAlignment ?? MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _buildCancelButton(Theme.of(context).colorScheme, localizations),
+              if ((widget.config.gapBetweenCalendarAndButtons ?? 0) > 0)
+                SizedBox(width: widget.config.gapBetweenCalendarAndButtons),
+              _buildOkButton(Theme.of(context).colorScheme, localizations),
+            ],
+          ),
         ),
       ],
     );
@@ -113,6 +120,7 @@ class _CalendarDatePicker2WithActionButtonsState
       ColorScheme colorScheme, MaterialLocalizations localizations) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
+      hoverColor: widget.config.actionButtonHoverColor,
       onTap: () => setState(() {
         _editCache = _values;
         widget.onCancelTapped?.call();
@@ -143,6 +151,7 @@ class _CalendarDatePicker2WithActionButtonsState
       ColorScheme colorScheme, MaterialLocalizations localizations) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
+      hoverColor: widget.config.actionButtonHoverColor,
       onTap: () => setState(() {
         _values = _editCache;
         widget.onValueChanged?.call(_values);

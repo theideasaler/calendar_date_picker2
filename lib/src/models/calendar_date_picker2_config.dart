@@ -695,6 +695,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     this.closeDialogOnCancelTapped,
     this.closeDialogOnOkTapped,
     this.buttonPadding,
+    this.actionButtonLeftPadding,
+    this.actionButtonRightPadding,
+    this.actionButtonHoverColor,
+    this.actionButtonAlignment,
   }) : super(
           calendarType: calendarType,
           firstDate: firstDate,
@@ -796,6 +800,18 @@ class CalendarDatePicker2WithActionButtonsConfig
   /// Custom wrapping padding for Ok & Cancel buttons
   final EdgeInsets? buttonPadding;
 
+  /// Left padding for the action buttons row
+  final double? actionButtonLeftPadding;
+
+  /// Right padding for the action buttons row
+  final double? actionButtonRightPadding;
+
+  /// Hover color for action buttons
+  final Color? actionButtonHoverColor;
+
+  /// Alignment for action buttons in the row
+  final MainAxisAlignment? actionButtonAlignment;
+
   @override
   CalendarDatePicker2WithActionButtonsConfig copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -857,6 +873,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     bool? closeDialogOnCancelTapped,
     bool? closeDialogOnOkTapped,
     EdgeInsets? buttonPadding,
+    double? actionButtonLeftPadding,
+    double? actionButtonRightPadding,
+    Color? actionButtonHoverColor,
+    MainAxisAlignment? actionButtonAlignment,
     bool? rangeBidirectional,
     ScrollPhysics? calendarViewScrollPhysics,
     Color? daySplashColor,
@@ -959,6 +979,10 @@ class CalendarDatePicker2WithActionButtonsConfig
       closeDialogOnOkTapped:
           closeDialogOnOkTapped ?? this.closeDialogOnOkTapped,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      actionButtonLeftPadding: actionButtonLeftPadding ?? this.actionButtonLeftPadding,
+      actionButtonRightPadding: actionButtonRightPadding ?? this.actionButtonRightPadding,
+      actionButtonHoverColor: actionButtonHoverColor ?? this.actionButtonHoverColor,
+      actionButtonAlignment: actionButtonAlignment ?? this.actionButtonAlignment,
       calendarViewScrollPhysics:
           calendarViewScrollPhysics ?? this.calendarViewScrollPhysics,
       daySplashColor: daySplashColor ?? this.daySplashColor,
