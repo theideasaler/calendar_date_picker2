@@ -109,6 +109,21 @@ typedef SelectedRangeHighlightBuilder = Widget? Function({
 typedef ModePickerTextHandler = String? Function(
     {required DateTime monthDate, bool? isMonthPicker});
 
+/// Builder for a custom day-mode header row.
+///
+/// Provides month/year mode toggles and built-in previous/next month callbacks
+/// to keep header state synced with the calendar page state.
+typedef CalendarHeaderBuilder = Widget Function({
+  required DateTime monthDate,
+  required CalendarDatePicker2Mode viewMode,
+  required VoidCallback onMonthTap,
+  required VoidCallback onYearTap,
+  required VoidCallback onPreviousMonthTap,
+  required VoidCallback onNextMonthTap,
+  required bool isPreviousMonthDisabled,
+  required bool isNextMonthDisabled,
+});
+
 /// Callback for the scroll calendar view on scrolling
 typedef ScrollViewOnScrolling = void Function(double offset);
 
@@ -139,6 +154,7 @@ class CalendarDatePicker2Config {
     this.weekdayLabelBuilder,
     this.firstDayOfWeek,
     this.controlsHeight,
+    this.headerBuilder,
     this.lastMonthIcon,
     this.hideLastMonthIcon,
     this.nextMonthIcon,
@@ -241,6 +257,12 @@ class CalendarDatePicker2Config {
 
   /// Custom height for calendar control toggle's height
   final double? controlsHeight;
+
+  /// Builder to customize day-mode header layout with synced month navigation.
+  ///
+  /// When provided, this replaces the default day-mode top controls area and
+  /// receives built-in callbacks for month/year toggles and month navigation.
+  final CalendarHeaderBuilder? headerBuilder;
 
   /// Custom icon for last month button control
   final Widget? lastMonthIcon;
@@ -443,6 +465,7 @@ class CalendarDatePicker2Config {
     WeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
+    CalendarHeaderBuilder? headerBuilder,
     Widget? lastMonthIcon,
     bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
@@ -517,6 +540,7 @@ class CalendarDatePicker2Config {
       weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
+      headerBuilder: headerBuilder ?? this.headerBuilder,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       hideLastMonthIcon: hideLastMonthIcon ?? this.hideLastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
@@ -625,6 +649,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     WeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
+    CalendarHeaderBuilder? headerBuilder,
     Widget? lastMonthIcon,
     bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
@@ -706,6 +731,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           weekdayLabelBuilder: weekdayLabelBuilder,
           firstDayOfWeek: firstDayOfWeek,
           controlsHeight: controlsHeight,
+          headerBuilder: headerBuilder,
           lastMonthIcon: lastMonthIcon,
           hideLastMonthIcon: hideLastMonthIcon,
           nextMonthIcon: nextMonthIcon,
@@ -808,6 +834,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     WeekdayLabelBuilder? weekdayLabelBuilder,
     int? firstDayOfWeek,
     double? controlsHeight,
+    CalendarHeaderBuilder? headerBuilder,
     Widget? lastMonthIcon,
     bool? hideLastMonthIcon,
     Widget? nextMonthIcon,
@@ -891,6 +918,7 @@ class CalendarDatePicker2WithActionButtonsConfig
       weekdayLabelBuilder: weekdayLabelBuilder ?? this.weekdayLabelBuilder,
       firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
       controlsHeight: controlsHeight ?? this.controlsHeight,
+      headerBuilder: headerBuilder ?? this.headerBuilder,
       lastMonthIcon: lastMonthIcon ?? this.lastMonthIcon,
       hideLastMonthIcon: hideLastMonthIcon ?? this.hideLastMonthIcon,
       nextMonthIcon: nextMonthIcon ?? this.nextMonthIcon,
